@@ -10,11 +10,22 @@ set -x
 
 COMMITS=$(git log -$NUMBER_COMMITS --oneline --pretty=format:"%h" | tr " " "\n")
 
+JSON_NOTE='{
+    "test": {
+        "title": "example glossary",
+		"result": "failed",
+		"summary": {
+            "title": "Something",
+            "logs": "path to logs"
+        }
+    }
+}'
+
 GIT_NOTES="git notes"
 cnt=0
 for commit in $COMMITS; do
     cnt=$((cnt+1))
-    ${GIT_NOTES} add -f -m "Testing notes ${cnt}\npackit_test=yes" ${commit}
+    ${GIT_NOTES} add -f -m "Testing notes ${cnt}\npackit_test=yes" -m "json=${JSON_NOTE}" ${commit}
 done
 
 cnt=0
