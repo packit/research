@@ -37,6 +37,16 @@ For 'editing' git notes, a command
 ## Can we check out the commit and its git notes?
 Yes, `git notes` where designed for it. See [git_notes.sh](./git_notes.sh).
 
+## How to push and pull notes to / from git?
+To push the notes into git use the command
+```bash
+git push origin refs/notes/commits
+```
+
+To pull the notes from git use the command
+```bash
+git fetch origin refs/notes/commits:refs/notes/commits
+```
 ## Update .gitconfig for git notes support
 
 ```bash
