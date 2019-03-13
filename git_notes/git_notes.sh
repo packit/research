@@ -2,7 +2,7 @@
 
 NUMBER_COMMITS=$1
 if [[ -z $NUMBER_COMMITS ]]; then
-    echo Specify number of commit to add notes
+    echo Specify number of commits to add notes to
     exit 1
 fi
 
@@ -21,11 +21,10 @@ JSON_NOTE='{
     }
 }'
 
-GIT_NOTES="git notes"
 cnt=0
 for commit in $COMMITS; do
     cnt=$((cnt+1))
-    ${GIT_NOTES} add -f -m "Testing notes ${cnt}\npackit_test=yes" -m "json=${JSON_NOTE}" ${commit}
+    git notes add -f -m "Testing notes ${cnt}\npackit_test=yes" -m "json=${JSON_NOTE}" ${commit}
 done
 
 cnt=0
