@@ -14,6 +14,7 @@
 - automatic commit suffixes for files (sources, `srpm`, `rpm`)
 - push to copr
 - multipackage support
+- looks [active](https://pagure.io/rpkg-util/commits/master)
 
 :heavy_minus_sign:
 - autopacking workflow is deprecated
