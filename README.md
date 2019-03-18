@@ -5,7 +5,7 @@ This repo is used to document research performed by the packit team.
 
 ## Topics covered
 
-* [First topic](/topic)
+* [`git notes` as a storage of our data](./git_notes)
 *
 
 
