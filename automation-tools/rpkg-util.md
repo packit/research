@@ -1,8 +1,8 @@
-# RPKG
+# RPKG-UTIL
 
 - It is an rpm packaging utility that works with both DistGit and standard Git repositories and it handles two types of directory content: packed and unpacked.
 - [ :computer: pagure.io/rpkg-util](https://pagure.io/rpkg-util)
-- ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rpkg.svg), [![PyPI](https://img.shields.io/pypi/v/rpkg.svg)](https://pypi.org/project/rpkg/), [ :package: fedora packages](https://src.fedoraproject.org/rpms/rpkg)
+- ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rpkg-util.svg), [![PyPI](https://img.shields.io/pypi/v/rpkg-util.svg)](https://pypi.org/project/rpkg-util/), [ :package: fedora packages](https://src.fedoraproject.org/rpms/rpkg-util)
 
 
 :heavy_plus_sign:
