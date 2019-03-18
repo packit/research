@@ -1,7 +1,7 @@
 # TITO
 
 - Tito is a tool for managing RPM based projects using git for their source code repository.
-- [ :computer: github.com/dgoodwin/tito](https://github.com/dgoodwin/tito), [ :scroll: documentation](???)
+- [ :computer: github.com/dgoodwin/tito](https://github.com/dgoodwin/tito)
 - ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/tito.svg), [![PyPI](https://img.shields.io/pypi/v/tito.svg)](https://pypi.org/project/tito/), [ :package: fedora packages](https://src.fedoraproject.org/rpms/tito)
 
 :heavy_plus_sign:
