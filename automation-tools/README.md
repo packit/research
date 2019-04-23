@@ -4,6 +4,6 @@ There are multiple tools with the similar goal to Packit. Here is a list of tool
 
 - [tito](./tito.md)
 - [rdopkg](./rdopkg.md)
-- [rpkg](./rpkg.md)
+- [rpkg](./rpkg.md) + [rpkg2](./rpkg.md#RPKG2)
 - [rpkg-util](./rpkg-util.md)
 - [dlrn](./dlrn.md)

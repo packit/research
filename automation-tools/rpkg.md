@@ -37,3 +37,46 @@
 - rpmlint: check SPEC.
 - copr-cli: for building package in Fedora Copr.
 - module-build-service: for building modules.
+
+
+# RPKG2
+
+rpkg2 is a project forked from rpkg to introduce various major improvements and refactor in order to:
+
+- Modern modularization.
+- A real library for import from other projects to operate package repository or access package metadata.
+- Extensible for writing package client tool.
+- A framework to write subcommands in a decoupled way to build artifacts, including RPMs, modules, or containers.
+- Remove all deprecation and technical debt.
+- Python 3 default apparently.
+
+Examples:
+
+```python
+from pyrpkg.pkgrepo import PackageRepository
+repo = PackageRepository('/path/to/package')
+print(repo.branch_merge)
+print(repo.branch_remote)
+print(repo.push_url)
+print(repo.commit_hash)
+```
+
+```python
+from pyrpkg.pkgrepo import PackageRepository
+from pyrpkg.pkginfo import PackageMetadata
+
+repo = PackageRepository('/path/to/package')
+pkg = PackageMetadata(repo)
+print(pkg.ns)
+print(pkg.ns_repo_name)
+print(pkg.disttag)
+print(pkg.spec)
+```
+
+```python
+from pyrpkg.config import read_config
+
+config = read_config('/path/to/rpkg.config')
+print(config.rpkg.anongiturl)
+print(config.rpkg.distgit_namespaced)
+```
