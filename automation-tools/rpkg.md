@@ -80,3 +80,10 @@ config = read_config('/path/to/rpkg.config')
 print(config.rpkg.anongiturl)
 print(config.rpkg.distgit_namespaced)
 ```
+
+Two (probably mirrored) repositories:
+- https://pagure.io/rpkg2
+- https://gitlab.com/rpkg/rpkg2
+
+And the old github one:
+- https://gitlab.com/rpkg/rpkg2
