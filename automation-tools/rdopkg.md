@@ -10,10 +10,15 @@
 - rebases to new versions
 - sending changes for review
 - modifying .spec file: bumping versions, managing patches, writing changelog, producing meaningful commit messages, …
-- persistance (`rdopkg --continue`) -- The state is stored in a file named .rdopkg.json in the current directory.
+- persistence (`rdopkg --continue`) -- The state is stored in a file named `.rdopkg.json` in the current directory.
 
 :heavy_minus_sign:
-- .
+- loosely coupled to RDO ecosystem -- need the following repositories:
+    - upstream git
+    - RDO distgit
+    - patched git repo
+    - metadata repo
+
 
 ### Patching branches
 

@@ -87,3 +87,6 @@ Two (probably mirrored) repositories:
 
 And the old github one:
 - https://gitlab.com/rpkg/rpkg2
+
+
+For the background, see [this discussion](https://pagure.io/rpkg/issue/49) and the [this wiki `Thoughts_on_rpkg2`](https://fedoraproject.org/wiki/Thoughts_on_rpkg2).

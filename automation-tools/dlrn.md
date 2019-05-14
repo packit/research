@@ -14,4 +14,5 @@
   - `/api/repo_status`
 
 :heavy_minus_sign:
-- heavily coupled to rdopkg/OpenStack workflow (need to use [RPM Packaging for OpenStack](https://github.com/openstack/rpm-packaging))
+- heavily coupled to rdopkg/OpenStack workflow (need to use [RPM Packaging for OpenStack](https://github.com/openstack/rpm-packaging)):
+    > DLRN uses rdoinfo to retrieve the metadata and repositories associated with each project in RDO (code and distgit) and mock to carry out the actual build in an isolated environment.
