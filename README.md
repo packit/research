@@ -6,7 +6,7 @@ This repo is used to document research performed by the packit team.
 ## Topics covered
 
 * [`git notes` as a storage of our data](./git_notes)
-*
+* [Tools/libraries similar or related to the Packit](./automation-tools)
 
 
 ## Organization of this repository
