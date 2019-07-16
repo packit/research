@@ -7,6 +7,7 @@ This repo is used to document research performed by the packit team.
 
 * [`git notes` as a storage of our data](./git_notes)
 * [Tools/libraries similar or related to the Packit](./automation-tools)
+* [Zuul CI](./zuul)
 
 
 ## Organization of this repository
