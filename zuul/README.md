@@ -1,7 +1,7 @@
 # Zuul CI - softwarefactory-project.io
 
 [Zuul](https://zuul-ci.org/) is a CI system invented in OpenStack community.
-Softwarefactory (SF) is project which is hosting a bunch of services to ease
+[Softwarefactory](https://softwarefactory-project.io) (SF) is project which is hosting a bunch of services to ease
 development of open source projects. Zuul is one of the services.
 
 Zuul is a heavy Ansible user.
