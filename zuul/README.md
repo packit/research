@@ -14,7 +14,7 @@ In-order to get on-board SF, you need to do these things:
 * Let Zuul know about your repo: https://softwarefactory-project.io/r/15927
   * [Docs](https://ansible.softwarefactory-project.io/docs/user/config_repo.html#config-repo)
 
-* Install SF GitHub app: softwarefactory-project-zuul
+* Install SF GitHub app: [softwarefactory-project-zuul](https://github.com/apps/softwarefactory-project-zuul)
 
 * Create .zuul.yaml and define noop job inside to test the connection: https://github.com/packit-service/ogr/pull/120/commits/23046836e2774a1c5de6620d93d9a88b21a98751
 
