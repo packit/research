@@ -41,6 +41,11 @@ In-order to get on-board SF, you need to do these things:
 
 * A repo with existing jobs, playbooks and roles which OpenStack is using: https://github.com/openstack-infra/zuul-jobs/blob/master/zuul.yaml
 
+* More useful links:
+  * Existing SF jobs: https://softwarefactory-project.io/cgit/config/tree/zuul.d/_jobs-base.yaml#n58
+  * Our Zuul tenant: https://softwarefactory-project.io/zuul/t/local/status
+  * Zuul pipelines defined in SF: https://softwarefactory-project.io/cgit/config/tree/zuul.d/_pipelines.yaml
+
 * You can join internal IRC channel #sf-ops for questions. [Fabien](https://github.com/morucci) is super-duper helpful.
 
 * Good luck and have fun!
