@@ -1,0 +1,9 @@
+-
+  downstream_name: atomic-reactor
+  upstream_url: "git@github.com:containerbuildsystem/atomic-reactor.git"
+-
+  downstream_name: packit
+  upstream_url: "https://github.com/packit-service/packit"
+-
+  downstream_name: youtube-dl
+  upstream_url: "https://github.com/ytdl-org/youtube-dl"
