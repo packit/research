@@ -1,0 +1,565 @@
+[2019-09-16 12:33:00,769] INFO    |packit: Handling package packit from upstream url https://github.com/packit-service/packit
+[2019-09-16 12:33:00,769] INFO    |packit: ----------------
+[2019-09-16 12:33:00,769] INFO    |packit: [1mCloning upstream[0m
+[2019-09-16 12:33:00,769] INFO    |packit: ----------------
+[2019-09-16 12:33:00,769] DEBUG   |packit.utils: Cloning repo: https://github.com/packit-service/packit -> /tmp/tmpoh9ka3en
+[2019-09-16 12:33:02,289] DEBUG   |packit.local_project: remote url of the repo is https://github.com/packit-service/packit
+[2019-09-16 12:33:02,289] DEBUG   |packit.local_project: Parsed namespace and repo name from url: packit-service/packit
+[2019-09-16 12:33:02,289] INFO    |packit: ----------------------
+[2019-09-16 12:33:02,289] INFO    |packit: [1mChecking packit config[0m
+[2019-09-16 12:33:02,289] INFO    |packit: ----------------------
+[2019-09-16 12:33:02,289] INFO    |packit: Found packit config .packit.yaml
+[2019-09-16 12:33:02,289] DEBUG   |packit.config: Local package config found: /tmp/tmpoh9ka3en/.packit.yaml
+[2019-09-16 12:33:02,295] DEBUG   |packit.config: Package config:
+{
+    "specfile_path": "packit.spec",
+    "synced_files": [
+        "packit.spec",
+        ".packit.yaml",
+        {
+            "src": "fedora-tests/",
+            "dest": "tests/"
+        }
+    ],
+    "upstream_project_name": "packitos",
+    "downstream_package_name": "packit",
+    "current_version_command": [
+        "python3",
+        "setup.py",
+        "--version"
+    ],
+    "create_tarball_command": [
+        "python3",
+        "setup.py",
+        "sdist",
+        "--dist-dir",
+        "."
+    ],
+    "create_pr": false,
+    "jobs": [
+        {
+            "job": "propose_downstream",
+            "trigger": "release",
+            "metadata": {
+                "dist-git-branch": "master"
+            }
+        },
+        {
+            "job": "propose_downstream",
+            "trigger": "release",
+            "metadata": {
+                "dist-git-branch": "f30"
+            }
+        },
+        {
+            "job": "propose_downstream",
+            "trigger": "release",
+            "metadata": {
+                "dist-git-branch": "f29"
+            }
+        },
+        {
+            "job": "sync_from_downstream",
+            "trigger": "commit"
+        },
+        {
+            "job": "copr_build",
+            "trigger": "pull_request",
+            "metadata": {
+                "targets": [
+                    "fedora-29-x86_64",
+                    "fedora-30-x86_64",
+                    "fedora-31-x86_64",
+                    "fedora-rawhide-x86_64"
+                ]
+            }
+        }
+    ]
+}
+[2019-09-16 12:33:02,295] INFO    |packit: ---------------------
+[2019-09-16 12:33:02,295] INFO    |packit: [1mGetting upstream spec[0m
+[2019-09-16 12:33:02,295] INFO    |packit: ---------------------
+[2019-09-16 12:33:02,301] DEBUG   |packit: Using upstream spec /tmp/tmpoh9ka3en/packit.spec
+[2019-09-16 12:33:02,301] INFO    |packit: --------------------------------
+[2019-09-16 12:33:02,301] INFO    |packit: [1mBuilding srpm with upstream spec[0m
+[2019-09-16 12:33:02,301] INFO    |packit: --------------------------------
+[2019-09-16 12:33:02,301] DEBUG   |packit.base_git: command handler = RunCommandType.local
+[2019-09-16 12:33:02,301] DEBUG   |packit.base_git: Running ActionName.post_upstream_clone hook.
+[2019-09-16 12:33:02,301] DEBUG   |packit.base_git: Running ActionName.post_upstream_clone.
+[2019-09-16 12:33:02,301] DEBUG   |packit.base_git: Running default implementation for ActionName.post_upstream_clone.
+[2019-09-16 12:33:02,301] DEBUG   |packit.utils: cmd = 'python3 setup.py --version'
+[2019-09-16 12:33:04,090] DEBUG   |packit.utils: STDOUT: 0.6.2.dev12+g8396278
+[2019-09-16 12:33:04,090] DEBUG   |packit.upstream: version = 0.6.2.dev12+g8396278
+[2019-09-16 12:33:04,090] DEBUG   |packit.upstream: sanitized version = 0.6.2.dev12+g8396278
+[2019-09-16 12:33:04,094] DEBUG   |packit.upstream: name + version = packitos-0.6.2.dev12+g8396278
+[2019-09-16 12:33:04,181] DEBUG   |packit.utils: cmd = 'python3 setup.py sdist --dist-dir .'
+[2019-09-16 12:33:04,905] DEBUG   |packit.utils: STDOUT: running sdist
+running egg_info
+creating packitos.egg-info
+writing packitos.egg-info/PKG-INFO
+writing dependency_links to packitos.egg-info/dependency_links.txt
+writing entry points to packitos.egg-info/entry_points.txt
+writing requirements to packitos.egg-info/requires.txt
+writing top-level names to packitos.egg-info/top_level.txt
+writing manifest file 'packitos.egg-info/SOURCES.txt'
+writing manifest file 'packitos.egg-info/SOURCES.txt'
+running check
+creating packitos-0.6.2.dev12+g8396278
+creating packitos-0.6.2.dev12+g8396278/docs
+creating packitos-0.6.2.dev12+g8396278/fedora-tests
+creating packitos-0.6.2.dev12+g8396278/files
+creating packitos-0.6.2.dev12+g8396278/files/tasks
+creating packitos-0.6.2.dev12+g8396278/packit
+creating packitos-0.6.2.dev12+g8396278/packit/cli
+creating packitos-0.6.2.dev12+g8396278/packitos.egg-info
+creating packitos-0.6.2.dev12+g8396278/tests
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/cockpit-ostree
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/dist_git
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/empty_changelog
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/osbuild
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/snapd
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/snapd/packaging
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/snapd/packaging/fedora
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/snapd/vendor
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/sourcegit
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/sourcegit/source_git
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/sourcegit/source_git/fedora
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/sourcegit/upstream
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/sync_files
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/upstream_git
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/functional
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/unit
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_recording
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration/test_data
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration/test_data/test_api
+creating packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration/test_data/test_status
+copying files to packitos-0.6.2.dev12+g8396278...
+copying .git_archival.txt -> packitos-0.6.2.dev12+g8396278
+copying .gitattributes -> packitos-0.6.2.dev12+g8396278
+copying .gitignore -> packitos-0.6.2.dev12+g8396278
+copying .packit.yaml -> packitos-0.6.2.dev12+g8396278
+copying .pre-commit-config.yaml -> packitos-0.6.2.dev12+g8396278
+copying .zuul.yaml -> packitos-0.6.2.dev12+g8396278
+copying CHANGELOG.md -> packitos-0.6.2.dev12+g8396278
+copying CONTRIBUTING.md -> packitos-0.6.2.dev12+g8396278
+copying Dockerfile -> packitos-0.6.2.dev12+g8396278
+copying Dockerfile.tests -> packitos-0.6.2.dev12+g8396278
+copying LICENSE -> packitos-0.6.2.dev12+g8396278
+copying Makefile -> packitos-0.6.2.dev12+g8396278
+copying README.md -> packitos-0.6.2.dev12+g8396278
+copying Vagrantfile -> packitos-0.6.2.dev12+g8396278
+copying ansible.cfg -> packitos-0.6.2.dev12+g8396278
+copying packit.spec -> packitos-0.6.2.dev12+g8396278
+copying pytest.ini -> packitos-0.6.2.dev12+g8396278
+copying recipe-tests.yaml -> packitos-0.6.2.dev12+g8396278
+copying release-conf.yaml -> packitos-0.6.2.dev12+g8396278
+copying setup.cfg -> packitos-0.6.2.dev12+g8396278
+copying setup.py -> packitos-0.6.2.dev12+g8396278
+copying docs/01.md -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/02.md -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/ARCHITECTURE.md -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/actions.md -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/build.md -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/configuration.md -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/create_bodhi_update.md -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/how-to-source-git.md -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/packit.dia -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/packit.png -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/propose_update.md -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/source-git-best-practices.svg.png -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/source-git.md -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/srpm.md -> packitos-0.6.2.dev12+g8396278/docs
+copying docs/sync-from-downstream.md -> packitos-0.6.2.dev12+g8396278/docs
+copying fedora-tests/simple.py -> packitos-0.6.2.dev12+g8396278/fedora-tests
+copying fedora-tests/tests.yml -> packitos-0.6.2.dev12+g8396278/fedora-tests
+copying fedora-tests/upstream.sh -> packitos-0.6.2.dev12+g8396278/fedora-tests
+copying files/install-requirements.yaml -> packitos-0.6.2.dev12+g8396278/files
+copying files/install-tests-requirements.yaml -> packitos-0.6.2.dev12+g8396278/files
+copying files/zuul-install-requirements-git-master.yaml -> packitos-0.6.2.dev12+g8396278/files
+copying files/zuul-install-requirements-pip.yaml -> packitos-0.6.2.dev12+g8396278/files
+copying files/zuul-install-requirements-rpms.yaml -> packitos-0.6.2.dev12+g8396278/files
+copying files/zuul-pre-commit.yaml -> packitos-0.6.2.dev12+g8396278/files
+copying files/zuul-tests-session-recording.yaml -> packitos-0.6.2.dev12+g8396278/files
+copying files/zuul-tests.yaml -> packitos-0.6.2.dev12+g8396278/files
+copying files/tasks/build-rpm-deps.yaml -> packitos-0.6.2.dev12+g8396278/files/tasks
+copying files/tasks/configure-git.yaml -> packitos-0.6.2.dev12+g8396278/files/tasks
+copying files/tasks/generic-dnf-requirements.yaml -> packitos-0.6.2.dev12+g8396278/files/tasks
+copying files/tasks/install-packit.yaml -> packitos-0.6.2.dev12+g8396278/files/tasks
+copying files/tasks/ogr-from-master.yaml -> packitos-0.6.2.dev12+g8396278/files/tasks
+copying files/tasks/python-compile-deps.yaml -> packitos-0.6.2.dev12+g8396278/files/tasks
+copying files/tasks/rpm-test-deps.yaml -> packitos-0.6.2.dev12+g8396278/files/tasks
+copying files/tasks/sandcastle-master.yaml -> packitos-0.6.2.dev12+g8396278/files/tasks
+copying files/tasks/zuul-project-setup.yaml -> packitos-0.6.2.dev12+g8396278/files/tasks
+copying packit/__init__.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/actions.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/api.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/base_git.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/command_handler.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/config.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/constants.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/distgit.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/downstream_checks.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/exceptions.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/fed_mes_consume.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/fedpkg.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/local_project.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/schema.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/security.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/status.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/sync.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/upstream.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/utils.py -> packitos-0.6.2.dev12+g8396278/packit
+copying packit/cli/__init__.py -> packitos-0.6.2.dev12+g8396278/packit/cli
+copying packit/cli/build.py -> packitos-0.6.2.dev12+g8396278/packit/cli
+copying packit/cli/copr_build.py -> packitos-0.6.2.dev12+g8396278/packit/cli
+copying packit/cli/create_update.py -> packitos-0.6.2.dev12+g8396278/packit/cli
+copying packit/cli/generate.py -> packitos-0.6.2.dev12+g8396278/packit/cli
+copying packit/cli/packit_base.py -> packitos-0.6.2.dev12+g8396278/packit/cli
+copying packit/cli/push_updates.py -> packitos-0.6.2.dev12+g8396278/packit/cli
+copying packit/cli/srpm.py -> packitos-0.6.2.dev12+g8396278/packit/cli
+copying packit/cli/status.py -> packitos-0.6.2.dev12+g8396278/packit/cli
+copying packit/cli/sync_from_downstream.py -> packitos-0.6.2.dev12+g8396278/packit/cli
+copying packit/cli/types.py -> packitos-0.6.2.dev12+g8396278/packit/cli
+copying packit/cli/update.py -> packitos-0.6.2.dev12+g8396278/packit/cli
+copying packit/cli/utils.py -> packitos-0.6.2.dev12+g8396278/packit/cli
+copying packitos.egg-info/PKG-INFO -> packitos-0.6.2.dev12+g8396278/packitos.egg-info
+copying packitos.egg-info/SOURCES.txt -> packitos-0.6.2.dev12+g8396278/packitos.egg-info
+copying packitos.egg-info/dependency_links.txt -> packitos-0.6.2.dev12+g8396278/packitos.egg-info
+copying packitos.egg-info/entry_points.txt -> packitos-0.6.2.dev12+g8396278/packitos.egg-info
+copying packitos.egg-info/requires.txt -> packitos-0.6.2.dev12+g8396278/packitos.egg-info
+copying packitos.egg-info/top_level.txt -> packitos-0.6.2.dev12+g8396278/packitos.egg-info
+copying tests/__init__.py -> packitos-0.6.2.dev12+g8396278/tests
+copying tests/testsuite_basic/__init__.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic
+copying tests/testsuite_basic/conftest.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic
+copying tests/testsuite_basic/spellbook.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic
+copying tests/testsuite_basic/utils.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic
+copying tests/testsuite_basic/data/copr_config -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data
+copying tests/testsuite_basic/data/cockpit-ostree/Makefile -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/cockpit-ostree
+copying tests/testsuite_basic/data/cockpit-ostree/cockpit-ostree.spec.dg -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/cockpit-ostree
+copying tests/testsuite_basic/data/cockpit-ostree/cockpit-ostree.spec.in -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/cockpit-ostree
+copying tests/testsuite_basic/data/cockpit-ostree/packit.yaml -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/cockpit-ostree
+copying tests/testsuite_basic/data/dist_git/beer.spec -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/dist_git
+copying tests/testsuite_basic/data/empty_changelog/.packit.json -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/empty_changelog
+copying tests/testsuite_basic/data/empty_changelog/beer.spec -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/empty_changelog
+copying tests/testsuite_basic/data/osbuild/.packit.yaml -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/osbuild
+copying tests/testsuite_basic/data/osbuild/__init__.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/osbuild
+copying tests/testsuite_basic/data/osbuild/osbuild.spec -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/osbuild
+copying tests/testsuite_basic/data/osbuild/setup.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/osbuild
+copying tests/testsuite_basic/data/snapd/.packit.yaml -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/snapd
+copying tests/testsuite_basic/data/snapd/packaging/fedora/fix-spec -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/snapd/packaging/fedora
+copying tests/testsuite_basic/data/snapd/packaging/fedora/pack-source -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/snapd/packaging/fedora
+copying tests/testsuite_basic/data/snapd/packaging/fedora/snapd.spec -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/snapd/packaging/fedora
+copying tests/testsuite_basic/data/snapd/vendor/vendor.json -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/snapd/vendor
+copying tests/testsuite_basic/data/sourcegit/source_git/.packit.yaml -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/sourcegit/source_git
+copying tests/testsuite_basic/data/sourcegit/source_git/fedora/beer.spec -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/sourcegit/source_git/fedora
+copying tests/testsuite_basic/data/sourcegit/upstream/big-source-file.txt -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/sourcegit/upstream
+copying tests/testsuite_basic/data/sync_files/a.md -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/sync_files
+copying tests/testsuite_basic/data/sync_files/b.md -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/sync_files
+copying tests/testsuite_basic/data/sync_files/c.txt -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/sync_files
+copying tests/testsuite_basic/data/upstream_git/.packit.json -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/upstream_git
+copying tests/testsuite_basic/data/upstream_git/beer.spec -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/data/upstream_git
+copying tests/testsuite_basic/functional/__init__.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/functional
+copying tests/testsuite_basic/functional/test_srpm.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/functional
+copying tests/testsuite_basic/integration/__init__.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/bodhi_latest_builds.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/bodhi_status_updates.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_actions.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_api.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_base_git.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_build.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_create_update.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_distgit.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_generate.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_pagure.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_push_updates.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_security.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_source_git.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_sync_files.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_update.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_upstream.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_using_cockpit.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_using_osbuild.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_using_snapd.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/integration
+copying tests/testsuite_basic/unit/__init__.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_actions.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_api.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_base_git.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_cli.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_cli_utils.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_config.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_local_project.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_security.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_sync.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_utils.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_basic/unit
+copying tests/testsuite_recording/__init__.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_recording
+copying tests/testsuite_recording/integration/__init__.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration
+copying tests/testsuite_recording/integration/test_api.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration
+copying tests/testsuite_recording/integration/test_status.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration
+copying tests/testsuite_recording/integration/testbase.py -> packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration
+copying tests/testsuite_recording/integration/test_data/test_api/tests.testsuite_recording.integration.test_api.ProposeUpdate.test_propose_update.yaml -> packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration/test_data/test_api
+copying tests/testsuite_recording/integration/test_data/test_status/tests.testsuite_recording.integration.test_status.TestStatus.test_builds.yaml -> packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration/test_data/test_status
+copying tests/testsuite_recording/integration/test_data/test_status/tests.testsuite_recording.integration.test_status.TestStatus.test_distgen_versions.yaml -> packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration/test_data/test_status
+copying tests/testsuite_recording/integration/test_data/test_status/tests.testsuite_recording.integration.test_status.TestStatus.test_dowstream_pr.yaml -> packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration/test_data/test_status
+copying tests/testsuite_recording/integration/test_data/test_status/tests.testsuite_recording.integration.test_status.TestStatus.test_status.yaml -> packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration/test_data/test_status
+copying tests/testsuite_recording/integration/test_data/test_status/tests.testsuite_recording.integration.test_status.TestStatus.test_up_releases.yaml -> packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration/test_data/test_status
+copying tests/testsuite_recording/integration/test_data/test_status/tests.testsuite_recording.integration.test_status.TestStatus.test_updates.yaml -> packitos-0.6.2.dev12+g8396278/tests/testsuite_recording/integration/test_data/test_status
+Writing packitos-0.6.2.dev12+g8396278/setup.cfg
+Creating tar archive
+removing 'packitos-0.6.2.dev12+g8396278' (and everything under it)
+[2019-09-16 12:33:04,905] DEBUG   |packit.base_git: Running ActionName.fix_spec.
+[2019-09-16 12:33:04,906] DEBUG   |packit.base_git: Running default implementation for ActionName.fix_spec.
+[2019-09-16 12:33:04,962] DEBUG   |packit.upstream: new %autosetup line:
+%autosetup -n packitos-0.6.2.dev12+g8396278
+[2019-09-16 12:33:04,963] DEBUG   |packit.utils: cmd = 'rpmdev-bumpspec --new 0.6.2.dev12+g8396278 --comment Development snapshot (8396278d) -r /tmp/tmpoh9ka3en/packit.spec'
+[2019-09-16 12:33:05,070] DEBUG   |packit.upstream: present srpms = set()
+[2019-09-16 12:33:05,071] DEBUG   |packit.utils: cmd = 'rpmbuild -bs --define _sourcedir . --define _specdir /tmp/tmpoh9ka3en --define _srcrpmdir /tmp/tmpoh9ka3en --define _topdir /tmp/tmpoh9ka3en --define _builddir /tmp/tmpoh9ka3en --define _rpmdir /tmp/tmpoh9ka3en --define _buildrootdir /tmp/tmpoh9ka3en packit.spec'
+[2019-09-16 12:33:05,220] DEBUG   |packit.utils: STDOUT: Wrote: /tmp/tmpoh9ka3en/packit-0.6.2.dev12+g8396278-1.fc28.src.rpm
+[2019-09-16 12:33:05,220] DEBUG   |packit.upstream: Wrote: /tmp/tmpoh9ka3en/packit-0.6.2.dev12+g8396278-1.fc28.src.rpm
+[2019-09-16 12:33:05,221] INFO    |packit.upstream: SRPM is /tmp/tmpoh9ka3en/packit-0.6.2.dev12+g8396278-1.fc28.src.rpm
+[2019-09-16 12:33:05,221] INFO    |packit: SRPM: /tmp/tmpoh9ka3en/packit-0.6.2.dev12+g8396278-1.fc28.src.rpm
+[2019-09-16 12:33:05,228] INFO    |packit: -----------------------
+[2019-09-16 12:33:05,228] INFO    |packit: [1mGetting downstream spec[0m
+[2019-09-16 12:33:05,228] INFO    |packit: -----------------------
+[2019-09-16 12:33:06,159] INFO    |packit: ----------------------------------
+[2019-09-16 12:33:06,159] INFO    |packit: [1mBuilding srpm with downstream spec[0m
+[2019-09-16 12:33:06,159] INFO    |packit: ----------------------------------
+[2019-09-16 12:33:06,160] DEBUG   |packit.base_git: Running ActionName.post_upstream_clone hook.
+[2019-09-16 12:33:06,160] DEBUG   |packit.base_git: Running ActionName.post_upstream_clone.
+[2019-09-16 12:33:06,160] DEBUG   |packit.base_git: Running default implementation for ActionName.post_upstream_clone.
+[2019-09-16 12:33:06,160] DEBUG   |packit.utils: cmd = 'python3 setup.py --version'
+[2019-09-16 12:33:06,781] DEBUG   |packit.utils: STDOUT: 0.6.2.dev12+g8396278.d20190916
+[2019-09-16 12:33:06,781] DEBUG   |packit.upstream: version = 0.6.2.dev12+g8396278.d20190916
+[2019-09-16 12:33:06,781] DEBUG   |packit.upstream: sanitized version = 0.6.2.dev12+g8396278.d20190916
+[2019-09-16 12:33:06,782] DEBUG   |packit.upstream: name + version = packitos-0.6.2.dev12+g8396278.d20190916
+[2019-09-16 12:33:06,782] DEBUG   |packit.utils: cmd = 'python3 setup.py sdist --dist-dir .'
+[2019-09-16 12:33:07,503] DEBUG   |packit.utils: STDOUT: running sdist
+running egg_info
+writing packitos.egg-info/PKG-INFO
+writing dependency_links to packitos.egg-info/dependency_links.txt
+writing entry points to packitos.egg-info/entry_points.txt
+writing requirements to packitos.egg-info/requires.txt
+writing top-level names to packitos.egg-info/top_level.txt
+writing manifest file 'packitos.egg-info/SOURCES.txt'
+running check
+creating packitos-0.6.2.dev12+g8396278.d20190916
+creating packitos-0.6.2.dev12+g8396278.d20190916/docs
+creating packitos-0.6.2.dev12+g8396278.d20190916/fedora-tests
+creating packitos-0.6.2.dev12+g8396278.d20190916/files
+creating packitos-0.6.2.dev12+g8396278.d20190916/files/tasks
+creating packitos-0.6.2.dev12+g8396278.d20190916/packit
+creating packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+creating packitos-0.6.2.dev12+g8396278.d20190916/packitos.egg-info
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/cockpit-ostree
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/dist_git
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/empty_changelog
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/osbuild
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/snapd
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/snapd/packaging
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/snapd/packaging/fedora
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/snapd/vendor
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/sourcegit
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/sourcegit/source_git
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/sourcegit/source_git/fedora
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/sourcegit/upstream
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/sync_files
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/upstream_git
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/functional
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/unit
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration/test_data
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration/test_data/test_api
+creating packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration/test_data/test_status
+copying files to packitos-0.6.2.dev12+g8396278.d20190916...
+copying .git_archival.txt -> packitos-0.6.2.dev12+g8396278.d20190916
+copying .gitattributes -> packitos-0.6.2.dev12+g8396278.d20190916
+copying .gitignore -> packitos-0.6.2.dev12+g8396278.d20190916
+copying .packit.yaml -> packitos-0.6.2.dev12+g8396278.d20190916
+copying .pre-commit-config.yaml -> packitos-0.6.2.dev12+g8396278.d20190916
+copying .zuul.yaml -> packitos-0.6.2.dev12+g8396278.d20190916
+copying CHANGELOG.md -> packitos-0.6.2.dev12+g8396278.d20190916
+copying CONTRIBUTING.md -> packitos-0.6.2.dev12+g8396278.d20190916
+copying Dockerfile -> packitos-0.6.2.dev12+g8396278.d20190916
+copying Dockerfile.tests -> packitos-0.6.2.dev12+g8396278.d20190916
+copying LICENSE -> packitos-0.6.2.dev12+g8396278.d20190916
+copying Makefile -> packitos-0.6.2.dev12+g8396278.d20190916
+copying README.md -> packitos-0.6.2.dev12+g8396278.d20190916
+copying Vagrantfile -> packitos-0.6.2.dev12+g8396278.d20190916
+copying ansible.cfg -> packitos-0.6.2.dev12+g8396278.d20190916
+copying packit.spec -> packitos-0.6.2.dev12+g8396278.d20190916
+copying pytest.ini -> packitos-0.6.2.dev12+g8396278.d20190916
+copying recipe-tests.yaml -> packitos-0.6.2.dev12+g8396278.d20190916
+copying release-conf.yaml -> packitos-0.6.2.dev12+g8396278.d20190916
+copying setup.cfg -> packitos-0.6.2.dev12+g8396278.d20190916
+copying setup.py -> packitos-0.6.2.dev12+g8396278.d20190916
+copying docs/01.md -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/02.md -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/ARCHITECTURE.md -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/actions.md -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/build.md -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/configuration.md -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/create_bodhi_update.md -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/how-to-source-git.md -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/packit.dia -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/packit.png -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/propose_update.md -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/source-git-best-practices.svg.png -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/source-git.md -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/srpm.md -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying docs/sync-from-downstream.md -> packitos-0.6.2.dev12+g8396278.d20190916/docs
+copying fedora-tests/simple.py -> packitos-0.6.2.dev12+g8396278.d20190916/fedora-tests
+copying fedora-tests/tests.yml -> packitos-0.6.2.dev12+g8396278.d20190916/fedora-tests
+copying fedora-tests/upstream.sh -> packitos-0.6.2.dev12+g8396278.d20190916/fedora-tests
+copying files/install-requirements.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files
+copying files/install-tests-requirements.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files
+copying files/zuul-install-requirements-git-master.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files
+copying files/zuul-install-requirements-pip.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files
+copying files/zuul-install-requirements-rpms.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files
+copying files/zuul-pre-commit.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files
+copying files/zuul-tests-session-recording.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files
+copying files/zuul-tests.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files
+copying files/tasks/build-rpm-deps.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files/tasks
+copying files/tasks/configure-git.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files/tasks
+copying files/tasks/generic-dnf-requirements.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files/tasks
+copying files/tasks/install-packit.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files/tasks
+copying files/tasks/ogr-from-master.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files/tasks
+copying files/tasks/python-compile-deps.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files/tasks
+copying files/tasks/rpm-test-deps.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files/tasks
+copying files/tasks/sandcastle-master.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files/tasks
+copying files/tasks/zuul-project-setup.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/files/tasks
+copying packit/__init__.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/actions.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/api.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/base_git.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/command_handler.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/config.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/constants.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/distgit.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/downstream_checks.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/exceptions.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/fed_mes_consume.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/fedpkg.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/local_project.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/schema.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/security.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/status.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/sync.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/upstream.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/utils.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit
+copying packit/cli/__init__.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+copying packit/cli/build.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+copying packit/cli/copr_build.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+copying packit/cli/create_update.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+copying packit/cli/generate.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+copying packit/cli/packit_base.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+copying packit/cli/push_updates.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+copying packit/cli/srpm.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+copying packit/cli/status.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+copying packit/cli/sync_from_downstream.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+copying packit/cli/types.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+copying packit/cli/update.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+copying packit/cli/utils.py -> packitos-0.6.2.dev12+g8396278.d20190916/packit/cli
+copying packitos.egg-info/PKG-INFO -> packitos-0.6.2.dev12+g8396278.d20190916/packitos.egg-info
+copying packitos.egg-info/SOURCES.txt -> packitos-0.6.2.dev12+g8396278.d20190916/packitos.egg-info
+copying packitos.egg-info/dependency_links.txt -> packitos-0.6.2.dev12+g8396278.d20190916/packitos.egg-info
+copying packitos.egg-info/entry_points.txt -> packitos-0.6.2.dev12+g8396278.d20190916/packitos.egg-info
+copying packitos.egg-info/requires.txt -> packitos-0.6.2.dev12+g8396278.d20190916/packitos.egg-info
+copying packitos.egg-info/top_level.txt -> packitos-0.6.2.dev12+g8396278.d20190916/packitos.egg-info
+copying tests/__init__.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests
+copying tests/testsuite_basic/__init__.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic
+copying tests/testsuite_basic/conftest.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic
+copying tests/testsuite_basic/spellbook.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic
+copying tests/testsuite_basic/utils.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic
+copying tests/testsuite_basic/data/copr_config -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data
+copying tests/testsuite_basic/data/cockpit-ostree/Makefile -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/cockpit-ostree
+copying tests/testsuite_basic/data/cockpit-ostree/cockpit-ostree.spec.dg -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/cockpit-ostree
+copying tests/testsuite_basic/data/cockpit-ostree/cockpit-ostree.spec.in -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/cockpit-ostree
+copying tests/testsuite_basic/data/cockpit-ostree/packit.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/cockpit-ostree
+copying tests/testsuite_basic/data/dist_git/beer.spec -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/dist_git
+copying tests/testsuite_basic/data/empty_changelog/.packit.json -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/empty_changelog
+copying tests/testsuite_basic/data/empty_changelog/beer.spec -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/empty_changelog
+copying tests/testsuite_basic/data/osbuild/.packit.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/osbuild
+copying tests/testsuite_basic/data/osbuild/__init__.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/osbuild
+copying tests/testsuite_basic/data/osbuild/osbuild.spec -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/osbuild
+copying tests/testsuite_basic/data/osbuild/setup.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/osbuild
+copying tests/testsuite_basic/data/snapd/.packit.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/snapd
+copying tests/testsuite_basic/data/snapd/packaging/fedora/fix-spec -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/snapd/packaging/fedora
+copying tests/testsuite_basic/data/snapd/packaging/fedora/pack-source -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/snapd/packaging/fedora
+copying tests/testsuite_basic/data/snapd/packaging/fedora/snapd.spec -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/snapd/packaging/fedora
+copying tests/testsuite_basic/data/snapd/vendor/vendor.json -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/snapd/vendor
+copying tests/testsuite_basic/data/sourcegit/source_git/.packit.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/sourcegit/source_git
+copying tests/testsuite_basic/data/sourcegit/source_git/fedora/beer.spec -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/sourcegit/source_git/fedora
+copying tests/testsuite_basic/data/sourcegit/upstream/big-source-file.txt -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/sourcegit/upstream
+copying tests/testsuite_basic/data/sync_files/a.md -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/sync_files
+copying tests/testsuite_basic/data/sync_files/b.md -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/sync_files
+copying tests/testsuite_basic/data/sync_files/c.txt -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/sync_files
+copying tests/testsuite_basic/data/upstream_git/.packit.json -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/upstream_git
+copying tests/testsuite_basic/data/upstream_git/beer.spec -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/data/upstream_git
+copying tests/testsuite_basic/functional/__init__.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/functional
+copying tests/testsuite_basic/functional/test_srpm.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/functional
+copying tests/testsuite_basic/integration/__init__.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/bodhi_latest_builds.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/bodhi_status_updates.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_actions.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_api.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_base_git.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_build.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_create_update.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_distgit.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_generate.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_pagure.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_push_updates.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_security.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_source_git.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_sync_files.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_update.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_upstream.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_using_cockpit.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_using_osbuild.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/integration/test_using_snapd.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/integration
+copying tests/testsuite_basic/unit/__init__.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_actions.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_api.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_base_git.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_cli.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_cli_utils.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_config.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_local_project.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_security.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_sync.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/unit
+copying tests/testsuite_basic/unit/test_utils.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_basic/unit
+copying tests/testsuite_recording/__init__.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording
+copying tests/testsuite_recording/integration/__init__.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration
+copying tests/testsuite_recording/integration/test_api.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration
+copying tests/testsuite_recording/integration/test_status.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration
+copying tests/testsuite_recording/integration/testbase.py -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration
+copying tests/testsuite_recording/integration/test_data/test_api/tests.testsuite_recording.integration.test_api.ProposeUpdate.test_propose_update.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration/test_data/test_api
+copying tests/testsuite_recording/integration/test_data/test_status/tests.testsuite_recording.integration.test_status.TestStatus.test_builds.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration/test_data/test_status
+copying tests/testsuite_recording/integration/test_data/test_status/tests.testsuite_recording.integration.test_status.TestStatus.test_distgen_versions.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration/test_data/test_status
+copying tests/testsuite_recording/integration/test_data/test_status/tests.testsuite_recording.integration.test_status.TestStatus.test_dowstream_pr.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration/test_data/test_status
+copying tests/testsuite_recording/integration/test_data/test_status/tests.testsuite_recording.integration.test_status.TestStatus.test_status.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration/test_data/test_status
+copying tests/testsuite_recording/integration/test_data/test_status/tests.testsuite_recording.integration.test_status.TestStatus.test_up_releases.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration/test_data/test_status
+copying tests/testsuite_recording/integration/test_data/test_status/tests.testsuite_recording.integration.test_status.TestStatus.test_updates.yaml -> packitos-0.6.2.dev12+g8396278.d20190916/tests/testsuite_recording/integration/test_data/test_status
+Writing packitos-0.6.2.dev12+g8396278.d20190916/setup.cfg
+Creating tar archive
+removing 'packitos-0.6.2.dev12+g8396278.d20190916' (and everything under it)
+[2019-09-16 12:33:07,504] DEBUG   |packit.base_git: Running ActionName.fix_spec.
+[2019-09-16 12:33:07,504] DEBUG   |packit.base_git: Running default implementation for ActionName.fix_spec.
+[2019-09-16 12:33:07,559] DEBUG   |packit.upstream: new %autosetup line:
+%autosetup -n packitos-0.6.2.dev12+g8396278.d20190916
+[2019-09-16 12:33:07,559] DEBUG   |packit.utils: cmd = 'rpmdev-bumpspec --new 0.6.2.dev12+g8396278.d20190916 --comment Development snapshot (8396278d) -r /tmp/tmpoh9ka3en/packit.spec'
+[2019-09-16 12:33:07,664] DEBUG   |packit.upstream: present srpms = {PosixPath('/tmp/tmpoh9ka3en/packit-0.6.2.dev12+g8396278-1.fc28.src.rpm')}
+[2019-09-16 12:33:07,664] DEBUG   |packit.utils: cmd = 'rpmbuild -bs --define _sourcedir . --define _specdir /tmp/tmpoh9ka3en --define _srcrpmdir /tmp/tmpoh9ka3en --define _topdir /tmp/tmpoh9ka3en --define _builddir /tmp/tmpoh9ka3en --define _rpmdir /tmp/tmpoh9ka3en --define _buildrootdir /tmp/tmpoh9ka3en packit.spec'
+[2019-09-16 12:33:07,808] DEBUG   |packit.utils: STDOUT: Wrote: /tmp/tmpoh9ka3en/packit-0.6.2.dev12+g8396278.d20190916-1.fc28.src.rpm
+[2019-09-16 12:33:07,808] DEBUG   |packit.upstream: Wrote: /tmp/tmpoh9ka3en/packit-0.6.2.dev12+g8396278.d20190916-1.fc28.src.rpm
+[2019-09-16 12:33:07,808] INFO    |packit.upstream: SRPM is /tmp/tmpoh9ka3en/packit-0.6.2.dev12+g8396278.d20190916-1.fc28.src.rpm
+[2019-09-16 12:33:07,809] INFO    |packit: SRPM: /tmp/tmpoh9ka3en/packit-0.6.2.dev12+g8396278.d20190916-1.fc28.src.rpm
+[2019-09-16 12:33:07,809] DEBUG   |packit: Removing repository directory: /tmp/tmpoh9ka3en

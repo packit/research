@@ -1,0 +1,71 @@
+[2019-09-16 14:32:49,464] INFO    |packit: Handling package atomic-reactor from upstream url git@github.com:containerbuildsystem/atomic-reactor.git
+[2019-09-16 14:32:49,464] INFO    |packit: ----------------
+[2019-09-16 14:32:49,464] INFO    |packit: [1mCloning upstream[0m
+[2019-09-16 14:32:49,464] INFO    |packit: ----------------
+[2019-09-16 14:32:49,464] DEBUG   |packit.utils: Cloning repo: git@github.com:containerbuildsystem/atomic-reactor.git -> /tmp/tmp3dzaoql6
+[2019-09-16 14:32:51,612] DEBUG   |packit.local_project: remote url of the repo is git@github.com:containerbuildsystem/atomic-reactor.git
+[2019-09-16 14:32:51,612] DEBUG   |packit.local_project: Parsed namespace and repo name from url: containerbuildsystem/atomic-reactor
+[2019-09-16 14:32:51,613] INFO    |packit: ----------------------
+[2019-09-16 14:32:51,613] INFO    |packit: [1mChecking packit config[0m
+[2019-09-16 14:32:51,613] INFO    |packit: ----------------------
+[2019-09-16 14:32:51,613] INFO    |packit: Packit config not found
+[2019-09-16 14:32:51,613] INFO    |packit: ------------------------
+[2019-09-16 14:32:51,613] INFO    |packit: [1mGenerating packit config[0m
+[2019-09-16 14:32:51,613] INFO    |packit: ------------------------
+[2019-09-16 14:32:51,613] DEBUG   |packit.cli.generate: Packit config file '/tmp/tmp3dzaoql6/.packit.yaml' changed.
+[2019-09-16 14:32:51,613] INFO    |packit: Generated new packit config /tmp/tmp3dzaoql6/.packit.yaml
+[2019-09-16 14:32:51,613] DEBUG   |packit.config: Local package config found: /tmp/tmp3dzaoql6/.packit.yaml
+[2019-09-16 14:32:51,615] DEBUG   |packit.config: Package config:
+{
+    "specfile_path": "atomic-reactor.spec",
+    "synced_files": [
+        "atomic-reactor.spec",
+        ".packit.yaml"
+    ],
+    "upstream_project_name": "atomic-reactor.git",
+    "downstream_package_name": "atomic-reactor"
+}
+[2019-09-16 14:32:51,616] INFO    |packit: ---------------------
+[2019-09-16 14:32:51,616] INFO    |packit: [1mGetting upstream spec[0m
+[2019-09-16 14:32:51,616] INFO    |packit: ---------------------
+[2019-09-16 14:32:51,617] DEBUG   |packit: Using upstream spec /tmp/tmp3dzaoql6/atomic-reactor.spec
+[2019-09-16 14:32:51,617] INFO    |packit: --------------------------------
+[2019-09-16 14:32:51,617] INFO    |packit: [1mBuilding srpm with upstream spec[0m
+[2019-09-16 14:32:51,617] INFO    |packit: --------------------------------
+[2019-09-16 14:32:51,617] DEBUG   |packit.base_git: command handler = RunCommandType.local
+[2019-09-16 14:32:51,618] DEBUG   |packit.base_git: Running ActionName.post_upstream_clone hook.
+[2019-09-16 14:32:51,618] DEBUG   |packit.base_git: Running ActionName.post_upstream_clone.
+[2019-09-16 14:32:51,618] DEBUG   |packit.base_git: Running default implementation for ActionName.post_upstream_clone.
+[2019-09-16 14:32:51,618] DEBUG   |packit.utils: cmd = 'git describe --tags --match *'
+[2019-09-16 14:32:51,625] DEBUG   |packit.utils: STDOUT: 1.6.42-11-g84387fd
+[2019-09-16 14:32:51,625] DEBUG   |packit.upstream: version = 1.6.42-11-g84387fd
+[2019-09-16 14:32:51,626] DEBUG   |packit.upstream: sanitized version = 1.6.42.11.g84387fd
+[2019-09-16 14:32:51,630] DEBUG   |packit.upstream: name + version = atomic-reactor.git-1.6.42.11.g84387fd
+[2019-09-16 12:32:54,944] DEBUG   |packit.utils: cmd = 'git archive -o atomic-reactor.git-1.6.42.11.g84387fd.tar.gz --prefix atomic-reactor.git-1.6.42.11.g84387fd/ HEAD'
+[2019-09-16 12:32:55,000] DEBUG   |packit.base_git: Running ActionName.fix_spec.
+[2019-09-16 12:32:55,000] DEBUG   |packit.base_git: Running default implementation for ActionName.fix_spec.
+[2019-09-16 12:32:56,570] DEBUG   |packit.upstream: new %setup line:
+%setup -qn %{name}-%{commit} -n atomic-reactor.git-1.6.42.11.g84387fd
+[2019-09-16 12:32:56,571] DEBUG   |packit.utils: cmd = 'rpmdev-bumpspec --new 1.6.42.11.g84387fd --comment Development snapshot (84387fd8) -r /tmp/tmp3dzaoql6/atomic-reactor.spec'
+[2019-09-16 12:32:58,106] DEBUG   |packit.upstream: present srpms = set()
+[2019-09-16 12:32:58,107] DEBUG   |packit.utils: cmd = 'rpmbuild -bs --define _sourcedir . --define _specdir /tmp/tmp3dzaoql6 --define _srcrpmdir /tmp/tmp3dzaoql6 --define _topdir /tmp/tmp3dzaoql6 --define _builddir /tmp/tmp3dzaoql6 --define _rpmdir /tmp/tmp3dzaoql6 --define _buildrootdir /tmp/tmp3dzaoql6 atomic-reactor.spec'
+[2019-09-16 12:32:59,648] DEBUG   |packit.utils: STDOUT: Wrote: /tmp/tmp3dzaoql6/atomic-reactor-1.6.42.11.g84387fd-1.fc28.src.rpm
+[2019-09-16 12:32:59,648] DEBUG   |packit.upstream: Wrote: /tmp/tmp3dzaoql6/atomic-reactor-1.6.42.11.g84387fd-1.fc28.src.rpm
+[2019-09-16 12:32:59,648] INFO    |packit.upstream: SRPM is /tmp/tmp3dzaoql6/atomic-reactor-1.6.42.11.g84387fd-1.fc28.src.rpm
+[2019-09-16 12:32:59,648] INFO    |packit: SRPM: /tmp/tmp3dzaoql6/atomic-reactor-1.6.42.11.g84387fd-1.fc28.src.rpm
+[2019-09-16 12:32:59,650] INFO    |packit: -----------------------
+[2019-09-16 12:32:59,650] INFO    |packit: [1mGetting downstream spec[0m
+[2019-09-16 12:32:59,650] INFO    |packit: -----------------------
+[2019-09-16 12:33:00,743] INFO    |packit: ----------------------------------
+[2019-09-16 12:33:00,743] INFO    |packit: [1mBuilding srpm with downstream spec[0m
+[2019-09-16 12:33:00,744] INFO    |packit: ----------------------------------
+[2019-09-16 12:33:00,744] DEBUG   |packit.base_git: Running ActionName.post_upstream_clone hook.
+[2019-09-16 12:33:00,744] DEBUG   |packit.base_git: Running ActionName.post_upstream_clone.
+[2019-09-16 12:33:00,745] DEBUG   |packit.base_git: Running default implementation for ActionName.post_upstream_clone.
+[2019-09-16 12:33:00,745] DEBUG   |packit.utils: cmd = 'git describe --tags --match *'
+[2019-09-16 12:33:00,759] DEBUG   |packit.utils: STDOUT: 1.6.42-11-g84387fd
+[2019-09-16 12:33:00,760] DEBUG   |packit.upstream: version = 1.6.42-11-g84387fd
+[2019-09-16 12:33:00,760] DEBUG   |packit.upstream: sanitized version = 1.6.42.11.g84387fd
+[2019-09-16 12:33:00,761] DEBUG   |packit.upstream: name + version = atomic-reactor.git-1.6.42.11.g84387fd
+[2019-09-16 12:33:00,761] ERROR   |packit: The target archive doesn't use a common extension (.tar.gz, .tar.bz2, .tar.xz, .zip), git archive can't be used. Please provide your own script for archive creation.
+[2019-09-16 12:33:00,761] DEBUG   |packit: Removing repository directory: /tmp/tmp3dzaoql6
