@@ -1,0 +1,69 @@
+[2019-09-16 12:33:07,817] INFO    |packit: Handling package youtube-dl from upstream url https://github.com/ytdl-org/youtube-dl
+[2019-09-16 12:33:07,817] INFO    |packit: ----------------
+[2019-09-16 12:33:07,817] INFO    |packit: [1mCloning upstream[0m
+[2019-09-16 12:33:07,817] INFO    |packit: ----------------
+[2019-09-16 12:33:07,818] DEBUG   |packit.utils: Cloning repo: https://github.com/ytdl-org/youtube-dl -> /tmp/tmp6hodwb61
+[2019-09-16 12:33:14,117] DEBUG   |packit.local_project: remote url of the repo is https://github.com/ytdl-org/youtube-dl
+[2019-09-16 12:33:14,117] DEBUG   |packit.local_project: Parsed namespace and repo name from url: ytdl-org/youtube-dl
+[2019-09-16 12:33:14,117] INFO    |packit: ----------------------
+[2019-09-16 12:33:14,117] INFO    |packit: [1mChecking packit config[0m
+[2019-09-16 12:33:14,117] INFO    |packit: ----------------------
+[2019-09-16 12:33:14,118] INFO    |packit: Packit config not found
+[2019-09-16 12:33:14,118] INFO    |packit: ------------------------
+[2019-09-16 12:33:14,118] INFO    |packit: [1mGenerating packit config[0m
+[2019-09-16 12:33:14,118] INFO    |packit: ------------------------
+[2019-09-16 12:33:14,118] DEBUG   |packit.cli.generate: Packit config file '/tmp/tmp6hodwb61/.packit.yaml' changed.
+[2019-09-16 12:33:14,118] INFO    |packit: Generated new packit config /tmp/tmp6hodwb61/.packit.yaml
+[2019-09-16 12:33:14,118] DEBUG   |packit.config: Local package config found: /tmp/tmp6hodwb61/.packit.yaml
+[2019-09-16 12:33:14,119] DEBUG   |packit.config: Package config:
+{
+    "specfile_path": "youtube-dl.spec",
+    "synced_files": [
+        "youtube-dl.spec",
+        ".packit.yaml"
+    ],
+    "upstream_project_name": "youtube-dl",
+    "downstream_package_name": "youtube-dl"
+}
+[2019-09-16 12:33:14,120] INFO    |packit: ---------------------
+[2019-09-16 12:33:14,120] INFO    |packit: [1mGetting upstream spec[0m
+[2019-09-16 12:33:14,120] INFO    |packit: ---------------------
+[2019-09-16 12:33:14,123] INFO    |packit: --------------------------------
+[2019-09-16 12:33:14,124] INFO    |packit: [1mBuilding srpm with upstream spec[0m
+[2019-09-16 12:33:14,124] INFO    |packit: --------------------------------
+[2019-09-16 12:33:14,124] INFO    |packit: Specfile not provided
+[2019-09-16 12:33:14,125] INFO    |packit: -----------------------
+[2019-09-16 12:33:14,125] INFO    |packit: [1mGetting downstream spec[0m
+[2019-09-16 12:33:14,125] INFO    |packit: -----------------------
+[2019-09-16 12:33:15,199] INFO    |packit: ----------------------------------
+[2019-09-16 12:33:15,199] INFO    |packit: [1mBuilding srpm with downstream spec[0m
+[2019-09-16 12:33:15,200] INFO    |packit: ----------------------------------
+[2019-09-16 12:33:15,200] DEBUG   |packit.base_git: command handler = RunCommandType.local
+[2019-09-16 12:33:15,200] DEBUG   |packit.base_git: Running ActionName.post_upstream_clone hook.
+[2019-09-16 12:33:15,200] DEBUG   |packit.base_git: Running ActionName.post_upstream_clone.
+[2019-09-16 12:33:15,201] DEBUG   |packit.base_git: Running default implementation for ActionName.post_upstream_clone.
+[2019-09-16 12:33:15,201] DEBUG   |packit.utils: cmd = 'git describe --tags --match *'
+[2019-09-16 12:33:15,206] DEBUG   |packit.utils: STDOUT: 2019.09.12.1
+[2019-09-16 12:33:15,206] DEBUG   |packit.upstream: version = 2019.09.12.1
+[2019-09-16 12:33:15,206] DEBUG   |packit.upstream: sanitized version = 2019.09.12.1
+[2019-09-16 12:33:15,212] DEBUG   |packit.upstream: name + version = youtube-dl-2019.09.12.1
+[2019-09-16 12:33:15,357] DEBUG   |packit.utils: cmd = 'git archive -o youtube-dl-2019.09.12.1.tar.gz --prefix youtube-dl-2019.09.12.1/ HEAD'
+[2019-09-16 12:33:15,516] DEBUG   |packit.base_git: Running ActionName.fix_spec.
+[2019-09-16 12:33:15,516] DEBUG   |packit.base_git: Running default implementation for ActionName.fix_spec.
+[2019-09-16 12:33:15,597] DEBUG   |packit.upstream: new %setup line:
+%setup -qn %{name} -n youtube-dl-2019.09.12.1
+[2019-09-16 12:33:15,597] DEBUG   |packit.utils: cmd = 'rpmdev-bumpspec --new 2019.09.12.1 --comment Development snapshot (e1f692f0) -r /tmp/tmp6hodwb61/youtube-dl.spec'
+[2019-09-16 12:33:15,662] DEBUG   |packit.upstream: present srpms = set()
+[2019-09-16 12:33:15,663] DEBUG   |packit.utils: cmd = 'rpmbuild -bs --define _sourcedir . --define _specdir /tmp/tmp6hodwb61 --define _srcrpmdir /tmp/tmp6hodwb61 --define _topdir /tmp/tmp6hodwb61 --define _builddir /tmp/tmp6hodwb61 --define _rpmdir /tmp/tmp6hodwb61 --define _buildrootdir /tmp/tmp6hodwb61 youtube-dl.spec'
+[2019-09-16 12:33:15,726] DEBUG   |packit.utils: STDOUT: RPM build errors:
+[2019-09-16 12:33:15,726] INFO    |packit.utils: STDERR: error: Bad file: ./youtube-dl.conf: No such file or directory
+error: Bad file: ./youtube-dl-gpgkeys.gpg: No such file or directory
+error: Bad file: ./youtube-dl-2019.09.12.1.tar.gz.sig: No such file or directory
+    Bad file: ./youtube-dl.conf: No such file or directory
+    Bad file: ./youtube-dl-gpgkeys.gpg: No such file or directory
+    Bad file: ./youtube-dl-2019.09.12.1.tar.gz.sig: No such file or directory
+[2019-09-16 12:33:15,726] ERROR   |packit.utils: Command ['rpmbuild', '-bs', '--define', '_sourcedir .', '--define', '_specdir /tmp/tmp6hodwb61', '--define', '_srcrpmdir /tmp/tmp6hodwb61', '--define', '_topdir /tmp/tmp6hodwb61', '--define', '_builddir /tmp/tmp6hodwb61', '--define', '_rpmdir /tmp/tmp6hodwb61', '--define', '_buildrootdir /tmp/tmp6hodwb61', 'youtube-dl.spec'] failed
+[2019-09-16 12:33:15,727] ERROR   |packit.utils: Command ['rpmbuild', '-bs', '--define', '_sourcedir .', '--define', '_specdir /tmp/tmp6hodwb61', '--define', '_srcrpmdir /tmp/tmp6hodwb61', '--define', '_topdir /tmp/tmp6hodwb61', '--define', '_builddir /tmp/tmp6hodwb61', '--define', '_rpmdir /tmp/tmp6hodwb61', '--define', '_buildrootdir /tmp/tmp6hodwb61', 'youtube-dl.spec'] failed.
+[2019-09-16 12:33:15,727] ERROR   |packit.upstream: Failed to create SRPM: PackitException("Command ['rpmbuild', '-bs', '--define', '_sourcedir .', '--define', '_specdir /tmp/tmp6hodwb61', '--define', '_srcrpmdir /tmp/tmp6hodwb61', '--define', '_topdir /tmp/tmp6hodwb61', '--define', '_builddir /tmp/tmp6hodwb61', '--define', '_rpmdir /tmp/tmp6hodwb61', '--define', '_buildrootdir /tmp/tmp6hodwb61', 'youtube-dl.spec'] failed: Command ['rpmbuild', '-bs', '--define', '_sourcedir .', '--define', '_specdir /tmp/tmp6hodwb61', '--define', '_srcrpmdir /tmp/tmp6hodwb61', '--define', '_topdir /tmp/tmp6hodwb61', '--define', '_builddir /tmp/tmp6hodwb61', '--define', '_rpmdir /tmp/tmp6hodwb61', '--define', '_buildrootdir /tmp/tmp6hodwb61', 'youtube-dl.spec'] failed.",)
+[2019-09-16 12:33:15,727] ERROR   |packit: Failed to create SRPM.
+[2019-09-16 12:33:15,727] DEBUG   |packit: Removing repository directory: /tmp/tmp6hodwb61
