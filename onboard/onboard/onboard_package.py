@@ -132,7 +132,7 @@ class PackageOnboarder:
         Use packit generate when not found
         """
         self.announce_operation('Checking packit config')
-        self.packit_pkg_cfg = get_existing_config(self.repo.working_dir)
+        self.packit_pkg_cfg = get_existing_config(Path(self.repo.working_dir))
         if self.packit_pkg_cfg:
             logger.info(f"Found packit config {self.packit_pkg_cfg}")
 
@@ -144,11 +144,11 @@ class PackageOnboarder:
                 "downstream_package_name": self.downstream_name
             }
 
-            self.packit_pkg_cfg = os.path.join(self.repo.working_dir, '.packit.yaml')
+            self.packit_pkg_cfg = Path(self.repo.working_dir) / '.packit.yaml'
             generate_config(
+                config_file=self.packit_pkg_cfg,
                 write_to_file=True,
                 template_data=template_data,
-                config_file_name=self.packit_pkg_cfg,
             )
             logger.info(f"Generated new packit config {self.packit_pkg_cfg}")
 
@@ -170,7 +170,8 @@ class PackageOnboarder:
         self.ensure_packit_config()
 
         # try running status
-        self.packit_api = get_packit_api(config=self.packit_cfg, local_project=self.packit_local_project)
+        self.packit_api = get_packit_api(config=self.packit_cfg,
+                                         local_project=self.packit_local_project)
         # self.announce_operation('Getting status')
         # self.packit_api.status()
 
@@ -180,7 +181,9 @@ class PackageOnboarder:
         self.build_srpm()
 
         # trying srpm build with downstream specfile
-        self.specfile_path = self.get_downstream_spec(dest=self.get_spec_from_packit_config())
+        self.specfile_path = self.get_downstream_spec(
+            dest=self.get_spec_from_packit_config()
+        )
         self.announce_operation("Building srpm with downstream spec")
         self.build_srpm()
 
