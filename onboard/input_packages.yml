@@ -1,9 +1,20 @@
--
-  downstream_name: atomic-reactor
-  upstream_url: "git@github.com:containerbuildsystem/atomic-reactor.git"
--
-  downstream_name: packit
-  upstream_url: "https://github.com/packit-service/packit"
--
-  downstream_name: youtube-dl
-  upstream_url: "https://github.com/ytdl-org/youtube-dl"
+- downstream_name: cockpit
+  upstream_url: https://github.com/cockpit-project/cockpit
+- downstream_name: cockpit-composer
+  upstream_url: https://github.com/weldr/cockpit-composer
+- downstream_name: cockpit-podman
+  upstream_url: https://github.com/cockpit-project/cockpit-podman
+- downstream_name: osbuild
+  upstream_url: https://github.com/osbuild/osbuild
+- downstream_name: pyparted
+  upstream_url: https://github.com/rhinstaller/pyparted
+- downstream_name: python-meh
+  upstream_url: https://github.com/rhinstaller/python-meh
+- downstream_name: python-simpleline
+  upstream_url: https://github.com/rhinstaller/python-simpleline
+- downstream_name: rpminspect
+  upstream_url: https://github.com/rpminspect/rpminspect
+- downstream_name: tmux-top
+  upstream_url: https://github.com/TomasTomecek/tmux-top
+- downstream_name: ksh
+  upstream_url: https://github.com/att/ast
