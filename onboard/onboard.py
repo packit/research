@@ -18,6 +18,11 @@ execution_date = str(strftime('%Y_%m_%d-%H_%M_%S', gmtime()))
 log_dir = os.path.join(os.getcwd(), 'output', execution_date)
 os.makedirs(log_dir)
 
+latest_path = os.path.join(os.getcwd(), 'output', 'latest')
+if os.path.exists(latest_path):
+    os.unlink(latest_path)
+os.symlink(log_dir, latest_path)
+
 for pkg in pkg_list:
     print('*' * os.get_terminal_size().columns)
     logger.info(f"Handling package info: {pkg}")

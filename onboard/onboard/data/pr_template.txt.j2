@@ -1,0 +1,21 @@
+{% if template_data.first_contact %}
+Let us introduce [packit service](https://packit.dev) to you - the automation to integrate upstream open source projects into Fedora operating system.
+{% else %}
+We enabled copr builds in the packit config for you.
+{% endif %}
+After merging this PR, you are just a few steps away from RPM builds being automatically triggered on your PR's.
+It means, that you'll be able to try and play with your change, packaged as an RPM.
+{% if template_data.first_contact %}
+But there is more. By using packit, you can for example enable adding new releases into Fedora Rawhide.
+{% endif %}
+What are the next steps?
+* Install [Packit-as-a-Service github aplication](https://github.com/marketplace/packit-as-a-service) in your repo
+* In case you are first user, wait for account approval
+* Enjoy the built RPMs!
+
+For more info, please:
+ * check out the documentation: https://packit.dev/docs/
+ * contact [@packit-service/the-packit-team](https://github.com/orgs/packit-service/teams/the-packit-team)
+{% if template_data.spec_fetched %}
+The spec you see in this PR was fetched from your package's Fedora dist-git.
+{% endif -%}
