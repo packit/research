@@ -26,7 +26,7 @@ os.symlink(log_dir, latest_path)
 for pkg in pkg_list:
     print('*' * os.get_terminal_size().columns)
     logger.info(f"Handling package info: {pkg}")
-    po = PackageOnboarder(pkg)
+    po = PackageOnboarder(pkg, '--dry-run' in sys.argv)
     results.append(po.run(log_dir=log_dir))
 
 yaml.safe_dump(results, open(os.path.join(log_dir, "results.yml"),'w'))

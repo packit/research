@@ -27,8 +27,13 @@ class OnboardError(Exception):
     pass
 
 
+class NeedsManualFinishup(Exception):
+    pass
+
+
 class PackageOnboarder:
-    def __init__(self, info):
+    def __init__(self, info, dry_run):
+        self.dry_run = dry_run
         self.upstream_url = info['upstream_url']
         self.downstream_name = info['downstream_name']
         self.repo = None
@@ -54,7 +59,7 @@ class PackageOnboarder:
         if self.repo and self.repo.working_dir:
             if os.path.exists(self.repo.working_dir):
                 logger.debug('Removing repository directory: %s', self.repo.working_dir)
-                # shutil.rmtree(self.repo.working_dir)
+                shutil.rmtree(self.repo.working_dir)
         if log_handler:
             logger.removeHandler(log_handler)
 
@@ -102,6 +107,9 @@ class PackageOnboarder:
             logger.debug(f"Using upstream spec {from_config}")
             return from_config
 
+        specs = [str(x) for x in Path(self.repo.working_dir).glob('**/*.spec.in')]
+        if len(specs) != 0:
+            raise NeedsManualFinishup(f"Spec has to be generated in this repo")
         # Try to find other spec files
         specs = [str(x) for x in Path(self.repo.working_dir).glob('**/*.spec')]
         if len(specs) == 1:
@@ -248,26 +256,27 @@ class PackageOnboarder:
             subject = 'Enable copr builds and add packit config'
         else:
             subject = 'Enable copr builds for packit config'
-        fork = self.prepare_fork()
 
         # commit
         logger.info("Creating commit")
         self.packit_local_project.git_repo.index.add([str(self.pkg_cfg_path)])
         self.packit_local_project.git_repo.index.commit(subject)
 
-        # push
-        logger.info("Pushing")
-        r = self.packit_local_project.git_repo.remote(WHOAMI)
-        r.push()
+        pr_body = self.build_pr_text()
+        if not self.dry_run:
+            self.prepare_fork()
+            # push
+            logger.info("Pushing")
+            r = self.packit_local_project.git_repo.remote(WHOAMI)
+            r.push()
 
-        body = self.build_pr_text()
-        logger.info("Creating PR")
-        self.git_project.pr_create(
-            title=subject,
-            body=body,
-            target_branch='master',
-            source_branch=f"{WHOAMI}:{ONBOARD_BRANCH_NAME}"
-        )
+            logger.info("Creating PR")
+            self.git_project.pr_create(
+                title=subject,
+                body=pr_body,
+                target_branch='master',
+                source_branch=f"{WHOAMI}:{ONBOARD_BRANCH_NAME}"
+            )
 
     def _run(self):
         self.clone_repo()
@@ -321,6 +330,12 @@ class PackageOnboarder:
 
         try:
             self._run()
+        except NeedsManualFinishup as ex:
+            logger.info(ex)
+            logger.info(f"Please finish this manualy in {self.repo.working_dir}")
+            self.result['repo_path'] = self.repo.working_dir
+            self.result['unfinished'] = True
+            logger.removeHandler(fh)
         except Exception as ex:
             logger.error(ex)
             traceback.print_exc()
