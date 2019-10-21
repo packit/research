@@ -199,7 +199,7 @@ class PackageOnboarder:
             'first_contact': not self.result['already_had_packit_conf'],
             'spec_fetched': self.result['downstream_spec_used']
         })
-        logger.warning('New PR text:')
+        logger.debug('New PR text:')
         logger.debug(output_text)
         return output_text
 
@@ -291,9 +291,8 @@ class PackageOnboarder:
             logger.info(f"Project already has a branch {ONBOARD_BRANCH_NAME} in {WHOAMI} namespace. Skipping.")
             return
 
-        # TODO: https://github.com/packit-service/packit/issues/570
-        # self.announce_operation('Getting status')
-        # self.packit_api.status()
+        self.announce_operation('Getting status')
+        self.packit_api.status()
 
         self.packit_local_project.git_repo.create_head(ONBOARD_BRANCH_NAME).checkout()
         up_spec = self.get_upstream_spec()
