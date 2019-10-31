@@ -15,8 +15,8 @@
 * tmux-top
 
 ## In review(packit):
-* blivet-gui - https://github.com/storaged-project/blivet-gui/pull/135
 * ansible-bender - https://github.com/ansible-community/ansible-bender/pull/173
+* blivet-gui - https://github.com/storaged-project/blivet-gui/pull/135
 * initial-setup - https://github.com/rhinstaller/initial-setup/pull/79
 * lorax - https://github.com/weldr/lorax/pull/878
 * python-meh - https://github.com/rhinstaller/python-meh/pull/21
@@ -24,17 +24,18 @@
 * rpmdeplint - https://github.com/default-to-open/rpmdeplint/pull/1
 
 ## In review(copr):
+* cockpit-ostree - https://github.com/cockpit-project/cockpit-ostree/pull/31
+* cockpit-podman - https://github.com/cockpit-project/cockpit-podman/pull/235
 * sen - https://github.com/TomasTomecek/sen/pull/150
 
 ## Onboarded without copr builds yet
-* cockpit-ostree
-* cockpit-podman
 * rear
-* redminecli
-* rust-pretty-git-prompt
 
 ## Blocked:
-### package not found
+### Needs downstream patches for build
+* rust-pretty-git-prompt - has packit config
+
+### Package not found
 * cockpit-container
 * redminecli
 
@@ -45,8 +46,8 @@
 * standard-test-roles
 
 ## Needs action for spec generate:
-* anaconda
-* cockpit-composer
+* anaconda - how is it built?
+* cockpit-composer - npm fails
 * ksh
 * rpminspect
 * cockpit
