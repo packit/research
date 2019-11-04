@@ -9,7 +9,7 @@ The task here is to decide between SQL or NoSQL and then between our own deploym
 
 SQL stores data in a structured way of interconnected tables.
 The question here is whether we actually need structured tables to do some crazy queries.
-Big plus here is that Celery supports [SQLAlchemy](https://www.sqlalchemy.org) as a [build-in backend](https://docs.celeryproject.org/en/latest/getting-started/first-steps-with-celery.html#keeping-results) and the same applies to [Flask](https://github.com/pallets/flask-sqlalchemy).
+Big plus here is that Celery supports [SQLAlchemy](https://www.sqlalchemy.org) as a [built-in backend](https://docs.celeryproject.org/en/latest/getting-started/first-steps-with-celery.html#keeping-results) and the same applies to [Flask](https://github.com/pallets/flask-sqlalchemy).
 From the databases which SQLAlchemy supports I'd select SQLite and Postgresql (see also [this](https://tableplus.com/blog/2018/08/sqlite-vs-postgresql-which-database-to-use-and-why.html) and [this](https://www.digitalocean.com/community/tutorials/sqlite-vs-mysql-vs-postgresql-a-comparison-of-relational-database-management-systems)):
 
 ## SQLite
