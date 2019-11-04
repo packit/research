@@ -18,7 +18,7 @@ From the databases which SQLAlchemy supports I'd select SQLite and Postgresql (s
 Ultra-lightweight in setup, administration, and required resource. Very fast.
 
 ### Cons
-Because SQLite is a serverless database, it doesn’t provide direct network access to its data. The application (as I understand it) just stores data in a file by using a library. If more containers (in our case service and more workers) need to access the db, they probably need to have the file on a shared (RWX) volume.
+Because SQLite is a serverless database, it doesn’t provide direct network access to its data. An application (as I understand it) just stores data in a file by using a SQLite library. If more containers (in our case service and more workers) need to access the db, they probably need to have the file on a shared (RWX) volume.
 
 ## Postgresql
 
@@ -26,26 +26,35 @@ Because SQLite is a serverless database, it doesn’t provide direct network acc
 [JSON data type](http://www.postgresqltutorial.com/postgresql-json) is a big plus, because we already have our data serialized as jsons so we can just store them that way and then do all kinds of queries over them.
 
 ### Cons
-Overkill
+[Overkill](https://www.digitalocean.com/community/tutorials/sqlite-vs-mysql-vs-postgresql-a-comparison-of-relational-database-management-systems#when-not-to-use-postgresql)
 
 
 # NoSQL
 
-Example of a NoSQL database is [MongoDB](https://www.mongodb.com/what-is-mongodb).
+Example of a NoSQL ([Document-oriented](https://www.digitalocean.com/community/tutorials/a-comparison-of-nosql-database-management-systems-and-models#document-oriented-databases)) database is [MongoDB](https://www.mongodb.com/what-is-mongodb).
+
 ## Pros:
 Stores data in flexible, JSON-like documents, meaning fields can vary from document to document and data structure can be changed over time. It also [supports queries](https://www.tutorialspoint.com/mongodb/mongodb_query_document.htm) and indexing.
+
 ## Cons
 Using MongoDB as a Celery backend is not that straightforward, but there are options: [[1]](http://docs.celeryproject.org/en/latest/_modules/celery/backends/mongodb.html), [[2]](https://stackoverflow.com/questions/15740755/working-example-of-celery-with-mongo-db), [[3]](https://stackoverflow.com/questions/53017827/example-celery-v4-2-with-mongodb-results-backend)
 
-# Cloud
+# DBaaS
 
-Deploy or cloud-native? That's the question.
+Deploy ourselves or [cloud-native](https://en.wikipedia.org/wiki/Cloud_database)? That's the question.
 
 ## Deploy in OpenShift
 
-OpenShift provides a container image for running MongoDB, [see](https://docs.openshift.com/container-platform/3.11/using_images/db_images/mongodb.html).
+There are publicly available container images for both [Postgresql](https://docs.openshift.com/container-platform/3.11/using_images/db_images/postgresql.html) and [MongoDB](https://docs.openshift.com/container-platform/3.11/using_images/db_images/mongodb.html).
 
 ## AWS
+
+### Postgresql
+
+- [Amazon RDS for PostgreSQL](https://aws.amazon.com/rds/postgresql)
+- [PostgreSQL on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html)
+
+### MongoDB
 
 Even that one can use MongoDB in AWS (see [[1]](https://docs.aws.amazon.com/quickstart/latest/mongodb/welcome.html), [[2]](https://aws.amazon.com/quickstart/architecture/mongodb)), Amazon seems to be pushing their MongoDB compatible [DocumentDB](https://aws.amazon.com/documentdb) (see also [Docs/Developer Guide](https://docs.aws.amazon.com/documentdb/latest/developerguide)).
 Given that we don't need full MongoDB compatibility, the DocumentDB seems to be the preferred one. (and the winner of today's battle)
