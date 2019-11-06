@@ -21,6 +21,9 @@
           <li class="pf-c-nav__item">
             <a href="{{ url_for('logs') }}" class="pf-c-nav__link">Logs</a>
           </li>
+          <li class="pf-c-nav__item">
+            <a href="{{ url_for('projects') }}" class="pf-c-nav__link">Projects</a>
+          </li>
         </ul>
       </nav>
     </div>
@@ -30,9 +33,11 @@
     <section class="pf-c-page__main-section pf-m-light">
       <div class="pf-c-content">
         <h1> {{ header }} </h1>
-        <div>
-          {{ content }}
-        </div>
+      </div>
+    </section>
+    <section class="pf-c-page__main-section pf-m-light">
+      <div class="pf-c-content">
+        {{ content|safe }}
       </div>
     </section>
   </main>
