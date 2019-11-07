@@ -1,7 +1,6 @@
 from flask import Flask, render_template, send_from_directory
 import socket
 import requests
-import json
 
 app = Flask("Packit Service Dashboard")
 API_URL = "https://stg.packit.dev/api"
@@ -28,12 +27,10 @@ def check_service(server, port, ip_type=socket.SOCK_STREAM):
 
 def return_json(url, method="GET", **kwargs):
     response = requests.request(method=method, url=url, **kwargs)
-    output = None
     try:
-        output = json.loads(response.content)
-    except Exception:
-        pass
-    return output
+        return response.json()
+    except ValueError:
+        return None
 
 
 def return_json_all_pages(url, limit=10, method="GET", **kwargs):
