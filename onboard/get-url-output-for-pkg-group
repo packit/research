@@ -1,0 +1,2225 @@
+Summary:
+
+Processed packages: 2067
+
+Failures:
+ - specs unreached: 529
+ - URL not found in sources of: 933
+ - Package has multiple sources: 462
+ - Spec for pkg failed to be parsed: 9
+ - Found upstream urls: 134
+
+Result: Specs unreached 529
+https://src.fedoraproject.org/rpms/yum/raw/master/f/yum.spec
+https://src.fedoraproject.org/rpms/preupgrade-assistant/raw/master/f/preupgrade-assistant.spec
+https://src.fedoraproject.org/rpms/python/raw/master/f/python.spec
+https://src.fedoraproject.org/rpms/java-1.7.0-openjdk/raw/master/f/java-1.7.0-openjdk.spec
+https://src.fedoraproject.org/rpms/preupgrade-assistant-el6toel7/raw/master/f/preupgrade-assistant-el6toel7.spec
+https://src.fedoraproject.org/rpms/rh-php56/raw/master/f/rh-php56.spec
+https://src.fedoraproject.org/rpms/mesa-private-llvm/raw/master/f/mesa-private-llvm.spec
+https://src.fedoraproject.org/rpms/httpd24/raw/master/f/httpd24.spec
+https://src.fedoraproject.org/rpms/java-1.7.1-ibm/raw/master/f/java-1.7.1-ibm.spec
+https://src.fedoraproject.org/rpms/java-1.7.0-oracle/raw/master/f/java-1.7.0-oracle.spec
+https://src.fedoraproject.org/rpms/yum-utils/raw/master/f/yum-utils.spec
+https://src.fedoraproject.org/rpms/java-1.6.0-openjdk/raw/master/f/java-1.6.0-openjdk.spec
+https://src.fedoraproject.org/rpms/java-1.8.0-oracle/raw/master/f/java-1.8.0-oracle.spec
+https://src.fedoraproject.org/rpms/oprofile/raw/master/f/oprofile.spec
+https://src.fedoraproject.org/rpms/java-1.6.0-sun/raw/master/f/java-1.6.0-sun.spec
+https://src.fedoraproject.org/rpms/nss-util/raw/master/f/nss-util.spec
+https://src.fedoraproject.org/rpms/java-1.8.0-ibm/raw/master/f/java-1.8.0-ibm.spec
+https://src.fedoraproject.org/rpms/redhat-access-insights/raw/master/f/redhat-access-insights.spec
+https://src.fedoraproject.org/rpms/preupgrade-assistant-contents/raw/master/f/preupgrade-assistant-contents.spec
+https://src.fedoraproject.org/rpms/man-pages-overrides/raw/master/f/man-pages-overrides.spec
+https://src.fedoraproject.org/rpms/udev/raw/master/f/udev.spec
+https://src.fedoraproject.org/rpms/thermostat1/raw/master/f/thermostat1.spec
+https://src.fedoraproject.org/rpms/authconfig/raw/master/f/authconfig.spec
+https://src.fedoraproject.org/rpms/util-linux-ng/raw/master/f/util-linux-ng.spec
+https://src.fedoraproject.org/rpms/procps/raw/master/f/procps.spec
+https://src.fedoraproject.org/rpms/squid34/raw/master/f/squid34.spec
+https://src.fedoraproject.org/rpms/nodejs010/raw/master/f/nodejs010.spec
+https://src.fedoraproject.org/rpms/nss-softokn/raw/master/f/nss-softokn.spec
+https://src.fedoraproject.org/rpms/java-1.6.0-ibm/raw/master/f/java-1.6.0-ibm.spec
+https://src.fedoraproject.org/rpms/mysql/raw/master/f/mysql.spec
+https://src.fedoraproject.org/rpms/createrepo/raw/master/f/createrepo.spec
+https://src.fedoraproject.org/rpms/redhat-support-tool/raw/master/f/redhat-support-tool.spec
+https://src.fedoraproject.org/rpms/php54/raw/master/f/php54.spec
+https://src.fedoraproject.org/rpms/java-1.7.0-ibm/raw/master/f/java-1.7.0-ibm.spec
+https://src.fedoraproject.org/rpms/php55/raw/master/f/php55.spec
+https://src.fedoraproject.org/rpms/gcc-libraries/raw/master/f/gcc-libraries.spec
+https://src.fedoraproject.org/rpms/ConsoleKit/raw/master/f/ConsoleKit.spec
+https://src.fedoraproject.org/rpms/man/raw/master/f/man.spec
+https://src.fedoraproject.org/rpms/system-config-network/raw/master/f/system-config-network.spec
+https://src.fedoraproject.org/rpms/preupgrade-assistant-el6toel7-data/raw/master/f/preupgrade-assistant-el6toel7-data.spec
+https://src.fedoraproject.org/rpms/samba3x/raw/master/f/samba3x.spec
+https://src.fedoraproject.org/rpms/compat-sap-c++/raw/master/f/compat-sap-c++.spec
+https://src.fedoraproject.org/rpms/rh-java-common/raw/master/f/rh-java-common.spec
+https://src.fedoraproject.org/rpms/mysql55-mysql/raw/master/f/mysql55-mysql.spec
+https://src.fedoraproject.org/rpms/jakarta-taglibs-standard/raw/master/f/jakarta-taglibs-standard.spec
+https://src.fedoraproject.org/rpms/strongimcv/raw/master/f/strongimcv.spec
+https://src.fedoraproject.org/rpms/rhel-system-roles/raw/master/f/rhel-system-roles.spec
+https://src.fedoraproject.org/rpms/redhat-support-lib-python/raw/master/f/redhat-support-lib-python.spec
+https://src.fedoraproject.org/rpms/bind97/raw/master/f/bind97.spec
+https://src.fedoraproject.org/rpms/prelink/raw/master/f/prelink.spec
+https://src.fedoraproject.org/rpms/java-1.5.0-ibm/raw/master/f/java-1.5.0-ibm.spec
+https://src.fedoraproject.org/rpms/rhscl-dockerfiles/raw/master/f/rhscl-dockerfiles.spec
+https://src.fedoraproject.org/rpms/rsyslog7/raw/master/f/rsyslog7.spec
+https://src.fedoraproject.org/rpms/crypto-utils/raw/master/f/crypto-utils.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-collections/raw/master/f/jakarta-commons-collections.spec
+https://src.fedoraproject.org/rpms/db4/raw/master/f/db4.spec
+https://src.fedoraproject.org/rpms/texlive-texmf/raw/master/f/texlive-texmf.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-beanutils/raw/master/f/jakarta-commons-beanutils.spec
+https://src.fedoraproject.org/rpms/latrace/raw/master/f/latrace.spec
+https://src.fedoraproject.org/rpms/apache-jasper/raw/master/f/apache-jasper.spec
+https://src.fedoraproject.org/rpms/openssl098e/raw/master/f/openssl098e.spec
+https://src.fedoraproject.org/rpms/openlmi-providers/raw/master/f/openlmi-providers.spec
+https://src.fedoraproject.org/rpms/devassist09/raw/master/f/devassist09.spec
+https://src.fedoraproject.org/rpms/rh-postgresql94/raw/master/f/rh-postgresql94.spec
+https://src.fedoraproject.org/rpms/pth/raw/master/f/pth.spec
+https://src.fedoraproject.org/rpms/nss_ldap/raw/master/f/nss_ldap.spec
+https://src.fedoraproject.org/rpms/rsyslog5/raw/master/f/rsyslog5.spec
+https://src.fedoraproject.org/rpms/maven-doxia-tools/raw/master/f/maven-doxia-tools.spec
+https://src.fedoraproject.org/rpms/maven-reporting-exec/raw/master/f/maven-reporting-exec.spec
+https://src.fedoraproject.org/rpms/maven-shared-jar/raw/master/f/maven-shared-jar.spec
+https://src.fedoraproject.org/rpms/compat-db/raw/master/f/compat-db.spec
+https://src.fedoraproject.org/rpms/maven30/raw/master/f/maven30.spec
+https://src.fedoraproject.org/rpms/openswan/raw/master/f/openswan.spec
+https://src.fedoraproject.org/rpms/jpackage-utils/raw/master/f/jpackage-utils.spec
+https://src.fedoraproject.org/rpms/rh-ror41/raw/master/f/rh-ror41.spec
+https://src.fedoraproject.org/rpms/python-twisted-web/raw/master/f/python-twisted-web.spec
+https://src.fedoraproject.org/rpms/xmlrpc/raw/master/f/xmlrpc.spec
+https://src.fedoraproject.org/rpms/MySQL-python/raw/master/f/MySQL-python.spec
+https://src.fedoraproject.org/rpms/nginx16/raw/master/f/nginx16.spec
+https://src.fedoraproject.org/rpms/v8/raw/master/f/v8.spec
+https://src.fedoraproject.org/rpms/libevent2/raw/master/f/libevent2.spec
+https://src.fedoraproject.org/rpms/pam_krb5/raw/master/f/pam_krb5.spec
+https://src.fedoraproject.org/rpms/system-config-date/raw/master/f/system-config-date.spec
+https://src.fedoraproject.org/rpms/upstart/raw/master/f/upstart.spec
+https://src.fedoraproject.org/rpms/perf/raw/master/f/perf.spec
+https://src.fedoraproject.org/rpms/module-init-tools/raw/master/f/module-init-tools.spec
+https://src.fedoraproject.org/rpms/dstat/raw/master/f/dstat.spec
+https://src.fedoraproject.org/rpms/postgresql84/raw/master/f/postgresql84.spec
+https://src.fedoraproject.org/rpms/groovy/raw/master/f/groovy.spec
+https://src.fedoraproject.org/rpms/binutils220/raw/master/f/binutils220.spec
+https://src.fedoraproject.org/rpms/gcc44/raw/master/f/gcc44.spec
+https://src.fedoraproject.org/rpms/PyXML/raw/master/f/PyXML.spec
+https://src.fedoraproject.org/rpms/openhpi32/raw/master/f/openhpi32.spec
+https://src.fedoraproject.org/rpms/rh-ruby22/raw/master/f/rh-ruby22.spec
+https://src.fedoraproject.org/rpms/system-config-users/raw/master/f/system-config-users.spec
+https://src.fedoraproject.org/rpms/llvm-private/raw/master/f/llvm-private.spec
+https://src.fedoraproject.org/rpms/junit4/raw/master/f/junit4.spec
+https://src.fedoraproject.org/rpms/gcc4/raw/master/f/gcc4.spec
+https://src.fedoraproject.org/rpms/SysVinit/raw/master/f/SysVinit.spec
+https://src.fedoraproject.org/rpms/vixie-cron/raw/master/f/vixie-cron.spec
+https://src.fedoraproject.org/rpms/nss_compat_ossl/raw/master/f/nss_compat_ossl.spec
+https://src.fedoraproject.org/rpms/mod_auth_kerb/raw/master/f/mod_auth_kerb.spec
+https://src.fedoraproject.org/rpms/sysvinit/raw/master/f/sysvinit.spec
+https://src.fedoraproject.org/rpms/compat-gcc-32/raw/master/f/compat-gcc-32.spec
+https://src.fedoraproject.org/rpms/nss_db/raw/master/f/nss_db.spec
+https://src.fedoraproject.org/rpms/yum-updatesd/raw/master/f/yum-updatesd.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-dbcp/raw/master/f/jakarta-commons-dbcp.spec
+https://src.fedoraproject.org/rpms/python-backports-ssl_match_hostname/raw/master/f/python-backports-ssl_match_hostname.spec
+https://src.fedoraproject.org/rpms/python-prioritized-methods/raw/master/f/python-prioritized-methods.spec
+https://src.fedoraproject.org/rpms/python-kid/raw/master/f/python-kid.spec
+https://src.fedoraproject.org/rpms/jai-imageio-core/raw/master/f/jai-imageio-core.spec
+https://src.fedoraproject.org/rpms/libdfp/raw/master/f/libdfp.spec
+https://src.fedoraproject.org/rpms/libitm/raw/master/f/libitm.spec
+https://src.fedoraproject.org/rpms/mongodb/raw/master/f/mongodb.spec
+https://src.fedoraproject.org/rpms/pam_passwdqc/raw/master/f/pam_passwdqc.spec
+https://src.fedoraproject.org/rpms/pdksh/raw/master/f/pdksh.spec
+https://src.fedoraproject.org/rpms/python-argparse/raw/master/f/python-argparse.spec
+https://src.fedoraproject.org/rpms/rh-mongodb26/raw/master/f/rh-mongodb26.spec
+https://src.fedoraproject.org/rpms/rh-nginx18/raw/master/f/rh-nginx18.spec
+https://src.fedoraproject.org/rpms/rh-python34/raw/master/f/rh-python34.spec
+https://src.fedoraproject.org/rpms/unit-api/raw/master/f/unit-api.spec
+https://src.fedoraproject.org/rpms/gnupg/raw/master/f/gnupg.spec
+https://src.fedoraproject.org/rpms/python-ctypes/raw/master/f/python-ctypes.spec
+https://src.fedoraproject.org/rpms/unix2dos/raw/master/f/unix2dos.spec
+https://src.fedoraproject.org/rpms/amtu/raw/master/f/amtu.spec
+https://src.fedoraproject.org/rpms/arptables_jf/raw/master/f/arptables_jf.spec
+https://src.fedoraproject.org/rpms/gcc43/raw/master/f/gcc43.spec
+https://src.fedoraproject.org/rpms/hmaccalc/raw/master/f/hmaccalc.spec
+https://src.fedoraproject.org/rpms/mktemp/raw/master/f/mktemp.spec
+https://src.fedoraproject.org/rpms/mod_ssl/raw/master/f/mod_ssl.spec
+https://src.fedoraproject.org/rpms/mysql-connector-odbc64/raw/master/f/mysql-connector-odbc64.spec
+https://src.fedoraproject.org/rpms/openCryptoki/raw/master/f/openCryptoki.spec
+https://src.fedoraproject.org/rpms/unixODBC64/raw/master/f/unixODBC64.spec
+https://src.fedoraproject.org/rpms/bootparamd/raw/master/f/bootparamd.spec
+https://src.fedoraproject.org/rpms/compat-gcc-34/raw/master/f/compat-gcc-34.spec
+https://src.fedoraproject.org/rpms/hardlink/raw/master/f/hardlink.spec
+https://src.fedoraproject.org/rpms/hplip3/raw/master/f/hplip3.spec
+https://src.fedoraproject.org/rpms/krb5-appl/raw/master/f/krb5-appl.spec
+https://src.fedoraproject.org/rpms/mod_python/raw/master/f/mod_python.spec
+https://src.fedoraproject.org/rpms/openct/raw/master/f/openct.spec
+https://src.fedoraproject.org/rpms/python-gudev/raw/master/f/python-gudev.spec
+https://src.fedoraproject.org/rpms/rdate/raw/master/f/rdate.spec
+https://src.fedoraproject.org/rpms/readahead/raw/master/f/readahead.spec
+https://src.fedoraproject.org/rpms/tetex/raw/master/f/tetex.spec
+https://src.fedoraproject.org/rpms/vnc/raw/master/f/vnc.spec
+https://src.fedoraproject.org/rpms/yum-metadata-parser/raw/master/f/yum-metadata-parser.spec
+https://src.fedoraproject.org/rpms/yum-presto/raw/master/f/yum-presto.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-pool/raw/master/f/jakarta-commons-pool.spec
+https://src.fedoraproject.org/rpms/php-pecl-apc/raw/master/f/php-pecl-apc.spec
+https://src.fedoraproject.org/rpms/4Suite/raw/master/f/4Suite.spec
+https://src.fedoraproject.org/rpms/adaptx/raw/master/f/adaptx.spec
+https://src.fedoraproject.org/rpms/aether/raw/master/f/aether.spec
+https://src.fedoraproject.org/rpms/alchemist/raw/master/f/alchemist.spec
+https://src.fedoraproject.org/rpms/anacron/raw/master/f/anacron.spec
+https://src.fedoraproject.org/rpms/ant17/raw/master/f/ant17.spec
+https://src.fedoraproject.org/rpms/apache-james-project/raw/master/f/apache-james-project.spec
+https://src.fedoraproject.org/rpms/apel/raw/master/f/apel.spec
+https://src.fedoraproject.org/rpms/aqute-bndlib/raw/master/f/aqute-bndlib.spec
+https://src.fedoraproject.org/rpms/ash/raw/master/f/ash.spec
+https://src.fedoraproject.org/rpms/automake14/raw/master/f/automake14.spec
+https://src.fedoraproject.org/rpms/automake15/raw/master/f/automake15.spec
+https://src.fedoraproject.org/rpms/automake16/raw/master/f/automake16.spec
+https://src.fedoraproject.org/rpms/automake17/raw/master/f/automake17.spec
+https://src.fedoraproject.org/rpms/autorun/raw/master/f/autorun.spec
+https://src.fedoraproject.org/rpms/axis/raw/master/f/axis.spec
+https://src.fedoraproject.org/rpms/btparser/raw/master/f/btparser.spec
+https://src.fedoraproject.org/rpms/buildsys-macros/raw/master/f/buildsys-macros.spec
+https://src.fedoraproject.org/rpms/bzr/raw/master/f/bzr.spec
+https://src.fedoraproject.org/rpms/c2050/raw/master/f/c2050.spec
+https://src.fedoraproject.org/rpms/c2070/raw/master/f/c2070.spec
+https://src.fedoraproject.org/rpms/caching-nameserver/raw/master/f/caching-nameserver.spec
+https://src.fedoraproject.org/rpms/cairo-java/raw/master/f/cairo-java.spec
+https://src.fedoraproject.org/rpms/cas/raw/master/f/cas.spec
+https://src.fedoraproject.org/rpms/cdecl/raw/master/f/cdecl.spec
+https://src.fedoraproject.org/rpms/cdrtools/raw/master/f/cdrtools.spec
+https://src.fedoraproject.org/rpms/checkstyle/raw/master/f/checkstyle.spec
+https://src.fedoraproject.org/rpms/classpathx-jaf/raw/master/f/classpathx-jaf.spec
+https://src.fedoraproject.org/rpms/classpathx-mail/raw/master/f/classpathx-mail.spec
+https://src.fedoraproject.org/rpms/cmpi-bindings/raw/master/f/cmpi-bindings.spec
+https://src.fedoraproject.org/rpms/cobertura/raw/master/f/cobertura.spec
+https://src.fedoraproject.org/rpms/compat-boost-1331/raw/master/f/compat-boost-1331.spec
+https://src.fedoraproject.org/rpms/compat-expat1/raw/master/f/compat-expat1.spec
+https://src.fedoraproject.org/rpms/compat-gcc/raw/master/f/compat-gcc.spec
+https://src.fedoraproject.org/rpms/compat-gcc-295/raw/master/f/compat-gcc-295.spec
+https://src.fedoraproject.org/rpms/compat-gcc-296/raw/master/f/compat-gcc-296.spec
+https://src.fedoraproject.org/rpms/compat-gcc-44/raw/master/f/compat-gcc-44.spec
+https://src.fedoraproject.org/rpms/compat-glibc/raw/master/f/compat-glibc.spec
+https://src.fedoraproject.org/rpms/compat-libcap1/raw/master/f/compat-libcap1.spec
+https://src.fedoraproject.org/rpms/compat-libcom_err/raw/master/f/compat-libcom_err.spec
+https://src.fedoraproject.org/rpms/compat-libtermcap/raw/master/f/compat-libtermcap.spec
+https://src.fedoraproject.org/rpms/compat-openldap/raw/master/f/compat-openldap.spec
+https://src.fedoraproject.org/rpms/compat-readline43/raw/master/f/compat-readline43.spec
+https://src.fedoraproject.org/rpms/compat-slang/raw/master/f/compat-slang.spec
+https://src.fedoraproject.org/rpms/devassistant/raw/master/f/devassistant.spec
+https://src.fedoraproject.org/rpms/devassistant-assistants-dts/raw/master/f/devassistant-assistants-dts.spec
+https://src.fedoraproject.org/rpms/DeviceKit-power/raw/master/f/DeviceKit-power.spec
+https://src.fedoraproject.org/rpms/dirmngr/raw/master/f/dirmngr.spec
+https://src.fedoraproject.org/rpms/diskdumputils/raw/master/f/diskdumputils.spec
+https://src.fedoraproject.org/rpms/distcache/raw/master/f/distcache.spec
+https://src.fedoraproject.org/rpms/dmalloc/raw/master/f/dmalloc.spec
+https://src.fedoraproject.org/rpms/dvipdfm/raw/master/f/dvipdfm.spec
+https://src.fedoraproject.org/rpms/dvipdfmx/raw/master/f/dvipdfmx.spec
+https://src.fedoraproject.org/rpms/easymock2/raw/master/f/easymock2.spec
+https://src.fedoraproject.org/rpms/easymock3/raw/master/f/easymock3.spec
+https://src.fedoraproject.org/rpms/eclipse-birt/raw/master/f/eclipse-birt.spec
+https://src.fedoraproject.org/rpms/eclipse-callgraph/raw/master/f/eclipse-callgraph.spec
+https://src.fedoraproject.org/rpms/eclipse-changelog/raw/master/f/eclipse-changelog.spec
+https://src.fedoraproject.org/rpms/eclipse-dtp/raw/master/f/eclipse-dtp.spec
+https://src.fedoraproject.org/rpms/eclipse-linuxprofilingframework/raw/master/f/eclipse-linuxprofilingframework.spec
+https://src.fedoraproject.org/rpms/eclipse-mylyn/raw/master/f/eclipse-mylyn.spec
+https://src.fedoraproject.org/rpms/eclipse-oprofile/raw/master/f/eclipse-oprofile.spec
+https://src.fedoraproject.org/rpms/eclipse-rpm-editor/raw/master/f/eclipse-rpm-editor.spec
+https://src.fedoraproject.org/rpms/eclipse-rse/raw/master/f/eclipse-rse.spec
+https://src.fedoraproject.org/rpms/eclipse-valgrind/raw/master/f/eclipse-valgrind.spec
+https://src.fedoraproject.org/rpms/epydoc/raw/master/f/epydoc.spec
+https://src.fedoraproject.org/rpms/eruby/raw/master/f/eruby.spec
+https://src.fedoraproject.org/rpms/ethereal/raw/master/f/ethereal.spec
+https://src.fedoraproject.org/rpms/fbset/raw/master/f/fbset.spec
+https://src.fedoraproject.org/rpms/felix-osgi-compendium/raw/master/f/felix-osgi-compendium.spec
+https://src.fedoraproject.org/rpms/felix-osgi-core/raw/master/f/felix-osgi-core.spec
+https://src.fedoraproject.org/rpms/freeradius2/raw/master/f/freeradius2.spec
+https://src.fedoraproject.org/rpms/fsh/raw/master/f/fsh.spec
+https://src.fedoraproject.org/rpms/gcc34/raw/master/f/gcc34.spec
+https://src.fedoraproject.org/rpms/geronimo-jaspic-spec/raw/master/f/geronimo-jaspic-spec.spec
+https://src.fedoraproject.org/rpms/gjdoc/raw/master/f/gjdoc.spec
+https://src.fedoraproject.org/rpms/glassfish-el-api/raw/master/f/glassfish-el-api.spec
+https://src.fedoraproject.org/rpms/glassfish-jsp/raw/master/f/glassfish-jsp.spec
+https://src.fedoraproject.org/rpms/glib-java/raw/master/f/glib-java.spec
+https://src.fedoraproject.org/rpms/glibc-kernheaders/raw/master/f/glibc-kernheaders.spec
+https://src.fedoraproject.org/rpms/gnu-crypto/raw/master/f/gnu-crypto.spec
+https://src.fedoraproject.org/rpms/gnu-regexp/raw/master/f/gnu-regexp.spec
+https://src.fedoraproject.org/rpms/gob2/raw/master/f/gob2.spec
+https://src.fedoraproject.org/rpms/gypsy/raw/master/f/gypsy.spec
+https://src.fedoraproject.org/rpms/hesinfo/raw/master/f/hesinfo.spec
+https://src.fedoraproject.org/rpms/hesiod/raw/master/f/hesiod.spec
+https://src.fedoraproject.org/rpms/ht2html/raw/master/f/ht2html.spec
+https://src.fedoraproject.org/rpms/httpd24-docker/raw/master/f/httpd24-docker.spec
+https://src.fedoraproject.org/rpms/hwbrowser/raw/master/f/hwbrowser.spec
+https://src.fedoraproject.org/rpms/ia32el/raw/master/f/ia32el.spec
+https://src.fedoraproject.org/rpms/ibmasm/raw/master/f/ibmasm.spec
+https://src.fedoraproject.org/rpms/ibmasm-xinput/raw/master/f/ibmasm-xinput.spec
+https://src.fedoraproject.org/rpms/iptraf/raw/master/f/iptraf.spec
+https://src.fedoraproject.org/rpms/jadetex/raw/master/f/jadetex.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-codec/raw/master/f/jakarta-commons-codec.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-daemon/raw/master/f/jakarta-commons-daemon.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-digester/raw/master/f/jakarta-commons-digester.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-discovery/raw/master/f/jakarta-commons-discovery.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-el/raw/master/f/jakarta-commons-el.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-fileupload/raw/master/f/jakarta-commons-fileupload.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-lang/raw/master/f/jakarta-commons-lang.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-launcher/raw/master/f/jakarta-commons-launcher.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-logging/raw/master/f/jakarta-commons-logging.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-modeler/raw/master/f/jakarta-commons-modeler.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-net/raw/master/f/jakarta-commons-net.spec
+https://src.fedoraproject.org/rpms/jakarta-commons-validator/raw/master/f/jakarta-commons-validator.spec
+https://src.fedoraproject.org/rpms/jarjar/raw/master/f/jarjar.spec
+https://src.fedoraproject.org/rpms/java-1.4.2-bea/raw/master/f/java-1.4.2-bea.spec
+https://src.fedoraproject.org/rpms/java-1.4.2-gcj-compat/raw/master/f/java-1.4.2-gcj-compat.spec
+https://src.fedoraproject.org/rpms/java-1.4.2-ibm/raw/master/f/java-1.4.2-ibm.spec
+https://src.fedoraproject.org/rpms/java-1.4.2-ibm-sap/raw/master/f/java-1.4.2-ibm-sap.spec
+https://src.fedoraproject.org/rpms/java-1.5.0-bea/raw/master/f/java-1.5.0-bea.spec
+https://src.fedoraproject.org/rpms/java-1.5.0-gcj/raw/master/f/java-1.5.0-gcj.spec
+https://src.fedoraproject.org/rpms/java-1.5.0-sun/raw/master/f/java-1.5.0-sun.spec
+https://src.fedoraproject.org/rpms/java-1.6.0-bea/raw/master/f/java-1.6.0-bea.spec
+https://src.fedoraproject.org/rpms/jcifs/raw/master/f/jcifs.spec
+https://src.fedoraproject.org/rpms/jetty-distribution-remote-resources/raw/master/f/jetty-distribution-remote-resources.spec
+https://src.fedoraproject.org/rpms/jetty-eclipse/raw/master/f/jetty-eclipse.spec
+https://src.fedoraproject.org/rpms/jetty-version-maven-plugin/raw/master/f/jetty-version-maven-plugin.spec
+https://src.fedoraproject.org/rpms/jlex/raw/master/f/jlex.spec
+https://src.fedoraproject.org/rpms/jrefactory/raw/master/f/jrefactory.spec
+https://src.fedoraproject.org/rpms/junitperf/raw/master/f/junitperf.spec
+https://src.fedoraproject.org/rpms/keytool-maven-plugin/raw/master/f/keytool-maven-plugin.spec
+https://src.fedoraproject.org/rpms/konkretcmpi/raw/master/f/konkretcmpi.spec
+https://src.fedoraproject.org/rpms/krbafs/raw/master/f/krbafs.spec
+https://src.fedoraproject.org/rpms/kudzu/raw/master/f/kudzu.spec
+https://src.fedoraproject.org/rpms/launchmail/raw/master/f/launchmail.spec
+https://src.fedoraproject.org/rpms/lha/raw/master/f/lha.spec
+https://src.fedoraproject.org/rpms/libbtctl/raw/master/f/libbtctl.spec
+https://src.fedoraproject.org/rpms/libc-client/raw/master/f/libc-client.spec
+https://src.fedoraproject.org/rpms/libgconf-java/raw/master/f/libgconf-java.spec
+https://src.fedoraproject.org/rpms/libglade-java/raw/master/f/libglade-java.spec
+https://src.fedoraproject.org/rpms/libgnome-java/raw/master/f/libgnome-java.spec
+https://src.fedoraproject.org/rpms/libgssapi/raw/master/f/libgssapi.spec
+https://src.fedoraproject.org/rpms/libgssglue/raw/master/f/libgssglue.spec
+https://src.fedoraproject.org/rpms/libgtk-java/raw/master/f/libgtk-java.spec
+https://src.fedoraproject.org/rpms/libjpeg/raw/master/f/libjpeg.spec
+https://src.fedoraproject.org/rpms/libmusicbrainz3/raw/master/f/libmusicbrainz3.spec
+https://src.fedoraproject.org/rpms/libp11/raw/master/f/libp11.spec
+https://src.fedoraproject.org/rpms/libreadline-java/raw/master/f/libreadline-java.spec
+https://src.fedoraproject.org/rpms/libsilc/raw/master/f/libsilc.spec
+https://src.fedoraproject.org/rpms/libspe2/raw/master/f/libspe2.spec
+https://src.fedoraproject.org/rpms/libtermcap/raw/master/f/libtermcap.spec
+https://src.fedoraproject.org/rpms/libungif/raw/master/f/libungif.spec
+https://src.fedoraproject.org/rpms/libvte-java/raw/master/f/libvte-java.spec
+https://src.fedoraproject.org/rpms/libytnef/raw/master/f/libytnef.spec
+https://src.fedoraproject.org/rpms/lslk/raw/master/f/lslk.spec
+https://src.fedoraproject.org/rpms/maven-anno-plugin/raw/master/f/maven-anno-plugin.spec
+https://src.fedoraproject.org/rpms/maven-changes-plugin/raw/master/f/maven-changes-plugin.spec
+https://src.fedoraproject.org/rpms/maven-downloader/raw/master/f/maven-downloader.spec
+https://src.fedoraproject.org/rpms/maven-ejb-plugin/raw/master/f/maven-ejb-plugin.spec
+https://src.fedoraproject.org/rpms/maven-gpg-plugin/raw/master/f/maven-gpg-plugin.spec
+https://src.fedoraproject.org/rpms/maven-jaxb2-plugin/raw/master/f/maven-jaxb2-plugin.spec
+https://src.fedoraproject.org/rpms/maven-jxr/raw/master/f/maven-jxr.spec
+https://src.fedoraproject.org/rpms/maven-plugins-pom/raw/master/f/maven-plugins-pom.spec
+https://src.fedoraproject.org/rpms/maven-project-info-reports-plugin/raw/master/f/maven-project-info-reports-plugin.spec
+https://src.fedoraproject.org/rpms/maven-repository-builder/raw/master/f/maven-repository-builder.spec
+https://src.fedoraproject.org/rpms/maven-shared/raw/master/f/maven-shared.spec
+https://src.fedoraproject.org/rpms/maven-site-plugin/raw/master/f/maven-site-plugin.spec
+https://src.fedoraproject.org/rpms/maven-timestamp-plugin/raw/master/f/maven-timestamp-plugin.spec
+https://src.fedoraproject.org/rpms/maven2-common-poms/raw/master/f/maven2-common-poms.spec
+https://src.fedoraproject.org/rpms/min12xxw/raw/master/f/min12xxw.spec
+https://src.fedoraproject.org/rpms/mingw-pthreads/raw/master/f/mingw-pthreads.spec
+https://src.fedoraproject.org/rpms/mockobjects/raw/master/f/mockobjects.spec
+https://src.fedoraproject.org/rpms/mod_auth_mysql/raw/master/f/mod_auth_mysql.spec
+https://src.fedoraproject.org/rpms/mod_auth_pgsql/raw/master/f/mod_auth_pgsql.spec
+https://src.fedoraproject.org/rpms/mod_authz_ldap/raw/master/f/mod_authz_ldap.spec
+https://src.fedoraproject.org/rpms/mod_passenger/raw/master/f/mod_passenger.spec
+https://src.fedoraproject.org/rpms/mx/raw/master/f/mx.spec
+https://src.fedoraproject.org/rpms/MyODBC/raw/master/f/MyODBC.spec
+https://src.fedoraproject.org/rpms/mysql-connector-c++/raw/master/f/mysql-connector-c++.spec
+https://src.fedoraproject.org/rpms/mysql51/raw/master/f/mysql51.spec
+https://src.fedoraproject.org/rpms/mysql51-mysql/raw/master/f/mysql51-mysql.spec
+https://src.fedoraproject.org/rpms/mysql55/raw/master/f/mysql55.spec
+https://src.fedoraproject.org/rpms/mysqlclient10/raw/master/f/mysqlclient10.spec
+https://src.fedoraproject.org/rpms/nc/raw/master/f/nc.spec
+https://src.fedoraproject.org/rpms/netdump/raw/master/f/netdump.spec
+https://src.fedoraproject.org/rpms/newt-perl/raw/master/f/newt-perl.spec
+https://src.fedoraproject.org/rpms/nginx16-docker/raw/master/f/nginx16-docker.spec
+https://src.fedoraproject.org/rpms/nodejs-init-package-json/raw/master/f/nodejs-init-package-json.spec
+https://src.fedoraproject.org/rpms/nodejs-normalize-package-data/raw/master/f/nodejs-normalize-package-data.spec
+https://src.fedoraproject.org/rpms/nodejs-npm-registry-client/raw/master/f/nodejs-npm-registry-client.spec
+https://src.fedoraproject.org/rpms/nodejs-npmconf/raw/master/f/nodejs-npmconf.spec
+https://src.fedoraproject.org/rpms/nodejs-read-installed/raw/master/f/nodejs-read-installed.spec
+https://src.fedoraproject.org/rpms/nodejs010-docker/raw/master/f/nodejs010-docker.spec
+https://src.fedoraproject.org/rpms/notify-python/raw/master/f/notify-python.spec
+https://src.fedoraproject.org/rpms/npm/raw/master/f/npm.spec
+https://src.fedoraproject.org/rpms/nss-myhostname/raw/master/f/nss-myhostname.spec
+https://src.fedoraproject.org/rpms/obex-data-server/raw/master/f/obex-data-server.spec
+https://src.fedoraproject.org/rpms/obexd/raw/master/f/obexd.spec
+https://src.fedoraproject.org/rpms/objectweb-asm4/raw/master/f/objectweb-asm4.spec
+https://src.fedoraproject.org/rpms/open/raw/master/f/open.spec
+https://src.fedoraproject.org/rpms/openldap24-libs/raw/master/f/openldap24-libs.spec
+https://src.fedoraproject.org/rpms/openlmi-tools/raw/master/f/openlmi-tools.spec
+https://src.fedoraproject.org/rpms/openssl096b/raw/master/f/openssl096b.spec
+https://src.fedoraproject.org/rpms/openssl097a/raw/master/f/openssl097a.spec
+https://src.fedoraproject.org/rpms/pam_ldap/raw/master/f/pam_ldap.spec
+https://src.fedoraproject.org/rpms/pam_smb/raw/master/f/pam_smb.spec
+https://src.fedoraproject.org/rpms/Parfait/raw/master/f/Parfait.spec
+https://src.fedoraproject.org/rpms/pbm2l2030/raw/master/f/pbm2l2030.spec
+https://src.fedoraproject.org/rpms/pbm2l7k/raw/master/f/pbm2l7k.spec
+https://src.fedoraproject.org/rpms/pcmcia-cs/raw/master/f/pcmcia-cs.spec
+https://src.fedoraproject.org/rpms/pcp-gui/raw/master/f/pcp-gui.spec
+https://src.fedoraproject.org/rpms/pegtl/raw/master/f/pegtl.spec
+https://src.fedoraproject.org/rpms/perl-Compress-Zlib/raw/master/f/perl-Compress-Zlib.spec
+https://src.fedoraproject.org/rpms/perl-DateManip/raw/master/f/perl-DateManip.spec
+https://src.fedoraproject.org/rpms/perl-IO-Zlib/raw/master/f/perl-IO-Zlib.spec
+https://src.fedoraproject.org/rpms/perl-libintl/raw/master/f/perl-libintl.spec
+https://src.fedoraproject.org/rpms/perl-libxml-enno/raw/master/f/perl-libxml-enno.spec
+https://src.fedoraproject.org/rpms/perl-Parse-CPAN-Meta/raw/master/f/perl-Parse-CPAN-Meta.spec
+https://src.fedoraproject.org/rpms/perl-PlRPC/raw/master/f/perl-PlRPC.spec
+https://src.fedoraproject.org/rpms/perl-Test-Tester/raw/master/f/perl-Test-Tester.spec
+https://src.fedoraproject.org/rpms/perl-Time-modules/raw/master/f/perl-Time-modules.spec
+https://src.fedoraproject.org/rpms/perl-XML-Encoding/raw/master/f/perl-XML-Encoding.spec
+https://src.fedoraproject.org/rpms/perl-XML-LibXML-Common/raw/master/f/perl-XML-LibXML-Common.spec
+https://src.fedoraproject.org/rpms/pexpect/raw/master/f/pexpect.spec
+https://src.fedoraproject.org/rpms/pfmon/raw/master/f/pfmon.spec
+https://src.fedoraproject.org/rpms/php-pecl-jsonc/raw/master/f/php-pecl-jsonc.spec
+https://src.fedoraproject.org/rpms/php-pecl-mongo/raw/master/f/php-pecl-mongo.spec
+https://src.fedoraproject.org/rpms/php-pecl-zendopcache/raw/master/f/php-pecl-zendopcache.spec
+https://src.fedoraproject.org/rpms/php53/raw/master/f/php53.spec
+https://src.fedoraproject.org/rpms/pirut/raw/master/f/pirut.spec
+https://src.fedoraproject.org/rpms/plexus-cdc/raw/master/f/plexus-cdc.spec
+https://src.fedoraproject.org/rpms/plexus-container-default/raw/master/f/plexus-container-default.spec
+https://src.fedoraproject.org/rpms/plexus-digest/raw/master/f/plexus-digest.spec
+https://src.fedoraproject.org/rpms/plexus-mail-sender/raw/master/f/plexus-mail-sender.spec
+https://src.fedoraproject.org/rpms/plexus-maven-plugin/raw/master/f/plexus-maven-plugin.spec
+https://src.fedoraproject.org/rpms/plexus-tools-pom/raw/master/f/plexus-tools-pom.spec
+https://src.fedoraproject.org/rpms/plpa/raw/master/f/plpa.spec
+https://src.fedoraproject.org/rpms/pmake/raw/master/f/pmake.spec
+https://src.fedoraproject.org/rpms/pmd/raw/master/f/pmd.spec
+https://src.fedoraproject.org/rpms/policy/raw/master/f/policy.spec
+https://src.fedoraproject.org/rpms/portmap/raw/master/f/portmap.spec
+https://src.fedoraproject.org/rpms/postgresql-odbc64/raw/master/f/postgresql-odbc64.spec
+https://src.fedoraproject.org/rpms/prctl/raw/master/f/prctl.spec
+https://src.fedoraproject.org/rpms/psgml/raw/master/f/psgml.spec
+https://src.fedoraproject.org/rpms/pstack/raw/master/f/pstack.spec
+https://src.fedoraproject.org/rpms/pump/raw/master/f/pump.spec
+https://src.fedoraproject.org/rpms/pvm/raw/master/f/pvm.spec
+https://src.fedoraproject.org/rpms/pwlib/raw/master/f/pwlib.spec
+https://src.fedoraproject.org/rpms/pychart/raw/master/f/pychart.spec
+https://src.fedoraproject.org/rpms/pygpgme/raw/master/f/pygpgme.spec
+https://src.fedoraproject.org/rpms/pyliblzma/raw/master/f/pyliblzma.spec
+https://src.fedoraproject.org/rpms/Pyrex/raw/master/f/Pyrex.spec
+https://src.fedoraproject.org/rpms/python-Coherence/raw/master/f/python-Coherence.spec
+https://src.fedoraproject.org/rpms/python-decoratortools/raw/master/f/python-decoratortools.spec
+https://src.fedoraproject.org/rpms/python-di/raw/master/f/python-di.spec
+https://src.fedoraproject.org/rpms/python-docs/raw/master/f/python-docs.spec
+https://src.fedoraproject.org/rpms/python-elementtree/raw/master/f/python-elementtree.spec
+https://src.fedoraproject.org/rpms/python-elixir/raw/master/f/python-elixir.spec
+https://src.fedoraproject.org/rpms/python-fpconst/raw/master/f/python-fpconst.spec
+https://src.fedoraproject.org/rpms/python-imaging/raw/master/f/python-imaging.spec
+https://src.fedoraproject.org/rpms/python-iwlib/raw/master/f/python-iwlib.spec
+https://src.fedoraproject.org/rpms/python-louie/raw/master/f/python-louie.spec
+https://src.fedoraproject.org/rpms/python-myghty/raw/master/f/python-myghty.spec
+https://src.fedoraproject.org/rpms/python-newt_syrup/raw/master/f/python-newt_syrup.spec
+https://src.fedoraproject.org/rpms/python-numeric/raw/master/f/python-numeric.spec
+https://src.fedoraproject.org/rpms/python-paver/raw/master/f/python-paver.spec
+https://src.fedoraproject.org/rpms/python-peak-rules/raw/master/f/python-peak-rules.spec
+https://src.fedoraproject.org/rpms/python-peak-util-addons/raw/master/f/python-peak-util-addons.spec
+https://src.fedoraproject.org/rpms/python-peak-util-assembler/raw/master/f/python-peak-util-assembler.spec
+https://src.fedoraproject.org/rpms/python-peak-util-extremes/raw/master/f/python-peak-util-extremes.spec
+https://src.fedoraproject.org/rpms/python-peak-util-symbols/raw/master/f/python-peak-util-symbols.spec
+https://src.fedoraproject.org/rpms/python-pylons/raw/master/f/python-pylons.spec
+https://src.fedoraproject.org/rpms/python-repoze-what/raw/master/f/python-repoze-what.spec
+https://src.fedoraproject.org/rpms/python-repoze-what-plugins-sql/raw/master/f/python-repoze-what-plugins-sql.spec
+https://src.fedoraproject.org/rpms/python-repoze-what-pylons/raw/master/f/python-repoze-what-pylons.spec
+https://src.fedoraproject.org/rpms/python-repoze-what-quickstart/raw/master/f/python-repoze-what-quickstart.spec
+https://src.fedoraproject.org/rpms/python-repoze-who-friendlyform/raw/master/f/python-repoze-who-friendlyform.spec
+https://src.fedoraproject.org/rpms/python-repoze-who-testutil/raw/master/f/python-repoze-who-testutil.spec
+https://src.fedoraproject.org/rpms/python-sexy/raw/master/f/python-sexy.spec
+https://src.fedoraproject.org/rpms/python-sqlite/raw/master/f/python-sqlite.spec
+https://src.fedoraproject.org/rpms/python-tlslite/raw/master/f/python-tlslite.spec
+https://src.fedoraproject.org/rpms/python-toscawidgets/raw/master/f/python-toscawidgets.spec
+https://src.fedoraproject.org/rpms/python-turbocheetah/raw/master/f/python-turbocheetah.spec
+https://src.fedoraproject.org/rpms/python-turbojson/raw/master/f/python-turbojson.spec
+https://src.fedoraproject.org/rpms/python-turbokid/raw/master/f/python-turbokid.spec
+https://src.fedoraproject.org/rpms/python-tw-forms/raw/master/f/python-tw-forms.spec
+https://src.fedoraproject.org/rpms/python-twisted-conch/raw/master/f/python-twisted-conch.spec
+https://src.fedoraproject.org/rpms/python-twisted-core/raw/master/f/python-twisted-core.spec
+https://src.fedoraproject.org/rpms/python-twisted-lore/raw/master/f/python-twisted-lore.spec
+https://src.fedoraproject.org/rpms/python-twisted-mail/raw/master/f/python-twisted-mail.spec
+https://src.fedoraproject.org/rpms/python-twisted-names/raw/master/f/python-twisted-names.spec
+https://src.fedoraproject.org/rpms/python-twisted-news/raw/master/f/python-twisted-news.spec
+https://src.fedoraproject.org/rpms/python-twisted-runner/raw/master/f/python-twisted-runner.spec
+https://src.fedoraproject.org/rpms/python-twisted-words/raw/master/f/python-twisted-words.spec
+https://src.fedoraproject.org/rpms/python-weberror/raw/master/f/python-weberror.spec
+https://src.fedoraproject.org/rpms/python-webflash/raw/master/f/python-webflash.spec
+https://src.fedoraproject.org/rpms/python-webhelpers/raw/master/f/python-webhelpers.spec
+https://src.fedoraproject.org/rpms/python-which/raw/master/f/python-which.spec
+https://src.fedoraproject.org/rpms/python-wsgiproxy/raw/master/f/python-wsgiproxy.spec
+https://src.fedoraproject.org/rpms/python-zope-filesystem/raw/master/f/python-zope-filesystem.spec
+https://src.fedoraproject.org/rpms/python27-docker/raw/master/f/python27-docker.spec
+https://src.fedoraproject.org/rpms/qca-ossl/raw/master/f/qca-ossl.spec
+https://src.fedoraproject.org/rpms/qca2/raw/master/f/qca2.spec
+https://src.fedoraproject.org/rpms/raidtools/raw/master/f/raidtools.spec
+https://src.fedoraproject.org/rpms/report/raw/master/f/report.spec
+https://src.fedoraproject.org/rpms/rh-mariadb100/raw/master/f/rh-mariadb100.spec
+https://src.fedoraproject.org/rpms/rh-mariadb100-docker/raw/master/f/rh-mariadb100-docker.spec
+https://src.fedoraproject.org/rpms/rh-mongodb26-docker/raw/master/f/rh-mongodb26-docker.spec
+https://src.fedoraproject.org/rpms/rh-mysql56/raw/master/f/rh-mysql56.spec
+https://src.fedoraproject.org/rpms/rh-mysql56-docker/raw/master/f/rh-mysql56-docker.spec
+https://src.fedoraproject.org/rpms/rh-passenger40/raw/master/f/rh-passenger40.spec
+https://src.fedoraproject.org/rpms/rh-passenger40-docker/raw/master/f/rh-passenger40-docker.spec
+https://src.fedoraproject.org/rpms/rh-perl520/raw/master/f/rh-perl520.spec
+https://src.fedoraproject.org/rpms/rh-perl520-docker/raw/master/f/rh-perl520-docker.spec
+https://src.fedoraproject.org/rpms/rh-php56-docker/raw/master/f/rh-php56-docker.spec
+https://src.fedoraproject.org/rpms/rh-postgresql94-docker/raw/master/f/rh-postgresql94-docker.spec
+https://src.fedoraproject.org/rpms/rh-python34-docker/raw/master/f/rh-python34-docker.spec
+https://src.fedoraproject.org/rpms/rh-ror41-docker/raw/master/f/rh-ror41-docker.spec
+https://src.fedoraproject.org/rpms/rh-ruby22-docker/raw/master/f/rh-ruby22-docker.spec
+https://src.fedoraproject.org/rpms/rh-vagrant1/raw/master/f/rh-vagrant1.spec
+https://src.fedoraproject.org/rpms/rh-varnish4/raw/master/f/rh-varnish4.spec
+https://src.fedoraproject.org/rpms/rhn-applet/raw/master/f/rhn-applet.spec
+https://src.fedoraproject.org/rpms/rpmdb-redhat/raw/master/f/rpmdb-redhat.spec
+https://src.fedoraproject.org/rpms/rubygem-activerecord-deprecated_finders/raw/master/f/rubygem-activerecord-deprecated_finders.spec
+https://src.fedoraproject.org/rpms/rubygem-bcrypt-ruby/raw/master/f/rubygem-bcrypt-ruby.spec
+https://src.fedoraproject.org/rpms/rubygem-bson_ext/raw/master/f/rubygem-bson_ext.spec
+https://src.fedoraproject.org/rpms/rubygem-celluloid/raw/master/f/rubygem-celluloid.spec
+https://src.fedoraproject.org/rpms/rubygem-fakeweb/raw/master/f/rubygem-fakeweb.spec
+https://src.fedoraproject.org/rpms/rubygem-hike/raw/master/f/rubygem-hike.spec
+https://src.fedoraproject.org/rpms/rubygem-rails-observers/raw/master/f/rubygem-rails-observers.spec
+https://src.fedoraproject.org/rpms/rubygem-therubyracer/raw/master/f/rubygem-therubyracer.spec
+https://src.fedoraproject.org/rpms/salinfo/raw/master/f/salinfo.spec
+https://src.fedoraproject.org/rpms/sblim/raw/master/f/sblim.spec
+https://src.fedoraproject.org/rpms/sblim-cmpi-dhcp/raw/master/f/sblim-cmpi-dhcp.spec
+https://src.fedoraproject.org/rpms/sblim-cmpi-dns/raw/master/f/sblim-cmpi-dns.spec
+https://src.fedoraproject.org/rpms/sblim-cmpi-samba/raw/master/f/sblim-cmpi-samba.spec
+https://src.fedoraproject.org/rpms/sblim-tools-libra/raw/master/f/sblim-tools-libra.spec
+https://src.fedoraproject.org/rpms/schedutils/raw/master/f/schedutils.spec
+https://src.fedoraproject.org/rpms/seekwatcher/raw/master/f/seekwatcher.spec
+https://src.fedoraproject.org/rpms/selinux-doc/raw/master/f/selinux-doc.spec
+https://src.fedoraproject.org/rpms/selinux-policy-strict/raw/master/f/selinux-policy-strict.spec
+https://src.fedoraproject.org/rpms/selinux-policy-targeted/raw/master/f/selinux-policy-targeted.spec
+https://src.fedoraproject.org/rpms/setarch/raw/master/f/setarch.spec
+https://src.fedoraproject.org/rpms/sinjdoc/raw/master/f/sinjdoc.spec
+https://src.fedoraproject.org/rpms/sisu-maven-plugin/raw/master/f/sisu-maven-plugin.spec
+https://src.fedoraproject.org/rpms/slocate/raw/master/f/slocate.spec
+https://src.fedoraproject.org/rpms/SOAPpy/raw/master/f/SOAPpy.spec
+https://src.fedoraproject.org/rpms/specspo/raw/master/f/specspo.spec
+https://src.fedoraproject.org/rpms/sysklogd/raw/master/f/sysklogd.spec
+https://src.fedoraproject.org/rpms/sysreport/raw/master/f/sysreport.spec
+https://src.fedoraproject.org/rpms/system-config-bind/raw/master/f/system-config-bind.spec
+https://src.fedoraproject.org/rpms/system-config-boot/raw/master/f/system-config-boot.spec
+https://src.fedoraproject.org/rpms/system-config-firewall/raw/master/f/system-config-firewall.spec
+https://src.fedoraproject.org/rpms/system-config-netboot/raw/master/f/system-config-netboot.spec
+https://src.fedoraproject.org/rpms/system-config-proc/raw/master/f/system-config-proc.spec
+https://src.fedoraproject.org/rpms/system-config-samba/raw/master/f/system-config-samba.spec
+https://src.fedoraproject.org/rpms/system-config-securitylevel/raw/master/f/system-config-securitylevel.spec
+https://src.fedoraproject.org/rpms/system-config-services/raw/master/f/system-config-services.spec
+https://src.fedoraproject.org/rpms/tagsoup/raw/master/f/tagsoup.spec
+https://src.fedoraproject.org/rpms/tcsh617/raw/master/f/tcsh617.spec
+https://src.fedoraproject.org/rpms/termcap/raw/master/f/termcap.spec
+https://src.fedoraproject.org/rpms/tetex-tex4ht/raw/master/f/tetex-tex4ht.spec
+https://src.fedoraproject.org/rpms/texlive-texmf-errata/raw/master/f/texlive-texmf-errata.spec
+https://src.fedoraproject.org/rpms/tncfhh/raw/master/f/tncfhh.spec
+https://src.fedoraproject.org/rpms/tora/raw/master/f/tora.spec
+https://src.fedoraproject.org/rpms/trilead-ssh2/raw/master/f/trilead-ssh2.spec
+https://src.fedoraproject.org/rpms/tux/raw/master/f/tux.spec
+https://src.fedoraproject.org/rpms/umb-scheme/raw/master/f/umb-scheme.spec
+https://src.fedoraproject.org/rpms/unitsofmeasurement/raw/master/f/unitsofmeasurement.spec
+https://src.fedoraproject.org/rpms/utempter/raw/master/f/utempter.spec
+https://src.fedoraproject.org/rpms/valgrind-callgrind/raw/master/f/valgrind-callgrind.spec
+https://src.fedoraproject.org/rpms/virtuoso-opensource/raw/master/f/virtuoso-opensource.spec
+https://src.fedoraproject.org/rpms/vlock/raw/master/f/vlock.spec
+https://src.fedoraproject.org/rpms/w3c-libwww/raw/master/f/w3c-libwww.spec
+https://src.fedoraproject.org/rpms/werken-xpath/raw/master/f/werken-xpath.spec
+https://src.fedoraproject.org/rpms/xdoclet/raw/master/f/xdoclet.spec
+https://src.fedoraproject.org/rpms/xemacs-sumo/raw/master/f/xemacs-sumo.spec
+https://src.fedoraproject.org/rpms/xferstats/raw/master/f/xferstats.spec
+https://src.fedoraproject.org/rpms/xjavadoc/raw/master/f/xjavadoc.spec
+https://src.fedoraproject.org/rpms/xml-commons/raw/master/f/xml-commons.spec
+https://src.fedoraproject.org/rpms/xml-commons-apis12/raw/master/f/xml-commons-apis12.spec
+https://src.fedoraproject.org/rpms/xml-maven-plugin/raw/master/f/xml-maven-plugin.spec
+https://src.fedoraproject.org/rpms/xmlbeans/raw/master/f/xmlbeans.spec
+https://src.fedoraproject.org/rpms/xmldb-api/raw/master/f/xmldb-api.spec
+https://src.fedoraproject.org/rpms/xmlrpc3/raw/master/f/xmlrpc3.spec
+https://src.fedoraproject.org/rpms/xmltex/raw/master/f/xmltex.spec
+https://src.fedoraproject.org/rpms/xom/raw/master/f/xom.spec
+https://src.fedoraproject.org/rpms/yap/raw/master/f/yap.spec
+
+Result: URL not found in sources of 933
+rpm
+iproute
+systemtap
+pcp
+valgrind
+tcsh
+file
+libtiff
+curl
+realmd
+libpfm
+libservicelog
+lsvpd
+rear
+libarchive
+papi
+openjpeg
+ansible
+libxml2
+elfutils
+libvpd
+ltrace
+icedtea-web
+setroubleshoot-plugins
+strace
+libcap-ng
+lftp
+openhpi
+ocaml
+adcli
+perl-IO-Socket-SSL
+pcre
+cups-filters
+servicelog
+wget
+libpcap
+lldpad
+ethtool
+perl-Net-SSLeay
+zlib
+dos2unix
+tcl
+nmap
+socat
+pyserial
+pytz
+logwatch
+libuser
+python-tornado
+python-six
+tk
+gupnp
+perl-Module-Load-Conditional
+libssh2
+libaio
+libidn
+gc
+perl-Sys-CPU
+psmisc
+tpm-tools
+mc
+python-dns
+python-nose
+foomatic
+environment-modules
+findutils
+iotop
+nettle
+python-nss
+unzip
+python-py
+lsscsi
+perl-libwww-perl
+m2crypto
+tcp_wrappers
+librelp
+python-crypto
+os-prober
+setup
+star
+blktrace
+sblim-wbemcli
+chrpath
+pyOpenSSL
+liblognorm
+pytest
+libmemcached
+ldns
+system-switch-java
+expect
+mtx
+bison
+readline
+perl-Config-General
+make
+fipscheck
+maven-script-interpreter
+maven-verifier
+python-backports
+ocaml-findlib
+lzo
+perl-Digest-SHA
+perl-ExtUtils-ParseXS
+sblim-cmpi-fsvol
+perl-DB_File
+numad
+python-ethtool
+netpbm
+python-pycurl
+python-setuptools
+icoutils
+log4j
+gdbm
+cscope
+perl-DateTime
+krb5-auth-dialog
+libzfcphbaapi
+perl-LDAP
+python-virtualenv
+foomatic-db
+python-pygments
+apache-commons-beanutils
+apache-commons-compress
+apache-commons-configuration
+apache-commons-digester
+apache-commons-jexl
+apache-commons-jxpath
+apache-commons-net
+apache-commons-vfs
+rubygem-thread_safe
+rubygem-tzinfo
+ws-commons-util
+xz-java
+scrub
+zip
+xerces-c
+libpng12
+python-pyudev
+tmpwatch
+acl
+libyaml
+libtool
+dash
+sblim-cmpi-base
+apache-commons-collections
+traceroute
+lynx
+perl-Date-Calc
+perl-Net-DNS
+python-sqlalchemy
+python-sphinx
+python-prettytable
+ftp
+xmlgraphics-commons
+perl-JSON
+perl-Crypt-SSLeay
+perl-Authen-SASL
+passwd
+rtkit
+libtar
+libnetfilter_conntrack
+attr
+perl-Socket
+newt
+iperf3
+python-dateutil
+cdrkit
+minicom
+python-chardet
+python-markdown
+apache-commons-lang3
+libdwarf
+maven-dependency-tree
+perl-Test-Harness
+perl-Test-Pod-Coverage
+perl-Test-Warn
+python-ldap
+time
+tree
+libfastjson
+python-smbc
+keyutils
+perl-DBD-Pg
+perl-Perl4-CoreLibs
+gupnp-igd
+python-cherrypy
+dwz
+ortp
+giflib
+guile
+memstomp
+patch
+perl-Date-Manip
+perl-DBI
+perl-Test-Spelling
+perl-XML-LibXML
+python-iniparse
+redhat-lsb
+dump
+gsl
+perl-CGI
+perl-NetAddr-IP
+perl-Test-Inter
+perl-XML-Parser
+perl-XML-Simple
+perl-XML-Twig
+python-docutils
+python-psycopg2
+sysfsutils
+words
+log4cpp
+xguest
+adjtimex
+ant-antunit
+apache-commons-cli
+apache-commons-daemon
+apache-commons-dbcp
+apache-commons-exec
+apache-commons-io
+apache-commons-lang
+apache-commons-pool
+apache-commons-validator
+apache-ivy
+apache-mime4j
+apache-parent
+apache-rat
+apr-util
+audit-viewer
+autoconf213
+autogen
+avalon-logkit
+babel
+base64coder
+bc
+bcel
+beecrypt
+bwidget
+byacc
+byaccj
+cadaver
+castor
+cdparanoia
+cdrdao
+compat-libgfortran-41
+compat-readline5
+cpptest
+cppunit
+ctags
+cvsps
+dcraw
+dejagnu
+dev86
+diffutils
+docbook5-schemas
+dtach
+dumpet
+eclipse-gef
+ed
+ElectricFence
+emacs-auctex
+exec-maven-plugin
+fakeroot
+felix-bundlerepository
+felix-framework
+felix-osgi-foundation
+felix-osgi-obr
+felix-parent
+felix-shell
+felix-utils
+fftw
+flute
+frysk
+geronimo-annotation
+geronimo-jaxrpc
+geronimo-jms
+geronimo-jta
+geronimo-osgi-support
+geronimo-saaj
+geronimo-specs
+glassfish-jaxb
+glibc32
+glpk
+gmime
+gperf
+gprolog
+graphviz
+groff
+hdparm
+help2man
+hexedit
+hfsutils
+httpcomponents-client
+httpcomponents-core
+indent
+ipv6calc
+iso-codes
+javamail
+jbigkit
+jetty-build-support
+jfsutils
+joe
+ksshaskpass
+libasyncns
+libatasmart
+libavc1394
+libbsd
+libdaemon
+libdbi
+libdbi-drivers
+libdc1394
+libdv
+libedit
+libee
+libesmtp
+libestr
+libformula
+libiec61883
+libieee1284
+libjpeg-turbo
+libmcrypt
+libmicrohttpd
+libmng
+libmnl
+libmpc
+libnet
+libnfnetlink
+libnice
+libnih
+libntlm
+libpaper
+libpipeline
+libpng10
+LibRaw
+libraw1394
+libshout
+libtnc
+libwvstreams
+libxslt
+libzip
+linuxconsoletools
+linuxdoc-tools
+lockdev
+lpsolve
+lucene
+lzop
+mailcap
+malaga
+malaga-suomi-voikko
+man-pages-cs
+maven-antrun-plugin
+maven-archiver
+maven-artifact-resolver
+maven-assembly-plugin
+maven-clean-plugin
+maven-common-artifact-filters
+maven-compiler-plugin
+maven-dependency-analyzer
+maven-dependency-plugin
+maven-deploy-plugin
+maven-doxia
+maven-doxia-sitetools
+maven-ear-plugin
+maven-enforcer
+maven-file-management
+maven-filtering
+maven-injection-plugin
+maven-install-plugin
+maven-invoker
+maven-invoker-plugin
+maven-jar-plugin
+maven-jarsigner-plugin
+maven-javadoc-plugin
+maven-parent
+maven-plugin-build-helper
+maven-plugin-bundle
+maven-plugin-testing
+maven-plugin-tools
+maven-release
+maven-remote-resources-plugin
+maven-reporting-impl
+maven-resources-plugin
+maven-scm
+maven-shade-plugin
+maven-shared-incremental
+maven-shared-io
+maven-shared-utils
+maven-source-plugin
+maven-verifier-plugin
+maven-wagon
+maven-war-plugin
+mcpp
+meanwhile
+mikmod
+mingetty
+mingw-binutils
+mingw-crt
+mingw-gcc
+mingw-headers
+mkbootdisk
+mock
+mpage
+mpfr
+mtools
+mysql-connector-odbc
+ncompress
+neon
+nodejs-abbrev
+nodejs-ansi
+nodejs-archy
+nodejs-asn1
+nodejs-aws-sign
+nodejs-block-stream
+nodejs-boom
+nodejs-bson
+nodejs-child-process-close
+nodejs-chmodr
+nodejs-chownr
+nodejs-cmd-shim
+nodejs-combined-stream
+nodejs-config-chain
+nodejs-cookie-jar
+nodejs-couch-login
+nodejs-cryptiles
+nodejs-delayed-stream
+nodejs-editor
+nodejs-forever-agent
+nodejs-fstream-npm
+nodejs-hawk
+nodejs-hoek
+nodejs-json-stringify-safe
+nodejs-lockfile
+nodejs-mime
+nodejs-mkdirp
+nodejs-mongodb
+nodejs-mute-stream
+nodejs-nan
+nodejs-node-uuid
+nodejs-nopt
+nodejs-npm-user-validate
+nodejs-npmlog
+nodejs-oauth-sign
+nodejs-once
+nodejs-opener
+nodejs-osenv
+nodejs-promzard
+nodejs-proto-list
+nodejs-qs
+nodejs-read-package-json
+nodejs-retry
+nodejs-sigmund
+nodejs-slide
+nodejs-tar
+nodejs-tunnel-agent
+nodejs-uid-number
+objectweb-anttask
+ocaml-calendar
+ocaml-curses
+ocaml-fileutils
+ocaml-gettext
+ocaml-xml-light
+openobex
+opensp
+pakchois
+pam_ccreds
+patchutils
+pax
+pcmciautils
+pentaho-libxml
+pentaho-reporting-flow-engine
+perl-Algorithm-Diff
+perl-AppConfig
+perl-Archive-Extract
+perl-Archive-Tar
+perl-Archive-Zip
+perl-autodie
+perl-B-Keywords
+perl-B-Lint
+perl-Bit-Vector
+perl-Browser-Open
+perl-BSD-Resource
+perl-Business-ISBN
+perl-Business-ISBN-Data
+perl-Cache-Memcached
+perl-Capture-Tiny
+perl-Carp
+perl-Carp-Clan
+perl-CGI-Session
+perl-Class-Accessor
+perl-Class-Data-Inheritable
+perl-Class-Factory-Util
+perl-Class-Inspector
+perl-Class-ISA
+perl-Class-Load
+perl-Class-Load-XS
+perl-Class-MethodMaker
+perl-Class-Trigger
+perl-Clone
+perl-Compress-Raw-Bzip2
+perl-Compress-Raw-Zlib
+perl-Config-Simple
+perl-Config-Tiny
+perl-constant
+perl-Convert-ASN1
+perl-Convert-BinHex
+perl-CPAN-Changes
+perl-CPAN-Meta
+perl-CPAN-Meta-Requirements
+perl-CPAN-Meta-YAML
+perl-CPANPLUS
+perl-CPANPLUS-Dist-Build
+perl-Crypt-OpenSSL-Bignum
+perl-Crypt-OpenSSL-Random
+perl-Crypt-OpenSSL-RSA
+perl-Crypt-PasswdMD5
+perl-CSS-Tiny
+perl-Data-Dumper
+perl-Data-OptList
+perl-Data-Peek
+perl-DateTime-Format-DateParse
+perl-DateTime-Format-Mail
+perl-DateTime-Format-W3CDTF
+perl-DBD-CSV
+perl-DBD-MySQL
+perl-DBD-SQLite
+ perl-DBIx-Simple
+perl-Devel-CheckLib
+perl-Devel-Cover
+perl-Devel-Cycle
+perl-Devel-EnforceEncapsulation
+perl-Devel-Leak
+perl-Devel-StackTrace
+perl-Devel-Symdump
+perl-Digest
+perl-Digest-BubbleBabble
+perl-Digest-HMAC
+perl-Digest-MD5
+perl-Digest-SHA1
+perl-Dist-CheckConflicts
+perl-Email-Address
+perl-Email-Date-Format
+perl-Encode
+perl-Encode-Detect
+perl-Encode-Locale
+perl-Env
+perl-Error
+perl-Exception-Class
+perl-Exporter
+perl-Exporter-Tiny
+perl-ExtUtils-Depends
+perl-ExtUtils-MakeMaker
+perl-ExtUtils-MakeMaker-Coverage
+perl-ExtUtils-Manifest
+perl-ExtUtils-PkgConfig
+perl-FCGI
+perl-File-CheckTree
+perl-File-Copy-Recursive
+perl-File-Fetch
+perl-File-Find-Rule
+perl-File-Find-Rule-Perl
+perl-File-HomeDir
+perl-File-Inplace
+perl-File-Listing
+perl-File-Path
+perl-File-pushd
+perl-File-Remove
+perl-File-ShareDir
+perl-File-Slurp
+perl-File-Temp
+perl-File-Which
+perl-Filter
+perl-Font-AFM
+perl-Font-TTF
+perl-GD
+perl-GD-Barcode
+perl-Getopt-Long
+perl-gettext
+perl-Glib
+perl-GSSAPI
+perl-Hook-LexWrap
+perl-HTML-Format
+perl-HTML-FormatText-WithLinks
+perl-HTML-FormatText-WithLinks-AndTables
+perl-HTML-Parser
+perl-HTML-Tagset
+perl-HTML-Tree
+perl-HTTP-Cookies
+perl-HTTP-Daemon
+perl-HTTP-Date
+perl-HTTP-Message
+perl-HTTP-Negotiate
+perl-HTTP-Tiny
+perl-Inline
+perl-Inline-Files
+perl-IO-CaptureOutput
+perl-IO-Compress
+perl-IO-HTML
+perl-IO-Socket-INET6
+perl-IO-Socket-IP
+perl-IO-String
+perl-IO-stringy
+perl-IO-Tty
+perl-IPC-Cmd
+perl-IPC-Run
+perl-IPC-Run3
+perl-JSON-PP
+perl-libxml-perl
+perl-Linux-Pid
+perl-List-AllUtils
+perl-List-MoreUtils
+perl-Locale-Codes
+perl-Locale-Maketext
+perl-Locale-Maketext-Gettext
+perl-Locale-PO
+perl-Log-Message
+perl-Log-Message-Simple
+perl-LWP-MediaTypes
+perl-Mail-DKIM
+perl-Mail-SPF
+perl-MailTools
+perl-Makefile-DOM
+perl-Makefile-Parser
+perl-MIME-Lite
+perl-MIME-tools
+perl-MIME-Types
+perl-Mixin-Linewise
+perl-Module-Build
+perl-Module-Find
+perl-Module-Implementation
+perl-Module-Info
+perl-Module-Install
+perl-Module-Load
+perl-Module-Manifest
+perl-Module-Metadata
+perl-Module-Pluggable
+perl-Module-Runtime
+perl-Module-ScanDeps
+perl-Module-Signature
+perl-Mozilla-CA
+perl-Net-Daemon
+perl-Net-DNS-Resolver-Programmable
+perl-Net-HTTP
+perl-Net-IP
+perl-Net-LibIDN
+perl-Net-SMTP-SSL
+perl-Net-Telnet
+perl-Net-XMPP
+perl-Newt
+perl-Number-Compare
+perl-Object-Deadly
+perl-Package-Anon
+perl-Package-DeprecationManager
+perl-Package-Generator
+perl-Package-Stash
+perl-Package-Stash-XS
+perl-PadWalker
+perl-PAR-Dist
+perl-Parallel-Iterator
+perl-Params-Check
+perl-Params-Util
+perl-parent
+perl-Parse-Yapp
+perl-PathTools
+perl-Perl-Critic
+perl-Perl-Critic-More
+perl-Perl-MinimumVersion
+perl-Perl-OSType
+perl-Perlilog
+perl-Pod-Checker
+perl-Pod-Coverage
+perl-Pod-Coverage-TrustPod
+perl-Pod-Eventual
+perl-Pod-LaTeX
+perl-Pod-Parser
+perl-Pod-Perldoc
+perl-Pod-Plainer
+perl-Pod-POM
+perl-Pod-Simple
+perl-Pod-Spell
+perl-Pod-Usage
+perl-podlators
+perl-PPI
+perl-PPI-HTML
+perl-PPIx-Regexp
+perl-PPIx-Utilities
+perl-prefork
+perl-Probe-Perl
+perl-Readonly
+perl-Readonly-XS
+perl-Scalar-List-Utils
+perl-SGMLSpm
+perl-SNMP_Session
+perl-Socket6
+perl-Sort-Versions
+perl-Spiffy
+perl-SQL-Statement
+perl-srpm-macros
+perl-Storable
+perl-String-CRC32
+perl-String-Format
+perl-String-ShellQuote
+perl-String-Similarity
+perl-Sub-Exporter
+perl-Sub-Install
+perl-Sub-Name
+perl-Sub-Uplevel
+perl-Switch
+perl-Syntax-Highlight-Engine-Kate
+perl-Sys-MemInfo
+perl-Sys-Syslog
+perl-Taint-Runtime
+perl-Task-Weaken
+perl-Term-ProgressBar
+perl-Term-UI
+perl-Test-Base
+perl-Test-ClassAPI
+perl-Test-CPAN-Meta
+perl-Test-Deep
+perl-Test-Differences
+perl-Test-DistManifest
+perl-Test-EOL
+perl-Test-Exception
+perl-Test-Fatal
+perl-Test-HasVersion
+perl-Test-Manifest
+perl-Test-Memory-Cycle
+perl-Test-MinimumVersion
+perl-Test-MockObject
+perl-Test-NoTabs
+perl-Test-NoWarnings
+perl-Test-Object
+perl-Test-Output
+perl-Test-Perl-Critic
+perl-Test-Pod
+perl-Test-Portability-Files
+perl-Test-Prereq
+perl-Test-Requires
+perl-Test-Script
+perl-Test-Simple
+perl-Test-SubCalls
+perl-Test-Synopsis
+perl-Test-Taint
+perl-Test-Vars
+perl-Test-Without-Module
+perl-TeX-Hyphen
+perl-Text-Autoformat
+perl-Text-CharWidth
+perl-Text-CSV_XS
+perl-Text-Glob
+perl-Text-Iconv
+perl-Text-ParseWords
+perl-Text-PDF
+perl-Text-Reform
+perl-Text-Soundex
+perl-Text-Template
+perl-Text-Unidecode
+perl-Text-WrapI18N
+perl-Thread-Queue
+perl-threads
+perl-threads-shared
+perl-Tie-IxHash
+perl-Time-HiRes
+perl-Time-Local
+perl-TimeDate
+perl-Tk
+perl-Tree-DAG_Node
+perl-Try-Tiny
+perl-Unicode-Map8
+perl-Unicode-String
+perl-UNIVERSAL-can
+perl-UNIVERSAL-isa
+perl-URI
+perl-version
+perl-Version-Requirements
+perl-WWW-Curl
+perl-WWW-RobotRules
+perl-XML-Catalog
+perl-XML-DOM
+perl-XML-DOM-XPath
+perl-XML-Dumper
+perl-XML-Filter-BufferText
+perl-XML-Grove
+perl-XML-Handler-YAWriter
+perl-XML-LibXSLT
+perl-XML-NamespaceSupport
+perl-XML-RegExp
+perl-XML-SAX-Base
+perl-XML-SAX-Writer
+perl-XML-TokeParser
+perl-XML-TreeBuilder
+perl-XML-Writer
+perl-XML-XPath
+perl-XML-XPathEngine
+perl-XML-XQL
+perl-YAML
+perl-YAML-Syck
+perl-YAML-Tiny
+perltidy
+pinfo
+plexus-cipher
+plexus-component-api
+plexus-i18n
+plotutils
+pngnq
+polkit-pkla-compat
+popt
+postgresql-odbc
+procinfo
+psutils
+PyGreSQL
+pylint
+python-alsa
+python-basemap-data
+python-coverage
+python-cpio
+python-cups
+python-decorator
+python-dtopt
+python-enchant
+python-feedparser
+python-formencode
+python-genshi
+python-hwdata
+python-inotify
+python-IPy
+python-isodate
+python-lxml
+python-markupsafe
+python-memcached
+python-paste
+python-paste-script
+python-progress
+python-rdflib
+python-reportlab
+python-repoze-tm2
+python-repoze-who
+python-repoze-who-plugins-sa
+python-routes
+python-setproctitle
+python-tempita
+python-transaction
+python-twisted
+python-zope-interface
+pyxattr
+raptor2
+rcs
+redland
+rpmdevtools
+rubygem-addressable
+rubygem-atomic
+rubygem-bacon
+rubygem-bson
+rubygem-childprocess
+rubygem-coffee-script-source
+rubygem-crack
+rubygem-excon
+rubygem-fake_ftp
+rubygem-fog-core
+rubygem-fog-json
+rubygem-fog-libvirt
+rubygem-fog-xml
+rubygem-formatador
+rubygem-hashicorp-checkpoint
+rubygem-http_connection
+rubygem-introspection
+rubygem-jbuilder
+rubygem-jquery-rails
+rubygem-metaclass
+rubygem-mime-types
+rubygem-mocha
+rubygem-mongo
+rubygem-net-http-persistent
+rubygem-net-scp
+rubygem-net-sftp
+rubygem-netrc
+rubygem-polyglot
+rubygem-rack
+rubygem-rails
+rubygem-rb-inotify
+rubygem-rest-client
+rubygem-ruby-libvirt
+rubygem-safe_yaml
+rubygem-sqlite3
+rubygem-test_declarative
+rubygem-tilt
+rubygem-timers
+rubygem-turbolinks
+rubygem-webmock
+sane-frontends
+sblim-cim-client2
+sblim-cmpi-network
+sblim-cmpi-nfsv3
+sblim-cmpi-nfsv4
+sblim-cmpi-params
+sblim-cmpi-sysfs
+sblim-cmpi-syslog
+sblim-indication_helper
+sblim-sfcc
+sblim-smis-hba
+sblim-testsuite
+sdparm
+setserial
+setuptool
+sgpio
+sharutils
+slang
+snakeyaml
+splint
+statserial
+struts
+suitesparse
+system-config-rootpassword
+system-switch-mail
+tclx
+texi2html
+tix
+tokyocabinet
+TurboGears2
+unifdef
+unique
+units
+ustr
+uuid
+vconfig
+volume_key
+whois
+wvdial
+xbean
+xml-stylebook
+xmlto
+xmltoman
+xstream
+yajl
+zisofs-tools
+
+Result: unsupported hosts
+{'central.maven.org', 'www.nlnetlabs.nl', 'brick.kernel.dk', 'dev.mysql.com', 'www.candelatech.com', 'download.sourceforge.net', 'libestr.adiscon.com', 'www.webdav.org', 'libssh2.org', 'download.savannah.gnu.org', 'ftp.sane-project.org', 'download.berlios.de', 'www.freedesktop.org', 'repo2.maven.org', 'cpan.org', 'lftp.yar.ru', 'archive.apache.org', 'www.cl.cam.ac.uk', 'ftp.cpan.org', 'ftp.ossp.org', 'waterlan.home.xs4all.nl', 'gitlab.linphone.org', 'www.stafford.uklinux.net', 'cdrkit.org', 'download.librdf.org', 'libarchive.org', 'pypi.io', 'ftp-osl.osuosl.org', 'nmap.org', 'pagure.io', 'www.puimula.org', 'releases.pagure.org', 'www.dechifro.org', 'web.archive.org', 'ftp.bieringer.de', 'www.manyfish.co.uk', 'www.pygresql.org', 'www.dnspython.org', 'icl.cs.utk.edu', 'www.splint.org', 'strace.io', 'download.boulder.ibm.com', 'pyxattr.k1024.org', 'bitbucket.org', 'download.forge.objectweb.org', 'www.openprinting.org', 'than.fedorapeople.org', 'libbsd.freedesktop.org', 'www.prevanders.net', 'mirror.linux.org.au', 'backpan.perl.org', 'ftp.dlitz.net', 'nongnu.org', 'ftp.rpm.org', 'curl.haxx.se', 'kernel.org', 'ftp.debian.org', 'download.kde.org', 'www.libraw.org', 'ftp.cistron.nl', 'www.rpm5.org', 'pyyaml.org', 'ftp.simplesystems.org', 'dist.codehaus.org', 'seb.dbzteam.org', 'registry.npmjs.org', 'snmp-session.googlecode.com', 'download-mirror.savannah.gnu.org', 'repo.or.cz', 'home.arcor.de', 'dl.bintray.com', 'diskscrub.googlecode.com', 'dl.sourceforge.net', 'sourceware.org', 'www.cobite.com', 'repo1.maven.org', 'www.lzop.org', 'www.jedsoft.org', 'files.pythonhosted.org', 'people.fedoraproject.org', 'prep.ai.mit.edu', 'www.kernel.org', 'ftp.suse.com', 'www.midnight-commander.org', 'ftp.pcre.org', 'ftp.alsa-project.org', 'www.tcpdump.org', 'http.us.debian.org', 'iniparse.googlecode.com', 'cyberelk.net', 'download.savannah.nongnu.org', 'tukaani.org', 'bintray.com', 'java.net', 'caml.inria.fr', 'git.eclipse.org', 'downloads.es.net', 'ftp.us.debian.org', 'rubygems.org', 'tropikhajma.sweb.cz', 'www.libee.org', 'ftp.linux.org.uk', 'nice.freedesktop.org', 'ftp.mars.org', 'dev-www.libreoffice.org', 'gitlab.com', 'www.oberhumer.com', 'xmlsoft.org', 'libzip.org', 'ftp.postgresql.org', 'initd.org', 'faculty.cse.tamu.edu', 'lxml.de', 'dotat.at', 'www.apache.org', 'www.gprolog.org', 'www.thrysoee.dk', 'ftp.porcupine.org', 'download.gnome.org', 'downloads.xiph.org', 'download.camlcity.org', 'www.fftw.org', 'metalab.unc.edu', 'www.dest-unreach.org', 'fallabs.com', 'netfilter.org', 'jaxb.java.net', 'rigaux.org', 'pypi.python.org', 'www.mpfr.org', 'sg.danny.cz', 'gondor.apana.org.au', 'salsa.debian.org', 'alioth.debian.org', 'cdn-aws.deb.debian.org', 'www.padl.com', 'savannah.nongnu.org', 'releases.ansible.com', 'www.liblognorm.com', 'sourceforge.net', 'fedorahosted.org', 'ftp.astron.com', 'invisible-island.net', 'ftp.gnu.org', 'www.zlib.net', '0pointer.de', 'ftpmirror.gnu.org', 'wvstreams.googlecode.com', 'downloads.sourceforge.net', 'guichaz.free.fr', 'forge.ocamlcore.org', 'download.rsyslog.com', 'mama.indstate.edu', 'prdownloads.sourceforge.net', 'cpan.metacpan.org', 'ftp.mesa.nl', 'v3.sk', 'downloads.us.xiph.org', 'launchpad.net', 'www.docbook.org', 'www.and.org', 'invisible-mirror.net', 'people.redhat.com', 'ftp.mozilla.org', 'www.hboehm.info', 'icedtea.classpath.org'}
+
+Result: Following packages have multiple sources: 462
+selinux-policy
+samba
+bind
+nss
+openssl
+openssh
+java-1.8.0-openjdk
+sudo
+httpd
+firewalld
+rsyslog
+php
+util-linux
+opencryptoki
+gcc
+openldap
+tzdata
+audit
+gnutls
+krb5
+ksh
+squid
+libreswan
+binutils
+policycoreutils
+ntp
+bash
+freeradius
+nspr
+cups
+perl
+zsh
+ca-certificates
+wireshark
+logrotate
+python27
+vsftpd
+net-snmp
+mariadb
+postgresql
+grep
+setroubleshoot
+quota
+iputils
+pam
+p11-kit
+shadow-utils
+sysstat
+chrony
+ruby
+procps-ng
+libsemanage
+quagga
+redhat-rpm-config
+libselinux
+tcpdump
+texlive
+tog-pegasus
+unbound
+dovecot
+tar
+sg3_utils
+dnsmasq
+ant
+polkit
+bacula
+cyrus-sasl
+git
+subversion
+vim
+rubygem-bundler
+brltty
+boost
+rubygem-thor
+net-tools
+mailman
+iptables
+hplip
+libgcrypt
+fetchmail
+aide
+at
+mailx
+rusers
+telnet
+rubygem-abrt
+rrdtool
+mrtg
+nss-pam-ldapd
+gawk
+mksh
+numpy
+bzip2
+cracklib
+amanda
+ypserv
+cyrus-imapd
+cpio
+libpng
+stunnel
+memtest86+
+scl-utils
+memcached
+sendmail
+rhino
+rsync
+gzip
+ypbind
+screen
+mercurial
+arpwatch
+emacs
+ebtables
+copy-jdk-configs
+python-urllib3
+trousers
+sqlite
+busybox
+ipset
+gmp
+ppp
+sed
+pinentry
+libffi
+ecj
+cmake
+sblim-gather
+perl-local-lib
+libdb
+smartmontools
+less
+libssh
+libtasn1
+ps_mem
+rsh
+mt-st
+tbb
+psacct
+libecap
+sane-backends
+xhtml1-dtds
+libcap
+m4
+mlocate
+dyninst
+swig
+xz
+portreserve
+spamassassin
+sblim-sfcb
+openwsman
+mutt
+procmail
+lapack
+postfix
+libproxy
+kbd
+aopalliance
+jsch
+python-webob
+xinetd
+setools
+gnupg2
+oddjob
+php-pear
+pesign
+nodejs
+atlas
+filesystem
+maven
+fop
+watchdog
+lsof
+pcre2
+cvs
+perl-XML-SAX
+mipv6-daemon
+ncurses
+ecryptfs-utils
+dnssec-trigger
+gutenprint
+hsqldb
+authd
+usbguard
+radvd
+exim
+dialog
+hamcrest
+squashfs-tools
+iptraf-ng
+openslp
+cgdcbxd
+lua
+qdox
+cim-schema
+docbook-style-dsssl
+libsrtp
+mgetty
+sac
+unixODBC
+python-boto
+protobuf
+man-pages
+c-ares
+rpmlint
+squirrelmail
+texinfo
+w3m
+finger
+libgpg-error
+man-db
+openhpi-subagent
+postgresql-jdbc
+pptp
+rwho
+eclipse
+libvpx
+mod_wsgi
+am-utils
+ant-contrib
+antlr
+apache-commons-codec
+apache-commons-logging
+apache-resource-bundles
+apmd
+apr
+aqute-bnd
+atinject
+autoconf
+automake
+avalon-framework
+beust-jcommander
+bogl
+bridge-utils
+bsf
+bsh
+buildnumber-maven-plugin
+cal10n
+ckermit
+codehaus-parent
+dblatex
+ddd
+dietlibc
+diffstat
+docbook-dtds
+docbook-simple
+docbook-slides
+docbook-style-xsl
+docbook-utils
+doxygen
+easymock
+eclipse-cdt
+eclipse-emf
+eclipse-nls
+eclipse-subclipse
+elinks
+emacspeak
+enscript
+epic
+exim-doc
+forge-parent
+fusesource-pom
+geronimo-parent-poms
+glassfish-el
+glassfish-fastinfoset
+glassfish-jaxb-api
+glassfish-jsp-api
+gnu-getopt
+gnuplot
+google-guice
+gpgme
+gpm
+hostname
+htdig
+html2ps
+httpcomponents-project
+httpunit
+ilmbase
+inn
+ipsec-tools
+irssi
+jakarta-commons-httpclient
+jakarta-oro
+java_cup
+java-atk-wrapper
+javacc-maven-plugin
+jboss-parent
+jdepend
+jdom
+jetty
+jetty-artifact-remote-resources
+jetty-assembly-descriptors
+jetty-parent
+jetty-test-policy
+jetty-toolchain
+jflex
+jna
+joda-time
+jpilot
+jsoup
+jsr-305
+jtidy
+junit
+jvnet-parent
+jwhois
+jython
+kdnssd-avahi
+kxml
+latex2html
+libassuan
+libconfig
+libdb4
+libisofs
+libksba
+libsmi
+libuv
+llvm
+lpg
+maven-ant-plugin
+maven-osgi
+maven-reporting-api
+maven-surefire
+maven2
+mcstrans
+migrationtools
+mod_dnssd
+mod_fcgid
+mod_perl
+mod_security
+modello
+mojo-parent
+mtr
+mx4j
+mysql-connector-java
+nano
+nasm
+nedit
+nekohtml
+nginx
+node-gyp
+nodejs-ctype
+nodejs-fstream
+nodejs-github-url-from-git
+nodejs-http-signature
+nodejs-inherits
+nodejs-lru-cache
+nodejs-which
+objectweb-asm
+octave
+opencv
+openjade
+passenger
+passwdqc
+perl-App-cpanminus
+perl-Data-Flow
+perl-DateTime-TimeZone
+perl-Net-Jabber
+perl-Template-Toolkit
+perl-XML-Stream
+pilot-link
+pl
+plexus-active-collections
+plexus-ant-factory
+plexus-bsh-factory
+plexus-build-api
+plexus-cli
+plexus-compiler
+plexus-component-factories-pom
+plexus-components-pom
+plexus-containers
+plexus-interactivity
+plexus-io
+plexus-pom
+plexus-sec-dispatcher
+plexus-utils
+plexus-velocity
+pngcrush
+pnm2ppa
+ppl
+privoxy
+python-matplotlib
+python3
+rarpd
+rdist
+regexp
+rhdb-utils
+rootfiles
+rubygem-actionmailer
+rubygem-actionpack
+rubygem-activemodel
+rubygem-activerecord
+rubygem-activeresource
+rubygem-activesupport
+rubygem-arel
+rubygem-coffee-rails
+rubygem-coffee-script
+rubygem-dalli
+rubygem-erubis
+rubygem-execjs
+rubygem-ffi
+rubygem-flexmock
+rubygem-i18n
+rubygem-listen
+rubygem-log4r
+rubygem-mail
+rubygem-multi_json
+rubygem-net-ssh
+rubygem-rack-cache
+rubygem-rack-protection
+rubygem-rack-test
+rubygem-railties
+rubygem-rake
+rubygem-ref
+rubygem-sass
+rubygem-sass-rails
+rubygem-sdoc
+rubygem-sinatra
+rubygem-sprockets
+rubygem-sprockets-rails
+rubygem-treetop
+rubygem-uglifier
+rubygems
+sat4j
+saxon
+saxpath
+sblim-cim-client
+sblim-cmpi-devel
+sgml-common
+sisu
+skkdic
+slf4j
+slrn
+sonatype-oss-parent
+sonatype-plugins-parent
+source-highlight
+sox
+svnkit
+symlinks
+system-config-httpd
+talk
+tcl-pgtcl
+teckit
+testng
+tmux
+tn5250
+udftools
+usermode
+uucp
+vagrant-libvirt
+varnish
+velocity
+vigra
+webalizer
+which
+wsdl4j
+wsmancli
+xalan-j2
+xerces-j2
+xhtml2fo-style-xsl
+xml-commons-apis
+xml-commons-resolver
+xqilla
+
+
+Result: Spec for following failed to be parsed: 9
+systemd
+glibc
+coreutils
+gdb
+basesystem
+mingw-filesystem
+vagrant
+xemacs
+guava
+
+Result: Found upstream urls: 134
+- downstream_name: sos
+  upstream_url: https://github.com/sosreport/sos
+- downstream_name: initscripts
+  upstream_url: https://github.com/fedora-sysv/initscripts
+- downstream_name: cockpit
+  upstream_url: https://github.com/cockpit-project/cockpit
+- downstream_name: tuned
+  upstream_url: https://github.com/redhat-performance/tuned
+- downstream_name: abrt
+  upstream_url: https://github.com/abrt/abrt
+- downstream_name: scap-security-guide
+  upstream_url: https://github.com/ComplianceAsCode/content
+- downstream_name: openscap
+  upstream_url: https://github.com/OpenSCAP/openscap
+- downstream_name: satyr
+  upstream_url: https://github.com/abrt/satyr
+- downstream_name: libica
+  upstream_url: https://github.com/opencryptoki/libica
+- downstream_name: libreport
+  upstream_url: https://github.com/abrt/libreport
+- downstream_name: chkconfig
+  upstream_url: https://github.com/fedora-sysv/chkconfig
+- downstream_name: libsepol
+  upstream_url: https://github.com/SELinuxProject/selinux
+- downstream_name: scap-workbench
+  upstream_url: https://github.com/OpenSCAP/scap-workbench
+- downstream_name: python-requests
+  upstream_url: https://github.com/requests/requests
+- downstream_name: avahi
+  upstream_url: https://github.com/lathiat/avahi
+- downstream_name: expat
+  upstream_url: https://github.com/libexpat/libexpat
+- downstream_name: javapackages-tools
+  upstream_url: https://github.com/fedora-java/javapackages
+- downstream_name: checkpolicy
+  upstream_url: https://github.com/SELinuxProject/selinux
+- downstream_name: cronie
+  upstream_url: https://github.com/cronie-crond/cronie
+- downstream_name: yp-tools
+  upstream_url: https://github.com/thkukuk/yp-tools
+- downstream_name: Cython
+  upstream_url: https://github.com/cython/cython
+- downstream_name: python-meh
+  upstream_url: https://github.com/rhinstaller/python-meh
+- downstream_name: openssl-ibmca
+  upstream_url: https://github.com/opencryptoki/openssl-ibmca
+- downstream_name: numactl
+  upstream_url: https://github.com/numactl/numactl
+- downstream_name: python-paramiko
+  upstream_url: https://github.com/paramiko/paramiko
+- downstream_name: python-urlgrabber
+  upstream_url: https://github.com/rpm-software-management/urlgrabber
+- downstream_name: conman
+  upstream_url: https://github.com/dun/conman
+- downstream_name: gperftools
+  upstream_url: https://github.com/gperftools/gperftools
+- downstream_name: abrt-java-connector
+  upstream_url: https://github.com/abrt/abrt-java-connector
+- downstream_name: jansi-native
+  upstream_url: https://github.com/fusesource/jansi-native
+- downstream_name: python-pillow
+  upstream_url: https://github.com/python-pillow/Pillow
+- downstream_name: jzlib
+  upstream_url: https://github.com/ymnk/jzlib
+- downstream_name: tang
+  upstream_url: https://github.com/latchset/tang
+- downstream_name: mod_security_crs
+  upstream_url: https://github.com/SpiderLabs/owasp-modsecurity-crs
+- downstream_name: libevent
+  upstream_url: https://github.com/libevent/libevent
+- downstream_name: system-config-printer
+  upstream_url: https://github.com/OpenPrinting/system-config-printer
+- downstream_name: jose
+  upstream_url: https://github.com/latchset/jose
+- downstream_name: nss-pem
+  upstream_url: https://github.com/kdudka/nss-pem
+- downstream_name: libvncserver
+  upstream_url: https://github.com/LibVNC/libvncserver
+- downstream_name: luksmeta
+  upstream_url: https://github.com/latchset/luksmeta
+- downstream_name: json-c
+  upstream_url: https://github.com/json-c/json-c
+- downstream_name: PyYAML
+  upstream_url: https://github.com/yaml/pyyaml
+- downstream_name: xmvn
+  upstream_url: https://github.com/fedora-java/xmvn
+- downstream_name: php-pecl-memcache
+  upstream_url: https://github.com/websupport-sk/pecl-memcache
+- downstream_name: http-parser
+  upstream_url: https://github.com/nodejs/http-parser
+- downstream_name: si-units
+  upstream_url: https://github.com/unitsofmeasurement/si-units
+- downstream_name: uom-lib
+  upstream_url: https://github.com/unitsofmeasurement/uom-lib
+- downstream_name: uom-parent
+  upstream_url: https://github.com/unitsofmeasurement/uom-parent
+- downstream_name: uom-se
+  upstream_url: https://github.com/unitsofmeasurement/uom-se
+- downstream_name: uom-systems
+  upstream_url: https://github.com/unitsofmeasurement/uom-systems
+- downstream_name: dosfstools
+  upstream_url: http://github.com/dosfstools/dosfstools
+- downstream_name: catch
+  upstream_url: https://github.com/philsquared/Catch
+- downstream_name: crontabs
+  upstream_url: https://github.com/cronie-crond/crontabs
+- downstream_name: flex
+  upstream_url: https://github.com/westes/flex
+- downstream_name: hawtjni
+  upstream_url: https://github.com/fusesource/hawtjni
+- downstream_name: deltarpm
+  upstream_url: https://github.com/rpm-software-management/deltarpm
+- downstream_name: gd
+  upstream_url: https://github.com/libgd/libgd
+- downstream_name: netlabel_tools
+  upstream_url: https://github.com/netlabel/netlabel_tools
+- downstream_name: gnome-abrt
+  upstream_url: https://github.com/abrt/gnome-abrt
+- downstream_name: advancecomp
+  upstream_url: https://github.com/amadvance/advancecomp
+- downstream_name: apache-commons-parent
+  upstream_url: https://github.com/apache/commons-parent
+- downstream_name: asciidoc
+  upstream_url: https://github.com/asciidoc/asciidoc-py3
+- downstream_name: byteman
+  upstream_url: https://github.com/bytemanproject/byteman
+- downstream_name: cglib
+  upstream_url: https://github.com/cglib/cglib
+- downstream_name: docbook5-style-xsl
+  upstream_url: https://github.com/docbook/xslt10-stylesheets
+- downstream_name: dropwatch
+  upstream_url: https://github.com/nhorman/dropwatch
+- downstream_name: dvgrab
+  upstream_url: https://github.com/ddennedy/dvgrab
+- downstream_name: fros
+  upstream_url: https://github.com/mozeq/fros
+- downstream_name: glassfish-dtd-parser
+  upstream_url: https://github.com/javaee/jaxb-dtd-parser
+- downstream_name: icu4j
+  upstream_url: https://github.com/unicode-org/icu
+- downstream_name: iniparser
+  upstream_url: https://github.com/ndevilla/iniparser
+- downstream_name: iptstate
+  upstream_url: https://github.com/jaymzh/iptstate
+- downstream_name: jansi
+  upstream_url: https://github.com/fusesource/jansi
+- downstream_name: javacc
+  upstream_url: https://github.com/javacc/javacc
+- downstream_name: javassist
+  upstream_url: http://github.com/jboss-javassist/javassist
+- downstream_name: jdependency
+  upstream_url: http://github.com/tcurdt/jdependency
+- downstream_name: jemalloc
+  upstream_url: https://github.com/jemalloc/jemalloc
+- downstream_name: jettison
+  upstream_url: https://github.com/jettison-json/jettison
+- downstream_name: jline
+  upstream_url: https://github.com/jline/jline2
+- downstream_name: joda-convert
+  upstream_url: https://github.com/JodaOrg/joda-convert
+- downstream_name: libatomic_ops
+  upstream_url: https://github.com/ivmai/libatomic_ops
+- downstream_name: libdnet
+  upstream_url: https://github.com/boundary/%{master}
+- downstream_name: libiptcdata
+  upstream_url: https://github.com/ianw/libiptcdata
+- downstream_name: libpwquality
+  upstream_url: https://github.com/libpwquality/libpwquality
+- downstream_name: mongo-java-driver
+  upstream_url: https://github.com/mongodb/mongo-java-driver
+- downstream_name: nodejs-assert-plus
+  upstream_url: https://github.com/mcavage/node-assert-plus
+- downstream_name: nodejs-async
+  upstream_url: https://github.com/caolan/async
+- downstream_name: nodejs-form-data
+  upstream_url: https://github.com/form-data/form-data
+- downstream_name: nodejs-fstream-ignore
+  upstream_url: https://github.com/npm/fstream-ignore
+- downstream_name: nodejs-glob
+  upstream_url: https://github.com/isaacs/node-glob
+- downstream_name: nodejs-graceful-fs
+  upstream_url: https://github.com/isaacs/node-graceful-fs
+- downstream_name: nodejs-ini
+  upstream_url: https://github.com/isaacs/ini
+- downstream_name: nodejs-minimatch
+  upstream_url: https://github.com/isaacs/minimatch
+- downstream_name: nodejs-read
+  upstream_url: https://github.com/isaacs/read
+- downstream_name: nodejs-request
+  upstream_url: https://github.com/request/request
+- downstream_name: nodejs-rimraf
+  upstream_url: https://github.com/isaacs/rimraf
+- downstream_name: nodejs-semver
+  upstream_url: https://github.com/npm/node-semver
+- downstream_name: nodejs-sha
+  upstream_url: https://github.com/ForbesLindesay/sha
+- downstream_name: nodejs-sntp
+  upstream_url: https://github.com/hueniverse/sntp
+- downstream_name: ocaml-csv
+  upstream_url: https://github.com/Chris00/ocaml-csv
+- downstream_name: ocaml-extlib
+  upstream_url: https://github.com/ygrek/ocaml-extlib
+- downstream_name: oniguruma
+  upstream_url: https://github.com/kkos/oniguruma
+- downstream_name: passivetex
+  upstream_url: https://github.com/sebastianrahtz/passivetex
+- downstream_name: plexus-archiver
+  upstream_url: https://github.com/codehaus-plexus/plexus-archiver
+- downstream_name: plexus-classworlds
+  upstream_url: https://github.com/codehaus-plexus/plexus-classworlds
+- downstream_name: plexus-interpolation
+  upstream_url: https://github.com/codehaus-plexus/plexus-interpolation
+- downstream_name: plexus-resources
+  upstream_url: https://github.com/codehaus-plexus/plexus-resources
+- downstream_name: po4a
+  upstream_url: https://github.com/mquinson/po4a
+- downstream_name: pps-tools
+  upstream_url: https://github.com/redlab-i/pps-tools
+- downstream_name: pyparsing
+  upstream_url: https://github.com/pyparsing/pyparsing
+- downstream_name: python-beaker
+  upstream_url: https://github.com/bbangert/beaker
+- downstream_name: python-bugzilla
+  upstream_url: https://github.com/python-bugzilla/python-bugzilla
+- downstream_name: python-configobj
+  upstream_url: https://github.com/DiffSK/configobj
+- downstream_name: python-kitchen
+  upstream_url: https://github.com/fedora-infra/kitchen
+- downstream_name: python-kmod
+  upstream_url: https://github.com/downloads/agrover
+- downstream_name: python-mako
+  upstream_url: https://github.com/sqlalchemy/mako
+- downstream_name: python-mutagen
+  upstream_url: https://github.com/quodlibet/mutagen
+- downstream_name: python-paste-deploy
+  upstream_url: https://github.com/Pylons/pastedeploy
+- downstream_name: python-pymongo
+  upstream_url: https://github.com/mongodb/mongo-python-driver
+- downstream_name: python-slip
+  upstream_url: https://github.com/nphilipp/python-slip
+- downstream_name: python-webtest
+  upstream_url: https://github.com/Pylons/webtest
+- downstream_name: python-zope-sqlalchemy
+  upstream_url: https://github.com/zopefoundation/zope.sqlalchemy
+- downstream_name: pywbem
+  upstream_url: https://github.com/pywbem/pywbem
+- downstream_name: recode
+  upstream_url: https://github.com/rrthomas/recode
+- downstream_name: scipy
+  upstream_url: https://github.com/scipy/scipy
+- downstream_name: stax2-api
+  upstream_url: https://github.com/FasterXML/stax2-api
+- downstream_name: tidy
+  upstream_url: https://github.com/htacg/tidy-html5
+- downstream_name: tidyp
+  upstream_url: http://github.com/downloads/petdance
+- downstream_name: urlview
+  upstream_url: https://github.com/sigpipe/urlview
+- downstream_name: wkhtmltopdf
+  upstream_url: https://github.com/wkhtmltopdf/wkhtmltopdf
+- downstream_name: woodstox-core
+  upstream_url: https://github.com/FasterXML/woodstox
+- downstream_name: xdelta
+  upstream_url: https://github.com/jmacd/xdelta-devel
+- downstream_name: xmlunit
+  upstream_url: https://github.com/xmlunit/xmlunit
+- downstream_name: zziplib
+  upstream_url: https://github.com/gdraheim/zziplib
