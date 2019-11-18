@@ -110,3 +110,8 @@
   https://github.com/fedora-selinux/selinux, changes on
   upstream need to be approved via mailing list
   * lack of trust caused by failed cooperation with other always ready project
+* libguestfs collection of tools:
+  * The project is using mailing lists for reviews, not GitHub pull requests
+  * The request from them is that packit-service would react to branch pushes instead of PR changes
+    * https://github.com/packit-service/packit-service/issues/239
+  * libnbd is able to be onboarded: https://github.com/TomasTomecek/libnbd/pull/1
