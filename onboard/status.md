@@ -115,3 +115,9 @@
   * The request from them is that packit-service would react to branch pushes instead of PR changes
     * https://github.com/packit-service/packit-service/issues/239
   * libnbd is able to be onboarded: https://github.com/TomasTomecek/libnbd/pull/1
+* Red Hat infra services team & github.com/redhat-performance
+  * Some of the projects are on-board.
+  * Problems:
+    * ["Only collaborators can trigger packit."](https://github.com/packit-service/packit/issues/606)
+    * ["More verbose packit service."](https://github.com/packit-service/packit-service/issues/243)
+    * ["New Fedora release should not require projects to change packit.yaml"](https://github.com/packit-service/packit/issues/540)
