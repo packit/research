@@ -121,3 +121,9 @@
     * ["Only collaborators can trigger packit."](https://github.com/packit-service/packit/issues/606)
     * ["More verbose packit service."](https://github.com/packit-service/packit-service/issues/243)
     * ["New Fedora release should not require projects to change packit.yaml"](https://github.com/packit-service/packit/issues/540)
+* Open Source projects from [David Cantrell](https://github.com/dcantrell)
+  * [Packit should take care of the complete upstream release process](https://github.com/dcantrell/pyparted/pull/66#issuecomment-555038520):
+    * Create tarball, sign it and upload
+  * Push to Fedora iff all CI tests pass for the respective tag.
+  * Handle %changelog.
+
