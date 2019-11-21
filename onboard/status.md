@@ -5,6 +5,7 @@
 * dnf
 * fmf
 * libdnf
+* numactl
 * osbuild
 * packit
 * pycharm-community-edition
@@ -16,6 +17,7 @@
 * rebase-helper
 * tmt
 * tmux-top
+* tuned
 
 ## In review(packit):
 * chkconfig - https://github.com/fedora-sysv/chkconfig/pull/25
@@ -28,7 +30,6 @@
 * libica - https://github.com/opencryptoki/libica/pull/33
 * jose - https://github.com/latchset/jose/pull/71
 * mod_security_crs - https://github.com/SpiderLabs/owasp-modsecurity-crs/pull/1621
-* numactl - https://github.com/numactl/numactl/pull/83
 * openssl-ibmca - https://github.com/opencryptoki/openssl-ibmca/pull/60
 * python-meh - https://github.com/rhinstaller/python-meh/pull/21
 * python-paramiko - https://github.com/paramiko/paramiko/pull/1549
@@ -40,7 +41,6 @@
 * scap-workbench - https://github.com/OpenSCAP/scap-workbench/pull/236
 * sos - https://github.com/sosreport/sos/pull/1853
 * tang - https://github.com/latchset/tang/pull/39
-* tuned - https://github.com/redhat-performance/tuned/pull/205
 
 ## In review(copr):
 * cockpit-ostree - https://github.com/cockpit-project/cockpit-ostree/pull/31
