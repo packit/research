@@ -1,23 +1,24 @@
 ## Onboarded:
-* ansible-bender
-* blivet-gui
-* conu
-* dnf
-* fmf
-* libdnf
-* numactl
-* osbuild
-* packit
-* pycharm-community-edition
-* python-avocado
-* python-deprecated
-* python-dockerfile-parse
-* python-ogr
-* rear
-* rebase-helper
-* tmt
-* tmux-top
-* tuned
+* [ansible-bender](https://github.com/ansible-community/ansible-bender/)
+* [blivet-gui](https://github.com/storaged-project/blivet-gui)
+* [conu](https://github.com/user-cont/conu)
+* [dnf](https://github.com/rpm-software-management/dnf)
+* [fmf](https://github.com/psss/fmf)
+* [libdnf](https://github.com/rpm-software-management/libdnf)
+* [numactl](https://github.com/numactl/numactl/)
+* [osbuild](https://github.com/osbuild/osbuild)
+* [packit](https://github.com/packit-service/packit)
+* [pycharm-community-edition](https://github.com/phracek/pycharm-community-edition)
+* [python-avocado](https://github.com/avocado-framework/avocado)
+* [python-deprecated](https://github.com/tantale/deprecated)
+* [python-dockerfile-parse](https://github.com/containerbuildsystem/dockerfile-parse)
+* [python-ogr](https://github.com/packit-service/ogr)
+* [python-urlgrabber](https://github.com/rpm-software-management/urlgrabber)
+* [rear](https://github.com/rear/rear/)
+* [rebase-helper](https://github.com/rebase-helper/rebase-helper)
+* [tmt](https://github.com/psss/tmt)
+* [tmux-top](https://github.com/TomasTomecek/tmux-top)
+* [tuned](https://github.com/redhat-performance/tuned)
 
 ## In review(packit):
 * chkconfig - https://github.com/fedora-sysv/chkconfig/pull/25
@@ -35,7 +36,6 @@
 * python-paramiko - https://github.com/paramiko/paramiko/pull/1549
 * python-pillow - https://github.com/python-pillow/Pillow/pull/4206
 * python-simpleline - https://github.com/rhinstaller/python-simpleline/pull/62
-* python-urlgrabber - https://github.com/rpm-software-management/urlgrabber/pull/22
 * rpmdeplint - https://github.com/default-to-open/rpmdeplint/pull/1
 * scap-security-guide - https://github.com/ComplianceAsCode/content/pull/5000
 * scap-workbench - https://github.com/OpenSCAP/scap-workbench/pull/236
