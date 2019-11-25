@@ -2,7 +2,9 @@
 
 - `Deprecated` PyPI package is used for deprecation
 - annotate deprecated functions with `@depracted` decorator, optionally with message
-- functions will be removed after 6 months from the release in which they were marked as deprecated
+- functions will be removed in the 5th release after the release in which they were
+  deprecated
+-  template for warning: `since {version}, will be removed in {version}: {alternative/message}`
 
 ## Choice of library
 
