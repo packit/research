@@ -126,4 +126,10 @@
     * Create tarball, sign it and upload
   * Push to Fedora iff all CI tests pass for the respective tag.
   * Handle %changelog.
-
+* beaker, restraint
+  * multiple sources - some just need to be fetched from a remote URL
+    * could be worked around with actions
+  * only one tarball is from the current repo
+  * using `git describe` doesn't work for them - should be turned off, we should check how tito does this
+  * are using gerrit+jenkins atm (tito releasing), but want to switch to github
+  * provide API for artifacts (spec, srpm, rpms) so they can be linted (rpmlint)
