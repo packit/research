@@ -4,6 +4,7 @@
 * [conu](https://github.com/user-cont/conu)
 * [dnf](https://github.com/rpm-software-management/dnf)
 * [fmf](https://github.com/psss/fmf)
+* [jose](https://github.com/latchset/jose)
 * [libdnf](https://github.com/rpm-software-management/libdnf)
 * [numactl](https://github.com/numactl/numactl/)
 * [osbuild](https://github.com/osbuild/osbuild)
@@ -25,14 +26,16 @@
 * conman - https://github.com/dun/conman/pull/33
 * cronie - https://github.com/cronie-crond/cronie/pull/47
 * Cython - https://github.com/cython/cython/pull/3229
+* did - https://github.com/psss/did/pull/213
+* edd - https://github.com/psss/python-nitrate/pull/14
 * initscripts - https://github.com/fedora-sysv/initscripts/pull/292
 * initial-setup - https://github.com/rhinstaller/initial-setup/pull/79
 * jansi-native - https://github.com/fusesource/jansi-native/pull/22
 * libica - https://github.com/opencryptoki/libica/pull/33
-* jose - https://github.com/latchset/jose/pull/71
 * mod_security_crs - https://github.com/SpiderLabs/owasp-modsecurity-crs/pull/1621
 * openssl-ibmca - https://github.com/opencryptoki/openssl-ibmca/pull/60
 * python-meh - https://github.com/rhinstaller/python-meh/pull/21
+* python-nitrate - https://github.com/psss/python-nitrate/pull/14
 * python-paramiko - https://github.com/paramiko/paramiko/pull/1549
 * python-pillow - https://github.com/python-pillow/Pillow/pull/4206
 * python-simpleline - https://github.com/rhinstaller/python-simpleline/pull/62
