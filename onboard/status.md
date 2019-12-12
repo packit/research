@@ -20,6 +20,7 @@
 * [tmt](https://github.com/psss/tmt)
 * [tmux-top](https://github.com/TomasTomecek/tmux-top)
 * [tuned](https://github.com/redhat-performance/tuned)
+* [sen](https://github.com/TomasTomecek/sen)
 
 ## In review(packit):
 * chkconfig - https://github.com/fedora-sysv/chkconfig/pull/25
@@ -48,7 +49,6 @@
 ## In review(copr):
 * cockpit-ostree - https://github.com/cockpit-project/cockpit-ostree/pull/31
 * cockpit-podman - https://github.com/cockpit-project/cockpit-podman/pull/235
-* sen - https://github.com/TomasTomecek/sen/pull/150
 
 ## Onboarded without copr builds
 * nss-pem
