@@ -20,6 +20,7 @@
 * [tmt](https://github.com/psss/tmt)
 * [tmux-top](https://github.com/TomasTomecek/tmux-top)
 * [tuned](https://github.com/redhat-performance/tuned)
+* [sen](https://github.com/TomasTomecek/sen)
 
 ## In review(packit):
 * chkconfig - https://github.com/fedora-sysv/chkconfig/pull/25
@@ -48,7 +49,6 @@
 ## In review(copr):
 * cockpit-ostree - https://github.com/cockpit-project/cockpit-ostree/pull/31
 * cockpit-podman - https://github.com/cockpit-project/cockpit-podman/pull/235
-* sen - https://github.com/TomasTomecek/sen/pull/150
 
 ## Onboarded without copr builds
 * nss-pem
@@ -136,3 +136,14 @@
   * using `git describe` doesn't work for them - should be turned off, we should check how tito does this
   * are using gerrit+jenkins atm (tito releasing), but want to switch to github
   * provide API for artifacts (spec, srpm, rpms) so they can be linted (rpmlint)
+* dnf
+  * cross-PR dependencies
+    * short-term solution: enable adding a repository to the copr project via a PR comment
+    * create SRPM from master branch of a dependency, if no dependency is specified
+    * are using packit: 50 % of builds fail b/c of dependant projects & pull requests
+  * they use a dedicated repo for tests
+  * Current CI solution:
+    * provisioning: container image: contains rpm builds of all the components with tests included
+    * the container image is the input for the testing phase
+    * they want to have a matrix with all the test cases: distribute the runs to the testing farm
+  * another complete run should be then preformed with all packages built like if the PRs were merged
