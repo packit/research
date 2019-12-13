@@ -147,3 +147,17 @@
     * the container image is the input for the testing phase
     * they want to have a matrix with all the test cases: distribute the runs to the testing farm
   * another complete run should be then preformed with all packages built like if the PRs were merged
+* Dusty & CoreOS
+  * synced_files: src/ dest/ confusion
+  * naming: source-git, propose-update
+  * docs, source-git: finish the guide, show packit.yml
+  * source-git patches: some files are not excluded (packit.yaml, spec file, downstream files) - configurable?
+  * having packit.yaml in dist-git is confusing: we could have a "link" in dist-git which would point to a real location
+  * validate packit yaml and halt if it's invalid
+  * operate on a copy of a git repo: configurable?
+  * trigger: new commit in a branch, action: build in a koji tag (and push to a d-g branch)
+  * end goal: build certain upstream projects in a tag, release the tag to a stream & ostree repo
+    * they want to use real koji builds - being able to yum install from a koji tag
+    * push to a dedicated dist-git branch?
+  * 5-10 projects
+  * talk to Christian G
