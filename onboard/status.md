@@ -2,6 +2,7 @@
 * [ansible-bender](https://github.com/ansible-community/ansible-bender/)
 * [blivet-gui](https://github.com/storaged-project/blivet-gui)
 * [conu](https://github.com/user-cont/conu)
+* [did](https://github.com/psss/did)
 * [dnf](https://github.com/rpm-software-management/dnf)
 * [fmf](https://github.com/psss/fmf)
 * [jose](https://github.com/latchset/jose)
@@ -27,7 +28,6 @@
 * conman - https://github.com/dun/conman/pull/33
 * cronie - https://github.com/cronie-crond/cronie/pull/47
 * Cython - https://github.com/cython/cython/pull/3229
-* did - https://github.com/psss/did/pull/213
 * edd - https://github.com/psss/edd/pull/10
 * initscripts - https://github.com/fedora-sysv/initscripts/pull/292
 * initial-setup - https://github.com/rhinstaller/initial-setup/pull/79
@@ -39,6 +39,7 @@
 * python-nitrate - https://github.com/psss/python-nitrate/pull/14
 * python-paramiko - https://github.com/paramiko/paramiko/pull/1549
 * python-pillow - https://github.com/python-pillow/Pillow/pull/4206
+* python-requests - https://github.com/psf/requests/pull/5307
 * python-simpleline - https://github.com/rhinstaller/python-simpleline/pull/62
 * rpmdeplint - https://github.com/default-to-open/rpmdeplint/pull/1
 * scap-security-guide - https://github.com/ComplianceAsCode/content/pull/5000
