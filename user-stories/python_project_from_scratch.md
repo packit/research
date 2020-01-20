@@ -13,8 +13,8 @@ You can either manually set version in `setup.py` or let [setuptools-scm](https:
 
 Choose your scheme, eg `0.1.0`.
 It depends on previous steps, if you have hardcoded version in `setup.py`, or used mechanism like git tags
- * Create git tag `git tag 0.1.0`,  then python setup will use this as version
- * Push the tag to origin `git push origin 0.1.0`
+ * Create git tag `git tag 0.1.0 -a`,  then python setup will use this as version
+ * Push the tag to origin `git push --tags`
  * Use [tito](https://github.com/dgoodwin/tito) project to increase versions
 
 ### Upload package release to PYPI
@@ -27,7 +27,8 @@ It depends on previous steps, if you have hardcoded version in `setup.py`, or us
 
 ### Create Specfile
  * Install [pyp2rpm](https://pypi.org/project/pyp2rpm/) to convert your `setup.py` to a specfile: `sudo dnf install pyp2rpm`
- * Create specfile: `pyp2rpm requre > python-your_project_name.spec`
+ * Create specfile: `pyp2rpm your_project_name > python-your_project_name.spec`
+ * `pyp2rpm` creates also section `%check` in your specfile. It may cause troubles in case you have no defined `test` in your setup.py, so replace it with your test command, or remove this section.
 
 ### Install Packit-as-a-Service GitHub App
 See [documentation](https://packit.dev/packit-as-a-service).
@@ -54,6 +55,17 @@ jobs:
      - fedora-stable
 ```
 
+ * If you have static versioning scheme eg. version in spec, setup.py files it should work without next code, in case you are using versioning based on some scm tools, you have to add action to packit yaml (because ``.git`` is not part of tarball with package archive)
+  ```yaml
+actions:
+  create-archive:
+  - "python3 setup.py sdist --dist-dir ."
+  - "sh -c 'echo your_project_name-$(python3 setup.py --version).tar.gz'"
+  get-current-version:
+  - "python3 setup.py --version"
+```
+ 
+
 Then create pull request containing this `.packit.yaml` file.
 Packit service should try to do Copr builds for you to prove that Fedora RPM packages build fine.
 
@@ -62,8 +74,7 @@ It is important to get to consistent state. Previous steps are important do to i
 
 
 ### Troubleshooting
- * If the package cannot be build - try to build SRPM package locally
- * If there is issue with build it could be caused by version what were pushed to production. create another tag, or increase version and push the changes to git PR and PYPI
+ * If the package cannot be build - try to build SRPM package locally via packit CMD line tool: `packit srpm`
 
 
 ## Workflow to add your package to Fedora
