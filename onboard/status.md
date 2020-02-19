@@ -5,6 +5,7 @@
 * [did](https://github.com/psss/did)
 * [dnf](https://github.com/rpm-software-management/dnf)
 * [fmf](https://github.com/psss/fmf)
+* [gnome-abrt](https://github.com/abrt/gnome-abrt)
 * [jose](https://github.com/latchset/jose)
 * [libdnf](https://github.com/rpm-software-management/libdnf)
 * [numactl](https://github.com/numactl/numactl/)
@@ -18,6 +19,7 @@
 * [python-urlgrabber](https://github.com/rpm-software-management/urlgrabber)
 * [rear](https://github.com/rear/rear/)
 * [rebase-helper](https://github.com/rebase-helper/rebase-helper)
+* [reportd](https://github.com/abrt/reportd)
 * [tmt](https://github.com/psss/tmt)
 * [tmux-top](https://github.com/TomasTomecek/tmux-top)
 * [tuned](https://github.com/redhat-performance/tuned)
@@ -46,6 +48,7 @@
 * scap-workbench - https://github.com/OpenSCAP/scap-workbench/pull/236
 * sos - https://github.com/sosreport/sos/pull/1853
 * tang - https://github.com/latchset/tang/pull/39
+* will-crash - https://github.com/abrt/will-crash/pull/25
 
 ## In review(copr):
 * cockpit-ostree - https://github.com/cockpit-project/cockpit-ostree/pull/31
@@ -79,12 +82,12 @@
 
 ## Needs action for spec generate:
 * anaconda - how is it built?
-* abrt
-* libreport
+* abrt (onboarding blocked by pending build system change)
+* libreport (onboarding blocked by pending build system change)
 * cockpit - spec parse fails
 * cockpit-composer - npm fails
 * rpminspect - instructions for creating .spec?
-* satyr
+* satyr (onboarding blocked by pending build system change)
 
 ## Other error
 * expat - unclosed macro or bad line continuation
