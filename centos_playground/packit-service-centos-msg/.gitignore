@@ -1,0 +1,8 @@
+*.py[co]
+secrets/
+
+.idea/
+.eggs/
+.coverage
+*.egg-info
+.mypy_cache/
