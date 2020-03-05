@@ -1,0 +1,20 @@
+---
+- name: Install dependencies for centos messaging consumer.
+  hosts: all
+  tasks:
+  - name: Install all RPM/python packages needed to run centos messaging consumer.
+    dnf:
+      name:
+      - python3-celery
+      - python3-redis
+      - redis  # redis-cli
+      - python3-click
+      - git # setuptools-scm
+      - python3-setuptools_scm
+      - python3-paho-mqtt
+      state: present
+  - name: pip
+    pip:
+      #fedora 31 has lower version and fedora 32 has some missing dependencies (gcc)
+      name: cryptography >= 2.8
+      executable: pip3
