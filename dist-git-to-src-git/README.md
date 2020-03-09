@@ -20,7 +20,7 @@ Here are the steps:
 
 3. Now applying the patches (from the `SOURCES` directory) can begin. In order
    to decide which patches to apply, look in the spec-file. Use
-   [rebase-helper] for this.
+   [rebase-helper's `get_applied_patches()`] for this.
 
 ## Intermezzo: what should happen to all the patches?
 
@@ -30,21 +30,20 @@ Here is what we could do with all the patches:
   be deleted, a.k.a they wont show up in the source-git tree.
 
 - Patches which are used in the spec file and cannot be applied - this is
-  where tooling should err out, as something bad happened in dist-git. Or? It
-  might also happen that the patch cannot be applied b/c it was applied
-  already? Will we able to tell this?
+  where tooling should err out, as something bad happened in dist-git.
 
 - Patches which are not used in the spec file will end up being in the
   source-git tree under `centos-packaging/SOURCES/`. Maintainers might want to
   clean this up in the future. Or these might be other kinds of files stored
-  for unknown reasons.
+  for yet unknown reasons.
 
 ### For the future
 
 Are there any expectations for how the history of a source-git repo will
 evolve?
 
-What should happen when sources in dist-git are updated?
+What should happen when sources in dist-git are updated? Currently we will
+recreate the source-git branch.
 
 What should happen when the spec file or the patches in dist-git are updated?
 
@@ -76,3 +75,9 @@ Or breaking it down:
     $ dist2src copy-patches rpms/rpm src/rpm
     $ dist2src apply-patches [--keep-files] src/rpm
     $ dist2src commit src/rpm
+
+`dist2src get-archive` calls [`get_sources.sh`] or the script specified in
+`DIST2SRC_GET_SOURCES`.
+
+[`get_sources.sh`]: https://wiki.centos.org/Sources#get_sources.sh_script
+[rebase-helper's `get_applied_patches()`]: https://github.com/rebase-helper/rebase-helper/blob/e98f4f6b14e2ca2e8cbb8a8fbeb6935e5d0cf289/rebasehelper/specfile.py#L351
