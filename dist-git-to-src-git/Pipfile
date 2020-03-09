@@ -8,8 +8,8 @@ verify_ssl = true
 [packages]
 click = "*"
 gitpython = "*"
-mypy = "*"
 rebasehelper = "*"
+packitos = "*"
 
 [requires]
 python_version = "3.7"
