@@ -95,10 +95,11 @@ def checkout(path, branch, orphan=False):
     options = {}
     if orphan:
         options["orphan"] = branch
-    else:
-        options["B"] = branch
 
-    repo.git.checkout(**options)
+    if options:
+        repo.git.checkout(**options)
+    else:
+        repo.git.checkout(branch)
 
 
 @cli.command()
@@ -116,6 +117,7 @@ def get_archive(gitdir):
     command = sh.Command(script)
 
     with sh.pushd(gitdir):
+        logger.debug(f"Running command in {os.getcwd()}")
         stdout = command()
 
     return stdout
