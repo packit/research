@@ -79,5 +79,6 @@ Or breaking it down:
 `dist2src get-archive` calls [`get_sources.sh`] or the script specified in
 `DIST2SRC_GET_SOURCES`.
 
+[How to source-git?]: https://packit.dev/docs/how-to-source-git
 [`get_sources.sh`]: https://wiki.centos.org/Sources#get_sources.sh_script
 [rebase-helper's `get_applied_patches()`]: https://github.com/rebase-helper/rebase-helper/blob/e98f4f6b14e2ca2e8cbb8a8fbeb6935e5d0cf289/rebasehelper/specfile.py#L351
