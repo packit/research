@@ -233,7 +233,16 @@ def apply_patches(ctx, gitdir):
     for patch in specfile.get_applied_patches():
         message = f"Apply Patch{patch.index}: {patch.get_patch_name()}"
         logger.info(message)
-        repo.git.apply(os.path.relpath(patch.path, gitdir), p=patch.strip)
+        rel_path = os.path.relpath(patch.path, gitdir)
+        try:
+            repo.git.am(rel_path)
+        except git.exc.CommandError as e:
+            logger.debug(str(e))
+            repo.git.apply(rel_path, p=patch.strip)
+            ctx.invoke(stage, gitdir=gitdir, exclude="centos-packaging")
+            ctx.invoke(commit, gitdir=gitdir, m=message)
+
+        # The patch is a commit now, so clean it up.
         os.unlink(patch.path)
         # TODO(csomh):
         # the bellow is not complete, as there are many more ways to specify
@@ -241,8 +250,6 @@ def apply_patches(ctx, gitdir):
         specfile.comment_patches([patch.index])
         specfile._process_patches([patch.index])
         specfile.save()
-        ctx.invoke(stage, gitdir=gitdir, exclude="centos-packaging")
-        ctx.invoke(commit, gitdir=gitdir, m=message)
 
 
 @cli.command()
