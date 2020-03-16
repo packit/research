@@ -132,13 +132,10 @@ def copy_spec(ctx, origin, dest):
     """Copy the 'SPECS' directory from a dist-git repo to a source-git repo.
 
     In the source-git repo this is going to be under 'centos-packaging'.
-
-    After copying stage the changes in DEST.
     """
     shutil.copytree(
         os.path.join(origin, "SPECS"), os.path.join(dest, "centos-packaging", "SPECS")
     )
-    ctx.invoke(stage, gitdir=dest)
 
 
 @cli.command()
@@ -151,8 +148,6 @@ def copy_patches(ctx, origin, dest):
 
     This looks for 'SOURCES/*.patch' in ORIGIN and copy everything found to
     'centos-packaging/SOURCES/' in DEST.
-
-    After copying stage the changes in DEST.
     """
     files = filter(
         lambda x: x.endswith(".patch"), os.listdir(os.path.join(origin, "SOURCES"))
@@ -163,7 +158,6 @@ def copy_patches(ctx, origin, dest):
             os.path.join(origin, "SOURCES", f),
             os.path.join(dest, "centos-packaging", "SOURCES", f),
         )
-    ctx.invoke(stage, gitdir=dest)
 
 
 @cli.command()
@@ -176,7 +170,7 @@ def extract_archive(ctx, origin, dest):
 
     First, make sure that the archive was downloaded.
 
-    After extracting the archive, stage the changes in DEST.
+    After extracting the archive, stage and commit the changes in DEST.
     """
     # Make sure, the archive exists and use the STDOUT of get_sources.sh
     # to find out its path.
@@ -197,6 +191,7 @@ def extract_archive(ctx, origin, dest):
             shutil.move(os.path.join(topdir, f), os.path.join(dest, f))
 
     ctx.invoke(stage, gitdir=dest)
+    ctx.invoke(commit, m="Unpack archive", gitdir=dest)
 
 
 @cli.command()
@@ -209,6 +204,9 @@ def apply_patches(ctx, gitdir):
     Apply all the patches used in the SPEC-file, then update the
     SPEC-file by commenting the patches that were applied and deleting
     those patches from the disk.
+
+    Stage and commit changes after each patch, except the ones in the
+    'centos-packaging' directory.
     """
 
     class Specfile(SpecFile):
@@ -232,24 +230,19 @@ def apply_patches(ctx, gitdir):
     )
     repo = git.Repo(gitdir)
 
-    remove_from_spec = []
-    delete_patches = []
     for patch in specfile.get_applied_patches():
-        logger.info(f"Apply Patch{patch.index}: {patch.get_patch_name()}")
+        message = f"Apply Patch{patch.index}: {patch.get_patch_name()}"
+        logger.info(message)
         repo.git.apply(os.path.relpath(patch.path, gitdir), p=patch.strip)
-        delete_patches.append(patch.path)
-        remove_from_spec.append(patch.index)
-
-    logger.info(f"Number of patches to be commented: {len(remove_from_spec)}")
-    # TODO(csomh):
-    # the bellow is not complete, as there are many more ways to specify
-    # patches in spec files. Cover this in the future.
-    specfile.comment_patches(remove_from_spec)
-    specfile._process_patches(comment_out=remove_from_spec)
-    specfile.save()
-    for p in delete_patches:
-        os.unlink(p)
-    ctx.invoke(stage, gitdir=gitdir)
+        os.unlink(patch.path)
+        # TODO(csomh):
+        # the bellow is not complete, as there are many more ways to specify
+        # patches in spec files. Cover this in the future.
+        specfile.comment_patches([patch.index])
+        specfile._process_patches([patch.index])
+        specfile.save()
+        ctx.invoke(stage, gitdir=gitdir, exclude="centos-packaging")
+        ctx.invoke(commit, gitdir=gitdir, m=message)
 
 
 @cli.command()
@@ -264,11 +257,15 @@ def commit(gitdir, m):
 
 @cli.command()
 @click.argument("gitdir")
+@click.option("--exclude", help="Path to exclude from staging, relative to GITDIR")
 @log_call
-def stage(gitdir):
-    """Stage all content in GITDIR."""
+def stage(gitdir, exclude=None):
+    """Stage content in GITDIR."""
     repo = git.Repo(gitdir)
-    repo.git.add(".")
+    if exclude:
+        exclude = f":(exclude){exclude}"
+        logger.debug(exclude)
+    repo.git.add(".", exclude)
 
 
 @cli.command()
@@ -295,7 +292,8 @@ def convert(ctx, origin, dest):
     ctx.invoke(copy_spec, origin=origin_dir, dest=dest_dir)
     ctx.invoke(copy_patches, origin=origin_dir, dest=dest_dir)
     ctx.invoke(apply_patches, gitdir=dest_dir)
-    ctx.invoke(commit, gitdir=dest_dir)
+    ctx.invoke(stage, gitdir=dest_dir)
+    ctx.invoke(commit, gitdir=dest_dir, m="Add downstream SPEC-file")
 
 
 if __name__ == "__main__":
