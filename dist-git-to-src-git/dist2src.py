@@ -293,8 +293,8 @@ def convert(ctx, origin, dest):
     dest_dir, dest_branch = dest.split(":")
 
     ctx.invoke(checkout, path=origin_dir, branch=origin_branch)
-    ctx.invoke(get_archive, gitdir=origin_dir)
     ctx.invoke(checkout, path=dest_dir, branch=dest_branch, orphan=True)
+    ctx.invoke(get_archive, gitdir=origin_dir)
     ctx.invoke(extract_archive, origin=origin_dir, dest=dest_dir)
     ctx.invoke(copy_spec, origin=origin_dir, dest=dest_dir)
     ctx.invoke(copy_patches, origin=origin_dir, dest=dest_dir)
