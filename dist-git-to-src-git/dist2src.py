@@ -6,6 +6,7 @@ import os
 import re
 import shutil
 import tempfile
+from pathlib import Path
 
 import click
 import git
@@ -65,12 +66,13 @@ def log_call(func):
         logger.debug(f"{func.__name__}({args_string}{sep}{kwargs_string})")
         ret = func(*args, **kwargs)
         return ret
+
     return wrapper
 
 
 @cli.command()
-@click.argument("path")
-@click.argument("branch")
+@click.argument("path", type=click.Path(file_okay=False))
+@click.argument("branch", type=click.STRING)
 @click.option(
     "--orphan", is_flag=True, help="Create an branch with disconnected history."
 )
@@ -103,7 +105,7 @@ def checkout(path, branch, orphan=False):
 
 
 @cli.command()
-@click.argument("gitdir")
+@click.argument("gitdir", type=click.Path(exists=True, file_okay=False))
 @log_call
 def get_archive(gitdir):
     """Calls get_sources.sh in GITDIR.
@@ -124,8 +126,8 @@ def get_archive(gitdir):
 
 
 @cli.command()
-@click.argument("origin")
-@click.argument("dest")
+@click.argument("origin", type=click.Path(exists=True, file_okay=False))
+@click.argument("dest", type=click.Path(exists=True, file_okay=False))
 @log_call
 @click.pass_context
 def copy_spec(ctx, origin, dest):
@@ -133,14 +135,12 @@ def copy_spec(ctx, origin, dest):
 
     In the source-git repo this is going to be under 'centos-packaging'.
     """
-    shutil.copytree(
-        os.path.join(origin, "SPECS"), os.path.join(dest, "centos-packaging", "SPECS")
-    )
+    shutil.copytree(Path(origin, "SPECS"), Path(dest, "centos-packaging", "SPECS"))
 
 
 @cli.command()
-@click.argument("origin")
-@click.argument("dest")
+@click.argument("origin", type=click.Path(exists=True, file_okay=False))
+@click.argument("dest", type=click.Path(exists=True, file_okay=False))
 @log_call
 @click.pass_context
 def copy_patches(ctx, origin, dest):
@@ -149,20 +149,18 @@ def copy_patches(ctx, origin, dest):
     This looks for 'SOURCES/*.patch' in ORIGIN and copy everything found to
     'centos-packaging/SOURCES/' in DEST.
     """
-    files = filter(
-        lambda x: x.endswith(".patch"), os.listdir(os.path.join(origin, "SOURCES"))
-    )
-    os.makedirs(os.path.join(dest, "centos-packaging", "SOURCES"), exist_ok=True)
-    for f in files:
-        shutil.copy2(
-            os.path.join(origin, "SOURCES", f),
-            os.path.join(dest, "centos-packaging", "SOURCES", f),
-        )
+    orig_sources = Path(origin, "SOURCES")
+    dest_sources = Path(dest, "centos-packaging", "SOURCES")
+
+    dest_sources.mkdir(parents=True, exist_ok=True)
+
+    for patch in orig_sources.glob("*.patch"):
+        shutil.copy2(patch, dest_sources / patch.name)
 
 
 @cli.command()
-@click.argument("origin")
-@click.argument("dest")
+@click.argument("origin", type=click.Path(exists=True, file_okay=False))
+@click.argument("dest", type=click.Path(exists=True, file_okay=False))
 @log_call
 @click.pass_context
 def extract_archive(ctx, origin, dest):
@@ -177,25 +175,24 @@ def extract_archive(ctx, origin, dest):
     stdout = ""
     while "exists" not in stdout:
         stdout = ctx.invoke(get_archive, gitdir=origin)
-    archive = os.path.join(origin, stdout.partition(" exists")[0])
+    archive = Path(origin, stdout.partition(" exists")[0])
 
     with tempfile.TemporaryDirectory() as tmpdir:
         shutil.unpack_archive(archive, tmpdir)
         # Expect an archive with a single directory.
         assert len(os.listdir(tmpdir)) == 1
-        topdir = os.path.join(tmpdir, os.listdir(tmpdir)[0])
+        topdir = Path(tmpdir, os.listdir(tmpdir)[0])
         # These are all the files under the directory that was
         # in the archive.
-        files = os.listdir(topdir)
-        for f in files:
-            shutil.move(os.path.join(topdir, f), os.path.join(dest, f))
+        for f in topdir.iterdir():
+            shutil.move(f, Path(dest, f.name))
 
     ctx.invoke(stage, gitdir=dest)
     ctx.invoke(commit, m="Unpack archive", gitdir=dest)
 
 
 @cli.command()
-@click.argument("gitdir")
+@click.argument("gitdir", type=click.Path(exists=True, file_okay=False))
 @log_call
 @click.pass_context
 def apply_patches(ctx, gitdir):
@@ -253,7 +250,7 @@ def apply_patches(ctx, gitdir):
 
 
 @cli.command()
-@click.argument("gitdir")
+@click.argument("gitdir", type=click.Path(exists=True, file_okay=False))
 @click.option("-m", default="Import sources from dist-git", help="Git commmit message")
 @log_call
 def commit(gitdir, m):
@@ -263,7 +260,7 @@ def commit(gitdir, m):
 
 
 @cli.command()
-@click.argument("gitdir")
+@click.argument("gitdir", type=click.Path(exists=True, file_okay=False))
 @click.option("--exclude", help="Path to exclude from staging, relative to GITDIR")
 @log_call
 def stage(gitdir, exclude=None):
@@ -276,8 +273,8 @@ def stage(gitdir, exclude=None):
 
 
 @cli.command()
-@click.argument("origin")
-@click.argument("dest")
+@click.argument("origin", type=click.STRING)
+@click.argument("dest", type=click.STRING)
 @log_call
 @click.pass_context
 def convert(ctx, origin, dest):
@@ -293,8 +290,8 @@ def convert(ctx, origin, dest):
     dest_dir, dest_branch = dest.split(":")
 
     ctx.invoke(checkout, path=origin_dir, branch=origin_branch)
-    ctx.invoke(get_archive, gitdir=origin_dir)
     ctx.invoke(checkout, path=dest_dir, branch=dest_branch, orphan=True)
+    ctx.invoke(get_archive, gitdir=origin_dir)
     ctx.invoke(extract_archive, origin=origin_dir, dest=dest_dir)
     ctx.invoke(copy_spec, origin=origin_dir, dest=dest_dir)
     ctx.invoke(copy_patches, origin=origin_dir, dest=dest_dir)

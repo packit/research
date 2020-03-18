@@ -68,13 +68,14 @@ Or breaking it down:
 
     $ cd git.centos.org
     $ dist2src checkout rpms/rpm c8s
-    $ dist2src get-archive rpms/rpm
     $ dist2src checkout --orphan src/rpm c8s
+    $ dist2src get-archive rpms/rpm
     $ dist2src extract-archive rpms/rpm src/rpm
     $ dist2src copy-spec rpms/rpm src/rpm
     $ dist2src copy-patches rpms/rpm src/rpm
-    $ dist2src apply-patches [--keep-files] src/rpm
-    $ dist2src commit src/rpm
+    $ dist2src apply-patches src/rpm
+    $ dist2src stage src/rpm
+    $ dist2src commit -m "Add downstream SPEC-file" src/rpm
 
 `dist2src get-archive` calls [`get_sources.sh`] or the script specified in
 `DIST2SRC_GET_SOURCES`.
