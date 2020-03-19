@@ -22,5 +22,18 @@ convert: clean
 	./dist2src.py $(VERBOSE) convert $(DIR)/rpms/$(PACKAGE):$(BRANCH) $(DIR)/src/$(PACKAGE):$(BRANCH)
 	git -C $(DIR)/src/$(PACKAGE) log --oneline $(BRANCH)
 
+convert-fb: clean
+	git clone https://github.com/facebookincubator/rpm-backports.git
+	pushd rpm-backports
+#	./dist2src.py $(VERBOSE) convert rpm-backports/rpms/$(PACKAGE):master rpm-backports/src/$(PACKAGE):master
+	../dist2src.py $(VERBOSE) checkout --orphan src/$(PACKAGE) master
+	../dist2src.py $(VERBOSE) get-archive --no-sources-sh rpms/$(PACKAGE)
+	../dist2src.py $(VERBOSE) extract-archive rpms/$(PACKAGE) src/$(PACKAGE)
+	../dist2src.py $(VERBOSE) copy-spec rpms/$(PACKAGE) src/$(PACKAGE)
+	../dist2src.py $(VERBOSE) copy-patches rpms/$(PACKAGE) src/$(PACKAGE)
+	../dist2src.py $(VERBOSE) apply-patches src/$(PACKAGE)
+
+	git -C rpm-backports/src/$(PACKAGE) log --oneline
+
 clean:
 	rm -rf $(DIR)/
