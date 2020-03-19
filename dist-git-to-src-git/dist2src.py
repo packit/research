@@ -135,7 +135,15 @@ def copy_spec(ctx, origin, dest):
 
     In the source-git repo this is going to be under 'centos-packaging'.
     """
-    shutil.copytree(Path(origin, "SPECS"), Path(dest, "centos-packaging", "SPECS"))
+    origin_ = Path(origin, "SPECS")
+    if not origin_.is_dir():
+        origin_ = Path(origin, "specfiles")
+    dest_ = Path(dest, "centos-packaging", "SPECS")
+
+    dest_.mkdir(parents=True, exist_ok=True)
+
+    for spec in origin_.glob("*.spec"):
+        shutil.copy2(spec, dest_ / spec.name)
 
 
 @cli.command()
@@ -149,13 +157,15 @@ def copy_patches(ctx, origin, dest):
     This looks for 'SOURCES/*.patch' in ORIGIN and copy everything found to
     'centos-packaging/SOURCES/' in DEST.
     """
-    orig_sources = Path(origin, "SOURCES")
-    dest_sources = Path(dest, "centos-packaging", "SOURCES")
+    origin_ = Path(origin, "SOURCES")
+    if not origin_.is_dir():
+        origin_ = Path(origin, "sources")
+    dest_ = Path(dest, "centos-packaging", "SOURCES")
 
-    dest_sources.mkdir(parents=True, exist_ok=True)
+    dest_.mkdir(parents=True, exist_ok=True)
 
-    for patch in orig_sources.glob("*.patch"):
-        shutil.copy2(patch, dest_sources / patch.name)
+    for patch in origin_.glob("*.patch"):
+        shutil.copy2(patch, dest_ / patch.name)
 
 
 @cli.command()
