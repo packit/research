@@ -10,6 +10,8 @@ This repo is used to document research performed by the packit team.
 * [Zuul CI](./zuul)
 * [Deprecation policy](./deprecation)
 * [User stories related to our work](./user-stories/)
+* [Summit 2020 demo](summit-demo/)
+* [External Testing](external-testing/)
 
 
 ## Organization of this repository
