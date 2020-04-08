@@ -1,5 +1,6 @@
 ## Onboarded:
 * [ansible-bender](https://github.com/ansible-community/ansible-bender/)
+* [beaker](https://github.com/beaker-project/beaker)
 * [blivet-gui](https://github.com/storaged-project/blivet-gui)
 * [conu](https://github.com/user-cont/conu)
 * [did](https://github.com/psss/did)
@@ -20,6 +21,7 @@
 * [rear](https://github.com/rear/rear/)
 * [rebase-helper](https://github.com/rebase-helper/rebase-helper)
 * [reportd](https://github.com/abrt/reportd)
+* [restraint](https://github.com/beaker-project/restraint)
 * [tmt](https://github.com/psss/tmt)
 * [tmux-top](https://github.com/TomasTomecek/tmux-top)
 * [tuned](https://github.com/redhat-performance/tuned)
@@ -133,13 +135,6 @@
     * Create tarball, sign it and upload
   * Push to Fedora iff all CI tests pass for the respective tag.
   * Handle %changelog.
-* beaker, restraint
-  * multiple sources - some just need to be fetched from a remote URL
-    * could be worked around with actions
-  * only one tarball is from the current repo
-  * using `git describe` doesn't work for them - should be turned off, we should check how tito does this
-  * are using gerrit+jenkins atm (tito releasing), but want to switch to github
-  * provide API for artifacts (spec, srpm, rpms) so they can be linted (rpmlint)
 * dnf
   * cross-PR dependencies
     * short-term solution: enable adding a repository to the copr project via a PR comment
