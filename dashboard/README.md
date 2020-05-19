@@ -70,3 +70,32 @@ This is what we are doing currently (May 2020). All the templating + routing log
 * The entire page will load when going to another page instead of loading just a part of the page.
 
 
+### 4) Grafana Research + Observations 
+
+Quick setup for experimentation. Default username/password: admin
+
+```
+podman run -d -p 8300:3000 -u="root"  --name=grafana -v /home/icewreck/Development/Packit/grafana:/var/lib/grafana:z grafana/grafana
+```
+
+* Grafana was built for and is suited towards real time data monitoring, time series analytics or something that changes very frequently (network or sensor data, system load, etc), but can be for other purposes.
+* It has the concept of single page dashboards i.e. you host multiple services and then use a single instance of grafana to monitor all of them. Each service is supposed to have a seperate page/dashboard. Dashbords for different services can be installed from their [dashboard store.](https://grafana.com/grafana/dashboards?orderBy=name&direction=asc)
+* Its a visualization software with little support for other data and we will have to make lots of custom widgets/plugins 
+* Looks cool!
+* Grafana fetches data by directly plugging into a database (called a data-source), so we will have to provide credentials to packit-service's postgres. We will have to provide raw SQL commands for every graph and these will have to be changed every time we modify our models.py file.
+* Even postgres feels like a second class citizen compared to [time series databases.](https://grafana.com/docs/grafana/latest/getting-started/timeseries/)
+* Alternatively, grafana can use our JSON API as a data-source but thats only possible by using a third party plugin. (https://grafana.com/grafana/plugins/simpod-json-datasource)
+* There is no way of adding buttons or formatting inside tables (It may be possible, but I cannot find it) unless we make our own plugins for a customizable table. 
+* Grafana stores layout configuration and all fetched data in its own database (sqlite by default) which is redundant because we store all build data in the packit-service postgresql database as well.
+* Backup and restore will be difficult. (unless we use sqlite as database and copy-paste that sqlite file) (Edit: Incorrect, layout can be exported to json which can be copy -pasted into the correct folder for recreation)
+* Recreating the dashboard from CI will be difficult as layouts are stored in the above mentioned database. (Edit: Incorrect, look at https://github.com/acouvreur/ssh-log-to-influx A standalone grafana instance along with this dashboard can be created via scripts)
+* It has a cli but it can only change settings or passwords and install plugins.
+* We cannot remove the _upgrade to grafana enterprise banner_ in the settings panel.
+* Replacing the grafana logo in the title bar with packit's own is not possible. (unless we edit the source, which is hacky and not ideal)
+* Help menu, login button, settings icon, documentation buttons cannot be removed.
+* Large, publically visible buttons point to grafana documentation, which will be misleading in packit-service's dashboard.
+* We cannot control the URL scheme.
+* I haven't found a way to do something like recursive json.  Eg: (GET and display all builds info and if a user a wants it, find build_id from the all builds json and then do a GET request to fetch another json file for detailed info regarding that build_id)
+* Tests ?
+* Adapting it for our use case will be a literal hackfest with tons of plugins thrown in to make it work.
+
