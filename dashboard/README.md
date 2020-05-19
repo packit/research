@@ -99,3 +99,43 @@ podman run -d -p 8300:3000 -u="root"  --name=grafana -v /home/icewreck/Developme
 * Tests ?
 * Adapting it for our use case will be a literal hackfest with tons of plugins thrown in to make it work.
 
+
+
+## Dashboard - List of Features
+
+### Home Page
+
+* Number of successful and failed builds. (bar chart with dual bars for successful/failed) (toggle for weekly/monthly/yearly)
+* Number of successful out of total builds of all time. (donut chart)
+* Total number of projects (100% filled donut chart)
+* Total number of installations (100% filled donut chart)
+* Manually triggered vs automatic builds. (line chart) (toggle for weekly/monthly/yearly)
+* Top 5 most active projects. (Data List) (toggle for weekly/monthly/all-time)
+* Testing farm usage chart
+
+### Build Info Page
+
+* 
+
+### Projects Page
+
+* Total number of projects (100% filled donut chart)
+* Small gallery style cards for every project. (filters to sort by most builds, user namespace, recent activity)
+
+#### Specific Project View
+
+* Project ID
+* Total Number of PRs that used packit-service
+* Total number of builds
+* List of all builds related to that projects, from newest to oldest. (data list)
+* Each build will open the detailed build view
+
+### Status
+
+* Packit Service status and downtime reports.
+* Total number of calls to the GitHub API per hour. (sparkline chart)
+* Number of fedmsgs per hour. (sparkline chart)
+
+### FAQ
+
+### About
