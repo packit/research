@@ -12,6 +12,7 @@ This repo is used to document research performed by the packit team.
 * [User stories related to our work](./user-stories/)
 * [Summit 2020 demo](summit-demo/)
 * [External Testing](external-testing/)
+* [Monitoring Packit Service](monitoring/)
 
 
 ## Organization of this repository
