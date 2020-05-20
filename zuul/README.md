@@ -1,3 +1,5 @@
+(Outdated, see https://github.com/packit-service/packit-service-zuul)
+
 # Zuul CI - softwarefactory-project.io
 
 [Zuul](https://zuul-ci.org/) is a CI system invented in OpenStack community.
