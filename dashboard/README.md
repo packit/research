@@ -111,11 +111,34 @@ podman run -d -p 8300:3000 -u="root"  --name=grafana -v /home/icewreck/Developme
 * Total number of installations (100% filled donut chart)
 * Manually triggered vs automatic builds. (line chart) (toggle for weekly/monthly/yearly)
 * Top 5 most active projects. (Data List) (toggle for weekly/monthly/all-time)
+* Builds per chroot (donut chart)
 * Testing farm usage chart
 
 ### Build Info Page
 
-* 
+* Package/Project Name
+* SRPM Name
+* Repository URL
+* Link to trigger (pull request or release)
+* Copr Build ID
+* PR ID (where applicable)
+* Project ID
+* Build Submitted, Started, Finished Time
+* List of chroots
+* Status per chroot
+* Instructions to quick enable and install that build
+* List + download link of built RPMS, their size, etc
+* Link to the testing farm results page.
+* Link to the logs page.
+
+#### Build Logs Page
+
+* Once a build has finished, copr creates a web directory listing with downloadable build related files like some log files, the built rpms, etc. 
+* The build logs are in text files like build.log.gz and builder-live.log.gz 
+* These files will be rendered on the logs page inside some sort of monospace text widget.
+* SRPM logs, build logs and the live builder log (tabs to switch between them).
+* Dropdown to switch between the log pages of chroots/targets of the same build id.
+
 
 ### Projects Page
 
@@ -136,6 +159,15 @@ podman run -d -p 8300:3000 -u="root"  --name=grafana -v /home/icewreck/Developme
 * Total number of calls to the GitHub API per hour. (sparkline chart)
 * Number of fedmsgs per hour. (sparkline chart)
 
+### Installations
+List of namespaces and then a collapsable sublist of repos which have packit-service enabled.
+
+### Testing Farm
+(To be added later)
+
 ### FAQ
 
+The FAQ page will either link to the FAQ page on packit.dev or just live-render the [FAQ markdown file](https://github.com/packit-service/packit.dev/blob/master/content/faq/_index.md) from the packit.dev repo on the dashbpoard. This way we can have a single content source while respecting the desogn scheme of both the website and the dashboard.
+
 ### About
+
