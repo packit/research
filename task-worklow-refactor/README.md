@@ -6,13 +6,13 @@ will be the possibility to use more queues (for faster/slower tasks)
  and to differentiate tasks easily (Sentry).
 
 
-## Workflow
+## Workflow 1
  - get webhook payload or message from message bus 
  - add aditional info which can make determining the event type easier
  (GH webhooks - X-GitHub-Event)
  - send it to Celery as `task.process_message` - this task will take care about:
-    - parsing of the event into object of class Event (this class provides `project`, `package_config` properties,
-     which enables us to make the checks)
+    - parsing of the event into object of class Event (this class provides `project`, 
+    `package_config` properties, which enables us to make the checks)
     - private repository check
     - getting the handlers which handle the event
     - whitelist check
@@ -20,10 +20,11 @@ will be the possibility to use more queues (for faster/slower tasks)
     - (running `pre-check` here to filter out some events?)
     - sending specific task to Celery
   - handle specific tasks, which directly run the handlers
+ 
     
-#### How to pass the information needed by handlers
- Handlers are currently using the information from event (with `project` and `package_config` properties, specific for each event),
-  service config and job config object:
+#### How to pass the information needed by handlers (already discussed)
+ Handlers are currently using the information from event (with `project` and 
+ `package_config` properties, specific for each event), service config and job config object:
  ```python
 class JobHandler(Handler):
     def __init__(
@@ -41,10 +42,102 @@ class JobHandler(Handler):
          - job config 
          - event
      
-     - each subclass of class Event stores different set of info -> does it make sense to create model for each? 
+     - each subclass of class Event stores different set of info -> does it make sense
+      to create model for each? 
      - these could be reused since in `task_results` table we store the event dict
  3. pass just the arguments which are required by the specific handler
+ 
+### What needs to be done
+- create functions for serializing and deserializing the objects needed by each handler:
+    - service config
+    - package config
+    - job config
+    - project
+- for each event create method which serializes and deserializes event specific data
+- after doing the checks and getting the handlers pass arguments to `send_task` for each handler
+ instead of running it:
+```python
+    # serialize objects
+    serialized_config = self.config.serialize()
+    ...
+ 
+    handler = handler_kls(...)
+    if handler.pre_check():
+        celery_app.send_task(
+            name=handler.task_name, 
+            kwargs={"config": serialized_config,
+                    "job_config": serialized_job_config,
+                    "package_config": serialized_package_config,
+                    "project": serialized_project,
+                    "specific_info": info_dict}
+        )
+```
 
+- create task for each handler -> create functions handling tasks:
+ ```python
+@celery_app.task(name="task.run_copr_build_start_handler")
+def process_message(self, ...):
+    # get objects from serialized data
+    ...
+
+    handler = CoprBuildStartHandler(...)
+    handler.run_n_clean()
+    
+
+```
+
+- change the code in handlers to handle changed attributes correctly 
+(have project, config, job config, package config and specific data in separate attributes , 
+not everthing in original event object)
+
+## Workflow 2
+ - get webhook payload or message from message bus 
+ - add aditional info which can make determining the event type easier
+ (GH webhooks - X-GitHub-Event)
+ - send it to Celery as `task.parse_message` - this task will take care about:
+    - parsing of the info needed for the event object (doing event specific pre-check?)
+ - send event specific task to Celery with all arguments needed to create object of specific event
+ - event specific tasks will take care about:
+    - private repository check
+    - getting the handlers which handle the event
+    - whitelist check
+    - run the handlers
+    
+### What needs to be done
+- in each specific parser function send task to Celery:
+```python
+def parse_pr_event(event):
+    ... 
+    commit_sha = nested_get(event, "pull_request", "head", "sha")
+    https_url = event["repository"]["html_url"]
+
+    celery_app.send_task(
+        name="task.process_pr_event", 
+        kwargs={"action": PullRequestAction[action],
+                "pr_id": pr_id,
+                "base_repo_namespace": base_repo_namespace,
+                "base_repo_name": base_repo_name,
+                "base_ref": base_ref,
+                "target_repo_namespace": target_repo_namespace,
+                "target_repo_name": target_repo_name,
+                "https_url": https_url,
+                "commit_sha": commit_sha,
+                "user_login":user_login}
+    )
+```
+- create task for each event -> create functions handling the event specific tasks,
+which create event object and do the things written above
+ ```python
+@celery_app.task(name="task.process_pull_request_GH_event")
+def process_message(self, ...):
+    event = PullRequestGHEvent(...)
+    event.process() 
+# process method would contain code moved from process_message(),
+# the checks and running jobs
+    
+    
+
+```
 
 #### Which tasks do we want to have? 
   - task x job (what has to be done in general, independently on the trigger and git forge):
