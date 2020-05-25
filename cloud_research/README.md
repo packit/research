@@ -2,7 +2,7 @@
   
 Purpose of this document is to get information about possible clouds for packit-service hosting, costs and efforts. Based on the collected data in this card, we should be able to choose the right place for packit-service. 
   
-**AC:** 
+**AC:**
 - make sure the [requirements doc](https://docs.google.com/document/d/1McQCjokq9tgywZ8-ydMX_U7ymYxne5O_jyi4yRlnTqM/edit) is up to date  
 - research what would be the maintenance cost to have openshift 4 on azure:  
   - cost  
@@ -12,13 +12,12 @@ Purpose of this document is to get information about possible clouds for packit-
 - other people in the cyborg group already did some research, get in touch  
 - Michael Hoffman is researching AWS, get in touch with him  
   
-**To consider**
-managed vs. self manged:
-* managed: 
+**To consider:**
+* managed vs. self manged:
+  * managed: 
 	* no installation, maintenance and oc administration knowledge required
 	* expensive
-	
-* self managed (some of below and be counted as "hidden" costs):
+  * self managed (some of below and be counted as "hidden" costs):
 	* installation should be "easy"
 	* maintenance will require moderate effort (also depends on stability of underlying layers)
 		platform related:
@@ -28,9 +27,8 @@ managed vs. self manged:
 		openshift related:
 		(#TODO - get idea about daily mainatainance tasks and common issues)
 	* will we require test instance to prepare some acttions?
-	
-SSD vs. HDD:
-* in our environment it should be enough to have HDD, with option to upgrade to SSD in case of need. Upgrade will consist of data migration to new volume, cloud platform should be well prepared for such scenario. (detatiled data migration research out of scope)
+
+* SSD vs. HDD: In our environment it should be enough to have HDD, with option to upgrade to SSD in case of need. Upgrade will consist of data migration to new volume, cloud platform should be well prepared for such scenario.
 
 * high probably, we will have to pay for RedHat linux subscription, is it possible to avoid that?
   
