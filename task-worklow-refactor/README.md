@@ -90,6 +90,18 @@ def process_message(self, ...):
 (have project, config, job config, package config and specific data in separate attributes , 
 not everthing in original event object)
 
+
+### How the transition could be done in smaller steps
+ - implement the helper functions 
+    - serializing and deserializing common data (configs)
+    - serializing event-specific data
+ - change the code in handlers without using Event class,
+ so that the project and configs are separate attributes 
+ as well as event-specific info is deserialized into attributes
+ - when the changed handler code works, implement the division of 1 task into more tasks
+   (described above - create functions for processing each task)
+
+
 ## Workflow 2
  - get webhook payload or message from message bus 
  - add aditional info which can make determining the event type easier
