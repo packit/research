@@ -114,6 +114,18 @@ podman run -d -p 8300:3000 -u="root"  --name=grafana -v /home/icewreck/Developme
 * Builds per chroot (donut chart)
 * Testing farm usage chart
 
+### Jobs Page
+A searchable, sortable datatable listing all the [jobs](https://packit.dev/docs/configuration/#packit-service-jobs) executed by packit service. 
+Fields:
+* Job Type (tests or copr_build)
+* Trigger (Link to PR or release which triggered this)
+* Choots and their status
+* Git Ref
+* Pull Requests
+* Web Logs URL
+* Build ID
+* Repo Name and Link 
+
 ### Build Info Page
 
 * Package/Project Name
@@ -165,9 +177,22 @@ List of namespaces and then a collapsable sublist of repos which have packit-ser
 ### Testing Farm
 (To be added later)
 
+### Caching
+* Cache common API requests in the dashboard so as to not overload packit-service with repititive requests. 
+* Sqlite [can run in-memory](https://sqlite.org/inmemorydb.html) for caching. 
+* There is also [Flask-Caching](https://pythonhosted.org/Flask-Caching/) but it requires additional backends which might be overkill.
+* (We might not need this at all) 
+
 ### FAQ
 
 The FAQ page will either link to the FAQ page on packit.dev or just live-render the [FAQ markdown file](https://github.com/packit-service/packit.dev/blob/master/content/faq/_index.md) from the packit.dev repo on the dashbpoard. This way we can have a single content source while respecting the desogn scheme of both the website and the dashboard.
 
 ### About
+
+## API 
+* /pull-requests endpoint
+* /projects endpoint (possibly merge with the installations endpoint)
+* Fetch selective copr builds instead of all of them in the builds list (https://github.com/packit-service/packit-service/issues/633)
+* Other API endpoints for charts, stats, etc. (Discuss later)
+
 
