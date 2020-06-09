@@ -8,12 +8,12 @@
   - => We need to get back to the dist-git structure from the source-git.
 - Possible changes:
   - changes in the packaging files (not in spec-file, not in patch files; e.g. config-files)
-  - general changes in the spec-file (e.g. new release, new dependency)
+  - general changes in the spec-file (e.g. new release, new dependency, fixing a packaging problem)
   - change in patches:
     - patch added
     - patch edited
     - patch removed
-- Patches can be applied conditionally.
+- Patches can be applied conditionally (or even manually).
 - Users can help with the sync. (Tweak the change.)
 - No force-push possible.
 
