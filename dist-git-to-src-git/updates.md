@@ -71,7 +71,7 @@ We have various way, how to save metadata for regeneration:
 - Enhance packit config file:
   - ➕ editable by users
   - ➕ can be seen/reviewed
-  - ➖ is not connected with the commit
+  - ➖ is not connected with the commit (the mapping can be added)
 - git note (see [Git Notes research](../git_notes) for more info):
   - ➕ attached to the git commit
   - ➕ can be changed, but not so easily as a regular file
@@ -109,15 +109,21 @@ We have various way, how to save metadata for regeneration:
 - Regenerate the source-git from scratch and use
   [ours](https://git-scm.com/docs/merge-strategieshttps://git-scm.com/docs/merge-strategies)
   merging strategy to merge the new version on top of the old version ignoring its content.
+
+  <img src="./img/git-merge-ours.jpg" alt="git-merge-ours" width="200"/>
+  <img src="./img/git-merge-ours-new.jpg" alt="git-merge-ours-new" width="200"/>
+
   - Alternatively, we can `revert` all commits and apply the new ones to have linear history.
     - All those newly-created commits can be squashed together to have only one new commit.
-    - Will the revert of this work?
+
+  <img src="./img/git-revert-squash.jpg" alt="git-revert-squash" width="200"/>
+
 - We need to make sure that we go by the correct branch when reverting the content to the dist-git style.
   - Saving metadata (like above) can help us with that.
 
 ### Conclusion of proposal 2
 
-- ➖ Git tree is unreadable.
+- ➖ Git tree is not so clear. (There are multiple ways of doing this.)
 - ➕ Source-git generation can be improved on the flow.
   (We can do any rapid change without being scared of the future.)
 - ➕ Easy to implement.
