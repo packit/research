@@ -6,7 +6,12 @@
 
 2. Log in. (use prod credentials, there doesn't seem to be stg.accounts)
 
-3. Create an API token.
+3. [Create your personal API token.](https://git.stg.centos.org/settings/token/new) Tick:
+  * Fork a project
+  * Modify an existing project
+  * Open a new pull-request 
+
+Though in the next sample we'd use the packit user token to create the source-git repo.
 
 Now the code I ran:
 
@@ -25,15 +30,13 @@ And voilà... https://git.stg.centos.org/source-git/rpm-demo
 
 Now we need to grant our group the commit access (use packit's token - it can be found in secrets/stg/p-s.yaml):
 ```python
-In [21]: s.change_token('the-token')
-
 In [30]: mod_acls = {
     ...:     'user_type': 'group',
     ...:     'name': 'git-packit-team',
     ...:     'acl': 'commit',
     ...: }
 
-In [31]: s.call_api(u + 'source-git/rpm-demo/git/modifyacls', "POST", data=mod_acls)
+In [31]: s.call_api(s.get_api_url() + 'source-git/rpm-demo/git/modifyacls', "POST", data=mod_acls)
 ```
 
 ## Push stuff
@@ -103,7 +106,7 @@ Let's not push to master just yet.
 $ git checkout -B preview
 Switched to a new branch 'preview'
 
-$ git push -u sg
+$ git push -u sg --tags
 The authenticity of host 'git.stg.centos.org (8.43.84.204)' can't be established.
 RSA key fingerprint is SHA256:e0tkihPvgWKC/ull50CaD4i40cYqPEOhVzW8jKaAa0M.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
