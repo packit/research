@@ -18,6 +18,7 @@ work_dir = '/tmp/playground'
 result = []
 packit_conf = Config.get_user_config()
 runner = CliRunner()
+BRANCH = "c8"
 
 
 class CentosPackageSurvey:
@@ -26,14 +27,15 @@ class CentosPackageSurvey:
         self.src_dir = ""
         self.rpm_dir = ""
         self.pkg_res = {}
+        self.srpm_path = ""
 
     def clone(self):
         git_url = f"https://git.centos.org/{self.project_info['fullname']}"
         try:
-            Repo.clone_from(git_url, f"{work_dir}/rpms/{self.project_info['name']}", branch="c8s")
+            Repo.clone_from(git_url, f"{work_dir}/rpms/{self.project_info['name']}", branch=BRANCH)
             return True
         except Exception as ex:
-            if 'Remote branch c8s not found' in str(ex):
+            if f'Remote branch {BRANCH} not found' in str(ex):
                 return False
             self.pkg_res["package_name"] = self.project_info['name']
             self.pkg_res['error'] = f"CloneError: {ex}"
@@ -42,14 +44,14 @@ class CentosPackageSurvey:
     def run_srpm(self):
         try:
             packit_api = get_packit_api(config=packit_conf, local_project=LocalProject(Repo(self.src_dir)))
-            packit_api.create_srpm(srpm_dir=self.src_dir)
+            self.srpm_path = packit_api.create_srpm(srpm_dir=self.src_dir)
         except Exception as e:
             self.pkg_res['error'] = f"SRPMError: {e}"
 
     def convert(self):
         try:
             runner.invoke(convert,
-                          [f"{self.rpm_dir}:c8s", f"{self.src_dir}:c8s]"],
+                          [f"{self.rpm_dir}:{BRANCH}", f"{self.src_dir}:{BRANCH}]"],
                           catch_exceptions=False)
             return True
         except Exception as ex:
@@ -61,6 +63,14 @@ class CentosPackageSurvey:
             shutil.rmtree(self.rpm_dir)
         if os.path.exists(self.src_dir):
             shutil.rmtree(self.src_dir)
+
+    def do_mock_build(self):
+        c = subprocess.run(['mock', '-r', 'centos-stream-x86_64', 'rebuild', self.srpm_path])
+        if not c.returncode:
+            return
+        err_log_file = f"mock_error_builds/{self.project_info['name']}.log"
+        shutil.copyfile('/var/lib/mock/centos-stream-x86_64/result/build.log', err_log_file)
+        self.pkg_res['error'] = f'mock build failed. More info in: {err_log_file}'
 
     def run(self):
         if not self.clone():
@@ -84,11 +94,13 @@ class CentosPackageSurvey:
                 "conditional_patch": bool(re.findall(r'\n%if.*?\n%patch.*?\n%endif', spec_cont, re.DOTALL)),
             })
 
-        if self.convert():
+        if not self.convert():
+            self.pkg_res['size_rpms'] = subprocess.check_output(['du', '-s', self.rpm_dir]).split()[0].decode('utf-8')
+        else:
             self.run_srpm()
             self.pkg_res['size'] = subprocess.check_output(['du', '-s', self.src_dir]).split()[0].decode('utf-8')
-        else:
-            self.pkg_res['size_rpms'] = subprocess.check_output(['du', '-s', self.rpm_dir]).split()[0].decode('utf-8')
+            if self.srpm_path:
+                self.do_mock_build()
         self.cleanup()
 
 
@@ -112,15 +124,14 @@ def fetch_centos_pkgs_info(page):
             with open('intermediate-result.yml', 'w') as outfile:
                 yaml.dump(result, outfile)
 
-#TODO: store convert stderr in a nice way
-#TODO: mockbuild - with reasonable timeout
-#TODO: add other branches that are relevant for us
 
 if __name__ == '__main__':
     if not os.path.exists(work_dir):
         print("Your work_dir is missing.")
     if not os.path.exists(f"{work_dir}/rpms"):
         os.mkdir(f"{work_dir}/rpms")
+    if not os.path.exists(f"mock_error_builds"):
+        os.mkdir(f"mock_error_builds")
     fetch_centos_pkgs_info('https://git.centos.org/api/0/projects?namespace=rpms&owner=centosrcm&short=true')
     with open('result-data.yml', 'w') as outfile:
         yaml.dump(result, outfile)
