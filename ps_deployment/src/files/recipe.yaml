@@ -1,0 +1,9 @@
+---
+- name: This is a recipe for how to cook with packit-service
+  hosts: all
+  vars:
+    home_path: "{{ lookup('env', 'HOME') }}"
+    packit_service_path: /src
+  tasks:
+    - import_tasks: common.yaml
+    - import_tasks: httpd.yaml

@@ -1,0 +1,21 @@
+# Tasks common to all images
+
+- name: Create /usr/share/packit
+  file:
+    state: directory
+    path: /usr/share/packit
+- name: make packit home dir
+  file:
+    state: directory
+    path: "{{ home_path }}"
+    mode: 0776
+- name: stat {{ packit_service_path }}
+  stat:
+    path: "{{ packit_service_path }}"
+  tags:
+    - no-cache
+  register: src_path
+- name: Let's make sure {{ packit_service_path }} is present
+  assert:
+    that:
+      - "src_path.stat.isdir"

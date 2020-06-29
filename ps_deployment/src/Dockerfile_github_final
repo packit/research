@@ -1,0 +1,15 @@
+# Image for the web service (httpd), for celery worker see Dockerfile.worker
+
+FROM ps_normal_github_base
+
+ENV LANG=en_US.UTF-8 \
+    USER=packit \
+    HOME=/home/packit
+
+COPY files/setup.py files/setup.cfg files/recipe.yaml files/httpd.yaml files/common.yaml files/packit.wsgi files/run_httpd.sh files/setup_env_in_openshift.sh files/packit-httpd.conf /src/
+
+
+RUN cd /src/ \
+    && ansible-playbook -vv -c local -i localhost, recipe.yaml
+
+CMD ["echo test build done"]
