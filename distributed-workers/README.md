@@ -68,10 +68,18 @@ and [SNI as well](https://github.com/rabbitmq/rabbitmq-server/issues/789).
 Currently we're producing/consuming around 1200 messages per day
 so at this rate we'd be paying around 18 cents ($0.018) a month for using SQS.
 
-### Other Celery supported backends
+### Other SQLAlchemy/Celery supported databases
 
-The million $ question since we probably don't want to move away from Postgres.
-The only option I at the moment see is
-[AWS RDS for PostgreSQL](https://aws.amazon.com/rds/postgresql) which
-[starts at](https://aws.amazon.com/rds/postgresql/pricing) $0.021/hour, i.e. $15/month. 
-See also [UserGuide](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html).
+We use PostgreSQL via SQLAlchemy either [directly](https://github.com/packit-service/packit-service/blob/master/packit_service/models.py)
+or as a [Celery result backend](https://github.com/packit-service/packit-service/blob/master/packit_service/celerizer.py#L49).
+If we can't use it because it doesn't support SNI, then we have to find other free/open source,
+[SQLAlchemy supported database](https://docs.sqlalchemy.org/en/13/dialects/index.html)
+that supports TLS+SNI:
+ * SQLite - [nogo](https://github.com/packit-service/research/tree/master/data-stores#cons)
+ * [MariaDB](https://hub.docker.com/_/mariadb) - [supports TLS](https://mariadb.com/kb/en/securing-connections-for-client-and-server) but not [SNI](https://jira.mariadb.org/browse/MDEV-10658)
+ * [MySQL](https://hub.docker.com/_/mysql) - [supports TLS](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html) but not [SNI](https://bugs.mysql.com/bug.php?id=84849)
+ * [Firebird](https://hub.docker.com/r/jacobalberty/firebird/) - [supports TLS](https://www.firebirdsql.org/file/documentation/release_notes/html/en/3_0/rnfb30-security-new-authentication.html#rnfb30-security-ssltls), no reference to SNI
+
+Or use cloud database, like [AWS RDS for PostgreSQL](https://aws.amazon.com/rds/postgresql)
+whose [pricing](https://aws.amazon.com/rds/postgresql/pricing)
+starts at $0.018/hour ($13/month) for [db.t3.micro](https://aws.amazon.com/rds/instance-types) (1GiB mem).
