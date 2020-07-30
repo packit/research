@@ -13,7 +13,7 @@ This repo is used to document research performed by the packit team.
 * [Summit 2020 demo](summit-demo/)
 * [External Testing](external-testing/)
 * [Monitoring Packit Service](monitoring/)
-
+* [Packit-service deployment research](ps_deployment)
 
 ## Organization of this repository
 

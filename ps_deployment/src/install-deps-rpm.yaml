@@ -1,0 +1,43 @@
+---
+- name: Install dependencies for packit-service.
+  hosts: all
+  tasks:
+    - name: Install all RPM/python packages needed to run packit-service.
+      dnf:
+        name:
+          - python3-ipdb # for easy debugging
+          - python3-mod_wsgi
+          - python3-click
+          - git # setuptools-scm
+          # httpd & deps
+          - httpd
+          - mod_md
+          - mod_ssl
+          - nss_wrapper
+          #- python3-packit # temporary workaround for sake of marhsmallow
+          - python3-pip # not included in base fedora:31 image, needed for next task
+          # temporary dependencies
+          - krb5-devel
+          - gcc
+          - python3-devel
+          - python3-alembic
+          - python3-sqlalchemy
+          - python3-prometheus_client
+          - python3-psycopg2
+          #- python3-celery # don't, the liveness probe doesn't work
+          - python3-redis
+          - python3-lazy-object-proxy
+          #- python3-flask-restx # Needs Fedora 32
+          - python3-flexmock # because of the hack during the alembic upgrade
+          # (see d90948124e46_add_tables_for_triggers_koji_and_tests.py )
+        state: present
+    - name: Install pip deps
+      pip:
+        name:
+          # temporary workaround for sake of marhsmallow
+          - git+https://github.com/packit-service/packit.git
+          - persistentdict # still needed by one Alembic migration script
+          - sentry-sdk==0.14.4
+          - sentry-sdk[flask]==0.14.4
+          - flask-restx
+        executable: pip3

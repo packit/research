@@ -1,0 +1,13 @@
+FROM fedora:32
+
+
+ENV ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3 \
+	ANSIBLE_STDOUT_CALLBACK=debug
+
+RUN dnf install -y ansible && yum clean all -y
+COPY install-deps-rpm.yaml /src/
+
+RUN cd /src/ \
+    && ansible-playbook -vv -c local -i localhost, install-deps-rpm.yaml \
+    && dnf -y clean all --enablerepo='*'
+

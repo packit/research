@@ -1,0 +1,14 @@
+FROM registry.fedoraproject.org/f32/s2i-base:latest
+
+ENV ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3 \
+	ANSIBLE_STDOUT_CALLBACK=debug
+
+RUN dnf install -y ansible && dnf clean all -y
+COPY install-deps-github.yaml /src/
+COPY ./s2i/s2i/bin/ /usr/libexec/s2i
+
+
+RUN cd /src/ \
+    && ansible-playbook -vv -c local -i localhost, install-deps-github.yaml \
+    && dnf -y clean all --enablerepo='*'
+
