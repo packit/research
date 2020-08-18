@@ -6,9 +6,11 @@ import shutil
 import sys
 import yaml
 
-sys.path.insert(1, '/home/dhodovsk/repos/github.com/packit-service/dist-git-to-source-git')
 from click.testing import CliRunner
-from dist2src import convert
+# I am too lazy to make this not shitty (no one other will ever use this script anyway :D ),
+# but if you really want to use this thing, you know what to do
+sys.path.insert(1, '/home/dhodovsk/repos/github.com/packit-service/dist-git-to-source-git')
+from dist2src.cli import convert
 from git import Repo
 from packit.config import Config
 from packit.cli.utils import get_packit_api
@@ -72,6 +74,18 @@ class CentosPackageSurvey:
         shutil.copyfile('/var/lib/mock/centos-stream-x86_64/result/build.log', err_log_file)
         self.pkg_res['error'] = f'mock build failed. More info in: {err_log_file}'
 
+    @staticmethod
+    def get_conditional_info(spec_cont):
+        conditions = re.findall(r'\n%if.*?\n%endif', spec_cont, re.DOTALL)
+        result = []
+        p = re.compile("\n%if (.*)\n")
+        for con in conditions:
+            if '\n%patch' in con:
+                found = p.search(con)
+                if found:
+                    result.append(found.group(1))
+        return result
+
     def run(self):
         if not self.clone():
             return
@@ -91,7 +105,7 @@ class CentosPackageSurvey:
             self.pkg_res.update({
                 "autosetup": bool(re.search(r'\n%autosetup', spec_cont)),
                 "setup": bool(re.search(r'\n%setup', spec_cont)),
-                "conditional_patch": bool(re.findall(r'\n%if.*?\n%patch.*?\n%endif', spec_cont, re.DOTALL)),
+                "conditional_patch": self.get_conditional_info(spec_cont),
             })
 
         if not self.convert():
