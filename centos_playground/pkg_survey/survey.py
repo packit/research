@@ -3,14 +3,10 @@ import re
 import requests
 import subprocess
 import shutil
-import sys
 import yaml
 
 from click.testing import CliRunner
-# I am too lazy to make this not shitty (no one other will ever use this script anyway :D ),
-# but if you really want to use this thing, you know what to do
-sys.path.insert(1, '/home/dhodovsk/repos/github.com/packit-service/dist-git-to-source-git')
-from dist2src.cli import convert
+from dist2src.cli import convert_with_prep
 from git import Repo
 from packit.config import Config
 from packit.cli.utils import get_packit_api
@@ -23,41 +19,41 @@ runner = CliRunner()
 BRANCH = "c8"
 
 
-class CentosPackageSurvey:
+class CentosPkgValidatedConvert:
     def __init__(self, project_info):
         self.project_info = project_info
         self.src_dir = ""
         self.rpm_dir = ""
-        self.pkg_res = {}
+        self.result = {}
         self.srpm_path = ""
 
     def clone(self):
         git_url = f"https://git.centos.org/{self.project_info['fullname']}"
         try:
-            Repo.clone_from(git_url, f"{work_dir}/rpms/{self.project_info['name']}", branch=BRANCH)
+            Repo.clone_from(git_url, f"{work_dir}/rpms/{self.project_info['name']}", branch=BRANCH, depth=1)
             return True
         except Exception as ex:
             if f'Remote branch {BRANCH} not found' in str(ex):
                 return False
-            self.pkg_res["package_name"] = self.project_info['name']
-            self.pkg_res['error'] = f"CloneError: {ex}"
+            self.result["package_name"] = self.project_info['name']
+            self.result['error'] = f"CloneError: {ex}"
             return False
 
     def run_srpm(self):
         try:
-            packit_api = get_packit_api(config=packit_conf, local_project=LocalProject(Repo(self.src_dir)))
-            self.srpm_path = packit_api.create_srpm(srpm_dir=self.src_dir)
+            self.packit_api = get_packit_api(config=packit_conf, local_project=LocalProject(Repo(self.src_dir)))
+            self.srpm_path = self.packit_api.create_srpm(srpm_dir=self.src_dir)
         except Exception as e:
-            self.pkg_res['error'] = f"SRPMError: {e}"
+            self.result['error'] = f"SRPMError: {e}"
 
     def convert(self):
         try:
-            runner.invoke(convert,
-                          [f"{self.rpm_dir}:{BRANCH}", f"{self.src_dir}:{BRANCH}]"],
+            runner.invoke(convert_with_prep,
+                          [f"{self.rpm_dir}:{BRANCH}", f"{self.src_dir}:{BRANCH}"],
                           catch_exceptions=False)
             return True
         except Exception as ex:
-            self.pkg_res['error'] = f"ConvertError: {ex}"
+            self.result['error'] = f"ConvertError: {ex}"
             return False
 
     def cleanup(self):
@@ -70,9 +66,7 @@ class CentosPackageSurvey:
         c = subprocess.run(['mock', '-r', 'centos-stream-x86_64', 'rebuild', self.srpm_path])
         if not c.returncode:
             return
-        err_log_file = f"mock_error_builds/{self.project_info['name']}.log"
-        shutil.copyfile('/var/lib/mock/centos-stream-x86_64/result/build.log', err_log_file)
-        self.pkg_res['error'] = f'mock build failed. More info in: {err_log_file}'
+        self.result['error'] = f'mock build failed'
 
     @staticmethod
     def get_conditional_info(spec_cont):
@@ -86,36 +80,37 @@ class CentosPackageSurvey:
                     result.append(found.group(1))
         return result
 
-    def run(self):
+    def run(self, cleanup=False):
         if not self.clone():
             return
 
         self.rpm_dir = f"{work_dir}/rpms/{self.project_info['name']}"
         self.src_dir = f"{work_dir}/src/{self.project_info['name']}"
 
-        self.pkg_res["package_name"] = self.project_info['name']
+        self.result["package_name"] = self.project_info['name']
         specfile_path = f"{self.rpm_dir}/SPECS/{self.project_info['name']}.spec"
         if not os.path.exists(specfile_path):
-            self.pkg_res['error'] = 'Specfile not found.'
+            self.result['error'] = 'Specfile not found.'
             self.cleanup()
             return
 
         with open(specfile_path, "r") as spec:
             spec_cont = spec.read()
-            self.pkg_res.update({
+            self.result.update({
                 "autosetup": bool(re.search(r'\n%autosetup', spec_cont)),
                 "setup": bool(re.search(r'\n%setup', spec_cont)),
                 "conditional_patch": self.get_conditional_info(spec_cont),
             })
 
         if not self.convert():
-            self.pkg_res['size_rpms'] = subprocess.check_output(['du', '-s', self.rpm_dir]).split()[0].decode('utf-8')
+            self.result['size_rpms'] = subprocess.check_output(['du', '-s', self.rpm_dir]).split()[0].decode('utf-8')
         else:
             self.run_srpm()
-            self.pkg_res['size'] = subprocess.check_output(['du', '-s', self.src_dir]).split()[0].decode('utf-8')
+            self.result['size'] = subprocess.check_output(['du', '-s', self.src_dir]).split()[0].decode('utf-8')
             if self.srpm_path:
                 self.do_mock_build()
-        self.cleanup()
+        if cleanup:
+            self.cleanup()
 
 
 def fetch_centos_pkgs_info(page):
@@ -125,11 +120,11 @@ def fetch_centos_pkgs_info(page):
         r = requests.get(page)
         for p in r.json()["projects"]:
             print(f"Processing package: {p['name']}")
-            cps = CentosPackageSurvey(p)
-            cps.run()
-            if cps.pkg_res:
-                print(cps.pkg_res)
-                result.append(cps.pkg_res)
+            converter = CentosPkgValidatedConvert(p)
+            converter.run(cleanup=True)
+            if converter.result:
+                print(converter.result)
+                result.append(converter.result)
         page = r.json()["pagination"]["next"]
         if not page:
             break
