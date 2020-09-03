@@ -26,7 +26,9 @@ class OnboardCentosPKG():
         print(self.converter.result)
         with open('/in/result.yml', 'a+') as out:
             out.write(f'{self.converter.result}\n')
-        if self.converter.result.get('error') or self.converter.result.get('conditional_patch'):
+        if not self.converter.result or \
+                self.converter.result.get('error') or \
+                self.converter.result.get('conditional_patch'):
             print(f'Onboard aborted for {self.pkg_name}:')
             return
         print(f'Onboard successful for {self.pkg_name}:')

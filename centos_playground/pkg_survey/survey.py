@@ -6,11 +6,12 @@ import shutil
 import yaml
 
 from click.testing import CliRunner
-from dist2src.cli import convert_with_prep
 from git import Repo
 from packit.config import Config
 from packit.cli.utils import get_packit_api
 from packit.local_project import LocalProject
+from pathlib import Path
+from dist2src.core import Dist2Src
 
 work_dir = '/tmp/playground'
 result = []
@@ -48,9 +49,11 @@ class CentosPkgValidatedConvert:
 
     def convert(self):
         try:
-            runner.invoke(convert_with_prep,
-                          [f"{self.rpm_dir}:{BRANCH}", f"{self.src_dir}:{BRANCH}"],
-                          catch_exceptions=False)
+            self.d2s = Dist2Src(
+                dist_git_path=Path(self.rpm_dir),
+                source_git_path=Path(self.src_dir),
+            )
+            self.d2s.convert(BRANCH, BRANCH)
             return True
         except Exception as ex:
             self.result['error'] = f"ConvertError: {ex}"
