@@ -1,3 +1,4 @@
+import git
 import os
 import re
 import requests
@@ -6,7 +7,6 @@ import shutil
 import yaml
 
 from click.testing import CliRunner
-from git import Repo
 from packit.config import Config
 from packit.cli.utils import get_packit_api
 from packit.local_project import LocalProject
@@ -14,6 +14,7 @@ from pathlib import Path
 from dist2src.core import Dist2Src
 
 work_dir = '/tmp/playground'
+rpms_path = f"{work_dir}/rpms"
 result = []
 packit_conf = Config.get_user_config()
 runner = CliRunner()
@@ -31,7 +32,9 @@ class CentosPkgValidatedConvert:
     def clone(self):
         git_url = f"https://git.centos.org/{self.project_info['fullname']}"
         try:
-            Repo.clone_from(git_url, f"{work_dir}/rpms/{self.project_info['name']}", branch=BRANCH, depth=1)
+            git.Git(rpms_path).clone(git_url)
+            r = git.Repo(f"{rpms_path}/{self.project_info['name']}")
+            r.git.checkout(BRANCH)
             return True
         except Exception as ex:
             if f'Remote branch {BRANCH} not found' in str(ex):
@@ -42,7 +45,7 @@ class CentosPkgValidatedConvert:
 
     def run_srpm(self):
         try:
-            self.packit_api = get_packit_api(config=packit_conf, local_project=LocalProject(Repo(self.src_dir)))
+            self.packit_api = get_packit_api(config=packit_conf, local_project=LocalProject(git.Repo(self.src_dir)))
             self.srpm_path = self.packit_api.create_srpm(srpm_dir=self.src_dir)
         except Exception as e:
             self.result['error'] = f"SRPMError: {e}"
@@ -87,7 +90,7 @@ class CentosPkgValidatedConvert:
         if not self.clone():
             return
 
-        self.rpm_dir = f"{work_dir}/rpms/{self.project_info['name']}"
+        self.rpm_dir = f"{rpms_path}/{self.project_info['name']}"
         self.src_dir = f"{work_dir}/src/{self.project_info['name']}"
 
         self.result["package_name"] = self.project_info['name']
@@ -140,8 +143,8 @@ def fetch_centos_pkgs_info(page):
 if __name__ == '__main__':
     if not os.path.exists(work_dir):
         print("Your work_dir is missing.")
-    if not os.path.exists(f"{work_dir}/rpms"):
-        os.mkdir(f"{work_dir}/rpms")
+    if not os.path.exists(rpms_path):
+        os.mkdir(rpms_path)
     if not os.path.exists(f"mock_error_builds"):
         os.mkdir(f"mock_error_builds")
     fetch_centos_pkgs_info('https://git.centos.org/api/0/projects?namespace=rpms&owner=centosrcm&short=true')

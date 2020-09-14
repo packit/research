@@ -46,6 +46,7 @@ class OnboardCentosPKG():
 
 
 if __name__ == '__main__':
+    os.makedirs('/tmp/playground/rpms', exist_ok=True)
     with open('/in/input-pkgs.yml', 'r') as f:
         in_pkgs = f.readlines()
 
