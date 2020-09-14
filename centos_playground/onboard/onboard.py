@@ -26,7 +26,9 @@ class OnboardCentosPKG():
         print(self.converter.result)
         with open('/in/result.yml', 'a+') as out:
             out.write(f'{self.converter.result}\n')
-        if self.converter.result.get('error') or self.converter.result.get('conditional_patch'):
+        if not self.converter.result or \
+                "error" in self.converter.result or \
+                "conditional_patch" in self.converter.result:
             print(f'Onboard aborted for {self.pkg_name}:')
             return
         print(f'Onboard successful for {self.pkg_name}:')
@@ -44,6 +46,7 @@ class OnboardCentosPKG():
 
 
 if __name__ == '__main__':
+    os.makedirs('/tmp/playground/rpms', exist_ok=True)
     with open('/in/input-pkgs.yml', 'r') as f:
         in_pkgs = f.readlines()
 
