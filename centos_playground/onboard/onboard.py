@@ -4,6 +4,7 @@ from ogr.services.pagure import PagureService
 from ogr.abstract import AccessLevel
 
 from survey import CentosPkgValidatedConvert
+from add_master_branch import AddMasterBranch
 
 
 service = PagureService(token=os.getenv('PAGURE_TOKEN'),
@@ -28,7 +29,7 @@ class OnboardCentosPKG():
             out.write(f'{self.converter.result}\n')
         if not self.converter.result or \
                 "error" in self.converter.result or \
-                "conditional_patch" in self.converter.result:
+                self.converter.result.get("conditional_patch"):
             print(f'Onboard aborted for {self.pkg_name}:')
             return
         print(f'Onboard successful for {self.pkg_name}:')
@@ -43,6 +44,9 @@ class OnboardCentosPKG():
         git_repo = Repo(self.converter.src_dir)
         git_repo.create_remote('packit', new_project.get_git_urls()['ssh'])
         git_repo.git.push('packit', 'c8', tags=True)
+
+        add_master = AddMasterBranch(self.pkg_name)
+        add_master.run()
 
 
 if __name__ == '__main__':
