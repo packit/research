@@ -6,5 +6,6 @@ RUN dnf install epel-release -y && dnf install mock -y && \
 ADD ../pkg_survey/survey.py /workdir
 ADD onboard/run-onboard.sh /workdir
 ADD onboard/onboard.py /workdir
+ADD master-branches/* /workdir
 
 CMD bash /workdir/run-onboard.sh
