@@ -14,6 +14,7 @@ This repo is used to document research performed by the packit team.
 * [External Testing](external-testing/)
 * [Monitoring Packit Service](monitoring/)
 * [Packit-service deployment research](ps_deployment)
+* [Distributed workers](distributed-workers) and [AWS](AWS-SQS-RDS)
 
 ## Organization of this repository
 
