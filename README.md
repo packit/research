@@ -15,6 +15,7 @@ This repo is used to document research performed by the packit team.
 * [Monitoring Packit Service](monitoring/)
 * [Packit-service deployment research](ps_deployment)
 * [Distributed workers](distributed-workers) and [AWS](AWS-SQS-RDS)
+* [Deploy a testing instance for Packit-as-a-Service](./deploy-packit-pr/)
 
 ## Organization of this repository
 
