@@ -5,6 +5,7 @@
 - ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rdopkg.svg), [![PyPI](https://img.shields.io/pypi/v/rdopkg.svg)](https://pypi.org/project/rdopkg/), [ :package: fedora packages](https://src.fedoraproject.org/rpms/rdopkg)
 
 :heavy_plus_sign:
+
 - cloning package distgit and setting up remotes
 - introducing patches
 - rebases to new versions
@@ -13,12 +14,12 @@
 - persistence (`rdopkg --continue`) -- The state is stored in a file named `.rdopkg.json` in the current directory.
 
 :heavy_minus_sign:
-- loosely coupled to RDO ecosystem -- need the following repositories:
-    - upstream git
-    - RDO distgit
-    - patched git repo
-    - metadata repo
 
+- loosely coupled to RDO ecosystem -- need the following repositories:
+  - upstream git
+  - RDO distgit
+  - patched git repo
+  - metadata repo
 
 ### Patching branches
 
@@ -29,15 +30,16 @@
 - spec file changed automatically
 - automatically dropping patches already included patches in the upstream
 
-
 ### Actions
 
 - [fix](https://github.com/softwarefactory-project/rdopkg/blob/master/doc/rdopkg.1.adoc#action-fix) -- Apply changes to the `.spec` file.
+
   1. Bump Release, prepare a new `%changelog` entry header.
   2. Drop to shell, let user edit the `.spec` file.
   3. After running `rdopkg`, ensure description was added to `%changelog` and commit changes in a new commit.
 
 - [patch](https://github.com/softwarefactory-project/rdopkg/blob/master/doc/rdopkg.1.adoc#action-patch) -- Introduce new patches to the package.
+
   1. Unless -l/--local-patches was used, reset the local patches branch to the remote patches branch.
   2. Update patch files from local patches branch using git format-patch.
   3. Update .spec file with correct patch files references.
@@ -47,15 +49,15 @@
   7. Display the diff.
 
 - [new-version](https://github.com/softwarefactory-project/rdopkg/blob/master/doc/rdopkg.1.adoc#action-new-version) -- Update package to new upstream version.
+
   1. Show changes between the previous version and the current one, especially modifications to requirements.txt.
   2. Reset the local patches branch to the remote patches branch
-  3. Rebase the local patches branch on $NEW_VERSION tag.
+  3. Rebase the local patches branch on \$NEW_VERSION tag.
   4. Update .spec file: set Version, Release and patches_base to appropriate values and create a new %changelog entry.
   5. Download source tarball.
   6. Run fedpkg new-sources (rhpkg new-sources).
   7. Update patches from the local patches branch.
   8. Display the diff.
-
 
 - `-N`/`--new-sources` or `-n`/`--no-new-sources`
 

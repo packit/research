@@ -4,17 +4,16 @@
   vars:
     home_path: "{{ lookup('env', 'HOME') }}"
   tasks:
-  - name: make packit home dir
-    file:
-      state: directory
-      path: "{{ home_path }}"
-      mode: 0776
-  - name: Install packit-service-centos-msg
-    pip:
-      name: /src
-      executable: pip3
-  - name: Clean all the cache files (especially pip)
-    file:
-      state: absent
-      path: ~/.cache/
-
+    - name: make packit home dir
+      file:
+        state: directory
+        path: "{{ home_path }}"
+        mode: 0776
+    - name: Install packit-service-centos-msg
+      pip:
+        name: /src
+        executable: pip3
+    - name: Clean all the cache files (especially pip)
+      file:
+        state: absent
+        path: ~/.cache/

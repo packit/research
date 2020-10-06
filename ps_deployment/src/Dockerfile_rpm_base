@@ -10,4 +10,3 @@ COPY install-deps-rpm.yaml /src/
 RUN cd /src/ \
     && ansible-playbook -vv -c local -i localhost, install-deps-rpm.yaml \
     && dnf -y clean all --enablerepo='*'
-

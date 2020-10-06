@@ -7,9 +7,10 @@
 2. Log in. (use prod credentials, there doesn't seem to be stg.accounts)
 
 3. [Create your personal API token.](https://git.stg.centos.org/settings/token/new) Tick:
-  * Fork a project
-  * Modify an existing project
-  * Open a new pull-request 
+
+- Fork a project
+- Modify an existing project
+- Open a new pull-request
 
 Though in the next sample we'd use the packit user token to create the source-git repo.
 
@@ -29,6 +30,7 @@ In [9]: p = s.project_create(repo="rpm-demo", namespace="source-git")
 And voilà... https://git.stg.centos.org/source-git/rpm-demo
 
 Now we need to grant our group the commit access (use packit's token - it can be found in secrets/stg/p-s.yaml):
+
 ```python
 In [30]: mod_acls = {
     ...:     'user_type': 'group',
@@ -130,15 +132,14 @@ Branch 'preview' set up to track remote branch 'preview' from 'sg'.
 
 In the end I did demo on a "demo" branch, not master.
 
-
 ## Create a PR
 
 I did this via web ui: https://git.stg.centos.org/source-git/rpm/pull-request/1
 
-
 ## Build
 
 Build kicked off locally using `copr-cli`:
+
 ```
 $ packit srpm
 $ copr build ttomecek/centos-stream-rpm ./rpm-4.14.2-37.g8d29d36c.fc31.src.rpm
@@ -147,6 +148,7 @@ $ copr build ttomecek/centos-stream-rpm ./rpm-4.14.2-37.g8d29d36c.fc31.src.rpm
 ## Update check status
 
 Sadly the commit check status (flag in pagure terminology) did not show up:
+
 ```
 In [22]: cs = p.set_commit_status("8d29d36c13cf23a02d66789edb7ff735208b7ddd", CommitStatus.pending, "https://copr.fedorainfracloud.org/coprs/build/1315419", "RPM build", "The build is pending")
 
@@ -174,7 +176,8 @@ Out[39]:
 ```
 
 Instead, I posted a comment to the PR on packit's behalf:
-```
+
+````
 In [36]: msg = """
 RPM build [has finished](https://copr.fedorainfracloud.org/coprs/build/1320138).
 Status: **succeeded**
@@ -203,15 +206,12 @@ If you wish to try the change locally, you can install it in a [ubi8](https://ac
 
 In [37]: pr.comment(msg)
 Out[37]: <ogr.services.pagure.comments.PagurePRComment at 0x7f242f6dec90>
-```
-
+````
 
 ## Review and accept
 
 Another PR comment done via web ui, I faked the username and the icon.
 
-
 ## Run locally
 
 See the steps in the comment above.
-

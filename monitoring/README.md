@@ -5,23 +5,24 @@
 Requires implementing the `/metrics` end-point.
 
 Areas to be monitored
+
 - resources used in the namespaces and clusters
-    - number of processes/threads
-        - in API
-        - in workers
-    - memory
-    - CPU
-    - storage
-    - PostgreSQL metrics
-    - Redis/Celery metrics (?)
-        - tasks waiting in the queue
+  - number of processes/threads
+    - in API
+    - in workers
+  - memory
+  - CPU
+  - storage
+  - PostgreSQL metrics
+  - Redis/Celery metrics (?)
+    - tasks waiting in the queue
 - Actions taken by Packit Service and its components
   Some of the questions we could answer:
-    - How many times do we call the GitHub/Pagure/GitLab API?
-    - How many messages do we process from the Fedora and CentOS message
-      queues?
-    - Any other thing that is interesting information for us, but it's not
-      stored in the database.
+  - How many times do we call the GitHub/Pagure/GitLab API?
+  - How many messages do we process from the Fedora and CentOS message
+    queues?
+  - Any other thing that is interesting information for us, but it's not
+    stored in the database.
 
 ### How do we instrument our services and code?
 
@@ -60,7 +61,7 @@ individual projects, PRs, builds. See [#43].
 
 [can be exported]: https://github.com/prometheus/client_python#flask
 [#43]: https://github.com/packit-service/research/pull/43
-[to export to a Pushgateway]: https://github.com/prometheus/client_python#exporting-to-a-pushgateway
-[Federation]: https://prometheus.io/docs/prometheus/latest/federation/
+[to export to a pushgateway]: https://github.com/prometheus/client_python#exporting-to-a-pushgateway
+[federation]: https://prometheus.io/docs/prometheus/latest/federation/
 [instrumented]: https://github.com/prometheus/client_python#instrumenting
-[Prometherus Pushgateway]: https://github.com/prometheus/pushgateway
+[prometherus pushgateway]: https://github.com/prometheus/pushgateway

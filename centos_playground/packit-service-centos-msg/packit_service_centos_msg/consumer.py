@@ -20,16 +20,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 import json
-import os
 import ssl
 from logging import getLogger
 from os import getenv
 from pprint import pprint
 
-from celery import Celery
 import paho.mqtt.client as mqtt
+from celery import Celery
 
 logger = getLogger(__name__)
+
 
 class Consumerino(mqtt.Client):
     """
@@ -68,9 +68,12 @@ class Consumerino(mqtt.Client):
 
     def consume_from_centos_messaging(self, ca_certs, certfile):
 
-        self.tls_set(ca_certs=ca_certs, certfile=certfile,
-                     keyfile=certfile, cert_reqs=ssl.CERT_REQUIRED,
-                     tls_version=ssl.PROTOCOL_TLS)
+        self.tls_set(
+            ca_certs=ca_certs,
+            certfile=certfile,
+            keyfile=certfile,
+            cert_reqs=ssl.CERT_REQUIRED,
+            tls_version=ssl.PROTOCOL_TLS,
+        )
         self.connect(host="mqtt.stg.centos.org", port=8883)
         self.loop_forever()
-

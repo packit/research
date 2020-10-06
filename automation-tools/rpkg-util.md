@@ -4,9 +4,9 @@
 - [ :computer: pagure.io/rpkg-util](https://pagure.io/rpkg-util)
 - ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rpkg-util.svg), [![PyPI](https://img.shields.io/pypi/v/rpkg-util.svg)](https://pypi.org/project/rpkg-util/), [ :package: fedora packages](https://src.fedoraproject.org/rpms/rpkg-util)
 
-
 :heavy_plus_sign:
-- from the *template specfile* you can generate:
+
+- from the _template specfile_ you can generate:
   - specfile (changelog from commits)
   - srpm
   - rpm
@@ -17,8 +17,9 @@
 - looks [active](https://pagure.io/rpkg-util/commits/master)
 
 :heavy_minus_sign:
+
 - autopacking workflow is deprecated
-- need to write *template specfile*
+- need to write _template specfile_
 
 ### Specfile template
 
@@ -43,8 +44,6 @@ This is a test package.
 %changelog
 {{{ git_dir_changelog }}}
 ```
-
-
 
 ### Other sources
 

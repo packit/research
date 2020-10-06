@@ -1,11 +1,11 @@
 # RPKG
 
-
 - base library for fedpkg provides common functionality for dist-git setups
 - [ :computer: pagure.io/rpkg](https://pagure.io/rpkg), [ :scroll: documentation](https://docs.pagure.org/rpkg)
 - ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rpkg.svg), [![PyPI](https://img.shields.io/pypi/v/rpkg.svg)](https://pypi.org/project/rpkg/), [ :package: fedora packages](https://src.fedoraproject.org/rpms/rpkg)
 
 :heavy_plus_sign:
+
 - [CLI deffinition](https://docs.pagure.org/rpkg/cli.html#) for tools build on top of the rpkg
 - [Python API](https://docs.pagure.org/rpkg/api.html), some examples:
   - [cli](https://docs.pagure.org/rpkg/api.html#cli)
@@ -27,8 +27,8 @@
   - [gitignore](https://docs.pagure.org/rpkg/api.html#gitignore)
 
 :heavy_minus_sign:
-- .
 
+- .
 
 ### Requirements:
 
@@ -37,7 +37,6 @@
 - rpmlint: check SPEC.
 - copr-cli: for building package in Fedora Copr.
 - module-build-service: for building modules.
-
 
 # RPKG2
 
@@ -82,11 +81,12 @@ print(config.rpkg.distgit_namespaced)
 ```
 
 Two (probably mirrored) repositories:
+
 - https://pagure.io/rpkg2
 - https://gitlab.com/rpkg/rpkg2
 
 And the old github one:
-- https://gitlab.com/rpkg/rpkg2
 
+- https://gitlab.com/rpkg/rpkg2
 
 For the background, see [this discussion](https://pagure.io/rpkg/issue/49) and the [this wiki `Thoughts_on_rpkg2`](https://fedoraproject.org/wiki/Thoughts_on_rpkg2).

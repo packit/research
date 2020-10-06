@@ -3,7 +3,7 @@ in order to be able to have workers in a private cloud (PSI).
 
 Since we already have AWS account (log in with your kerberos credentials
 [here](https://auth.redhat.com/auth/realms/EmployeeIDP/protocol/saml/clients/itaws))
-we decided to use RDS PostgreSQL as database and SQS as Celery broker. 
+we decided to use RDS PostgreSQL as database and SQS as Celery broker.
 
 ## Simple Queue Service - [SQS](https://console.aws.amazon.com/sqs/home)
 
@@ -25,6 +25,7 @@ class PostgreSQL (11.x) DB in `default` VPC with `public-all` security group.
 For `prod` db we might investigate restricting it so that it could be accessed
 only from Openshift cluster(s) we use.
 To import data from our local `postgres` instance to RDS:
+
 ```
 oc rsh postgres-1-r2vnd pg_dump -v -U <user> -d <db name> -f /tmp/packit.dump
 oc rsync postgres-1-r2vnd:/tmp/packit.dump ./

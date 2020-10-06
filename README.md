@@ -2,23 +2,21 @@
 
 This repo is used to document research performed by the packit team.
 
-
 ## Topics covered
 
-* [`git notes` as a storage of our data](./git_notes)
-* [Tools/libraries similar or related to the Packit](./automation-tools)
-* [Zuul CI](./zuul)
-* [Deprecation policy](./deprecation)
-* [User stories related to our work](./user-stories/)
-* [Summit 2020 demo](summit-demo/)
-* [External Testing](external-testing/)
-* [Monitoring Packit Service](monitoring/)
-* [Packit-service deployment research](ps_deployment)
-* [Distributed workers](distributed-workers) and [AWS](AWS-SQS-RDS)
-* [Deploy a testing instance for Packit-as-a-Service](./deploy-packit-pr/)
+- [`git notes` as a storage of our data](./git_notes)
+- [Tools/libraries similar or related to the Packit](./automation-tools)
+- [Zuul CI](./zuul)
+- [Deprecation policy](./deprecation)
+- [User stories related to our work](./user-stories/)
+- [Summit 2020 demo](summit-demo/)
+- [External Testing](external-testing/)
+- [Monitoring Packit Service](monitoring/)
+- [Packit-service deployment research](ps_deployment)
+- [Distributed workers](distributed-workers) and [AWS](AWS-SQS-RDS)
+- [Deploy a testing instance for Packit-as-a-Service](./deploy-packit-pr/)
 
 ## Organization of this repository
-
 
 ### How to add new findings?
 

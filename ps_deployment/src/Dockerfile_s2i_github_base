@@ -11,4 +11,3 @@ COPY ./s2i/s2i/bin/ /usr/libexec/s2i
 RUN cd /src/ \
     && ansible-playbook -vv -c local -i localhost, install-deps-github.yaml \
     && dnf -y clean all --enablerepo='*'
-

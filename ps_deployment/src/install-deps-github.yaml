@@ -34,7 +34,7 @@
           - prometheus_client
           - psycopg2-binary
           - lazy-object-proxy
-          - flexmock 
+          - flexmock
           - click
           - ipdb
         executable: pip3
