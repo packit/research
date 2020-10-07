@@ -9,4 +9,3 @@ COPY install-deps-github.yaml /src/
 RUN cd /src/ \
     && ansible-playbook -vv -c local -i localhost, install-deps-github.yaml \
     && dnf -y clean all --enablerepo='*'
-

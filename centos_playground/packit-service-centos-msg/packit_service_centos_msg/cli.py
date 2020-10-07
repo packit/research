@@ -39,6 +39,6 @@ def listen_to_centos_messaging():
     CERTFILE = os.getenv("CENTOS_CERTFILE")
 
     centos_mqtt_client = Consumerino()
-    centos_mqtt_client.consume_from_centos_messaging(ca_certs=CA_CERTS, certfile=CERTFILE)
-
-
+    centos_mqtt_client.consume_from_centos_messaging(
+        ca_certs=CA_CERTS, certfile=CERTFILE
+    )

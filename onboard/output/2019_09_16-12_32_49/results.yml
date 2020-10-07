@@ -1,7 +1,17 @@
-- {downstream_name: atomic-reactor, fail_info: 'The target archive doesn''t use a
-    common extension (.tar.gz, .tar.bz2, .tar.xz, .zip), git archive can''t be used.
-    Please provide your own script for archive creation.', failed_during: Building
-    srpm with downstream spec, successful: false}
-- {downstream_name: packit, successful: true}
-- {downstream_name: youtube-dl, fail_info: Failed to create SRPM., failed_during: Building
-    srpm with downstream spec, successful: false}
+- {
+    downstream_name: atomic-reactor,
+    fail_info: "The target archive doesn't use a
+      common extension (.tar.gz, .tar.bz2, .tar.xz, .zip), git archive can't be used.
+      Please provide your own script for archive creation.",
+    failed_during: Building
+      srpm with downstream spec,
+    successful: false,
+  }
+- { downstream_name: packit, successful: true }
+- {
+    downstream_name: youtube-dl,
+    fail_info: Failed to create SRPM.,
+    failed_during: Building
+      srpm with downstream spec,
+    successful: false,
+  }

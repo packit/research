@@ -156,4 +156,3 @@ test_connection
 check_result $?
 
 cleanup
-

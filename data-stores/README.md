@@ -15,28 +15,33 @@ From the databases which SQLAlchemy supports I'd select SQLite and Postgresql (s
 ## SQLite
 
 ### Pros
+
 Ultra-lightweight in setup, administration, and required resource. Very fast.
 
 ### Cons
+
 Because SQLite is a serverless database, it doesn’t provide direct network access to its data. An application (as I understand it) just stores data in a file by using a SQLite library. If more containers (in our case service and more workers) need to access the db, they probably need to have the file on a shared (RWX) volume.
 
 ## Postgresql
 
 ### Pros
+
 [JSON data type](http://www.postgresqltutorial.com/postgresql-json) is a big plus, because we already have our data serialized as jsons so we can just store them that way and then do all kinds of queries over them.
 
 ### Cons
-[Overkill](https://www.digitalocean.com/community/tutorials/sqlite-vs-mysql-vs-postgresql-a-comparison-of-relational-database-management-systems#when-not-to-use-postgresql)
 
+[Overkill](https://www.digitalocean.com/community/tutorials/sqlite-vs-mysql-vs-postgresql-a-comparison-of-relational-database-management-systems#when-not-to-use-postgresql)
 
 # NoSQL
 
 Example of a NoSQL ([Document-oriented](https://www.digitalocean.com/community/tutorials/a-comparison-of-nosql-database-management-systems-and-models#document-oriented-databases)) database is [MongoDB](https://www.mongodb.com/what-is-mongodb).
 
 ## Pros:
+
 Stores data in flexible, JSON-like documents, meaning fields can vary from document to document and data structure can be changed over time. It also [supports queries](https://www.tutorialspoint.com/mongodb/mongodb_query_document.htm) and indexing.
 
 ## Cons
+
 Using MongoDB as a Celery backend is not that straightforward, but there are options: [[1]](http://docs.celeryproject.org/en/latest/_modules/celery/backends/mongodb.html), [[2]](https://stackoverflow.com/questions/15740755/working-example-of-celery-with-mongo-db), [[3]](https://stackoverflow.com/questions/53017827/example-celery-v4-2-with-mongodb-results-backend)
 
 # DBaaS

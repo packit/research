@@ -1,6 +1,5 @@
 # Updates of source-git repos
 
-
 ## Problem
 
 - We need to convert new dist-git commits to the existing source-git repository.
@@ -21,14 +20,12 @@
   - Do we want to allow it? How can we do it to no break the workflow?
 - No force-push possible.
 
-
 ### What can differ when going back to the dist-git structure?
 
 - Be able to create the "same" `RPM` file? What is "same"?
 - Can spec-file differ? e.g. different patch names, comments
   - Does the result have to be readable?
   - Is it a problem to have really high number of technical patches without sense?
-
 
 ## Proposal 1
 
@@ -66,7 +63,6 @@
   - In case of `index == -42`:
     - Remove the `name.patch`.
     - Remove the line `42` in the spec-file.
-
 
 ### Saving metadata
 
@@ -113,67 +109,69 @@ We have various way, how to save metadata for regeneration:
   - Various improvements and strategies possible and doable later
     (e.g. avoid both of if-else branches, expand macros before getting of the patches).
 
-
 ## Proposal 2
 
 - Easy solution that mimics the history overwriting without force push.
 - There are multiple ways, how to do this:
-    - (I) Regenerate the source-git from scratch and use
-      [ours](https://git-scm.com/docs/merge-strategieshttps://git-scm.com/docs/merge-strategies)
-      merging strategy to merge the new version on top of the old version ignoring its content.
-      (Packit does not work now with upstream-ref outside of the linear history.)
 
-      <img src="./img/git-merge-ours.jpg" alt="git-merge-ours" width="200"/>
-      <img src="./img/git-merge-ours-with-comments.jpg" alt="git-merge-ours-with-comments" width="200"/>
-      <img src="./img/git-merge-ours-new.jpg" alt="git-merge-ours-new" width="200"/>
+  - (I) Regenerate the source-git from scratch and use
+    [ours](https://git-scm.com/docs/merge-strategieshttps://git-scm.com/docs/merge-strategies)
+    merging strategy to merge the new version on top of the old version ignoring its content.
+    (Packit does not work now with upstream-ref outside of the linear history.)
 
-    - (II) Use force checkout the content instead of merge to have regular commit instead of the head one.
+    <img src="./img/git-merge-ours.jpg" alt="git-merge-ours" width="200"/>
+    <img src="./img/git-merge-ours-with-comments.jpg" alt="git-merge-ours-with-comments" width="200"/>
+    <img src="./img/git-merge-ours-new.jpg" alt="git-merge-ours-new" width="200"/>
 
-      <img src="./img/git-force-checkout.jpg" alt="git-force-checkout" width="200"/>
+  - (II) Use force checkout the content instead of merge to have regular commit instead of the head one.
 
-        ```bash
-        # generate new source-git to `rpm-4.14.2-36.el8` branch starting on master
-        git checkout c8s
-        git checkout -f rpm-4.14.2-36.el8 -- .
-        # use the `sg-start-rpm-4.14.2-25.el8` as upstream-ref in config
-        # (use the old one => revert that change)
-        git commit -m "Update from distgit"
-        ```
+    <img src="./img/git-force-checkout.jpg" alt="git-force-checkout" width="200"/>
 
-        ```bash
-        * d3ec53a - Update from distgit (c8s)
-        * 9eba783 - Apply Patch1002: rpm-4.14.2-unversioned-python.patch (rpm-4.14.2-25.el8)
-        * 9609ba3 - Compile with Platform-Python binary where relevant
-        :
-        * 5513f1d - Apply Patch1: rpm-4.11.x-siteconfig.patch
-        * ce19f5d - Downstream spec with commented patches (tag: sg-start-rpm-4.14.2-25.el8)
-        * 7c6a6b1 - .packit.yaml
-        * 49dd86b - Unpack archive
-        * fbcb954 - init (master)
-        ```
-        ```
-        commit d3ec53a11e62cb01252ddd166864e1b9ed6a84e1 (HEAD -> c8s)
-        Author: Frantisek Lachman <flachman@redhat.com>
-        Date:   Thu Jun 11 09:35:01 2020 +0200
+    ```bash
+    # generate new source-git to `rpm-4.14.2-36.el8` branch starting on master
+    git checkout c8s
+    git checkout -f rpm-4.14.2-36.el8 -- .
+    # use the `sg-start-rpm-4.14.2-25.el8` as upstream-ref in config
+    # (use the old one => revert that change)
+    git commit -m "Update from distgit"
+    ```
 
-            Update from distgit
+    ```bash
+    * d3ec53a - Update from distgit (c8s)
+    * 9eba783 - Apply Patch1002: rpm-4.14.2-unversioned-python.patch (rpm-4.14.2-25.el8)
+    * 9609ba3 - Compile with Platform-Python binary where relevant
+    :
+    * 5513f1d - Apply Patch1: rpm-4.11.x-siteconfig.patch
+    * ce19f5d - Downstream spec with commented patches (tag: sg-start-rpm-4.14.2-25.el8)
+    * 7c6a6b1 - .packit.yaml
+    * 49dd86b - Unpack archive
+    * fbcb954 - init (master)
+    ```
 
-            Signed-off-by: Frantisek Lachman <flachman@redhat.com>
+    ```
+    commit d3ec53a11e62cb01252ddd166864e1b9ed6a84e1 (HEAD -> c8s)
+    Author: Frantisek Lachman <flachman@redhat.com>
+    Date:   Thu Jun 11 09:35:01 2020 +0200
 
-         SPECS/rpm.spec                   |  69 +++++++++-
-         build/files.c                    |  31 ++++-
-         build/pack.c                     |  34 ++++-
-         :
-         tools/debugedit.c                | 584 +++++++++++++++++++++++++++++++++++++++++++++++++++++-------------------------
-         26 files changed, 628 insertions(+), 270 deletions(-)
-        ```
-        ```bash
-        $ packit srpm
-        Input directory is an upstream repository.
-        100%[=============================>]     3.96M  eta 00:00:00
-        44 patches added to '/home/flachman/Projects/git.centos.org/src/rpm/SPECS/rpm.spec'.
-        SRPM: /home/flachman/Projects/git.centos.org/src/rpm/rpm-4.14.2-37.gd3ec53a1.fc32.src.rpm
-        ```
+        Update from distgit
+
+        Signed-off-by: Frantisek Lachman <flachman@redhat.com>
+
+     SPECS/rpm.spec                   |  69 +++++++++-
+     build/files.c                    |  31 ++++-
+     build/pack.c                     |  34 ++++-
+     :
+     tools/debugedit.c                | 584 +++++++++++++++++++++++++++++++++++++++++++++++++++++-------------------------
+     26 files changed, 628 insertions(+), 270 deletions(-)
+    ```
+
+    ```bash
+    $ packit srpm
+    Input directory is an upstream repository.
+    100%[=============================>]     3.96M  eta 00:00:00
+    44 patches added to '/home/flachman/Projects/git.centos.org/src/rpm/SPECS/rpm.spec'.
+    SRPM: /home/flachman/Projects/git.centos.org/src/rpm/rpm-4.14.2-37.gd3ec53a1.fc32.src.rpm
+    ```
 
   - (III) Another alternative is to revert to the initial commit
     (we should start with some neutral state) and rerun the generation script.
@@ -202,6 +200,7 @@ We have various way, how to save metadata for regeneration:
     * 49dd86b - Unpack archive
     * fbcb954 - init (master)
     ```
+
     ```bash
     $ git diff 9eba783 46b055b --stat
     .packit.yaml                                                                                                                               |      2 +-
@@ -219,12 +218,14 @@ We have various way, how to save metadata for regeneration:
      build/files.c                                                                                                                              |     31 +-
      :                                                                                                                         |    584 +-
     ```
+
     ```bash
     $ packit srpm
     Input directory is an upstream repository.
     44 patches added to '/home/flachman/Projects/git.centos.org/src/rpm/SPECS/rpm.spec'.
     SRPM: /home/flachman/Projects/git.centos.org/src/rpm/rpm-4.14.2-37.gd3ec53a1.fc32.src.rpm
     ```
+
 - We need to make sure that we go by the correct branch when reverting the content to the dist-git style.
   - Saving metadata (like above) can help us with that.
 
@@ -240,7 +241,7 @@ We have various way, how to save metadata for regeneration:
       (Still contains the commits from the first run.)
     - ➖ We loose the history about creation of new source-git.
     - ➕ Git history is clear. Just one new commit.
-        - Effectivelly, same content as the manual approach.
+      - Effectivelly, same content as the manual approach.
   - version (III)
     - ➕ contains the last source-git generation history
     - ➖ lots of unnecessary commits from the last runs, that are reverted each time

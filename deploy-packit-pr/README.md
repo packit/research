@@ -2,9 +2,9 @@
 
 AC:
 
-* figure out how we want to do this epic
-* write down your findings in a document
-* discuss with the team and get a consensus
+- figure out how we want to do this epic
+- write down your findings in a document
+- discuss with the team and get a consensus
 
 ## How should the deployment be triggered?
 
@@ -32,15 +32,15 @@ modify this default to 'prod'.
 
 Repositories:
 
-* packit/packit-service
-* packit/packit
-* packit/ogr
-* packit/dashboard
-* packit/tokman
-* packit/sandcastle
-* packit/deployment
-* packit/packit-service-centosmsg
-* packit/packit-service-fedmsg
+- packit/packit-service
+- packit/packit
+- packit/ogr
+- packit/dashboard
+- packit/tokman
+- packit/sandcastle
+- packit/deployment
+- packit/packit-service-centosmsg
+- packit/packit-service-fedmsg
 
 Examples:
 
@@ -59,20 +59,20 @@ $ deploy packit=456 deployment=321
 
 ## Where to build the images?
 
-* Docker Hub
-    - Slow; there can be only one build in our project, since we are using a
-      free account.
-    - It's not that obvious how to trigger on-demand builds from PRs.
-        - Actually, @sakalosj told that it's possible to trigger builds using the
-          Docker Hub API, but the method is not documented.
-* Quay
-    - [Similar](http://docs.quay.io/guides/custom-trigger.html) to Docker Hub.
-* OpenShift Online
-    - Costs us money.
-    - But we could use resource limits to have it under control.
-* PSI
-    - Behind the firewall.
-    - But builds could push images to a public registry.
+- Docker Hub
+  - Slow; there can be only one build in our project, since we are using a
+    free account.
+  - It's not that obvious how to trigger on-demand builds from PRs.
+    - Actually, @sakalosj told that it's possible to trigger builds using the
+      Docker Hub API, but the method is not documented.
+- Quay
+  - [Similar](http://docs.quay.io/guides/custom-trigger.html) to Docker Hub.
+- OpenShift Online
+  - Costs us money.
+  - But we could use resource limits to have it under control.
+- PSI
+  - Behind the firewall.
+  - But builds could push images to a public registry.
 
 ## Which namespace/cluster should we use for the deployment?
 
@@ -90,10 +90,11 @@ sure that different deployments of Packit-as-a-Service don't conflict with
 each other, when it comes to interacting with these services.
 
 Here are the ways we could achieve this:
+
 - Each deployment has it's own GitHub App.
 - Each deployment has it's own FAS user account.
-    - And so it's own Copr account.
-    - We'll need to manually create these FAS users.
+  - And so it's own Copr account.
+  - We'll need to manually create these FAS users.
 - Each deployment is using it's own Copr organisation.
 - Each deployment is using it's own GitLab.com account.
 - Dist-git is more problematic, as we don't want to create noise in prod
