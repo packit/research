@@ -6,4 +6,5 @@ run-onboard:
 	-v ${HOME}/.ssh/:/my-ssh/ \
 	-v ${PWD}/onboard/input/:/in \
 	-e PAGURE_TOKEN=${PAGURE_TOKEN} \
+	-e GITLAB_TOKEN=${GITLAB_TOKEN} \
 	centos-onboard
