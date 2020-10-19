@@ -18,26 +18,26 @@ rpms_path = f"{work_dir}/rpms"
 result = []
 packit_conf = Config.get_user_config()
 runner = CliRunner()
-BRANCH = "c8"
 
 
 class CentosPkgValidatedConvert:
-    def __init__(self, project_info):
+    def __init__(self, project_info, distgit_branch: str):
         self.project_info = project_info
         self.src_dir = ""
         self.rpm_dir = ""
         self.result = {}
         self.srpm_path = ""
+        self.distgit_branch = distgit_branch
 
     def clone(self):
         git_url = f"https://git.centos.org/{self.project_info['fullname']}"
         try:
             git.Git(rpms_path).clone(git_url)
             r = git.Repo(f"{rpms_path}/{self.project_info['name']}")
-            r.git.checkout(BRANCH)
+            r.git.checkout(self.distgit_branch)
             return True
         except Exception as ex:
-            if f"Remote branch {BRANCH} not found" in str(ex):
+            if f"Remote branch {self.distgit_branch} not found" in str(ex):
                 return False
             self.result["package_name"] = self.project_info["name"]
             self.result["error"] = f"CloneError: {ex}"
@@ -58,7 +58,7 @@ class CentosPkgValidatedConvert:
                 dist_git_path=Path(self.rpm_dir),
                 source_git_path=Path(self.src_dir),
             )
-            self.d2s.convert(BRANCH, BRANCH)
+            self.d2s.convert(self.distgit_branch, self.distgit_branch)
             return True
         except Exception as ex:
             self.result["error"] = f"ConvertError: {ex}"
@@ -90,7 +90,7 @@ class CentosPkgValidatedConvert:
                     result.append(found.group(1))
         return result
 
-    def run(self, cleanup=False):
+    def run(self, cleanup=False, skip_build=False):
         if not self.clone():
             return
 
@@ -127,7 +127,7 @@ class CentosPkgValidatedConvert:
                 .split()[0]
                 .decode("utf-8")
             )
-            if self.srpm_path:
+            if self.srpm_path and not skip_build:
                 self.do_mock_build()
         if cleanup:
             self.cleanup()

@@ -3,6 +3,7 @@ pushd "${HOME}/.ssh"
 install -m 0400 /my-ssh/id_rsa .
 install -m 0400 /my-ssh/id_rsa.pub .
 ssh-keyscan git.stg.centos.org >>known_hosts
+ssh-keyscan gitlab.com >>known_hosts
 popd
 
 python3 onboard.py
