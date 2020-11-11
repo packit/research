@@ -3,21 +3,19 @@
 This research covers updating https://packit.dev/ so it's more readable &
 usable to our users.
 
-
 ## Current status
 
 Well, we're not happy with the present website. Usability is lacking, for more
 info see [Raw meeting notes](#raw-meeting-notes).
 
 There are multiple tasks ahead of us to improve the website:
-* Layout
-* Structure
 
+- Layout
+- Structure
 
 ## What to do?
 
 Let's talk about the details - what we can do?
-
 
 ### "Steal" osbuild's website
 
@@ -28,10 +26,9 @@ theme, it seems the team created it from scratch, for Jekyll.
 
 **TODO**
 
-* Switch from hugo to jekyll
-* Copy-paste the osbuild site sources
-* Port packit.dev to the new layout
-
+- Switch from hugo to jekyll
+- Copy-paste the osbuild site sources
+- Port packit.dev to the new layout
 
 ### Pick a different layout
 
@@ -44,19 +41,19 @@ is pretty popular among python projects, but sadly the repo is archived and no
 longer maintained.
 
 Other minimalist themes:
-* [HugoTeX](https://themes.gohugo.io/hugotex/)
-* [Hugo ʕ•ᴥ•ʔ Bear Blog](https://github.com/janraasch/hugo-bearblog)
-* [ronu-hugo-theme](https://github.com/softwareyoga/ronu-hugo-theme)
-* [tale-hugo](https://github.com/EmielH/tale-hugo)
-* [fuji](https://github.com/amzrk2/hugo-theme-fuji/)
-* [kiera](https://themes.gohugo.io/hugo-kiera/)
-* [harbor](https://themes.gohugo.io/harbor/)
+
+- [HugoTeX](https://themes.gohugo.io/hugotex/)
+- [Hugo ʕ•ᴥ•ʔ Bear Blog](https://github.com/janraasch/hugo-bearblog)
+- [ronu-hugo-theme](https://github.com/softwareyoga/ronu-hugo-theme)
+- [tale-hugo](https://github.com/EmielH/tale-hugo)
+- [fuji](https://github.com/amzrk2/hugo-theme-fuji/)
+- [kiera](https://themes.gohugo.io/hugo-kiera/)
+- [harbor](https://themes.gohugo.io/harbor/)
 
 **TODO**
 
-* Pick a theme
-* Port current website to it
-
+- Pick a theme
+- Port current website to it
 
 ### Improve site's structure
 
@@ -67,12 +64,11 @@ parts of the documentation.
 
 **TODO**
 
-* Think about a new structure and propose it to the team
-* Implement the new structure
-* Make sure a list of blog posts is well listed and browsable
-* Preserve the important links and make redirects when moving content
-* Add a way to link to specific config options
-
+- Think about a new structure and propose it to the team
+- Implement the new structure
+- Make sure a list of blog posts is well listed and browsable
+- Preserve the important links and make redirects when moving content
+- Add a way to link to specific config options
 
 ### Hugo → Jekyll
 
@@ -89,13 +85,13 @@ When I
 [read](https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/about-jekyll-build-errors-for-github-pages-sites)
 about the jekyll ↔ GitHub integration, I feel like the key features are
 missing:
-* [No preview support in
-  PRs.](https://github.community/t/need-help-with-jekyll-github-project-page-and-team-git-workflow/10440)
-* They suggest using travis for testing.
-* "It can take up to 20 minutes for changes to your site to publish after you
-  push the changes to GitHub."
-  * This is already solved for us by the GitHub action Jirka set up.
 
+- [No preview support in
+  PRs.](https://github.community/t/need-help-with-jekyll-github-project-page-and-team-git-workflow/10440)
+- They suggest using travis for testing.
+- "It can take up to 20 minutes for changes to your site to publish after you
+  push the changes to GitHub."
+  - This is already solved for us by the GitHub action Jirka set up.
 
 ## Raw meeting notes
 
