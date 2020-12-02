@@ -14,7 +14,7 @@ What changes can occur?
 - Change in upstream means always change in the source-archive in distgit.
 - Change in source-git can mean:
   - Change in distribution files => can be converted directly.
-  - Change in the files => new patch needs to be added.
+  - Change in the source code => new patch needs to be added.
 
 ### Solutions for upstream -> source-git from GIT perspective
 
