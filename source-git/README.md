@@ -59,31 +59,47 @@ What changes can occur?
 
 Various ideas about the trigger for rebasing follow. Combination of multiple approaches is possible.
 
-#### 1. Manual update
+#### 1 Manual update
 
 - User decides when he wants to do the rebase.
 - Implementation:
   - Using a packit CLI.
-  - New issue in source-git with a title like `rebase from upstream`.
+- Possible conflicts can be solved on a git level.
 
-#### 2. Scheduled update
+#### 2 Automation
+
+It can be very convenient for users if we can trigger the update automatically,
+without any manual intervention.
+Various scenarios are described in the subsections.
+
+When rebasing a new version, we can get a conflict that can't be solved automatically.
+What can we do in that case? (Both options can be used together.)
+
+- Ask user to do the process manually, via CLI.
+- Open a merge request that can be updated manually.
+
+##### 2.1 Upstream issue
+
+- New issue in source-git with a title like `rebase from upstream`.
+
+##### 2.2 Scheduled update
 
 - No need to listen to any service.
 - We can potentially use Upstream Release Monitoring.
 - Like the current updates.
 
-#### 3. Listen for upstream events
+##### 2.3 Listen for upstream events
 
 - We don't have access to upstream projects.
 - Upstream will either need to install our GitHub application or be enabled on github2fedmsg.
 
-#### 4. Listen for downstream events
+##### 2.4 Listen for downstream events
 
 - Update when the rebase is done in distgit.
 - Does not make sense for projects using source-git as a way to do the rebase.
 - This is more about syncing dist-git updates to source-git.
 
-#### 5. Bug created
+##### 2.5 Bug created
 
 - The bug can be created by Upstream Release Monitoring or manually.
 - Isn't this a misuse of Bugzilla's?
