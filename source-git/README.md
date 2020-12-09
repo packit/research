@@ -103,3 +103,26 @@ What can we do in that case? (Both options can be used together.)
 
 - The bug can be created by Upstream Release Monitoring or manually.
 - Isn't this a misuse of Bugzilla's?
+
+### How Python maintainers do source-git?
+
+source: https://hackmd.io/9f64YNIZTCy0ZzKb5wKtqQ
+
+Structure:
+
+- Fedora patches stored in https://github.com/fedora-python/cpython
+- In the repo, there are `fedora-X.Y` branches for python version`X.Y`.
+- This branch is based on the upstream history (build on top of the upstream tag).
+- On top of the upstream history, there are patches in form of git commits.
+- There is a naming scheme for the patch commits.
+- The git rebase is used for updating the branches. (There is a tag left for history purpose.)
+- `git cherry-pick` used for rebasing downstream patch commits from a different branch.
+- Fix-up commits are created when patch needs to be edited.
+  (Interactive rebase is used when generating the dist-git patches.)
+- Removal is done as a commit revert.
+
+Converting commits to dist-git patches
+
+- They use [importpatches script](https://github.com/fedora-python/importpatches).
+  - Python script using `git format-patch --no-numbered` behind the scenes.
+- Obsolete patches needs to be handled manually.
