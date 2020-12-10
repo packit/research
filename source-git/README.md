@@ -135,3 +135,34 @@ Converting commits to dist-git patches
 - They use [importpatches script](https://github.com/fedora-python/importpatches).
   - Python script using `git format-patch --no-numbered` behind the scenes.
 - Obsolete patches needs to be handled manually.
+
+### How the rebase looks like for `chrony`?
+
+We have a source-git repository for chrony containing the upstream history:
+https://gitlab.com/packit-service/src/chrony/
+
+The important branch is the `el8-with-upstream` containing the upstream history
+with the downstream commits on top of it:
+
+```
+* 36f28c2f - Apply patch chrony-service-helper.patch (2 weeks ago) (el8-with-upstream) <Packit>
+* 03fe724d - Add sources defined in the spec file (2 weeks ago) <Packit>
+* 75055614 - Add spec-file for the distribution (2 weeks ago) <Packit>
+* 6557d593 - .packit.yaml (2 weeks ago) <Packit>
+* ffb9887c - doc: update NEWS (1 year, 7 months ago) (tag: 3.5) <Miroslav Lichvar>
+* 9220c9b8 - update copyright years (1 year, 7 months ago) <Miroslav Lichvar>
+* 2e28b191 - doc: add note about minsamples to FAQ (1 year, 7 months ago) <Miroslav Lichvar>
+* 636a4e27 - refclock: remove unnecessary strlen() call (1 year, 7 months ago) <Miroslav Lichvar>
+* 5c9e1e0b - test: extend 133-hwtimestamp test (1 year, 7 months ago) <Miroslav Lichvar>
+* 64fd1b8b - ntp: check value returned by CMSG_FIRSTHDR (1 year, 7 months ago) <Miroslav Lichvar>
+*
+*
+```
+
+As you can see, there is one commit with packit config file, second one with specfile
+and the other one contains all the other sources that are defined in the specfile.
+Then, commits representing the downstream patches follow.
+
+We can use basic git rebase to update our source-git.
+[Here](https://gitlab.com/packit-service/src/chrony/-/network/el8-with-upstream)
+you can see `rebase-for-master` and `rebase-for-3.5-stable` branches.
