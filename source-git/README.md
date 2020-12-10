@@ -55,6 +55,15 @@ What changes can occur?
 
 <img src="./img/sync-upstream-release+revert-and-regenerate.svg" alt="sync-upstream-release+revert-and-regenerate" height="200"/>
 
+### To rebase or not to rebase?
+
+It is a question if we want to do rebase or do the part of the source-git generation again.
+How this can differ?
+
+- Our generation algorithm can be improved.
+- The default packit config can be improved.
+- The non primary sources can change. (We add them in a form of commit on top of the upstream history.)
+
 ### How do we get known about a need for a rebase?
 
 Various ideas about the trigger for rebasing follow. Combination of multiple approaches is possible.
