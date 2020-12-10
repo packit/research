@@ -166,3 +166,15 @@ Then, commits representing the downstream patches follow.
 We can use basic git rebase to update our source-git.
 [Here](https://gitlab.com/packit-service/src/chrony/-/network/el8-with-upstream)
 you can see `rebase-for-master` and `rebase-for-3.5-stable` branches.
+
+### Conclusion
+
+- Probably the best way to do the updates is the manual way via CLI.
+  - It allows user to solved the possible conflicts.
+  - Easier to implement.
+  - The automation can be added later.
+- Scheduled updates can be useful for rawhide in a "automaintainer" usecase.
+  - Can create a PR against SG.
+- The _3. Revert & Regenerate_ can be used for the current source-git repositories (the dist-git ones).
+- The _Combination of 1. and 2._ can be used if we are able to force-push,
+  the _1. New branch for each release_ or _Combination of 1. and 3._ otherwise.
