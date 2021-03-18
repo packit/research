@@ -17,6 +17,7 @@ This repo is used to document research performed by the packit team.
 - [Deploy a testing instance for Packit-as-a-Service](./deploy-packit-pr/)
 - [Improving https://packit.dev/](./website-improvements/)
 - [Automation for moving the stable branches](./automation-for-stable-branches)
+- [Error budgets](./error-budgets/)
 
 ## Organization of this repository
 
