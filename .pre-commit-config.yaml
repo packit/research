@@ -27,7 +27,7 @@ repos:
         exclude: tests/integration/conftest.py
       - id: end-of-file-fixer
       - id: trailing-whitespace
-  - repo: https://gitlab.com/pycqa/flake8
+  - repo: https://github.com/PyCQA/flake8
     rev: 3.9.0
     hooks:
       - id: flake8
