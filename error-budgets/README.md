@@ -43,6 +43,8 @@
 
    Look at the [CKI SLOs].
 
+   Collected expectations are in a [separate document](users-expectations.md).
+
 3. Figure out which of the expectations identified in the previous step can be
    measured with an indicator. What are these indicators (SLIs)? What are the
    SLOs?
