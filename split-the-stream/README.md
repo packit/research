@@ -105,6 +105,11 @@ We have two goals:
   (Mapping would be problematic.)
 - For the purpose of the service, we can save the pairs to the database.
 
+Some related GitLab issues:
+
+- [Rearchitect MR widget mergeability logic](https://gitlab.com/gitlab-org/gitlab/-/issues/300042)
+- [Rearchitect / Refactor MR Widget [Discovery]](https://gitlab.com/gitlab-org/gitlab/-/issues/324381)
+
 ## Merge trains
 
 Allow merging multiple MRs in one target branch safely:
@@ -166,6 +171,16 @@ Potentially, we can use `only: - external` when defining the pipeline and combin
 
 - https://gitlab.com/gitlab-org/gitlab/-/issues/20907#note_300399873
 - But I can't make this approach work.
+
+Some related GitLab issues:
+
+- [EPIC: Customer custom MR widgets/Checks](https://gitlab.com/groups/gitlab-org/-/epics/5701)
+  - [Introduce Checks API](https://gitlab.com/gitlab-org/gitlab/-/issues/22187)
+  - [Provide an API for generic section in the Merge Request widget](https://gitlab.com/gitlab-org/gitlab/-/issues/7669)
+  - [Redesign external commit status](https://gitlab.com/gitlab-org/gitlab/-/issues/23759)
+  - [Markdown CI View / MR Widget](https://gitlab.com/gitlab-org/gitlab/-/issues/23282)
+- [Show arbitrary build results (closed)](https://gitlab.com/gitlab-org/gitlab/-/issues/15018)
+- [Custom merge widget blocks](https://gitlab.com/gitlab-org/gitlab/-/issues/22985)
 
 ## Commit status
 
