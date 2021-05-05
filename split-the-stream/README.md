@@ -91,6 +91,48 @@ We have multiple options:
 - To share the code between the upstream and source project, we need to create some shared libraries.
   - Can lead to 3. and/or having another project on our dependency chain.
 
+### Database
+
+What are the differences in the schema?
+
+- Event related models can be shared (`GitProject`, `JobTriggerModel`, `RunModel`, PullRequestModel`, ...).
+- Result models are probably not necessary (`SRPMBuildModel`, `CoprBuildModel`, ...).
+- Allow/deny list can be preserved.
+- Models for the setup procedure aren't necessary for stream (`InstallationModel`, `ProjectAuthenticationIssueModel`).
+- Connection between source-git and dist-git MRs can be done by creating a new join table.
+- If we need to track the results, we need to create a new model for that.
+
+We have multiple ways how we can manage database schema after the split:
+
+#### One schema for all
+
+- One schema that works for all use-cases.
+- The schema is defined in one place.
+- Databases can contain unused tables.
+- Schema can be more complicated.
+
+#### Independent schemas
+
+- Each schema fits the use-case.
+- Common changes are harder to share.
+
+#### Multiple alembic branches
+
+- https://alembic.sqlalchemy.org/en/latest/branches.html
+- Each use-case has its own alembic branch.
+- The definition is in one place.
+- Does not help with sharing of changes. (There is only merge and no rebase available.)
+
+#### Multiple alembic bases
+
+- https://alembic.sqlalchemy.org/en/latest/branches.html#working-with-multiple-bases
+- Multiple independent alembic migration paths. (We work on multiple branches in parallel.)
+- Different base can be located in a different location.
+  - There can be one shared schema and each use-case (upstream/CentOS-stream/?Fedora) can have a second one.
+- Ideally, bases are independent, but it is possible to
+  [specify dependencies](https://alembic.sqlalchemy.org/en/latest/branches.html#branch-dependencies)
+  between revisions.
+
 ## Linking of the merge-requests
 
 We have two goals:
