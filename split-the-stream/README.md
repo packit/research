@@ -255,3 +255,35 @@ Some related GitLab issues:
    - We can define pipelines or use commit statuses (=detached pipelines).
 4. How are CI results going to be displayed in dist-git MRs? We wan't to know this so that we can think about ways to take those results and display them for contributors on the source-git MRs.
    - Displayed as pipelines.
+
+## The plan
+
+1. Set up a new repository for the stream worker.
+   - `stream-worker`/`packit-stream-worker`/`source-git-worker`/...
+   - Build the image in quay.
+   - Setup zuul and pre-commit.ci.
+   - Create a `stable` branch.
+2. Set up a new deployment repository for stream.
+   - Create the new playbooks and share as much as possible with current workflow.
+   - We will have only one deployment for stream for start.
+   - Increase (=buy) the resources in openshift online.
+   - Deploy the stream service to openshift online.
+   - Update the script for moving `stable` branches.
+3. Implement the stream worker.
+   - New celery tasks are defined.
+   - Implementation is done as new handlers.
+   - Start with the really basic version so we can work on deployment ASAP:
+     - _If user creates a merge-request on the source-git repository, create a matching merge-request to the dist-git repository._
+4. Put the current worker away from the service.
+   - `packit-worker`/`packit-upstream-worker`/...
+   - What about the `process_message` task? (SPIKE card for that has been created.)
+     - Do we want to share it? What about a dedicated worker just for this?
+   - Move the build process.
+   - Setup zuul and pre-commit.ci.
+   - Update deployment if necessary.
+   - Update the script for moving `stable` branches.
+   - (Can be done in parallel with other steps.)
+5. Implement _Sync the CI results from the dist-git merge-request to the source-git merge-request._
+6. Implement _If the dist-git is updated, update the source-git repository by opening a PR._
+7. Implement _If the source-git merge-request is updated, update the dist-git merge-request._
+8. Implement _If the source-git merge-request is closed, close the dist-git merge-request._
