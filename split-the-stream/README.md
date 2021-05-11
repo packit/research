@@ -91,6 +91,11 @@ We have multiple options:
 - To share the code between the upstream and source project, we need to create some shared libraries.
   - Can lead to 3. and/or having another project on our dependency chain.
 
+### Dashboard
+
+- For the current goals, there is no need for having a dashboard.
+  - GitLab is our interface, and we can link the same result links as the CI in dist-git.
+
 ### Database
 
 What are the differences in the schema?
