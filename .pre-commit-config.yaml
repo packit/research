@@ -8,11 +8,11 @@ repos:
     hooks:
       - id: black
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.19.0
+    rev: v2.19.1
     hooks:
       - id: pyupgrade
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v2.3.0
+    rev: v2.3.1
     hooks:
       - id: prettier
         exclude: centos_playground/pkg_survey/result*
