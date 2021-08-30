@@ -4,7 +4,7 @@
 
 Here is how you can get a production database shell, please use it wisely!
 
-Find the name of the postgres pod on the production OpenShift namesapce:
+Find the name of the postgres pod on the production OpenShift namespace:
 
     $ oc get pods | grep postgres
     postgres-12-1-t4l5k                 1/1       Running     0          80d
