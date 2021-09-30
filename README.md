@@ -19,6 +19,7 @@ This repo is used to document research performed by the packit team.
 - [Automation for moving the stable branches](./automation-for-stable-branches)
 - [Error budgets](./error-budgets/)
 - [Support monorepos in source-git](./source-git-monorepos/README.md)
+- [Oauth integration](./oauth)
 
 ## Organization of this repository
 
