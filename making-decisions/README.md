@@ -13,7 +13,8 @@ stakeholders and where implementation would take a considerable effort.
 Although that's not what we need here, we need to be able to make quick
 democratic decisions within one sprint.
 
-I am amazed that the framework champions these type of questions and suggestions which can help us decide:
+I am amazed that the framework champions these type of questions and
+suggestions which can help us decide:
 
 - Whose problem are we trying to solve?
 - Who else could be impacted?
@@ -29,15 +30,18 @@ I am amazed that the framework champions these type of questions and suggestions
 
 ## [FESCo](https://docs.fedoraproject.org/en-US/fesco/)
 
-Decisions in FESCo are the daily bread so we can get an inspiration here. They have a well-thought voting mechanism:
+Decisions in FESCo are the daily bread so we can get an inspiration here. They
+have a well-thought voting mechanism:
 
-- One week for FESCo members to vote `+1` or `-1`. After the period accept if 3 `+1`s were received without a negative vote and vice versa.
+- One week for FESCo members to vote `+1` or `-1`. After the period accept if 3
+  `+1`s were received without a negative vote and vice versa.
 
 - Immediately accept or reject when getting 7 votes of the same type.
 
 - After a week, discuss the topic and decide.
 
-This also sounds like a too complicated solution for us although I like the aspect of: discuss when unsure, accept/reject in agreement.
+This also sounds like a too complicated solution for us although I like the
+aspect of: discuss when unsure, accept/reject in agreement.
 
 ## [UK Government suggestion for voting in charities](https://www.gov.uk/guidance/charity-meetings-making-decisions-and-voting#follow-voting-rules-if-applicable)
 
@@ -45,7 +49,29 @@ Simple and clear: members cast votes on meetings :) just like we do with groomin
 
 ## ["Board Voting: Common Steps & Tips for Better Decision-Making"](https://boardable.com/blog/board-voting/)
 
-Interesting (and biased) blog post which describes in detail the process of voting in non-profit organizations.
+Interesting (and biased) blog post which describes in detail the process of
+voting in non-profit organizations.
+
+## [Franta's suggestion about decision making in Teal organizations](https://reinventingorganizationswiki.com/theory/decision-making/)
+
+A thorough and well-explained comparison between types of organization and the
+decision making process followed by a fascinating read about the Teal decision
+making.
+
+Funnily enough, the advice the article is giving is contrary to my current
+proposal ('duh). They advise for the decision maker to make a call based on
+research, advices and being the subject matter expert. I instead suggested to
+have a consensus on a decision. The argument from the article is that reaching
+consensus is too expensive time-wise and resource-wise. I'd still try what I
+propose and reevaluate what's the most optimal process for us after a period of
+time.
+
+We can definitely still learn from the article so I strongly suggest reading it.
+
+## [Consent Decision Making](https://thedecider.app/consent-decision-making)
+
+Another fascinating process to make decisions with a clear process how to reach
+decisions.
 
 ## Proposal
 
@@ -53,10 +79,7 @@ Interesting (and biased) blog post which describes in detail the process of voti
 
 - Everyone has a right to say `+1`, `-1` or `+0` (or `-0`).
 
-- We all need to agree on the preferred choice, meaning we discuss until all cast the same vote.
+- We all need to agree on the preferred choice, meaning we discuss until all
+  cast the same vote.
 
-## Next steps
-
-- [ ] Pick a direction we want to go with.
-- [ ] Define guidelines.
-- [ ] Try to make a decision on next arch using the guidelines.
+- Reevaluate after a few sprints pass.
