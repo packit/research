@@ -75,6 +75,17 @@ We can definitely still learn from the article so I strongly suggest reading it.
 Another fascinating process to make decisions with a clear process how to reach
 decisions.
 
+## [CKI's feedback mechanism](https://cki-project.org/docs/hacking/rfcs/cki-001-cki-feedback-mechanism/)
+
+CKI team uses the _Request For Comments_ mechanism to formally propose a change
+so the team can provide feedback without requiring eventual consensus.
+
+## [Democracy 2.1](https://vitalplus.org/demokracie-2-1-rozhodovat-jinak-a-lepe/)
+
+A new way of voting proposal created by a Czech mathematician which enables
+people to cast +2 and -1 votes. The pitch is that it would eliminate "the bad
+guys" getting to parliament.
+
 ## Proposal
 
 - Use the Consent Decision Making process since it leaves plenty of room for a
