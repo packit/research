@@ -70,16 +70,20 @@ We can definitely still learn from the article so I strongly suggest reading it.
 
 ## [Consent Decision Making](https://thedecider.app/consent-decision-making)
 
+**winner**
+
 Another fascinating process to make decisions with a clear process how to reach
 decisions.
 
 ## Proposal
 
-- Use the same type of voting as we do with grooming.
+- Use the Consent Decision Making process since it leaves plenty of room for a
+  discussion and addressing objections.
 
-- Everyone has a right to say `+1`, `-1` or `+0` (or `-0`).
+- The owner of a topic is empowered to make a decision while being supported by
+  the team.
 
-- We all need to agree on the preferred choice, meaning we discuss until all
-  cast the same vote.
+- If we are still unable to make a decision, we can use a voting mechanism
+  (e.g. the Democracy 2.1 scheme).
 
 - Reevaluate after a few sprints pass.
