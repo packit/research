@@ -20,6 +20,7 @@ This repo is used to document research performed by the packit team.
 - [Error budgets](./error-budgets/)
 - [Support monorepos in source-git](./source-git-monorepos/README.md)
 - [Oauth integration](./oauth)
+- [Making technical decisions in our projects](./making-decisions/)
 
 ## Organization of this repository
 
