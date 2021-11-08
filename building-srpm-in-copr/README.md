@@ -48,20 +48,15 @@ to create sources for SRPM.
          used also here, e.g. `ActionName.create_archive`
     3. `create_srpm(srpm_path=output_file, srpm_dir=srpm_dir)`
        - run `rpmbuild` command
-- we could create a CLI command in Packit which would clone the repo in the version we want (particular branch, commit sha), run 1. and 2. step from current process,
-  move the needed files into `resultdir`
+- we need to group the functionality of cloning the particular repo version, running 1. and 2. step from current process,
+  move the needed files into `resultdir` -> dedicated CLI command/method - this will be used in the script
 - we need to get the required info into the script:
-  - git ref
-  - project url for cloning the repo and additional arguments to clone the version we want
-- the script could look like this, `packit` would be the build dependency
-  (+ packages needed for running the user-defined actions?):
-
-```bash
-#!bin/sh
-
-packit prepare-sources --project_url={PROJECT_URL} --upstream-ref={UPSTREAM_REF}
-
-```
+  - info about project version
+    - git ref
+    - pr_id
+    - repo name + namespace / url
+  - job config
+  - do we need anything from service config? we have the secrets there, so we can't pass the whole service config
 
 #### How did I test the functionality
 
@@ -90,3 +85,27 @@ copr_client.build_proxy.create_from_custom(ownername="lbarczio", projectname="og
                            script_builddeps=["git", "packit", "python3-wheel", "python3-pip", "python3-setuptools",
                             "python3-setuptools_scm", "python3-setuptools_scm_git_archive"])
 ```
+
+### Plan how to build SRPMs in Copr in Packit Service
+
+- create CLI command or only Packit API method for preparing sources (would mostly use existing functionality, described above)
+- implement creation of the script (Python/bash - Python would be easier for handling with configs)
+  - script will be created dynamically each time
+  - pass the needed arguments and use the method/command
+- implement using the script for creating SRPMS for Copr builds
+  - use copr API to submit SRPM build:
+    - `copr_client.build_proxy.create_from_custom(ownername=owner, projectname=project, script=script, script_builddeps=["git", "packit", ...])`
+    - find out what exactly will be the `builddeps` for SRPM creation (check which I needed to include when testing earlier)
+      - currently, we have some builddeps hardcoded in workers added on demand of some of our users,
+        those need to be included
+      - in future, we could implement mechanism for specifying builddeps for the action itself
+        - those would be included dynamically
+  - make sure we receive messages about SRPM state in fedmsg (we already have some processing in Packit Service,
+    check whether the format is up to date
+    [here](https://github.com/packit/packit-service/blob/950b865018b843be2addc68d0606491fca57343c/packit_service/worker/handlers/copr.py#L189)
+    and [here](https://github.com/packit/packit-service/blob/950b865018b843be2addc68d0606491fca57343c/packit_service/worker/handlers/copr.py#L268))
+  - create new handlers for SRPM state change / extend the CoprBuildStartHandler/CoprBuildEndHandler
+    - report the SRPM state to user (checks/statuses)
+    - create/update SRPM model in our DB
+    - provide the link with SRPM logs
+- for Koji builds, still use the old way for now
