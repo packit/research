@@ -1,0 +1,253 @@
+* High-level workflow
+Most of this is described in the original [[https://packit.dev/docs/source-git/design/][design article]].
+
+As of now, source-git is a layer on top of dist-git.
+
+Dist-git repositories are continuously kept in sync with their source-git counterparts.
+
+Dist-git is still the authoritative place to store source-code.
+
+Source-git is a place for collaboration and creative work.
+
+The whole workflow is built up in two layers:
+
+1. Some tooling which is possible to be used by engineers locally to work on
+   source-git repositories and transform their work to dist-git repositories.
+
+2. A group of bots, which using the tools above facilitate and take over some
+   of the mundane tasks from engineers.
+** Source-git repositories are forks of the upstream repo
+** Configuration is added to each downstream branch in the ~.distro~ directory
+** Each source-git repo maps to one or more dist-git repositories
+** Each downstream branch maps to one or more branches in dist-git
+** Configuration tells tooling:
+*** The commit after which downstream changes start (the last upstream commit)
+*** The way to get the source-archive from the last upstream commit
+*** The way to transform commits since the last upstream commit to patches
+*** The way to update the spec-file
+**** Version and release fields
+**** Source-tags
+**** Patch-tags
+**** Prep-section
+** Transforming source-git to dist-git is customizable
+** Each distribution has its own space to store source-git repos
+* Bots helping with things
+** Mirror a source-git PR to dist-git (as a PR)
+*** Open a dist-git PR with translated content when a source-git PR is opened
+*** Update the dist-git PR when the source-git PR is updated
+*** Close the dist-git PR if the source-git PR is closed
+** Mirror CI results from dist-git to source-git for convenience
+** Synchronize merging the mirrored PRs (first dist-git, then source-git)
+** Opening source-git PRs for dist-git only changes
+** Pulling upstream changes downstream and opening PRs for them in source-git
+** Kicking up builds once changes in dist-git are merged
+** Rebase source-git (and so dist-git) PRs after merges happen
+*** And support updating the spec-file
+- Would ~autospec~ a better option for this?
+** Pull content from Fedora to CentOS Stream
+** Branch source-git repositories when Fedora is branched (?)
+* Developer guide
+** TODO Where to put this developer guide?
+This is the topic of re-ordering source-git documentation on the website.
+** Pre-requisites and limitations
+These can change with time, but currently we have:
+- The spec-file uses ~%autosetup~
+- There are no conditionals in the spec-file.
+** Setting up the source-git repository
+Reach out to the Packit team to ask for a source-git repository to be created in
+gitlab.com/fedora/src for your package.
+- specify the URL of the repository of the upstream project;
+- the Git revision(s) from which the downstream branches should start
+
+For this new repository, access rights are going to be identical with dist-git.
+
+Make sure to reach out to fellow maintainers and let them now, that for
+maintaining the package they should use the source-git repository in the future.
+
+PRs opened in dist-git are going to receive a comment from the bot to let
+contributors know that they should open them instead in source-git. These
+comments should give contributors enough help to figure out how to do these
+contributions.
+
+** Proposing updates to existing branches
+Propose changes as MRs.
+
+A change can be anything from an edit to the spec file, other dist-git files
+(all these things are stored in the ~.distro~ directory), a cherry pick of
+upstream commits.
+
+When the MR is proposed, a source-git bot kicks in, transforms it to a dist-git
+PR and submits it to the dist-git repository. If the MR has multiple commits,
+the transformation is done commit-by-commit. Commit authorship is kept.
+
+OPTIONALLY A source-git with multiple commits can be transformed to a single
+commit dist-git PR by including some instruction for the bot to do so.
+
+If the source-git MR is updated, the source-git bot kicks in, and updates the
+dist-git PR, by redoing the transformation. Or extending the PR by transforming
+the new commits.
+
+If the source-git MR is closed without merging it, the corresponding dist-git PR
+is also going to be closed by the source-git bot.
+
+Bots rely on events (webhooks) to find out about work to be done, but they also
+periodically query the repositories to detect any missed work.
+
+*** TODO How can we enable engineers, to edit the dist-git PRs, if needed?
+*** TODO Bot permissions
+What authorization does the source-git bot need in the dist-git repo, in order
+to be able to perform all these operations?
+** Rebasing existing branches (or merging upstream content)
+What do we know about this problem so far?
+1. Rebasing creates a cleaner history
+2. Generating patches from a history with merge commits can become increasingly
+   difficult.  Mainly because the branches which are merged can also contain
+   merge commits.
+3. But there is no way to review a rebase in current Git-forges we know about.
+   1. What would such a review even look like? What should be reviewed?
+** Merging things in source-git
+- Virt team will manually cherry-pick commits from MRs into the downstream
+  branches, and close the MRs. Then translate the source-git branch to dist-git.
+- TODO What is the granularity of such translation in terms of commits?
+- Python team told us, that PRs in dist-git should be merged first, in order to
+  avoid the case when a source-git PR is merged, but the corresponding dist-git
+  PR fails to do so and needs more work to make it merge (which would lead to
+  the two histories to diverge, maybe?)
+- Glibc team is currently has to deal with rebasing PRs before a merge to fix
+  conflicts in the release number and changelog.
+- In projects with more activity engineers should have the help of bots to
+  - Rebase PRs, when some previous one was merged.
+  - Prioritize the merging of PRs.
+- Because merging a source-git MR also means to merge the corresponding dist-git
+  PR, merge operations should be always taken care by bots, in order to keep
+  consistency. The same operation though should be possible to be done by
+  engineers with a properly configured CLI tool, from the local copy of the
+  source-git repository, a.k.a ~packit source-git merge <MR ID>~.
+** Syncing back dist-git changes
+After mass-rebuilds happen, for example.
+
+There needs to be a mechanism that allows to unequivocally tell if a source-git
+and the corresponding dist-git branch are in sync. There are ways to do this,
+but I'm not sure which one would be the better one:
+- Mention the source-git commit ID(s) as a Git-trailer in the dist-git commit message.
+- Tag dist-git commits with a tag matching the source-git commit ID
+
+Questions that such a mechanism should allow to answer:
+- Is this (last) commit in a dist-git branch originate from source-git?
+- Does the current tip of the dist-git branch originate from the tip of the
+  corresponding source-git branch?
+- Was this source-git commit translated into dist-git?
+
+When dist-git branches are found to be out of sync with their corresponding
+source-git branches, a bot will translate back these changes into a source-git
+PR, and prioritize this PR to be merged *before* any other PR.
+
+*** TODO Command to tell the sync status between source-git and dist-git
+** Building locally
+- ~packit srpm~, ~packit local-build~
+- fedpkg srpm, fedpkg mock-build
+** Testing (locally)
+Not sure how often would engineers do something like this.
+* How to introduce this in Fedora?
+** Figure out which repositories/packages want to give the workflow a try
+** Set up source-git repositories for them in pagure.io/source-git-sig
+- [ ] How much tooling is actually needed for this? Could this be done manually?
+** Develop the bots to support the workflow
+*** mirror-bot
+*** ci-results bot
+*** merging bot
+*** rebasing bot
+*** sync-back bot
+** Make sure the workflow is well documented
+** Communicate with he community to tell about the workflow
+... and tell which packages are on board.
+- Email the devel list.
+* How to make this be adopted for CentOS Stream 9 development?
+* Priorities
+The end goal is to create a shared source-git workflow for the RHEL ecosystem,
+which can be used by any package.
+
+Source-git repositories are going to coexist with dist-git repositories for the
+foreseeable future. Transitioning to source-git is not possible or useful for
+every package.
+
+The long term goal is to have build and release pipelines and any other tooling
+used by engineers to support source-git repositories, in order to make
+source-git repositories first-class citizens, coexisting with dist-git
+repositories.
+
+The short term goal is to understand and gain experience with the workflow, and
+figure out solutions to the edge cases that might occur. We need to have a
+well-documented, well-understood workflow, proven and used by multiple engineers
+while maintaining a variety of packages we can then propose for the Fedora,
+CentOS and RHEL community to adopt.
+
+There are already some teams using a source-git workflow developed for
+themselves: kernel, systemd, cockpit, python, virt.
+
+** What are our priorities?
+Choose between:
+
+*** Develop the tooling and docs for the whole workflow
+This would be nice, b/c we could offer onboarding teams the full experience.
+Without glitches.
+
+But the workflow is not trivial, and we still don't understand all parts of it,
+so it's almost certain, that any "complete" solution we would deliver would have
+flaws and would be incomplete.
+
+This approach would be easier if we would be maintaining some packages
+ourselves, where applying the source-git workflow would really improve things.
+But currently there are no such packages. Most of the packages the Packit team
+maintains are packages without any patches downstream.
+
+Which means, that we try to develop a solution to a problem, which we don't have
+ourselves. This makes things more challenging as we don't have a way to face
+(and understand) the problem first hand, and need to rely on the experience of
+others.
+
+*** Work to increase adoption
+Instead of aiming to present a "complete" workflow, aim to have a useful part
+(or parts) of the workflow ready to be used, and adopted by as many teams and
+packages. Be prepared and proactively reach out to gather feedback.
+
+This approach would help us to get a better understanding of the context
+source-git needs to work in, without having a first hand experience ourselves.
+
+Once we have packages using (at least in part of their work) the Packit tooling,
+we can start expanding on that by adding new features to the whole experience.
+
+** Working with teams already using a source-git workflow
+*** Who are these teams?
+*** What is their workflow? What can we learn from them?
+*** How can they start adopting (parts) of the ~packit source-git~ tooling?
+** Finding packages which would newly adopt the source-git workflow
+*** How to find them?
+*** How to reach them?
+*** What is the MVP?
+What is the minimum tooling and documentation they would require in order to
+start using the workflow and start giving us feedback about any issue they face,
+so that we can start fixing these issues, and improve.
+
+* Interesting questions:
+- What is the commit message in dist-git is going to be?
+- How should conditionals (arch, distro) be handled?
+  - How are those handled in the Kernel?
+- Once there are enough repositories using source-git, we could dump the
+  parallel implementation and update tools so that they support building
+  directly from source-git.  Not all repositories would use this format, but
+  dist-git and source-git repositories could live next to each other as they do
+  in Debian (?).
+- Check how packaging is done in Debian? How do they do "source-git"? How is
+  branching done in source-git?
+- Merge vs. Rebase?
+- What to do with bundled *and* patched sources?
+- Branding/de-branding: Visual elements, copyright texts and other
+  brand-elements related to distributions might change as code is moved
+  downstream from Fedora to CentOS Stream to RHEL. How is this going to fit the
+  source-git workflow?
+- How to specify valid signatures for source-git commits? Check that all the
+  commits translated into dist-git are signed by a valid signature. Fail if no
+  signature is specified or if there is an unsigned commit.
+- Wouldn't allowing templating in the spec-file be a more flexible approach for
+  updating it?
