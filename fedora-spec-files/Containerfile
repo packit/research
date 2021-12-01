@@ -1,0 +1,12 @@
+FROM fedora:latest
+
+# `install_weak_deps=False` so we don't get texlive and other deps which we don't need.
+RUN dnf install -y \
+    python3-notebook \
+    python3-jupyter-client \
+    python3-matplotlib \
+    python3-bodhi-client \
+    python3-koji \
+    python3-tabulate \
+    xz \
+    --setopt=install_weak_deps=False
