@@ -22,6 +22,7 @@ This repo is used to document research performed by the packit team.
 - [Oauth integration](./oauth)
 - [Making technical decisions in our projects](./making-decisions/)
 - [`packit source-git update-source-git` research](./update-source-git/)
+- [Fedora Spec Files analysis](./fedora-spec-files/)
 
 ## Organization of this repository
 

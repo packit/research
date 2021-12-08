@@ -1,2 +1,6 @@
 dashboard/node_modules
 dashboard/package-lock.json
+fedora-spec-files/rpm-specs
+fedora-spec-files/rpm-specs-latest.tar.xz
+fedora-spec-files/.ipynb_checkpoints
+fedora-spec-files/data.json
