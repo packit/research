@@ -24,7 +24,12 @@ Let's define job statuses first to get a clear understanding of these objectives
 - failure: the job finished and wasn't successful: the PR needs to be fixed
 - error: infrastructure problems prevented the job to complete
 
-### 99% of builds have status set to success or failure within 12 hours
+### SLO1: Changes to GitHub PRs receive a status update within 15 seconds in 99% of cases
+
+It can be frustrating (for us and our users) when we push changes to our PRs
+while no statuses are being set. Let's make a deadline for packit to set these.
+
+### SLO2: 98% of builds have status set to success or failure within 12 hours
 
 The most core functionality is to run COPR builds for PRs. We want to be sure
 those builds either pass or fail and no error interrupts the build process.
@@ -32,15 +37,10 @@ those builds either pass or fail and no error interrupts the build process.
 The problem is that some builds take minutes and some hours so it's hard to
 design this objective in a generic way for everyone.
 
-### 95% of test runs have status set to success or failure within 12 hours
+### SLO3: 95% of test runs have status set to success or failure within 12 hours
 
 Similar as builds but since Testing Farm is outside of our control, let's lower
 the percentage.
-
-### Changes to GitHub PRs receive a status update within 15 seconds in 99% of cases
-
-It can be frustrating (for us and our users) when we push changes to our PRs
-while no statuses are being set. Let's make a deadline for packit to set these.
 
 ## Packit SLIs
 
