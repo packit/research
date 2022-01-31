@@ -4,7 +4,7 @@
 
 repos:
   - repo: https://github.com/psf/black
-    rev: 21.12b0
+    rev: 22.1.0
     hooks:
       - id: black
   - repo: https://github.com/asottile/pyupgrade
@@ -40,7 +40,7 @@ repos:
   #      - id: mypy
   #        args: [--no-strict-optional, --ignore-missing-imports]
   - repo: https://github.com/packit/pre-commit-hooks
-    rev: b05e5e2196b725c98529c5c3861658ebcbf18783
+    rev: 1da916777f5cc26ecf221b15e58ca51891d26d94
     hooks:
       - id: check-rebase
         args:
