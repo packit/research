@@ -23,6 +23,7 @@ This repo is used to document research performed by the packit team.
 - [Making technical decisions in our projects](./making-decisions/)
 - [`packit source-git update-source-git` research](./update-source-git/)
 - [Fedora Spec Files analysis](./fedora-spec-files/)
+- [Verifying the sync status of source-git and dist-git repos](source-git-sync-status/README.md)
 
 ## Organization of this repository
 
