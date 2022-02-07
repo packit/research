@@ -20,10 +20,11 @@ in dist-git.
 
 In order to help with this, both update commands
 (`packit source-git update-dist-git` and `packit source-git update-source-git`)
-should refuse to update the destination repository if the history of the two
-repositories has diverged. Nevertheless, it should be possible to override
-this with a `--force` flag, to allow developers to override tooling or human
-errors and bring the repositories back in sync.
+should refuse to update the destination repository if the head commit in the
+destination repository doesn't have it's pair commit among the ancestors of
+the current head commit in the source repository. Nevertheless, it should be
+possible to override this with a `--force` flag, to allow developers to
+override tooling or human errors and bring the repositories back in sync.
 
 ## CLI proposals
 
@@ -119,6 +120,7 @@ other words: the history of source-git and dist-git has diverged.)
 ## Proposed tasks
 
 1. Update `source-git` commands to mark the commit origin with Git-trailers
-2. Implement checking the sync-status
+2. Modify `source-git update-*` commands to check the sync-status
+3. Implement checking the sync-status
 
 [git-trailers]: https://git-scm.com/docs/git-interpret-trailers
