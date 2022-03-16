@@ -44,5 +44,5 @@ repos:
     hooks:
       - id: check-rebase
         args:
-          - git://github.com/packit/research.git
+          - https://github.com/packit/research.git
         stages: [manual, push]
