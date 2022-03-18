@@ -67,6 +67,28 @@ with solver being either:
 - [HTTP01](https://cert-manager.io/docs/configuration/acme/http01/) - looks
   like lots of experimentation
 
+### [mod_md](https://httpd.apache.org/docs/2.4/mod/mod_md.html)
+
+mod_md is Apache module for automated TLS cert provisioning/renewal using ACME (Let's Encrypt).
+One just has to tweak the httpd configuration and everything else should be automated.
+A few howtos:
+
+- [1](https://httpd.apache.org/docs/2.4/mod/mod_md.html)
+- [2](https://www.server-world.info/en/note?os=Fedora_35&p=httpd&f=10)
+- [3](https://frasertweedale.github.io/blog-redhat/posts/2020-05-07-ipa-acme-mod_md.html)
+- [4 (czech only, this is where I found it)](https://www.root.cz/clanky/https-certifikat-let-s-encrypt-pomoci-apache-a-vestaveneho-modulu-mod-md)
+
+The thing is that we haven't configured httpd directly since
+[we started using mod_wsgi-express](https://github.com/packit/packit-service/pull/1363)
+which configures httpd for us. So we'd need to figure out how to tweak the
+mod_wsgi-express generated httpd.conf before the server starts
+Or do we need to request [mod_wsgi](https://modwsgi.readthedocs.io)
+to support mod_md in a similar way it supports mod_ssl?
+
+We'd been actually installing mod_md prior to
+[moving to mod_wsgi-express](https://github.com/packit/packit-service/pull/1363)
+but AFAIK never used it (directly).
+
 ## Output
 
 There's no straightforward way to automate the certificate generation/renewal
