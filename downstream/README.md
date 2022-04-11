@@ -2,9 +2,9 @@
 
 In this document, I would like to take a look at the downstream part of the Fedora workflow and how we can automate it, namely:
 
-- from upstream to dist-git (already implemented, but still needs to be revisited)
-- builds in Koji
-- creating updates in Bodhi
+- from upstream to dist-git (already implemented, improvements are being worked on)
+- builds in Koji (already implemented)
+- creating updates in Bodhi (already implemented)
 
 For each step, I would like to cover the following structure:
 
@@ -56,7 +56,7 @@ Updating the already created PRs:
 - Be able to push to the PR created by Packit.
   - Needs support in Pagure.
 
-When reacting to comment, we now add :+1: to the comment so the user knows we have accepted the event.
+When reacting to comment, we now add :+1: to the comment so the user knows we have accepted the event. (already implemented with :eyes: icon)
 
 #### How to enhance the workflow?
 
@@ -139,7 +139,7 @@ When there is a new commit in dist-git, I want a new build for it to be triggere
 Options:
 
 - I can send a pull-request to a repository containing the list of repositories to build. (The same thing Zuul does.)
-- I can add a packit config to the distgit repository and configure the job (can be combined with the previous version so we can filter the projects before checking config presence).
+- I can add a packit config to the distgit repository and configure the job (can be combined with the previous version so we can filter the projects before checking config presence). (already implemented)
 - A service authenticated by FAS where I can enable the build and, ideally, configure the process.
 
 Also, the [`packit` FAS user](https://accounts.fedoraproject.org/user/packit/) needs to be added as a maintainer to the project. We can try getting the permission to run builds on any package, but that can add some requirements to the service (like running inside Fedora infrastructure, TODO: check it).
@@ -148,7 +148,7 @@ Also, the [`packit` FAS user](https://accounts.fedoraproject.org/user/packit/) n
 
 The build is triggered once there is a new commit in dist-git.
 
-Optionally, I can retrigger the action by a commit comment on dist-git.
+~~Optionally, I can retrigger the action by a commit comment on dist-git.~~ This is not possible. Pagure does not support this
 
 #### How to enhance the workflow?
 
@@ -173,7 +173,7 @@ The information about new commits is sent to fedora-messaging. We already have a
 
 There are (at least) 3 ways how to do this:
 
-1. New `job_type` and new handler can be created to implement the core functionality.
+1. New `job_type` and new handler can be created to implement the core functionality. (used in the current implementation)
 
 - Needs a new name for a job that needs to be different to `production_build`, but looks like the easiest solution.
 
@@ -188,7 +188,8 @@ There are (at least) 3 ways how to do this:
 #### How to communicate with the user?
 
 - When the build is triggered, affected users are notified via standard Fedora notifications.
-- When there is a problem, we can comment on the commit.
+- ~~When there is a problem, we can comment on the commit.~~ We can't. This is not supported by Pagure.
+- Configurable repository to create an issue in.
 - Optionally, when the commit comes from the PR, we can comment to that PR.
 
 ## Bodhi updates
@@ -215,7 +216,7 @@ TODO: We need to find a way to trigger the process manually. (In the worst case,
 
 #### How to enhance the workflow?
 
-In the usual case, no enhancement is needed. If we need one, we can use packit config to provide this extra info.
+In the usual case, no enhancement is needed. If we need one, we can use packit config or dist-git commit to provide this extra info.
 
 #### What this should done?
 
@@ -239,7 +240,8 @@ The information about successful builds is announced on fedora-messaging and we 
 
 Once the update is done, a user gets the info via usual Fedora messaging.
 
-TODO: If we have some problem with the creation, we need to find a good method to communicate with the user.
+~~TODO: If we have some problem with the creation, we need to find a good method to communicate with the user.~~
+User can configure a repository where Packit create an issue in case of failed update creation. (already implemented)
 
 ## Generic implementation issues
 
@@ -278,8 +280,8 @@ My personal opinion:
 
 ## Plan
 
-1. Start with the packit config as a way to enable the workflow. (Allows quicker implementation, but still an easy way how to test this.)
-2. Implement the Koji builds for new dist-git commits.
-3. Implement the Bodhi updates for new Koji builds.
+1. [done] Start with the packit config as a way to enable the workflow. (Allows quicker implementation, but still an easy way how to test this.)
+2. [done] Implement the Koji builds for new dist-git commits.
+3. [done] Implement the Bodhi updates for new Koji builds.
 4. Allow users to test our workflow.
 5. Provide a better way how to enable this without packit config in dist-git.
