@@ -89,6 +89,11 @@ We'd been actually installing mod_md prior to
 [moving to mod_wsgi-express](https://github.com/packit/packit-service/pull/1363)
 but AFAIK never used it (directly).
 
+### Use a web server with [automatic HTTPS, like Caddy](https://caddyserver.com/docs/automatic-https)
+
+How difficult the switch from httpd (API, dashboard) and nginx (metrics)
+would be, has not been researched.
+
 ## Output
 
 There's no straightforward way to automate the certificate generation/renewal
