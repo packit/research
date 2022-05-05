@@ -1,4 +1,6 @@
-# Updates of source-git repos
+# Updates of source-git repos (archived)
+
+This research is outdated and replaced by [research `packit source-git update-source-git`](https://github.com/packit/research/tree/main/update-source-git).
 
 ## Problem
 
