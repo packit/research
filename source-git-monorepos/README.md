@@ -14,21 +14,32 @@ To change this, a mechanism to specify which path(s) in the monorepo to map to
 which dist-git repo in the distribution needs to be introduced.
 
 This could be done by introducing a `packages` key, to hold a dictionary of
-`{package_name: package_object}`. Package-objects whould have keys identical
+`{package_name: package_object}`. Package-objects would have keys identical
 to the current top-level keys in `.packit.yaml` and `source-git.yaml`, except
 `upstream_project_url` and `upstream_ref`—these are left to be top-level keys
-only, and a new `package_paths` key which is a list of paths in the monorepo
-which map to the dist-git repo specified by `downstream_package_name`. If
-`downstream_package_name` is not specified, it would be assumed that the
+only.
+
+A package-object could also have a new `package_paths` key which is a list of
+paths in the monorepo which map to the dist-git repo specified by
+`downstream_package_name`.
+
+If `downstream_package_name` is not specified, it would be assumed that the
 dist-git repo is called `package_name`.
 
+If `package_paths` is not defined, it defaults to the path matching
+`package_name`, that is to `package_paths: [<package_name>]`.
+
 When processing a package from a monorepo, Packit should operate within these
-paths, that is, limit patch generation from Git-history to these paths.
+paths, that is, limit patch generation from Git-history to these paths, and
+use only these paths to create the source-tarballs.
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 
 **Table of Contents**
 
+- [`package_paths` and subdirectories to react on](#package_paths-and-subdirectories-to-react-on)
+- [`package_paths` and working directories](#package_paths-and-working-directories)
+- [Packages and specfile discovery](#packages-and-specfile-discovery)
 - [Impact on Source-git](#impact-on-source-git)
   - [`packit source-git init`](#packit-source-git-init)
   - [`packit source-git update-dist-git`](#packit-source-git-update-dist-git)
@@ -56,6 +67,75 @@ paths, that is, limit patch generation from Git-history to these paths.
 - [Open Issues](#open-issues)
 
 <!-- markdown-toc end -->
+
+## `package_paths` and subdirectories to react on
+
+In the context of monorepos it becomes handy to be able to filter the events a
+service or bot reacts to based in which paths of the monorepo the change
+happened.
+
+This is different from `package_paths` in the sense that it allows bots and
+services to react to a broader (or different) list of paths than the ones
+defined to belong to a package.
+
+To support this a new `handle` configuration key should be introduced with a
+`path` sub-key.
+
+`handle.paths` can be defined on the top-level, in the package-level (although
+it's not going to be used by the CLI) and on the job-level, and it's inherited
+as other configuration keys.
+
+`handle.paths` extends the trigger config option of jobs, by limiting the
+validity of the trigger to the paths defined.
+
+When the `packages` key is used, jobs have their `handle.paths` set to the
+list of `package_paths` of the packages to be handled by the job. If
+`packages` is not used, the default value is the path of the root of the Git
+repo.
+
+We could mimic the GitHub syntax here, and also provide `handle.ignore_paths`
+and the exclamation-mark syntax (`handle.paths: [!exluded/path, included/path]`).
+
+Providing `handle.ignore_paths` would be interesting, b/c it could be used to
+ignore certain paths for all the packages, by defining its values on the
+top-level.
+
+Note, that a top-level `handle.paths` would be always overrode by a
+`package.paths`. A `!flatten` tag would come handy here, too, to allow to use
+references to combine lists in YAML.
+
+Introducing `handle.paths` would be independent of introducing `packages`
+(monorepo support), as it can be useful even without that, in fact [it was
+requested] some long time ago.
+
+For an example see the [Impact on Packit](#impact-on-packit) chapter below.
+
+## `package_paths` and working directories
+
+It's still not clear if having a `working_dir` configuration value to set a
+custom working directory would be strictly required for monorepo support.
+User-defined actions can always `cd` to the sub-directory of their liking. As
+for default actions, it's less complicated if they all run from the root of
+the Git repository.
+
+## Packages and specfile discovery
+
+Without `packages`:
+
+1. `specfile_path`, if defined.
+2. `<downstream_package_name>.spec`, if `downstream_package_name` set.
+3. Recursively search the Git repository.
+
+With `packages`, for each package:
+
+1. `specfile_path`, if defined.
+2. `<downstream_package_name>.spec` in all the `paths`, either because
+   `downstream_package_name` is defined for the package, or because it
+   defaults to the name of the package.
+3. Recursively search all the `paths` of the package.
+
+Both in the case of 2. and 3. `paths` are searched in the order in which they
+are defined in the configuration file.
 
 ## Impact on Source-git
 
@@ -237,9 +317,13 @@ all packages of a monorepo should be handled.
 Example:
 
 ```yaml
+handle:
+  ignore_paths:
+    - doc
 upstream_project_url: https://pagure.io/copr/copr.git
 packages:
   copr-backend:
+    # defining 'specfile_path' would be optional
     specfile_path: backend/copr-backend.spec
     package_paths:
       - backend
@@ -260,12 +344,21 @@ jobs:
     packages:
       - copr-frontend
       - copr-backend
+    handle:
+      paths:
+        - backend
+        - frontend
+        - common
   - job: copr_build
     trigger: pull_request
     targets:
       - fedora-all
     packages:
       - copr-cli
+    handle:
+      paths:
+        - cli
+        - common
 ```
 
 ### packit init
@@ -454,3 +547,4 @@ source-git configuration is read as currently is.
 [released as a batch]: https://bodhi.fedoraproject.org/updates/FEDORA-2022-8f02fc9461
 [packit/packit#88]: https://github.com/packit/packit/issues/88
 [the `metadata` key was dropped]: https://github.com/packit/packit/issues/1515
+[it was requested]: https://github.com/packit/packit-service/issues/545
