@@ -19,15 +19,15 @@ to the current top-level keys in `.packit.yaml` and `source-git.yaml`, except
 `upstream_project_url` and `upstream_ref`—these are left to be top-level keys
 only.
 
-A package-object could also have a new `package_paths` key which is a list of
+A package-object could also have a new `paths` key which is a list of
 paths in the monorepo which map to the dist-git repo specified by
 `downstream_package_name`.
 
 If `downstream_package_name` is not specified, it would be assumed that the
 dist-git repo is called `package_name`.
 
-If `package_paths` is not defined, it defaults to the path matching
-`package_name`, that is to `package_paths: [<package_name>]`.
+If `package.paths` is not defined, it defaults to the path matching
+`package_name`, that is to `paths: [<package_name>]`.
 
 When processing a package from a monorepo, Packit should operate within these
 paths, that is, limit patch generation from Git-history to these paths, and
@@ -37,8 +37,8 @@ use only these paths to create the source-tarballs.
 
 **Table of Contents**
 
-- [`package_paths` and subdirectories to react on](#package_paths-and-subdirectories-to-react-on)
-- [`package_paths` and working directories](#package_paths-and-working-directories)
+- [`package.paths` and subdirectories to react on](#packagepaths-and-subdirectories-to-react-on)
+- [`package.paths` and working directories](#packagepaths-and-working-directories)
 - [Packages and specfile discovery](#packages-and-specfile-discovery)
 - [Impact on Source-git](#impact-on-source-git)
   - [`packit source-git init`](#packit-source-git-init)
@@ -68,13 +68,13 @@ use only these paths to create the source-tarballs.
 
 <!-- markdown-toc end -->
 
-## `package_paths` and subdirectories to react on
+## `package.paths` and subdirectories to react on
 
 In the context of monorepos it becomes handy to be able to filter the events a
 service or bot reacts to based in which paths of the monorepo the change
 happened.
 
-This is different from `package_paths` in the sense that it allows bots and
+This is different from `package.paths` in the sense that it allows bots and
 services to react to a broader (or different) list of paths than the ones
 defined to belong to a package.
 
@@ -89,7 +89,7 @@ as other configuration keys.
 validity of the trigger to the paths defined.
 
 When the `packages` key is used, jobs have their `handle.paths` set to the
-list of `package_paths` of the packages to be handled by the job. If
+list of `package.paths` of the packages to be handled by the job. If
 `packages` is not used, the default value is the path of the root of the Git
 repo.
 
@@ -110,7 +110,7 @@ requested] some long time ago.
 
 For an example see the [Impact on Packit](#impact-on-packit) chapter below.
 
-## `package_paths` and working directories
+## `package.paths` and working directories
 
 It's still not clear if having a `working_dir` configuration value to set a
 custom working directory would be strictly required for monorepo support.
@@ -148,7 +148,7 @@ packages:
   lit:
     downstream_package_name: python-lit
     specfile_path: .distro/python-lit/python-lit.spec
-    package_paths:
+    paths:
       - llvm/utils/lit
     # This could be also used, but it's not required here.
     # patch_generation_ignore_paths:
@@ -209,15 +209,15 @@ Example `packages.yaml`:
 
 ```yaml
 - downstream_package_name: copr-backend
-  package_path: backend
+  path: backend
   dist_git_path: rpms/copr-backend
   dist_git_branch: rawhide
 - downstream_package_name: copr-frontend
-  package_path: frontend
+  path: frontend
   dist_git_path: rpms/copr-frontend
   dist_git_branch: rawhide
 - downstream_package_name: copr-cli
-  package_path: cli
+  path: cli
   dist_git_path: rpms/copr-cli
   dist_git_branch: rawhide
 ```
@@ -295,7 +295,7 @@ match `basename DIST_GIT`.
 
 When opening an MR in a source-git monorepo, Hardly should figure out which
 dist-git packages are going to be impacted by the change (by looking at
-`package_paths`), and open mirror-MRs in the dist-git repositories of those
+`package.paths`), and open mirror-MRs in the dist-git repositories of those
 packages.
 
 CI results from all mirror-MRs should be synced back to the source-git MR.
@@ -325,15 +325,15 @@ packages:
   copr-backend:
     # defining 'specfile_path' would be optional
     specfile_path: backend/copr-backend.spec
-    package_paths:
+    paths:
       - backend
   copr-frontend:
     specfile_path: frontend/copr-frontend.spec
-    package_paths:
+    paths:
       - frontend
   copr-cli:
     specfile_path: cli/copr-cli.spec
-    package_paths:
+    paths:
       - cli
 jobs:
   - job: copr_build
@@ -433,7 +433,7 @@ The command should display status for all packages in a monorepo.
 
 ### packit validate-config
 
-Check if the paths specified in `package_paths` do exist in the monorepo.
+Check if the paths specified in `package.paths` do exist in the monorepo.
 
 Check if the package names (`downstream_package_name`) are correct and indeed
 exist in the distribution. See [packit/packit#88].
@@ -481,14 +481,14 @@ srpm_build_deps:
   - python3-setuptools
 packages:
   subpackage1:
-    package_paths:
+    paths:
       - package1
     srpm_build_deps:
       - python3-pip
       - python3-setuptools
       - python3-packaging
   subpackage2:
-    package_paths:
+    paths:
       - package2
 jobs:
   - job: copr_build
