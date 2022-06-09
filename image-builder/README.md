@@ -54,9 +54,12 @@ The integration is pretty straightforward:
 1. Create a new job: "image-builder" (or "image-build"?)
 2. Implement a handler for it (trigger = successful Copr build)
 3. Create a babysit task that will wait for the build completion
-4. Auth - this one's tricky
+4. Auth - create a 'service' account for Packit on access.redhat.com
 
-- We need a service account for console.redhat.com for Packit
+- Attach employee SKU to it
+- Create a refresh token & store it in bitwarden
+- Inform Image Builder team about this user so they are aware of it (maybe
+  increase quota)
 - We need to figure out how images will be shared with users (they can
   provide their AWS/GCP/Azure account ID so Image Builder can share the
   uploaded image with it)
