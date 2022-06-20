@@ -1,16 +1,10 @@
-### All relevant information about defining what exactly we want to track/measue is available in `define_adoption_metrics.md`
+### Relevant information about defining what exactly we want to track/measure is available in the link below
 
-- More information about defining the implementation, access to the metrics
-  (dashboard / grafana), getting the metrics, implementation details - will
-  follow in the future.
+[define_adoption_metrics.md](https://github.com/packit/research/blob/main/adoption-metrics/define_adoption_metrics.md)
 
-### Short summary about the implementation (how it may look like)
+### How to implement the metrics that we have defined?
 
-Don't take this too seriously - real implementation details will be discused in the future.
-
-- It will be nice to reuse most of the work of Laura's research about monitoring
-  [here](https://github.com/packit/research/tree/main/monitoring).
-- It may reuse the `/metrics` endpoint described in the link above and took a lot of
-  information about metrics from there (and implement new).
-- If we decide to go with dashboard - there may be a room for discussion about merging
-  or splitting these two types of metrics to dashboard.
+More information about the implementation details in
+[implementation.md](https://github.com/packit/research/blob/main/adoption-metrics/implementation.md).
+Please refer to the option we decided to implement in
+this [PR](https://github.com/packit/research/pull/149) (Grafana) and ignore other options.
