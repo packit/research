@@ -79,7 +79,7 @@ services to react to a broader (or different) list of paths than the ones
 defined to belong to a package.
 
 To support this a new `handle` configuration key should be introduced with a
-`path` sub-key.
+`paths` sub-key.
 
 `handle.paths` can be defined on the top-level, in the package-level (although
 it's not going to be used by the CLI) and on the job-level, and it's inherited
@@ -425,11 +425,19 @@ subset) of packages (packages from a monorepo are usually [released as a batch])
 
 ### packit push-updates
 
-Should be updated similar to `packit create-update`.
+This command works with updates. Currently if no option is provided updates
+which are in testing and belong to the package are pushed.
+
+In a monorepo, if no argument is provided, all updates in testing which
+contain any of the packages in the monorepo should be pushed.
+
+If one or more `PACKAGES` are specified, all updates in testing which could be
+pushed and contain any of the packages specified should be pushed.
 
 ### packit status
 
-The command should display status for all packages in a monorepo.
+The command should display status for all packages in a monorepo, or if one
+more `PACKAGES` are specified, status should be displayed for those packages.
 
 ### packit validate-config
 
