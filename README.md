@@ -25,6 +25,7 @@ This repo is used to document research performed by the packit team.
 - [Customize `source-git update-source-git`](./customize-update-dist-git/)
 - [Fedora Spec Files analysis](./fedora-spec-files/)
 - [Verifying the sync status of source-git and dist-git repos](source-git-sync-status/README.md)
+- [Workers scaling](./workers-scaling)
 
 ## Organization of this repository
 
