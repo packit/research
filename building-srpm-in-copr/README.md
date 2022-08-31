@@ -1,3 +1,9 @@
+# Follow ups
+
+1. [Stats for September 1st](september-2022.md)
+
+---
+
 Copr provides an option to use their [custom source method](https://docs.pagure.org/copr.copr/custom_source_method.html)
 to create sources for SRPM.
 
