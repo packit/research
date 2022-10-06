@@ -26,6 +26,7 @@ This repo is used to document research performed by the packit team.
 - [Fedora Spec Files analysis](./fedora-spec-files/)
 - [Verifying the sync status of source-git and dist-git repos](source-git-sync-status/README.md)
 - [Workers scaling](./workers-scaling)
+- [Logs aggregation](./logs-aggregation)
 
 ## Organization of this repository
 
