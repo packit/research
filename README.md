@@ -27,6 +27,7 @@ This repo is used to document research performed by the packit team.
 - [Verifying the sync status of source-git and dist-git repos](source-git-sync-status/README.md)
 - [Workers scaling](./workers-scaling)
 - [Logs aggregation](./logs-aggregation)
+- [Using Zuul for source-git in CentOS Stream](./source-git-in-zuul/README.md)
 
 ## Organization of this repository
 
