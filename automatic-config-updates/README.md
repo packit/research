@@ -8,7 +8,7 @@ Currently, we have no convenient way of telling if all users have migrated their
 There seem to be 2 possible approaches how such updates could work on the top-level (for example the pre-commit bot does both of these):
 
 1. When a user opens a pull request and we detect that the config in the PR can be transformed, we can push a new commit to the pull request.
-2. We could periodically (or make this an action that can be triggered manually, e.g. a script that we run on the side) go over all the currently used configs and search for possible transformations and proactively make a PR to the respective repositories.
+2. We could periodically (or make this an action that can be triggered manually, e.g. a script that we run on the side) go over all the currently used configs and search for possible transformations and proactively make a PR to the respective repositories. This could also be run after production deployment.
 
 A disadvantage of 1) is that it requires user action (in the form of a PR).
 If a project that has Packit enabled doesn't have any PR for a few months, during which we change the config and remove support for the old format, things like triggering `propose-downstream` won't work because the config will be invalid (because there was no PR where we could update it) and unparsable.
