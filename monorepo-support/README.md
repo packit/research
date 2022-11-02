@@ -15,9 +15,7 @@ which dist-git repo in the distribution needs to be introduced.
 
 This could be done by introducing a `packages` key, to hold a dictionary of
 `{package_name: package_object}`. Package-objects would have keys identical
-to the current top-level keys in `.packit.yaml` and `source-git.yaml`, except
-`upstream_project_url` and `upstream_ref`—these are left to be top-level keys
-only.
+to the current top-level keys in `.packit.yaml` and `source-git.yaml`.
 
 A package-object could also have a new `paths` key which is a list of
 paths in the monorepo which map to the dist-git repo specified by
@@ -26,8 +24,9 @@ paths in the monorepo which map to the dist-git repo specified by
 If `downstream_package_name` is not specified, it would be assumed that the
 dist-git repo is called `package_name`.
 
-If `package.paths` is not defined, it defaults to the path matching
-`package_name`, that is to `paths: [<package_name>]`.
+If `package.paths` is not defined, it defaults to the root of the monorepo,
+that is to `paths: ["./"]`. This probably implies that paths need to be
+explicitly defined for each package.
 
 When processing a package from a monorepo, Packit should operate within these
 paths, that is, limit patch generation from Git-history to these paths, and
