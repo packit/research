@@ -28,6 +28,7 @@ This repo is used to document research performed by the packit team.
 - [Workers scaling](./workers-scaling)
 - [Logs aggregation](./logs-aggregation)
 - [Using Zuul for source-git in CentOS Stream](./source-git-in-zuul/README.md)
+- [GitHub API call inventory](./github-api-call-inventory/README.md)
 
 ## Organization of this repository
 
