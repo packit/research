@@ -51,9 +51,9 @@ Set the offline token via `REDHAT_API_OFFLINE_TOKEN` env var and run the
 
 The integration is pretty straightforward:
 
-1. Create a new job: "image-builder" (or "image-build"?)
-2. Implement a handler for it (trigger = successful Copr build)
-3. Create a babysit task that will wait for the build completion
+1. Create a new job: "vm-image-build"
+2. Implement a handler for it (trigger = successful Copr build + explicit `/packit` command)
+3. Wait for the build to finish: babysit/polling/celery
 4. Auth - create a 'service' account for Packit on access.redhat.com
 
 - Attach employee SKU to it
@@ -65,4 +65,4 @@ The integration is pretty straightforward:
   uploaded image with it)
 
 5. Once the build is done, put a comment in a PR that the build is done and
-   provide steps how to launch it
+   provide steps how to access it and possibly launch it
