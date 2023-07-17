@@ -1,44 +1,48 @@
 # Research notes
 
-This repo is used to document research performed by the packit team.
-
-## Topics covered
-
-- [`git notes` as a storage of our data](./git_notes)
-- [Tools/libraries similar or related to the Packit](./automation-tools)
-- [Zuul CI](./zuul)
-- [Deprecation policy](./deprecation)
-- [User stories related to our work](./user-stories/)
-- [Summit 2020 demo](summit-demo/)
-- [External Testing](external-testing/)
-- [Monitoring Packit Service](monitoring/)
-- [Packit-service deployment research](ps_deployment)
-- [Distributed workers](distributed-workers) and [AWS](AWS-SQS-RDS)
-- [Deploy a testing instance for Packit-as-a-Service](./deploy-packit-pr/)
-- [Improving https://packit.dev/](./website-improvements/)
-- [Automation for moving the stable branches](./automation-for-stable-branches)
-- [Error budgets](./error-budgets/)
-- [Support for Monorepos](./monorepo-support/README.md)
-- [Oauth integration](./oauth)
-- [Making technical decisions in our projects](./making-decisions/)
-- [`packit source-git update-source-git` research](./update-source-git/)
-- [Customize `source-git update-source-git`](./customize-update-dist-git/)
-- [Fedora Spec Files analysis](./fedora-spec-files/)
-- [Verifying the sync status of source-git and dist-git repos](source-git-sync-status/README.md)
-- [Workers scaling](./workers-scaling)
-- [Logs aggregation](./logs-aggregation)
-- [Using Zuul for source-git in CentOS Stream](./source-git-in-zuul/README.md)
-- [GitHub API call inventory](./github-api-call-inventory/README.md)
+This repo is used to document research performed by the Packit Team.
 
 ## Organization of this repository
 
 ### How to add new findings?
 
-1. Please create a new directory in this repository.
-2. Create a README.md document in that directory.
-3. Make sure your README.md contains a clear description of what the outcome is
+1. Try to find an appropriate category for your topic. In case there is none yet,
+   you can create a new directory with `_category_.yml` file that describes the
+   category.
+1. Please create a new directory in the [research](research/) directory.
+1. Create an `index.md` document in that directory.
+   > **Note**
+   > In case you're working on a follow-up research, feel free to just add a new
+   > Markdown file next to already existing research.
+1. Make sure your `index.md` contains a clear description of what the outcome is
    from your research topic: ideally propose what the next steps should be.
    It's completely fine to tell that the technology is not interesting to us
    and there are no further actions.
-4. Add everything related to your topic in the directory.
-5. Open a pull request.
+1. Add everything related to your topic in the directory.
+1. Open a pull request.
+
+### Template for research
+
+```md
+---
+title: ‹Title of your research›
+authors: ‹Kerberos logins of authors, e.g. login or [login_a, login_b]›
+---
+
+## Description
+
+## Acceptance criteria
+
+---
+
+‹findings›
+
+---
+
+## Next steps
+```
+
+> **Warning**
+> Authors are not checked against the list of authors as with the blog posts,
+> keeping the authors in the attributes of research is just a courtesy to avoid
+> unnecessary _git blaming_.
