@@ -78,7 +78,7 @@ We have various way, how to save metadata for regeneration:
   - ➕ can be seen/reviewed
   - ➕ preserved between git commits
   - ➖ is not connected with the commit (the mapping can be added)
-- git note (see [Git Notes research](../git_notes) for more info):
+- git note (see [Git Notes research](/research/git-notes) for more info):
   - ➕ attached to the git commit
   - ➕ can be changed, but not so easily as a regular file
   - ➖ not preserved between git commits (easier usage if we use it together with second proposal)

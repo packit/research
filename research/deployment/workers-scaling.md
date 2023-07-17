@@ -42,7 +42,7 @@ because that's what [Celery User Guide suggests](https://docs.celeryq.dev/en/sta
 
 ## worker --concurrency
 
-The same [commit](<(https://github.com/packit/packit-service/commit/5d199cfee54dafd9a5cd5dadc1086e15d78598e5)>)
+The same [commit](https://github.com/packit/packit-service/commit/5d199cfee54dafd9a5cd5dadc1086e15d78598e5)
 that set `--prefetch-multiplier=1` also set `--concurrency=1`
 (number of concurrent worker processes/threads executing tasks)
 even it's probably had no effect because [the default is "number of CPUs/cores on the host"](https://docs.celeryq.dev/en/stable/userguide/configuration.html#std-setting-worker_concurrency)

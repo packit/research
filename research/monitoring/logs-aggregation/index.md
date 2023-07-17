@@ -71,7 +71,7 @@ Other teams using Splunk:
   to [forward logs to Splunk via syslog](https://docs.engineering.redhat.com/pages/viewpage.action?spaceKey=EXD&title=Instructions+on+Log+forwarding+-+Syslog)
   , AFAIK this can't be used outside VPN
 - Image builder
-  - Their composer runs in a ROSA cluster as well and uses a [Fluentd sidecar](<(https://github.com/osbuild/osbuild-composer/blob/main/templates/composer.yml#L123)>)
+  - Their composer runs in a ROSA cluster as well and uses a [Fluentd sidecar](https://github.com/osbuild/osbuild-composer/blob/main/templates/composer.yml#L123)
     container which communicates with the main container via syslog and forwards
     the logs to Splunk’s HTTP Event Collector (HEC).
   - ![Image builder's composer](img/composer.png)

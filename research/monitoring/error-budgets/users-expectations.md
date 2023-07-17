@@ -5,7 +5,7 @@ authors: jpopelka
 
 ## Users expectations
 
-To adopt [Error Budget](README.md) for Packit Service we asked our users
+To adopt [Error Budget](/research/monitoring/error-budgets) for Packit Service we asked our users
 to provide their feedback on what they expect from the service in areas of
 reliability, availability, performance, etc.
 

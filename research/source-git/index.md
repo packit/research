@@ -38,7 +38,7 @@ What changes can occur?
 
 #### 3. Revert & Regenerate
 
-- We can use same solution we discussed [updates from distgit](../dist-git-to-src-git/updates.md).
+- We can use same solution we discussed [updates from distgit](/research/source-git/dist-git-to-src-git/updates).
 
 ![revert-and-regenerate-upstream-release](img/revert-and-regenerate-upstream-release.svg)
 
@@ -55,7 +55,7 @@ What changes can occur?
 - Create a new source-git branch for a new release.
 - Have one main source-git branch that will always contain the current source-git.
   The updates will be done by reverting and recreating the new source-git on top of the old one.
-  - Various options mentioned in [updates from distgit](../dist-git-to-src-git/updates.md).
+  - Various options mentioned in [updates from distgit](/research/source-git/dist-git-to-src-git/updates).
 - No force-push needed.
 
 ![sync-upstream-release+revert-and-regenerate](img/sync-upstream-release+revert-and-regenerate.svg)

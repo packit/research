@@ -3,7 +3,7 @@ title: Cloud databases
 authors: jpopelka
 ---
 
-In [Distributed workers](../distributed-workers/README.md) we realized we need a cloud database
+In [Distributed workers](/research/deployment/distributed-workers) we realized we need a cloud database
 in order to be able to have workers in a private cloud (PSI).
 
 Since we already have AWS account (log in with your kerberos credentials
