@@ -1,4 +1,7 @@
-# Usage of composite type to store the pipelines
+---
+title: Usage of composite type to store the pipelines
+authors: lbarczio
+---
 
 [Composite column types](https://docs.sqlalchemy.org/en/14/orm/composites.html):
 Sets of columns can be associated with a single user-defined datatype, which in modern use is normally a Python dataclass. The ORM provides a single attribute which represents the group of columns using the class you provide.
