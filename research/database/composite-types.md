@@ -139,7 +139,7 @@ packit=# SELECT AVG(copr_build_target_count) FROM (
 (1 row)
 ```
 
-- similar situation for Copr builds <> TF runs, since the relationship can be 1:n
+- similar situation for Copr builds ⋄ TF runs, since the relationship can be 1:n
 
 ##### Average number of tests using the same Copr build
 
