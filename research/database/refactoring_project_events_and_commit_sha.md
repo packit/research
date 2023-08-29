@@ -1,5 +1,5 @@
 ---
-title: `commit_sha` refactor follow-up
+title: ‹commit_sha› refactor follow-up
 authors: mmassari
 ---
 
