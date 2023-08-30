@@ -1,0 +1,46 @@
+name: Test deployment
+
+on:
+  pull_request:
+    branches:
+      - main
+  # Allow running it from the merge queue
+  merge_group:
+
+jobs:
+  test-deploy:
+    name: Test deployment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: "packit/packit.dev"
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+
+      - name: Import the nested docs
+        run: make import
+
+      - name: Remove the ‹main› of ‹research›
+        run: rm -rf .research-docs research
+
+      - name: Checkout the PR
+        uses: actions/checkout@v3
+        with:
+          path: ".research-docs"
+
+      - name: Move out the ‹research›
+        run: mv .research-docs/research research
+
+      - name: Generate newer usage graphs
+        run: |
+          pip3 install click requests pygal
+          python3 files/generate_usage.py
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Test build website
+        run: yarn build
