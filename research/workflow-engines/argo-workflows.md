@@ -57,7 +57,40 @@ spec:
         args: ["{{inputs.parameters.message}}"]
 ```
 
+> it can be specified which Role (i.e. which permissions) the ServiceAccount that Argo uses by binding a
+> Role to a ServiceAccount using a RoleBinding (by default, ServiceAccount from the namespace from which it is run, which will almost always have insufficient privileges by default)
+
+> All pods in a workflow run with the service account specified in workflow.spec.serviceAccountName, or if omitted, the default service account of the workflow's namespace.
+
 - provides UI
 - workflows can be run using `Argo CLI` or directly `kubectl`
+- provides an API and client libraries:
+  - for Python there is an auto-generated one without good documentation: https://github.com/argoproj/argo-workflows/tree/master/sdks/python
+  - example:
+
+```python
+# imports
+
+manifest = IoArgoprojWorkflowV1alpha1Workflow(
+    metadata=ObjectMeta(generate_name='hello-world-'),
+    spec=IoArgoprojWorkflowV1alpha1WorkflowSpec(
+        entrypoint='whalesay',
+        templates=[
+            IoArgoprojWorkflowV1alpha1Template(
+                name='whalesay',
+                container=Container(
+                    image='docker/whalesay:latest', command=['cowsay'], args=['hello world']))]))
+
+api_client = argo_workflows.ApiClient(configuration)
+api_instance = workflow_service_api.WorkflowServiceApi(api_client)
+
+if __name__ == '__main__':
+    api_response = api_instance.create_workflow(
+        namespace='argo',
+        body=IoArgoprojWorkflowV1alpha1WorkflowCreateRequest(workflow=manifest),
+        _check_return_type=False)
+    pprint(api_response)
+```
+
 - complex architecture: https://github.com/argoproj/argo-workflows/blob/master/docs/architecture.md
-- doesn't look like a fit for us
+- doesn't look like a fit for us - not that flexible definition of tasks that we would need

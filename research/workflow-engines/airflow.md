@@ -51,8 +51,17 @@ dynamic_workflow()
 
 ```
 
-- Airflow uses schedulers and executors to manage task execution. The scheduler determines when to execute tasks, while the executor defines how tasks are run. Airflow supports various executors, including SequentialExecutor, LocalExecutor, and CeleryExecutor.
+- Airflow uses schedulers and executors to manage task execution. The scheduler determines when to execute tasks,
+  while the executor defines how tasks are run.
+  - Airflow supports various executors:
+  - https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/index.html#executor-types
+    - local ones: e.g. SequentialExecutor, LocalExecutor
+    - remote ones: e.g. CeleryExecutor, CeleryKubernetesExecutor, KubernetesExecutor
 - allows dynamic pipelines generation
+- sensors: type of operators designed to wait for something to occur:
+  - https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/sensors.html
+    > It can be time-based, or waiting for a file, or an external event, but all they do is wait until something happens, and then succeed so their downstream tasks can run.
+  - these look like a good fit for waiting for a message from messaging bus
 - provides UI ![UI](https://airflow.apache.org/docs/apache-airflow/stable/_images/dags.png)
 - from `Why not` in docs:
   > Airflow™ was built for finite batch workflows. While the CLI and REST API do allow triggering workflows, Airflow was not built for infinitely running event-based workflows. Airflow is not a streaming solution. However, a streaming system such as Apache Kafka is often seen working together with Apache Airflow. Kafka can be used for ingestion and processing in real-time, event data is written to a storage location, and Airflow periodically starts a workflow processing a batch of data.
@@ -62,6 +71,21 @@ dynamic_workflow()
 Details: https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/celery.html
 
 - it is also possible to use Flower UI
+
+## CeleryKubernetesExecutor
+
+> allows users to run simultaneously a CeleryExecutor and a KubernetesExecutor. An executor is chosen to run a
+> task based on the task’s queue.
+
+Details: https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/celery_kubernetes.html
+(also see the section [when to use](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/celery_kubernetes.html#when-to-use-celerykubernetesexecutor))
+
+## KubernetesExecutor
+
+- each task run in its own pod
+- scheduler itself does not necessarily need to be running on Kubernetes, but does need access to a Kubernetes cluster
+
+Details: https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html
 
 ## Deployment
 
