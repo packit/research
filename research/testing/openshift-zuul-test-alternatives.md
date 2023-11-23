@@ -7,7 +7,7 @@ This research is about giving an answer to [this card](https://github.com/orgs/p
 
 ## Openshift tests using podman kube play
 
-Following suggestions in [this research](https://packit.dev/research/testing/openshift-to-podman-kube-play) I have done a quick & dirty setup for running *packit-service openshift tests* using pods created with `podman kube play`.
+Following suggestions in [this research](https://packit.dev/research/testing/openshift-to-podman-kube-play) I have done a quick & dirty setup for running _packit-service openshift tests_ using pods created with `podman kube play`.
 
 ### Quick and dirty steps for make them running
 
@@ -117,7 +117,7 @@ This is a **dirty** ansible playbook for doing it
       file: "{{ path_to_secrets }}/extra-vars.yml"
       name: vault
     tags:
-      - always      
+      - always
 
     # to be able to read the github_app_id from the configuration file in tokman
   - name: include packit-service configuration
@@ -257,7 +257,7 @@ index 0d555a13..2740aa4b 100644
              - name: test-data-pv
                mountPath: /tmp/test_data
 -          command: ["bash", "/src/files/run_tests.sh"]
--  backoffLimit: 1         
+-  backoffLimit: 1
 +          #privileged: true
 +          #securityContext:
 +          #  runAsUser: 1024
@@ -281,7 +281,7 @@ index 20ec681b..297064a5 100644
        command: ["bash", "-c", "sleep 10000"]
 ```
 
-Now you can run the packit-service openshift tests using podman kube instead of starting the *service* and the *worker*; remember of running a `podman kube play --down /tmp/xxx.yaml` for every line above where you have used `podman kube play /tmp/xxx.yaml`
+Now you can run the packit-service openshift tests using podman kube instead of starting the _service_ and the _worker_; remember of running a `podman kube play --down /tmp/xxx.yaml` for every line above where you have used `podman kube play /tmp/xxx.yaml`
 
 ```bash
 podman kube play /tmp/redis.yaml
@@ -314,13 +314,13 @@ ________________________________________________ test_get_api_client ___________
         """let's make sure we can get k8s API client"""
 >       assert sandcastle.Sandcastle.get_api_client()
 
-tests_openshift/openshift_integration/test_sandcastle.py:9: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests_openshift/openshift_integration/test_sandcastle.py:9:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 /usr/local/lib/python3.9/site-packages/sandcastle/api.py:324: in get_api_client
     load_kube_config(client_configuration=configuration)
 /usr/local/lib/python3.9/site-packages/kubernetes/config/kube_config.py:792: in load_kube_config
     loader = _get_kube_config_loader(
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 filename = '~/.kube/config', config_dict = None, persist_config = True
 kwargs = {'active_context': None, 'config_persister': <bound method KubeConfigMerger.save_changes of <kubernetes.config.kube_config.KubeConfigMerger object at 0x7ff3a1ea7d30>>}
@@ -335,7 +335,7 @@ kcfg = <kubernetes.config.kube_config.KubeConfigMerger object at 0x7ff3a1ea7d30>
             kcfg = KubeConfigMerger(filename)
             if persist_config and 'config_persister' not in kwargs:
                 kwargs['config_persister'] = kcfg.save_changes
-    
+
             if kcfg.config is None:
 >               raise ConfigException(
                     'Invalid kube-config file. '
@@ -348,12 +348,13 @@ E               kubernetes.config.config_exception.ConfigException: Invalid kube
 ## Summary
 
 [`podman kube play`](https://docs.podman.io/en/v4.4/markdown/podman-kube-play.1.html) can not be used to test:
-  - *sandcastle*; we need a k8s cluster to be able to use the `kubernates` library. We could deploy pods in the cluster using [`podman kube apply`](https://docs.podman.io/en/v4.4/markdown/podman-kube-apply.1.html) but still we need an up and running cluster.
-  - *deployment*; the Openshift tests in the *deployment* repo are checking that pods are up and running on an Openshift dev instance; we can not check the same using `podman kube play` or `podman kube apply` (we would test different deployment settings...).
 
-`podman kube play` can be used for openshift tests in *packit-service* project not related with *sandcastle* but  `docker-compose` should be enough for these as well; so I don't really see advantages in using `podman kube play`.
+- _sandcastle_; we need a k8s cluster to be able to use the `kubernates` library. We could deploy pods in the cluster using [`podman kube apply`](https://docs.podman.io/en/v4.4/markdown/podman-kube-apply.1.html) but still we need an up and running cluster.
+- _deployment_; the Openshift tests in the _deployment_ repo are checking that pods are up and running on an Openshift dev instance; we can not check the same using `podman kube play` or `podman kube apply` (we would test different deployment settings...).
 
-For tests in *deployment*, *sandcastle* and in *packit-service* (which reference *sandcastle*) we still need a running k8s cluster.
+`podman kube play` can be used for openshift tests in _packit-service_ project not related with _sandcastle_ but `docker-compose` should be enough for these as well; so I don't really see advantages in using `podman kube play`.
 
-If I get it correctly, the **strimzi** project has tests running on Testing Farm using *minikube*: https://developers.redhat.com/articles/2023/08/17/how-testing-farm-makes-testing-your-upstream-project-easier#
+For tests in _deployment_, _sandcastle_ and in _packit-service_ (which reference _sandcastle_) we still need a running k8s cluster.
+
+If I get it correctly, the **strimzi** project has tests running on Testing Farm using _minikube_: https://developers.redhat.com/articles/2023/08/17/how-testing-farm-makes-testing-your-upstream-project-easier#
 For this reason I think we can probably make something similar using Openshift (maybe using Openshift Local - I think it makes sense to test everything against an Openshift instance).
