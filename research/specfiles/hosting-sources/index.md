@@ -370,3 +370,37 @@ sources.
 ```
 
 </details>
+
+### How to reproduce
+
+Rather brief description of how to reproduce follows.
+
+#### Obtaining the sources
+
+Provided by @xsuchy
+
+```bash
+for i in *spec; do
+    spectool $i |grep Source
+done >/tmp/output.txt
+```
+
+Additionally gzip-compressed.
+
+#### Processing the sources
+
+```bash
+python3 process.py ‹path to the gzip-compressed scraped sources›
+```
+
+#### Running the checker of domains
+
+Expects the list of domains in format `http(s)://domain.tld` in file
+`domains.txt` in a parent directory of the directory where the `checker.go` is
+being run from.
+
+```bash
+go run checker.go 2> log.txt
+```
+
+`log.txt` contains the logging messages, `stdout` progress bar.
