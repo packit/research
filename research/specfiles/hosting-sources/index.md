@@ -371,6 +371,33 @@ sources.
 
 </details>
 
+### Outcomes
+
+We have requested the following HTTP(s) domains to be allowed:
+
+- `codeberg.org` — as a forge that can host open-source projects
+- `kernel.org` — that has been already requested for onboarding of projects
+- `cran.r-project.org` — that has been blocking onboarding of multiple packages
+- `git.dpkg.org` — that has been blocking onboarding of packages
+- `kde.org` — as there is an initiative to support `invent.kde.org` as an
+  upstream forge, and it also hosts sources for downstream packages; KDE is also
+  supported _Fedora spin_
+- `xfce.org` — as there is a multitude of packages that could be onboarded,
+  also XFCE is a supported _Fedora spin_
+- `qt.io` — related to the `kde.org`
+- `x.org` — hosts large amount of packages with relatively low cadence of
+  upgrades, though there is a risk of patches (which do not integrate very well)
+- `ctan.math.illinois.edu` — abnormally large amount of packages (LaTeX),
+  patches are not expected, low cadence of upgrades expected, high potential
+- `hackage.haskell.org` — similarly to previous point, though related to
+  Haskell and Hackage packages
+
+As for the git forges, SSH access (port `22`, both IPv4 and IPv6) has been
+requested for:
+
+- `codeberg.org`
+- `invent.kde.org`
+
 ### How to reproduce
 
 Rather brief description of how to reproduce follows.
