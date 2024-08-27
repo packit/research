@@ -74,7 +74,7 @@ def _check_freqs(sources, domains):
 
     freqs = {}
     for source in sources:
-        if source.scheme in ("", "file"):
+        if source.scheme in IGNORED_PROTOCOLS:
             continue
 
         domain = "{scheme}://{host}".format(
