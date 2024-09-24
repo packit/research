@@ -166,6 +166,10 @@ more tailored to the needs of the Fedora CI.
 **TODO**:
 
 - [ ] Maybe have a default config configurable?
+      For context, we have [default jobs](https://packit.dev/docs/guide#jobs) on
+      the upstream in case there are no jobs specified. This could be leveraged
+      to provide some **reasonable** defaults for Koji builds and Testing Farm
+      runs on the downstream part.
 
 ### SRPM build
 
