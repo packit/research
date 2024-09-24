@@ -49,6 +49,13 @@ Should these be run in parallel or sequentially and fail on first?
 
 :::
 
+#### Installability test
+
+Installability test run by Fedora CI triggers Testing Farm and uses the
+following tmt plan: https://github.com/fedora-ci/installability-pipeline
+
+Installability test run by Zuul CI is done in the Zuul itself.
+
 ### Testing Farm
 
 Different form of request than for upstream jobs.
@@ -146,6 +153,20 @@ Most notable differences:
 
 ### Load balancing
 
+Preferably it would be ideal to have separate deployment for the “dist-git only”
+service as handling all Fedora packages would definitely increase traffic and
+could cause issues with running as both Fedora CI and original Packit Service.
+
+#### Default config
+
+Having a separate instance would also open up a door to a potential “default
+config” which could be different to our current one (SRPM, Copr build, TF) and
+more tailored to the needs of the Fedora CI.
+
+**TODO**:
+
+- [ ] Maybe have a default config configurable?
+
 ### SRPM build
 
 For Zuul is run via `fedpkg srpm`. Then it's provided for the Koji build.
@@ -153,6 +174,23 @@ For Zuul is run via `fedpkg srpm`. Then it's provided for the Koji build.
 Packit should not interefere with the way the SRPM gets built.
 
 ### Propagating Koji build
+
+As of now, the sources need to be already uploaded in the lookaside cache to run
+the RPM build in general (either Fedora CI or Zuul CI). Given that merges in
+dist-git are handled as fast-forward, it should be possible to just tag the
+build from the PR instead of rebuilding again (with the same sources and
+specfile).
+
+:::note
+
+This is definitely a _nice-to-have_, a follow-up.
+
+:::
+
+**TODO**:
+
+- [ ] Does it make sense to open a follow-up already, even if there's no PoC
+      yet?
 
 ### RPM for Testing Farm
 
@@ -168,13 +206,48 @@ Older format of tests that can be run via Zuul. Based on the TF API, Testing Far
 supports it too. Requesting STI tests from the Testing Farm should be possible,
 detection of their presence lies on Packit.
 
+**TODO**:
+
+- [ ] Should we support the STI tests?
+
+### Side tags
+
+Support for side tags has been requested in the original thread with the
+proposal. This may be required for “packaging workflows” that are more complex,
+e.g., Rust packaging (dependencies that are built as separate packages).
+
+> As a maintainer, I should be able to specify the dependencies of my package
+> that need to be verified with any proposed update.
+
 ## User perspective
 
 ### Fedora
 
+> As a maintainer I'd like to open a PR and have automated RPM build to verify
+> that, whatever I'm submitting, can be
+>
+> - built,
+> - installed, and
+> - passes the test suite.
+>
+> Adding and configuring the tests in the dist-git should be my responsibility.
+> I don't want the CI to be blocking, just annoying…
+
+**TODO**:
+
+- [ ] Packit should be able to run without any repo-specific configuration, but
+      there should be a way to override, if needed.
+
 ### Fedora SIGs
 
+AFAIK the repositories are hosted on the Fedora dist-git, therefore they should
+be handled by the Fedora CI already, the experience should be similar (if not
+the same) to the regular Fedora packages.
+
 ### CentOS SIGs
+
+As there is no streamlined CI for the CentOS SIGs, adoption would allow
+relatively simple integration with the Testing Farm.
 
 ## Difficulties depending on the forge
 
@@ -185,8 +258,43 @@ workflows, considerable overhead.
 
 ### GitLab
 
+ogr has a support for GitLab already, reporting sucks a bit, but it's not
+a blocking issue (due to the lack of upstream users, the priority of improving
+the UX has been lowered).
+
 #### Upstream vs downstream
+
+Difference between upstream and downstream events can be told easily by source
+of the webhooks (downstream come from Fedora Messaging, upstream directly from
+GitLab instances).
 
 ### Forgejo
 
-#### ogr
+Forgejo is an open-source git forge that seems to be a viable alternative to
+both Pagure and GitLab. There is no support for the forgejo in ogr as of now,
+additionally to ogr support we would need to adjust parsing of the webhooks, but
+it can completely replace the Pagure (as Fedora dist-git is the only Pagure
+instance used by Packit).
+
+## Notes from the arch discussion
+
+### Configuration
+
+For the beginning we should just handle the packages that are configured.
+
+:::warning
+
+This means that we don't want to handle _all_ Fedora packages for the _PoC/MVP_.
+
+:::
+
+### Auto-merging / gating
+
+During the implementation, we should keep in mind the possibility of polishing
+the process to eventually allow for auto-merging with improved gating (TF is
+helpful in this case a lot).
+
+**TODO**:
+
+- [ ] Consider this in the design.
+- [ ] Should not cause any annoyance for _proven packagers_
