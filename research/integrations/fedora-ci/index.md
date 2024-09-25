@@ -206,9 +206,9 @@ might be the best.
 
 ### STI tests
 
-Older format of tests that can be run via Zuul. Based on the TF API, Testing Farm
-supports it too. Requesting STI tests from the Testing Farm should be possible,
-detection of their presence lies on Packit.
+Older format of tests that can be run via Zuul. Based on the TF API, Testing
+Farm supports it too. Requesting STI tests from the Testing Farm should be
+possible, detection of their presence lies on Packit.
 
 **TODO**:
 
@@ -222,6 +222,23 @@ e.g., Rust packaging (dependencies that are built as separate packages).
 
 > As a maintainer, I should be able to specify the dependencies of my package
 > that need to be verified with any proposed update.
+
+### Upstream vs Downstream
+
+By default, we sync the Packit config to the downstream. This can cause a
+conflict when Packit runs as a Fedora CI, since the config would override any
+defaults that we would've set.
+
+Additionally, there needs to be a way to distinguish between upstream/downstream
+jobs anyways, cause Testing Farm runs on the downstream install RPMs from the
+Koji rather than Copr.
+
+:::warning
+
+It would probably be easier to run stateless as the current CI, utilizing only
+defaults and ignoring any Packit config that is present.
+
+:::
 
 ## User perspective
 
@@ -302,3 +319,20 @@ helpful in this case a lot).
 
 - [ ] Consider this in the design.
 - [ ] Should not cause any annoyance for _proven packagers_
+
+## Follow-up cards
+
+- [ ] Allow triggering of the Testing Farm with Koji build (instead of the Copr
+      build)
+- [ ] Allow triggering of the Testing Farm **STI** tests with Koji build (or in
+      general)
+- [ ] After PoC and final decision, deploy a separate instance to handle only
+      Fedora CI queue
+- [ ] Try to unify _installability pipeline_ with the tmt plan for install test
+      that we already have
+- [ ] Packit needs to be able to deduce the build target based on the branch
+      rather than config (i.e., Packit triggered by push to `f40` branch in the
+      dist-git should run Testing Farm for the F40; this **can't** be deduced
+      from the config)
+- [ ] Allow Packit to have customizable default config (more details above)
+- [ ] Allow Packit to run without any config (utilizing the previous point)
