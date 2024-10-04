@@ -33,11 +33,40 @@ the results of the SRPM build, i.e., just run `fedpkg srpm` and be done with it.
 This can be done within the sandbox as we do for non-scratch builds. However it
 might need some tweaking as Packit has specific worfklow.
 
+:::note Questions from review
+
+> This is a very interesting point -- do we want to be consistent as much as
+> possible with Packit's upstream implementation or be close to the real Fedora
+> builds.
+>
+> I agree the suggested approach `fedpkg srpm` makes more sense from the user
+> perspective since this results in the production-like result.
+
+With respect to downstream, I would be definitely voting for avoiding adjusting
+the SRPM creation. Adjusting the SRPM creation in any way enables the chance of
+inconsistencies, i.e., I have green CI, but once I merge it doesn't build. I
+don't think many maintainers would like that :D
+
+> How do we want to handle sources? (Do we want to continue with the current
+> trend of requiring sources in the lookaside cache?)
+
+I'm not really sure, but if we go deep into the possible improvements then it's
+quite possible that most of this initiative will not be achievable :)
+
+:::
+
 ### Koji scratch build
 
 We are already submitting scratch builds for merged PRs, if configured. This
 would just extend the functionality to the non-merged PRs (with need to provide
 the SRPM).
+
+:::note Review
+
+And we have scratch build functionality for upstream PRs available as well if
+this is anyhow relevant.
+
+:::
 
 ### RPM linting, inspect and installability test
 
@@ -46,6 +75,18 @@ There are premade tmt plans that we can run.
 :::note Question
 
 Should these be run in parallel or sequentially and fail on first?
+
+Follow-up question from review:
+
+> Are some of these somehow dependent?
+
+From the excerpt here (linting, installability, tests), it feels like linting
+should not be a hard blocker. I've seen the installability tests fail (even if
+tests passed) just because of the network flakes and such, so…
+
+In the sense of saving the resources, it definitely makes sense to make _full_
+_test suite_ dependent on the _installability_, but if it's flakey, it's just
+annoying.
 
 :::
 
@@ -156,6 +197,29 @@ Most notable differences:
 Preferably it would be ideal to have separate deployment for the “dist-git only”
 service as handling all Fedora packages would definitely increase traffic and
 could cause issues with running as both Fedora CI and original Packit Service.
+
+:::note Question from review
+
+> Would this mean `dist-git CI` and the current Packit? Or, Packit upstream and
+> Packit Fedora automation (including Koji, Bodhi and maybe also propose/pull)?
+
+I've been thinking about a way to split this in some reasonable matter :D Based
+on the way Packit operates, the most reasonable would be splitting the
+upstream/downstream parts, i.e.,
+
+- Packit Service (handles upstream **and** `propose-downstream` (as it is
+  triggered by upstream))
+- “Packit as Fedora CI” (handles downstream **and** `pull-from-upstream`)
+
+**However** I rant somewhere about the config in the dist-git and default config
+:D and this complicates things a lot :/ Maybe we could treat PRs in a special
+way for the _downstream PRs_ (Koji + TF).
+
+---
+
+feels like whack-a-mole…
+
+:::
 
 #### Default config
 
@@ -279,9 +343,25 @@ workflows, considerable overhead.
 
 ### GitLab
 
-ogr has a support for GitLab already, reporting sucks a bit, but it's not
-a blocking issue (due to the lack of upstream users, the priority of improving
-the UX has been lowered).
+ogr has a support for GitLab already, reporting sucks, but it's not a blocking
+issue (due to the lack of upstream users, the priority of improving the UX has
+been lowered).
+
+:::warning GitLab UX
+
+There are limitations on how Packit can improve the user experience on GitLab.
+
+GitLab is focused on providing the best user experience when using their own
+GitLab CI, external services must either just report commit statuses (unlike on
+GitHub that allows Check Suites and Check Runs), or integrate into the GitLab
+codebase itself.
+
+This hinders the user experience significantly.
+
+> Switching from Pagure to GitLab sounds effectively like getting rid of the
+> stability issues while maintaining the poor UX.
+
+:::
 
 #### Upstream vs downstream
 
@@ -320,14 +400,17 @@ helpful in this case a lot).
 - [ ] Consider this in the design.
 - [ ] Should not cause any annoyance for _proven packagers_
 
+:::note Review
+
+There's an [RFE](https://github.com/packit/packit-service/issues/1723) for
+a workflow that involves auto-landing PRs in the Fedora dist-git.
+
+:::
+
 ## Follow-up cards
 
 - [ ] Allow triggering of the Testing Farm with Koji build (instead of the Copr
       build)
-- [ ] Allow triggering of the Testing Farm **STI** tests with Koji build (or in
-      general)
-- [ ] After PoC and final decision, deploy a separate instance to handle only
-      Fedora CI queue
 - [ ] Try to unify _installability pipeline_ with the tmt plan for install test
       that we already have
 - [ ] Packit needs to be able to deduce the build target based on the branch
@@ -336,3 +419,7 @@ helpful in this case a lot).
       from the config)
 - [ ] Allow Packit to have customizable default config (more details above)
 - [ ] Allow Packit to run without any config (utilizing the previous point)
+- [ ] After PoC and final decision, deploy a separate instance to handle only
+      Fedora CI queue
+- [ ] Allow triggering of the Testing Farm **STI** tests with Koji build (or in
+      general)
