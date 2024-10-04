@@ -302,6 +302,11 @@ Koji rather than Copr.
 It would probably be easier to run stateless as the current CI, utilizing only
 defaults and ignoring any Packit config that is present.
 
+It might be possible to “abuse” the `packit_instances` key in the config to
+differentiate the normal deployments (`prod`, `stg`, `dev`) from a potential
+Fedora CI deployment. OTOH together with syncing the upstream configs to
+downstream, it may cause an incomprehensible mess.
+
 :::
 
 ## User perspective
