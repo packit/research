@@ -7,7 +7,7 @@ sidebar_position: 1
 
 You can customize the service configuration for a user project in two different ways:
 
-1. There is a configuration on the service side which has to be updated by the service team (upon notification from the service users for opt-in or opt-out from the service). This is how you can enable or disable Zuul for the Fedora CI nowadays: .
+1. There is a configuration on the service side which has to be updated by the service team (upon notification from the service users for opt-in or opt-out from the service). This is how you can enable or disable Zuul for the Fedora CI nowadays.
    I will refer to this solution as a **top-down solution**.
 2. There is a configuration, related with the service, on the user's project side. This is how packit works today. I will refer to this solution as a **bottom-up solution**.
 
@@ -359,3 +359,98 @@ Or we can have just one packit config
   However if the user configuration is against the will of our configuration we should decide which configuration wins (I would say ours)
 - it should be visible which is the result of applying the user packit config to a packit instance config. So we should probably have a command line or a packit service command to show the user the resulting configuration.
 -->
+
+# Packit 1.0.0 release - package config related notes
+
+Releasing packit 1.0.0 has been useful to realize we already struggle with handling multiple packit configurations "per project" (even though it is not easy to say what a "project" is...).
+
+I write my findings down because I think the solution we choose should help us handle these corner cases better next time.
+
+## `python-noggin-messages` and `libmodulemd` projects configurations
+
+### `python-noggin-messages`
+
+- The `configuration-migrations` script had generated a [PR to update the upstream configuration](https://github.com/fedora-infra/noggin-messages/pull/400/files) and the team merged it.
+- However, the downstream configuration remained inconsistent and was throwing errors in packit service, thus I [created a PR manually](https://src.fedoraproject.org/rpms/python-noggin-messages/pull-request/9)
+
+```yaml
+[...]
+files_to_sync:
+    - python-noggin-messages.spec
+    - 0001-Revert-Include-additional-files-in-the-sdist.patch
+    - README.md
+    - sources
+    - .packit.yaml
+[...]
+  - job: sync_from_downstream
+    trigger: commit
+```
+
+### `libmodulemd`
+
+- The `configuration-migrations` script had generated a PR, the changes were integrated through another [PR](https://github.com/fedora-modularity/libmodulemd/commit/c6ffc068985ded1e3cb6875762eaa8803b63052d).
+- However, the downstream configuration remained inconsistent and was throwing errors in packit service, thus I [created a PR manually](https://src.fedoraproject.org/rpms/libmodulemd/pull-request/38)
+
+```yaml
+specfile_path: fedora/libmodulemd.spec
+upstream_package_name: libmodulemd
+upstream_project_url: https://github.com/fedora-modularity/libmodulemd
+downstream_package_name: libmodulemd
+
+actions:
+  get-current-version: ./get_version.sh
+
+files_to_sync:
+  - fedora/
+  - .packit.yaml
+
+jobs:
+  - job: sync_from_downstream
+    trigger: commit
+
+  - job: copr_build
+    trigger: pull_request
+    metadata:
+      targets:
+        - fedora-all
+        - epel-7
+        - epel-8
+        - centos-stream-9
+```
+
+### The problems
+
+The first problem I see is that the downstream configuration remains inconsistent until a `propose-downstream` is performed and sometimes even later (I saw a [user](https://src.fedoraproject.org/fork/packit/rpms/libxcrypt/c/1488467390566ebc3fd1ab8e58e510da091c4d8e) not accepting the PRs created by packit and thus letting the downstream config broken).
+
+The second problem is the inconsistent upstream configuration, if I am not mistaken, the users want both the packit downstream configuration copied from the upstream and the other way around (I would say that, in this case, the `sync_from_downstream` job should not exist and it is the one that triggers the `Cannot load package config` exceptions running packit-service against the dist-git configuration). Even though the problem here is easily solved, I think this is a good example of how hard it is for our users (and not only) to understand which key belongs to which automation and be sure they are not conflicting.
+
+What if the downstream configuration also has a `pull-from-upstream` job and diverges from the upstream? This is obviously an error, but still not easily understandable.
+
+### Possible solutions
+
+I think it could be helpful process the config against a template (a default one, just for packit service) before loading it; we can easily remove the not needed keys and minimize the inconsistencies (probably we can also easily rename keys, making the next breaking changes in packit less painful in service). Nonetheless, we should find a way to show us and the users how the config appears after we process it.
+
+It could be helpful to increase awareness of which sections of the config are affecting which automation (upstream ci, downstream sync release) when showing the post processed configuration.
+
+Since we are copying the configuration from the upstream to the downstream, almost every time, we can not simply say that the upstream config is just for the _upstream ci_ and the downstream config works for the _downstream sync_, we already have a mix of both. And we need to increase awareness for the users (and us) on which key belongs and affect which automation.
+
+It is useful to have the complete configuration (upstream ci + downstream sync release) also downstream. Because the packit.yaml file could be used via Packit CLI in a downstream repo, as an example to trigger a copr build. But, not always the downstream config is managed by an upstream one, thus I think we should make it more visible and more consistent when it is and when it is not.
+**Referring a configuration** can be useful here, instead of copying the packit configuration downstream (only when a propose-downstream is performed) we can make the downstream configuration always consistent by _referencing the upstream one_. If a project has both a packit upstream config and a downstream one then its downstream config should probably reference the upstream, however the downstream can choose to remove the upstream reference and let the configurations diverge. If there is no upstream config reference then the downstream config can implicitly refer to a default _downstream sync_ packit service template.
+
+# Overall proposed solution
+
+We chose to follow a _bottom-up_ global config solution **but** for the _fedora distgit ci_ we start with a _top down_ solution.
+
+We will not have every package in Fedora enrolled in our _fedora distgit ci_ at the beginning, therefore we can start listing the _few_ allowed packages in our internal packit service configuration file. When packit would be enabled for most/all of the Fedora packages we can change the approach and let the packages opt-out or customize their _fedora distgit ci_ packit experience through a configuration that lives in their project `packit.yaml` file.
+
+In the meantime we can implement the _bottom-up-> templating + overlay_ mechanism and apply it to `packit`, `specfile` and `ogr` distgit configurations.
+Later, if this is working well for us, we can propose "middle layer templates" for groups of packages.
+
+As a result for the first implementation we should be able to put a `config` key in https://src.fedoraproject.org/rpms/packit/blob/rawhide/f/.packit.yaml that references the upstream packit config https://github.com/packit/packit/blob/main/.packit.yaml and ideally remove any other existing key; the downstream sync release for packit should not be affected by the change!
+
+- we need to add a `config` key to the schema
+- we need to load the packit.yaml file and search for the `config` key in it. If a `config` key is found we need to **recursively** - at the beginning we could also have a limited depth of 3/n steps and no more and then we can choose to implement some recursion detection algorithm if more than a couple of steps are needed - look for the parent configs and start processing all the templates in the chain, creating a new temporary packit.yml that will be used instead of the original one.
+  We should make the new code work both for the packit CLI and the packit-service. Thinking at packit CLI, we should probably stay flexible and let the `base: URI` be also a local url (like `file:///`).
+- we need to decide how to deal with `files_to_sync: packit.yml`; probably we can just remove it from the upstream config. But we should think what to do when `files_to_sync` is not defined at all (that means packit.yml is always copied from upstream to downstream), probably in those cases (which are most of the downstream sync only automations) there is no need for copying packit by default?
+- let the user know what the final configuration looks like (both for CLI and service); we should probably implement a CLI command that outputs the result of the pre-processing, and use it later in service. Would be nice if the output shows clearly which key affects which _automation chain_ (upstream ci, downstream sync release, downstream ci...)
+- we can also implement the default internal packit-service base template (I would just start with one, and see later if having more of them can be useful). We can try, as an example, to remove the [`metadata` key](https://github.com/packit/packit/issues/2509) through it. In this way, when we will work on the linked card, we will be able to release a breaking change in packit, without breaking the packit service automation. We can always propose updates for the users configurations, but if our users don't accept them we can still work with the old configurations, at least on the packit service side.
