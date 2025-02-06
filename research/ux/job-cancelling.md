@@ -123,4 +123,39 @@ cancel running scans.
 
 Suggested splitting into subtasks:
 
-_TODO_
+- [ ] Implement cancelling in the Packit API (knowing what needs to be
+      cancelled, i.e., Copr build ID, Testing Farm request, etc.)
+
+- [ ] Implement methods that would yield respective jobs to be cancelled, i.e.,
+      after retriggering a Copr build, we should get a list of running Copr
+      builds associated with the previous trigger
+
+- [ ] Improve the previous method by incorporating subsequent jobs
+
+  - _NOTE_: this might get more complex after implementation of job dependencies
+
+- [ ] Allow users to cancel running jobs via comment
+
+- [ ] Allow users to cancel running jobs via custom GitHub Check _action_
+
+  - _NOTE_: custom action can incorporate additional metadata provided by us,
+    therefore cancelling this way could be pretty cheap (there would be no need
+    to deduce which jobs need to be cancelled)
+  - _NOTE_: there's a smallish issue of differentiating of what should be
+    cancelled (could be handled by multiple custom actions), for example:
+    - _Copr build for specific target_
+    - _Copr build for all targets_
+    - _Copr build for all targets matching an identifier_
+
+- [ ] Automatically cancel running jobs once an update happens, e.g., push to
+      a PR, branch, or retriggering via comment.
+
+- [ ] (optionally, low-prio) Allow this to be configurable
+
+  - _use case_: I want to be able to test multiple Copr builds, even if they
+    were triggered in a succession of pushes
+  - _NOTE_: this use case could be more beneficial for running _commit_ events
+    rather than PR, i.e.
+
+    > as a maintainer I'd like to retain **all** builds
+    > that were pushed to the `main`, or `stable`
