@@ -130,6 +130,9 @@ Suggested splitting into subtasks:
       after retriggering a Copr build, we should get a list of running Copr
       builds associated with the previous trigger
 
+- [ ] Automatically cancel running jobs once an update happens, e.g., push to
+      a PR, branch, or retriggering via comment.
+
 - [ ] Improve the previous method by incorporating subsequent jobs
 
   - _NOTE_: this might get more complex after implementation of job dependencies
@@ -146,9 +149,6 @@ Suggested splitting into subtasks:
     - _Copr build for specific target_
     - _Copr build for all targets_
     - _Copr build for all targets matching an identifier_
-
-- [ ] Automatically cancel running jobs once an update happens, e.g., push to
-      a PR, branch, or retriggering via comment.
 
 - [ ] (optionally, low-prio) Allow this to be configurable
 
