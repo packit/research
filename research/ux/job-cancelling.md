@@ -24,15 +24,55 @@ succeeds.
 
 :::
 
+We should differentiate here based on the trigger / event.
+
 :::note
 
-When pushing to branches git forges usually provide previous commit hash, parse
-and provide it in the event, so that we can optimize the lookup in the database
-on our side.
+In general, when pushing to branches git forges usually provide previous commit
+hash, parse and provide it in the event, so that we can optimize the lookup
+in the database on our side.
 
 :::
 
-_TODO_
+### Triggered by commit / pull request
+
+:::note
+
+In both cases we should be given previous commit hash.
+
+:::
+
+In the most ideal scenario, we should utilize the provided previous commit, to
+find the latest pipeline that might be still running.
+
+#### Lookup based on the commit hash
+
+Finding the latest pipeline that might be still running based on the commit hash
+can be done by lookup through `PipelineModel` and `ProjectEventModel` (provided
+via `project_event_id`) that has a commit hash attribute.
+
+#### Alternative approach
+
+:::note
+
+Looks much simpler using the ORM, but boils down to the enumeration below
+anyways.
+
+:::
+
+1. Join on `pipelines × project events`
+1. Filter by event type (commit or pull request)
+1. Join on `(pipelines × project events) × specific events`
+1. And then find latest by
+   - commit: branch
+   - pull request: PR ID
+
+### Triggered by release
+
+tl;dr _n/a_
+
+Doesn't make sense to consider, since there is no reasonable scenario for
+_re-releasing_.
 
 ### Subsequent jobs
 
