@@ -9,7 +9,7 @@ This research aims to evaluate these benefits and outline the key aspects of a p
 
 ## [FastAPI](https://fastapi.tiangolo.com/)
 
-### Advantages:
+### Advantages
 
 - automatic documentation: OpenAPI, Swagger
 - data validation, type hints: Python’s type annotations and [Pydantic](https://docs.pydantic.dev/latest/) for data validation
@@ -19,6 +19,14 @@ This research aims to evaluate these benefits and outline the key aspects of a p
 - good ecosystem, community
 - async support
 - performance
+- filtering, searching, pagination should be more easier to do
+
+### Disadvantages (from our architecture discussion)
+
+- frequent updates, maintenance overhead
+- Pydantic v2 Rust dependency: Pydantic v2 requires a Rust toolchain, which can be difficult to manage
+  on LTS-based distributions. Since we use Fedora-based images in OpenShift and can also pin dependencies,
+  this is unlikely to be a major blocker.
 
 ### Considerations
 
@@ -44,12 +52,12 @@ This research aims to evaluate these benefits and outline the key aspects of a p
 
 ### Implementing models
 
-This is not strictly required (for the GET requests) but significantly improves the migration's value and is highly recommended.
-
-Previous attempt to document the endpoints with Flask:
-
-- https://github.com/packit/packit-service/pull/2089/files
-- the biggest issues: lot of duplication and additional code, change in serialization
+- this is not strictly required (for the GET requests) but significantly improves the migration's value and is highly recommended.
+- it would be also our primary reason for migration:
+  - could be fixed in Flask, but the effort would be similar to a full migration
+  - previous attempt to document the endpoints with Flask:
+    - https://github.com/packit/packit-service/pull/2089/files
+    - the biggest issues: lot of duplication and additional code, change in serialization
 
 #### Using Pydantic with our existing models
 
@@ -101,11 +109,10 @@ class User(SQLModel, table=True):
 
 ### Gradual rewrite
 
-- run Flask and FastAPI together
-- pick a few endpoints (e.g. file by file) and migrate
-- redirect traffic to FastAPI for migrated endpoints
-- repeat until everything is in FastAPI
-- remove Flask completely
+- keep existing Flask endpoints and introduce FastAPI under e.g. `/api/v1/`
+- migrate endpoints gradually (e.g., file by file) to FastAPI
+- update code to use the new endpoints
+- once all critical endpoints are migrated, remove Flask entirely
 
 - smaller risk of breaking something
 - work could be paralelised
