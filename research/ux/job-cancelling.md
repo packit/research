@@ -45,7 +45,19 @@ In both cases we should be given previous commit hash.
 In the most ideal scenario, we should utilize the provided previous commit, to
 find the latest pipeline that might be still running.
 
+:::note Arch discussion
+
+Do not cancel builds/tests on commit trigger for now.
+
+:::
+
 #### Lookup based on the commit hash
+
+:::note Arch discussion
+
+Start with the cheapest approach, i.e., this one.
+
+:::
 
 Finding the latest pipeline that might be still running based on the commit hash
 can be done by lookup through `PipelineModel` and `ProjectEventModel` (provided
@@ -76,7 +88,9 @@ _re-releasing_.
 
 ### Subsequent jobs
 
-_TODO_
+Given the pipelines we store, it shouldn't be hard, basically similar approach
+as for cancelling the initial job, just gotta check any other fields in the same
+row.
 
 ## Cancelling the jobs themselves
 
@@ -112,6 +126,13 @@ There are multiple API calls:
 - cancelling a specific build - [`cancelBuild`](<https://koji.fedoraproject.org/koji/api#:~:text=cancelBuild(buildID%2C%20strict%3DFalse)>)
 - cancelling a task - [`cancelTask`](<https://koji.fedoraproject.org/koji/api#:~:text=cancelTask(task_id%2C%20recurse%3DTrue)>)
 - cancelling a “full” task - [`cancelTaskFull`](<https://koji.fedoraproject.org/koji/api#:~:text=cancelTaskFull(task_id%2C%20strict%3DTrue)>)
+
+:::note Arch discussion
+
+Do not consider for now, but could be beneficial for saving resources of the
+Fedora Infra once we run as a _Fedora CI_.
+
+:::
 
 ### VM Image Builder
 
