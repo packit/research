@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Generate %patch, %source and %prep data about most patched Fedora spec files. """
+"""Generate %patch, %source and %prep data about most patched Fedora spec files."""
 import json
 import pathlib
 import re
