@@ -46,7 +46,6 @@ fedora-ci/
   - this involves duplicated work, and might be prone to errors (e.g. forgetting to apply a change to one repo)
   - first changing the code in old repo, and then applying the same to the new one
 - importing the code from new repo
-
   - cleaner transition
   - requires more initial effort and might be more complex to set up
   - how to implement:

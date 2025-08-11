@@ -253,7 +253,6 @@ User can configure a repository where Packit create an issue in case of failed u
 There is an occurring question if the new functionality/job will be incorporated into the existing service, done as a separate deployment or done from scratch. Let's put down some benefits and problems.
 
 1. New functionality added to the existing service
-
    - The new functionality is added as a new handler (=a separate class).
    - If we need to react to a new event, the parsing needs to be implemented.
    - The mapping between event and handler is done by decorating the handler and explicitly setting the event we react on.
@@ -262,7 +261,6 @@ There is an occurring question if the new functionality/job will be incorporated
    - Since we have one database, we can show some overall status and combine information from upstream part and downstream part (including the propose-downstream job that is somewhere in the middle).
 
 2. New functionality as another deployment
-
    - It's more a version of the previous one.
    - Benefits are independence, being able to have different identities and limits.
    - The main downside is a duplicated afford needed to maintain the service and to run the shared part (task scheduler, listeners, API service).
