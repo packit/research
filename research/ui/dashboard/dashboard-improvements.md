@@ -89,7 +89,6 @@ authors: mfocko
   Cost on our side:
   Requires changes in service codebase and also we would need to make sure that
   retriggering cannot be used outside of the dashboard
-
   - Auth in API `dashboard <=> service`
   - we could probably restrict IP address of sender to cluster on service side?
 
@@ -140,7 +139,6 @@ We could provide browser notifications for recently finished/failed builds:
    page currently present on dashboard, which might seem to be better option.
 
 2. **Improve the UX for results on dashboard.**
-
    - Start with pipeline overview.
 
      With a goal of achieving easy navigability at dashboard after being redirected

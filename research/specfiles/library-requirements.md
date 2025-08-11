@@ -39,7 +39,6 @@ authors: flachman
 ## Comments
 
 - For patches and other fields, we want to add a comment without a need to manipulate with the file directly.
-
   - What about having a get/set `comment` value for various spec-file attributes for comment lines right above the item without any non-comment line?
 
     ```

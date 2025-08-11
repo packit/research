@@ -6,7 +6,6 @@ authors: lbarczio
 ## Problematic parts of the process
 
 - setting GH statuses is the slowest part of the short running tasks
-
   - this shows mainly in projects with a lot of targets configured):
 
   ```

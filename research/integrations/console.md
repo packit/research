@@ -44,7 +44,6 @@ the future.
 How we can integrate with it?
 
 1. We should use [AWS Launch Templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html).
-
    - One cannot configure instance parameters using the provisioning API.
    - We also need to be strict about this: we don't want users willy nilly
      change their instances (i.e. request 64G mem).

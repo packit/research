@@ -41,9 +41,7 @@ Possible solutions, which can be somehow combined:
 1.  serialize the info about objects and pass it into `send_task`
     - this would need serializing and then again deserializing
 2.  save the info about objects in DB and pass IDs of models into `send_task`
-
     - what models does make sense to have? possibilities:
-
       - project
       - package config
       - service config

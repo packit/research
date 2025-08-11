@@ -14,7 +14,6 @@ authors: mfocko
 Looked into the options suggested by @lachmanfrantisek which were:
 
 - `Deprecated`
-
   - seems as a good choice, offers decorator that has optional parameters such as version or custom message
   - live GitHub repo
   - fast release cycle
@@ -24,30 +23,24 @@ Looked into the options suggested by @lachmanfrantisek which were:
     from docs, all properties are optional, you can add reason (usually alternative) or version in which it was deprecated
 
 - `Python-Deprecated`
-
   - dead version of `Deprecated`, which is probably kept in PyPI just for backward-compatibility
 
 - `deprecationlib`
-
   - seems like hobby project, only one information in decorator (alternative function name)
 
 - `Dandelyon`
-
   - looks like nice project
   - offers multiple decorators
   - doesn't seem to be very active
 
 - `deprecate`
-
   - dead project
 
 - `deprecation`
-
   - not very active
   - multiple issues
 
 - `libdeprecation`
-
   - dead version of `deprecation`
 
 - `warnings` (built-in module)

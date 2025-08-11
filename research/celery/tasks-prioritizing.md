@@ -38,7 +38,6 @@ authors: lbarczio
 ## How to do it
 
 - from [FAQ](https://docs.celeryproject.org/en/master/faq.html#does-celery-support-task-priorities):
-
   - Redis transport emulates priority support
   - prioritize work by routing high priority tasks to different workers, this usually works better than per message priorities
 
@@ -49,7 +48,6 @@ authors: lbarczio
 ### Task priority
 
 - docs are not so clear:
-
   - [priority](https://docs.celeryproject.org/en/latest/reference/celery.app.task.html?highlight=celery.app.task#celery.app.task.Task.priority)
     attribute of the `Task` - default task priority
   - [priority](https://docs.celeryproject.org/en/stable/reference/celery.app.task.html?highlight=priority#celery.app.task.Task.apply_async)

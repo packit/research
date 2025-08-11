@@ -8,11 +8,9 @@ authors:
 ## Usecases
 
 1. Show the whole workflow to the user.
-
    - It's not clear what it is.
 
 2. For each step, we get:
-
    - previous step
    - next steps
    - other steps from this group (e.g. other chroots for this build)
@@ -20,7 +18,6 @@ authors:
 3. It is possible to rerun the whole workflow.
 4. It is possible to rerun one step (and all the follow-up steps).
 5. It is possible to rerun a part of one step (and the follow-up step(s)).
-
    - E.g. one chroot.
 
 6. For project, we get all workflows.

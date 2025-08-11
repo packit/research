@@ -36,13 +36,11 @@ authors: flachman
 ## Actions
 
 - [fix](https://github.com/softwarefactory-project/rdopkg/blob/master/doc/rdopkg.1.adoc#action-fix) -- Apply changes to the `.spec` file.
-
   1. Bump Release, prepare a new `%changelog` entry header.
   2. Drop to shell, let user edit the `.spec` file.
   3. After running `rdopkg`, ensure description was added to `%changelog` and commit changes in a new commit.
 
 - [patch](https://github.com/softwarefactory-project/rdopkg/blob/master/doc/rdopkg.1.adoc#action-patch) -- Introduce new patches to the package.
-
   1. Unless -l/--local-patches was used, reset the local patches branch to the remote patches branch.
   2. Update patch files from local patches branch using git format-patch.
   3. Update .spec file with correct patch files references.
@@ -52,7 +50,6 @@ authors: flachman
   7. Display the diff.
 
 - [new-version](https://github.com/softwarefactory-project/rdopkg/blob/master/doc/rdopkg.1.adoc#action-new-version) -- Update package to new upstream version.
-
   1. Show changes between the previous version and the current one, especially modifications to requirements.txt.
   2. Reset the local patches branch to the remote patches branch
   3. Rebase the local patches branch on \$NEW_VERSION tag.
