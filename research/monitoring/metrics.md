@@ -7,6 +7,7 @@ authors: lbarczio
 
 - [Prometheus Flask exporter](https://github.com/rycus86/prometheus_flask_exporter)
   - metrics are configured via decorators, e.g. `@metrics.counter(..)`:
+
   ```python
   @app.route('/<item_type>')
   @metrics.do_not_track()
@@ -15,6 +16,7 @@ authors: lbarczio
   def by_type(item_type):
       pass  # only the counter is collected, not the default metrics
   ```
+
   - the metrics are by default exposed on the same Flask application on the /metrics endpoint,
     this can be adjusted
   - counters count invocations, other types (histogram, gauge, summary) collect metrics based on the
@@ -44,6 +46,7 @@ authors: lbarczio
   - metrics:
     - celery_workers - number of workers
     - celery_tasks_total - number of tasks per state (labels name, state, queue and namespace):
+
   ```
    celery_tasks_total{name="my_app.tasks.fetch_some_data",namespace="celery",queue="celery",state="RECEIVED"} 3.0
    celery_tasks_total{name="my_app.tasks.fetch_some_data",namespace="celery",queue="celery",state="PENDING"} 0.0
@@ -53,6 +56,7 @@ authors: lbarczio
    celery_tasks_total{name="my_app.tasks.fetch_some_data",namespace="celery",queue="celery",state="REVOKED"} 0.0
    celery_tasks_total{name="my_app.tasks.fetch_some_data",namespace="celery",queue="celery",state="SUCCESS"} 7.0
   ```
+
   - celery_tasks_runtime_seconds
   - celery_tasks_latency_seconds - time until tasks are picked up by a worker - this can be helpful for us and is
     not included in the first exporter metrics
@@ -80,9 +84,7 @@ authors: lbarczio
 - builtin Monitoring view in clusters we use currently - this should use some of the tools below
 
 - previous research:
-
   1. [`kube-state-metrics`](https://github.com/kubernetes/kube-state-metrics)
-
      - converts Kubernetes objects to metrics consumable by Prometheus
      - not focused on the health of the individual Kubernetes components, but rather on the health of the various objects inside, such as deployments, nodes and pods
      - metrics are exported on the HTTP endpoint `/metrics` on the listening port, designed to be consumed either by
@@ -103,7 +105,6 @@ authors: lbarczio
        [CLI args](https://github.com/kubernetes/kube-state-metrics/blob/master/docs/cli-arguments.md#command-line-arguments)
 
   2. [Node exporter](https://github.com/prometheus/node_exporter)
-
      - Prometheus exporter for hardware and OS metrics exposed by \*NIX kernels
      - runs on a host, provides details on I/O, memory, disk and CPU pressure
      - can be configured as a side-car container, [described](https://access.redhat.com/solutions/4406661)
@@ -131,7 +132,6 @@ authors: lbarczio
        - container_network_receive_bytes_total - cumulative count of bytes received
        - container_processes - number of processes running inside the container
   4. [`kubernetes_sd_config`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#kubernetes_sd_config)
-
      - in the Prometheus configuration allow Prometheus to retrieve scrape targets from Kubernetes REST API and stay synchronized with the cluster state.
      - role types that can be configured to discover targets:
        - `node` - discovers one target per cluster node with the address defaulting to the Kubelet's HTTP port

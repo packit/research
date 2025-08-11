@@ -195,13 +195,11 @@ Suggested splitting into subtasks:
       a PR, branch, or retriggering via comment.
 
 - [ ] Improve the previous method by incorporating subsequent jobs
-
   - _NOTE_: this might get more complex after implementation of job dependencies
 
 - [ ] Allow users to cancel running jobs via comment
 
 - [ ] Allow users to cancel running jobs via custom GitHub Check _action_
-
   - _NOTE_: custom action can incorporate additional metadata provided by us,
     therefore cancelling this way could be pretty cheap (there would be no need
     to deduce which jobs need to be cancelled)
@@ -212,7 +210,6 @@ Suggested splitting into subtasks:
     - _Copr build for all targets matching an identifier_
 
 - [ ] (optionally, low-prio) Allow this to be configurable
-
   - _use case_: I want to be able to test multiple Copr builds, even if they
     were triggered in a succession of pushes
   - _NOTE_: this use case could be more beneficial for running _commit_ events

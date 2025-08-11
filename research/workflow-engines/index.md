@@ -7,7 +7,6 @@ authors: lbarcziova
   how the logic around job dependencies could be eased by usage of these
 
 - you can find separate files describing tools that were proposed to be researched more:
-
   - [Airflow](airflow.md)
   - [Argo workflows](argo-workflows.md)
   - [Temporal](temporal.md)
