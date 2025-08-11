@@ -40,7 +40,7 @@ fedora-ci/
 
 - changes only to the new repo, without deploying
   - this would mean for few weeks the changes wouldn't take effect in the old deployment,
-    and might cause some bugs landing when the new deployment happens which might be harder to investigate (if there are a lot of new changes)
+    and might cause some bugs landing when the new deployment happens which might be harder to investigate (if there is a lot of new changes)
   - old deployment might continue to run with known bugs
 - changes to both repos
   - this involves duplicated work, and might be prone to errors (e.g. forgetting to apply a change to one repo)
