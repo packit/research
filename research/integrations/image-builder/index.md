@@ -58,7 +58,6 @@ The integration is pretty straightforward:
 2. Implement a handler for it (trigger = successful Copr build + explicit `/packit` command)
 3. Wait for the build to finish: babysit/polling/celery
 4. Auth - create a 'service' account for Packit on access.redhat.com
-
    - Attach employee SKU to it
    - Create a refresh token & store it in bitwarden
    - Inform Image Builder team about this user so they are aware of it (maybe

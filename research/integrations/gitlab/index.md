@@ -36,7 +36,6 @@ There are many ways available for us to move forward.
 - This service can then be enabled by the project maintainer by going to Project settings -> Integrations -> Packit service, eg. [test-instance](http://52.183.132.26:3000/testpackit/testing/-/settings/integrations).
 
 - For adding project integration to gitlab instances we have two options to move forward:
-
   1. We contribute to the [GitLab](https://gitlab.com/gitlab-org/gitlab/tree/master/app/models/project_services) and can reach large audiance, but for contributing to gitlab is a time taking process. (Currently looking into it)
 
   2. Add our project integration code directly to the custom gitlab instances that we currently want to support.

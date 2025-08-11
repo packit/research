@@ -31,7 +31,6 @@ Areas to be covered:
 ### Installation source
 
 - github
-
   - pros:
     - current changes in other projects are always in place - useful especially for stg branch
   - cons:
@@ -46,7 +45,6 @@ Areas to be covered:
 ### Image build approach
 
 - s2i: Source-to-Image (S2I) is a tool for building reproducible, Docker-formatted container images. It produces ready-to-run images by injecting application source into a container image and assembling a new image. The new image incorporates the base image (the builder) and built source and is ready to use with the docker run command. S2I supports incremental builds, which re-use previously downloaded dependencies, previously built artifacts, etc.
-
   - pros:
     - separating code and image development - probably advantage in bigger projects where development and devops is separated
   - cons:
