@@ -50,7 +50,6 @@ I see two possible solutions to support monorepos.
    Substitute the `self.event.package_config.jobs` calls like in this [commit](https://github.com/majamassarini/packit-service/commit/10d012bfddef815ad03781c2e3907998e20d8c7f). Where the `package_config.get_job_views` method looks like [this](https://github.com/majamassarini/packit/blob/multiple_distgit_external_package_config/packit/config/package_config.py#L157-L172).
 
    The above solution resolves a test like [this](https://github.com/majamassarini/packit-service/blob/multiple_distgit_packit_api/tests/unit/test_jobs.py#L3134-L3234).
-
    - **PROS**: we don't need to touch much more code than this. Our handlers are designed to work with one `JobConfig` and they will keep doing that, working in the same way with a `JobConfigView` (or just pick another name for it) and a `JobConfig`.
 
    - **CONS**: if, for supporting monorepos, we need to deal with multiple packages in the same handler. Then we need to group together the `JobConfigView`s, like in the `package_config.get_grouped_job_views` method [here](https://github.com/majamassarini/packit/blob/multiple_distgit_external_package_config/packit/config/package_config.py#L174-L196). And we should **add a new way to match jobs and handlers** in `steve_job.process_jobs` method.
@@ -63,7 +62,6 @@ I see two possible solutions to support monorepos.
    Modify `steve_job.process_jobs`, `steve_job.get_handlers_for_event`, `steve_job.get_config_for_handler_kls` methods to work with the new data structure returned by the `package_config.get_grouped_job_views`.
 
    At the end the `steve_job.process_jobs` will create only handlers taking a list of `JobConfig` or `JobConfigView` and for this reason we will modify all our handlers to loop over all the given configs.
-
    - **PROS**: one single way to _match jobs and handlers_
 
    - **CONS**: we are suggesting that all the handlers should be able to handle multiple configs, but this is probably not true.

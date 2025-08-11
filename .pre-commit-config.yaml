@@ -4,11 +4,11 @@
 
 repos:
   - repo: https://github.com/psf/black
-    rev: 24.4.2
+    rev: 25.1.0
     hooks:
       - id: black
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.16.0
+    rev: v3.20.0
     hooks:
       - id: pyupgrade
   - repo: https://github.com/pre-commit/mirrors-prettier
@@ -17,7 +17,7 @@ repos:
       - id: prettier
         exclude: centos_playground/pkg_survey/result*
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
     hooks:
       # - id: check-added-large-files  # this is a research repo, we can have big files here
       - id: check-ast
@@ -28,7 +28,7 @@ repos:
       - id: end-of-file-fixer
       - id: trailing-whitespace
   - repo: https://github.com/PyCQA/flake8
-    rev: 7.1.0
+    rev: 7.3.0
     hooks:
       - id: flake8
         args:
@@ -40,9 +40,9 @@ repos:
   #      - id: mypy
   #        args: [--no-strict-optional, --ignore-missing-imports]
   - repo: https://github.com/packit/pre-commit-hooks
-    rev: v1.2.0
+    rev: v1.3.0
     hooks:
       - id: check-rebase
         args:
           - https://github.com/packit/research.git
-        stages: [manual, push]
+        stages: [manual, pre-push]

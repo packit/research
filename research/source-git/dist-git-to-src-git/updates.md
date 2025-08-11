@@ -118,7 +118,6 @@ We have various way, how to save metadata for regeneration:
 
 - Easy solution that mimics the history overwriting without force push.
 - There are multiple ways, how to do this:
-
   - (I) Regenerate the source-git from scratch and use
     [ours](https://git-scm.com/docs/merge-strategieshttps://git-scm.com/docs/merge-strategies)
     merging strategy to merge the new version on top of the old version ignoring its content.

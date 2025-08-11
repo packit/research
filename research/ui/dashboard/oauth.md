@@ -80,7 +80,6 @@ We'll need to get a new scope registered for us, see the list in Fedora's docs t
 - I don't think we should create a new GitHub app specifically for the dashboard, we should keep using the one we have.
 
 - We can either
-
   1. Create a personalized dashboard with a list of repos, orgs, pipeline runs and PRs
 
   2. Or we can order the existing views so that user's content is first and sorted by time it was modified (recently modified content first)

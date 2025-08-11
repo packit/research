@@ -8,7 +8,6 @@ authors:
 ## Next steps for Packit
 
 1. Identify stakeholders who can help us to define our SLO
-
    - Project which are the most frequent users of the service.
    - Prominent users:
      - [rhinstaller/anaconda](https://github.com/rhinstaller/anaconda)
@@ -31,7 +30,6 @@ authors:
 
 2. Discuss and document their expectations. At a minimum in terms of
    (questions are provided as an example):
-
    - latency
      - How fast should builds/tests start? (First feedback from the service
        that something is happening.)
