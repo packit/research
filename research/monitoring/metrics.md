@@ -7,6 +7,7 @@ authors: lbarczio
 
 - [Prometheus Flask exporter](https://github.com/rycus86/prometheus_flask_exporter)
   - metrics are configured via decorators, e.g. `@metrics.counter(..)`:
+
   ```python
   @app.route('/<item_type>')
   @metrics.do_not_track()
@@ -45,6 +46,7 @@ authors: lbarczio
   - metrics:
     - celery_workers - number of workers
     - celery_tasks_total - number of tasks per state (labels name, state, queue and namespace):
+
   ```
    celery_tasks_total{name="my_app.tasks.fetch_some_data",namespace="celery",queue="celery",state="RECEIVED"} 3.0
    celery_tasks_total{name="my_app.tasks.fetch_some_data",namespace="celery",queue="celery",state="PENDING"} 0.0
