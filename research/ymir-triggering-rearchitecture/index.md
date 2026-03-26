@@ -12,7 +12,7 @@ with support for user-provided input (upstream fix, branch, etc.).
 
 ## User Input Options
 
-Four approaches for how users express intent, which can also be combined.
+Several approaches for how users express intent, which can also be combined.
 
 ### Labels
 
@@ -39,6 +39,23 @@ Triage agent would paste the pre-filled command in its output for copy-paste tri
 Users write free-form text like _"@ymir-agent please backport commit abc123 to rhel-9.6.0"_ and the system
 uses an LLM to extract intent and parameters.
 
+### Jira Automation manual trigger with user input form
+
+Jira Cloud Automation supports manual triggers from issues
+(the lightning bolt / Actions menu on an issue). When configured with "Prompt for input when
+this rule is triggered", a [custom form pops up](https://community.atlassian.com/forums/Automation-articles/Request-input-from-users-when-a-Manual-rule-is-triggered/ba-p/2333587)
+before the rule runs.
+
+Supported input field types: short text, paragraph, dropdown, number, checkbox.
+Values are referenced in actions via `{{userInputs.variableName}}`.
+
+Example: a "Backport" rule could prompt for "Upstream Fix URL" (short text) and "Target Branch"
+(dropdown), then POST these to the event router.
+
+Access can be restricted to specific [permission groups](https://support.atlassian.com/cloud-automation/docs/jira-automation-triggers/#Manual)
+("Groups that can run trigger"). Individual fields can be marked as required. Cancelling the
+form doesn't count towards monthly automation execution limits.
+
 ### Custom Jira fields
 
 Users fill in dedicated Jira fields (e.g., "Upstream Fix URL", "Target Branch") and the system
@@ -50,16 +67,20 @@ approach is more self-documenting (triage pastes the command with all required f
 
 ### Comparison
 
-|                | Labels  | `/ymir` CLI            | Natural language | Custom fields    |
-| -------------- | ------- | ---------------------- | ---------------- | ---------------- |
-| **Parameters** | No      | Yes                    | Yes              | Yes              |
-| **Parsing**    | Trivial | Deterministic          | LLM-dependent    | Deterministic    |
-| **UX**         | Simple  | Copy-paste from triage | Intuitive        | Must know fields |
-| **Pollable**   | Yes     | No (needs label combo) | No               | Yes              |
+|                | Labels  | `/ymir` CLI            | Manual trigger form    | Natural language  | Custom fields    |
+| -------------- | ------- | ---------------------- | ---------------------- | ----------------- | ---------------- |
+| **Parameters** | No      | Yes                    | Yes (form fields)      | Yes               | Yes              |
+| **Parsing**    | Trivial | Deterministic          | Deterministic          | LLM-dependent     | Deterministic    |
+| **UX**         | Simple  | Copy-paste from triage | Click + fill form      | Intuitive         | Must know fields |
+| **Pollable**   | Yes     | No (needs label combo) | N/A (automation posts) | No                | Yes              |
+| **Auth**       | N/A     | Needs group check      | Built-in group filter  | Needs group check | N/A              |
 
-**Recommendation, to agree on**: Start with `/ymir` CLI commands for backport/rebase (where parameters are needed).
-Labels could be used for triage (no input needed) or as a simpler alternative trigger if parameters
-are stored in Jira fields. But we should aim for consistency, simple UX.
+**CLI vs manual trigger forms**: Manual trigger forms are UI-centric — good for standalone use,
+but triage can't paste a one-click follow-up action. With CLI, triage pastes a pre-filled
+command that the user copy-pastes to trigger backport/rebase. Both can coexist.
+
+**To decide**: Which to start with — `/ymir` CLI or manual trigger forms (or both).
+We should aim for consistency and simple UX.
 
 ---
 
@@ -125,12 +146,24 @@ available to project admins. Might require coordination with Jira administrators
 ### Option C: Jira Automation Rules
 
 Use Jira's built-in [Automation](https://www.atlassian.com/software/jira/guides/automation/overview#board-vs-project)
-to detect comment/label events and POST to an external endpoint.
+to detect events and POST to an external endpoint. Two sub-options for user input:
 
-Rule examples:
+**C1: Comment-triggered rules** (pairs with `/ymir` CLI commands)
 
 - Rule: "Work item commented" + condition `comment contains /ymir` → "Send web request"
-- Rule: "Field value changed" (Labels) + condition matches `ymir-*` → "Send web request"
+- User posts `/ymir backport --upstream-fix <URL> --branch <branch>` as a comment
+- Triage agent can paste the pre-filled command for copy-paste triggering
+
+**C2: Manual trigger with input form** (Jira-native UI)
+
+- Rule: "Manual trigger from work item" with "Prompt for input" enabled
+- User clicks Actions → "Ymir Backport" on the issue, fills in a form (upstream fix URL,
+  target branch), and submits → rule POSTs to event router
+- Access restricted via "Groups that can run trigger" (built-in auth)
+- No comment syntax to learn — fully guided UI
+
+Both can coexist: e.g., manual trigger forms for new users, `/ymir` commands for power users
+or automation. The event router receives the same payload shape either way.
 
 It seems like other teams/automations utilise this too, e.g. Watson automation.
 
@@ -141,13 +174,16 @@ It seems like other teams/automations utilise this too, e.g. Watson automation.
 - New `event_router/` service (simpler — payloads pre-filtered by Jira)
 - Configure automation rules in Jira Cloud UI (project admin can do this)
 - Set up HTTPS endpoint
-- Build `/ymir` command parser
+- For C1: build `/ymir` command parser
+- For C2: configure input forms in Jira Automation rule UI
 
-| Pro                         | Con                    |
-| --------------------------- | ---------------------- |
-| Project admins can set up   | Not version-controlled |
-| Pre-filtered events         | HTTPS endpoint needed  |
-| More reliable than webhooks |                        |
+| Pro                                     | Con                    |
+| --------------------------------------- | ---------------------- |
+| Project admins can set up               | Not version-controlled |
+| Pre-filtered events                     | HTTPS endpoint needed  |
+| More reliable than webhooks             |                        |
+| C2: built-in auth + guided input forms  | C2: form config in UI  |
+| C1: triage can paste pre-filled command | C1: syntax to learn    |
 
 ---
 
@@ -166,19 +202,21 @@ It seems like other teams/automations utilise this too, e.g. Watson automation.
 ## Security Considerations
 
 - **Unauthorized triggering**: External users with Jira access could post `/ymir` commands or put labels.
-  Mitigation: check comment author's Jira group membership before processing. For labels might be more complicated.
+  With CLI (C1): event router must check comment author's group membership via Jira API.
+  With manual trigger forms (C2): built-in "Groups that can run trigger" handles this natively
+  in Jira — no custom auth code needed.
 
 - **Prompt injection via `--instructions`**: Malicious instructions could manipulate the LLM agent.
   Mitigations: input length limits, system prompt hardening, group membership check.
+  With manual trigger forms (C2), input fields have defined types (short text, dropdown) which
+  limits the attack surface compared to free-form comments.
 
 ---
 
 ## Implementation Tasks
 
-_This section assumes `/ymir` CLI commands as the user input method. Some tasks differ if
-using labels-only or custom fields._
-
-The following changes are needed regardless of triggering option (polling vs automation).
+The following changes are needed regardless of triggering option and user input method.
+With manual trigger forms (C2), the command parser is replaced by form payload handling.
 
 ### Triage agent: decouple from downstream routing
 
@@ -250,14 +288,14 @@ Webhooks not yet explored in depth — revisit if Automation proves insufficient
 **Polling as fallback**: Even with automation as primary trigger, polling can remain for missed
 events or retries via a `ymir-retry` label.
 
-**User input**: `/ymir` CLI commands seem like a good fit for parameterized workflows (backport,
-rebase) — deterministic parsing, triage can paste pre-filled commands. For triage itself,
-either labels or `/ymir triage` could work. Need to decide on consistency vs simplicity.
+**User input**: Either `/ymir` CLI commands (C1) or manual trigger forms (C2) — both use
+Automation Rules and the same event router. CLI is more flexible (triage pastes pre-filled
+commands, easy to script), manual trigger forms have lower barrier (no syntax, built-in auth).
+Both can coexist.
 
 ### To decide
 
-- [ ] User input method: `/ymir` CLI, labels, or combination?
-- [ ] Triggering mechanism: Automation (alternatively webhooks, look into that more) or start with polling?
+- [ ] User input: `/ymir` CLI (C1), manual trigger form (C2), or both?
 - [ ] Keep labels for status tracking (in-progress/completed/failed)?
 - [ ] Should triage still set Fix Version/Severity, or leave to user?
 - [ ] Keep triage auto-chain in code (disabled by default, not breaking SE)?
