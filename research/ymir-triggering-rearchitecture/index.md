@@ -100,21 +100,29 @@ Label triggers the workflow; a `/ymir` command in a comment provides parameters.
 - Once a labeled issue is found, fetch its comments and parse the `/ymir` command
 - Comment fetching is scoped to labeled issues only — avoids scanning all issues
 
-Note: Polling for comments standalone (without labels) is not feasible — there's no
-JQL filter for comment content, so it would require fetching and inspecting comments
-on every issue.
+**Comment-based polling** (comment-only, no labels):
+
+If users `@mention` a Ymir service account or post a `/ymir` command in a comment, we could filter it with e.g., `comment ~ "YMIR_ACCOUNT_ID"` or `comment ~ "/ymir"`. This removes the need
+for a trigger label but adds complexity:
+
+- No atomic "mark as processed" — with labels, we could remove the label after processing.
+  With comments, we must track processed comment IDs in Redis (edits to already-processed
+  comments should be ignored — user posts a new comment to correct)
+- Result set grows over time, needs time-based filtering (e.g., `AND updated >= -1d`)
+  — but `updated` catches any issue update, not just new @Ymir mentions, producing
+  false positives that still require comment-by-comment inspection
+- API cost scales with active issues: each poll does 1 search + N comment fetches, rate limiting?
 
 **Implementation**:
 
-- Change JQL to filter by trigger labels
-- Build `/ymir` command parser
-- Add polling loop (currently one-shot)
-- Fetch comments only for labeled issues
+- Labels + comments: change JQL, build `/ymir` parser, add polling loop, fetch comments for labeled issues
+- Comment-based polling: same, plus comment ID tracking in Redis, time-based JQL filtering
 
-| Pro                   | Con                           |
-| --------------------- | ----------------------------- |
-| No new infrastructure | 30-60s latency                |
-| All in code           | Two-step UX (comment + label) |
+| Pro                   | Con                                                       |
+| --------------------- | --------------------------------------------------------- |
+| No new infrastructure | 30-60s latency                                            |
+| All in code           | Labels + comments: two-step UX (comment + label)          |
+|                       | Comment-based: complex dedup (no atomic "mark processed") |
 
 ---
 
@@ -189,13 +197,14 @@ It seems like other teams/automations utilise this too, e.g. Watson automation.
 
 ### Options Summary
 
-|                         | Polling        | Webhooks       | Automation     |
-| ----------------------- | -------------- | -------------- | -------------- |
-| **Jira permissions**    | API access     | Global admin   | Project admin  |
-| **Comments standalone** | No             | Yes            | Yes            |
-| **Latency**             | 30-60s         | Sub-second     | Seconds        |
-| **Infrastructure**      | None new       | HTTPS endpoint | HTTPS endpoint |
-| **New code**            | Extend fetcher | Event router   | Event router   |
+|                         | Polling (labels)   | Polling (comments)                | Webhooks           | Automation         |
+| ----------------------- | ------------------ | --------------------------------- | ------------------ | ------------------ |
+| **Jira permissions**    | API access         | API access                        | Global admin       | Project admin      |
+| **Comments standalone** | No                 | Yes                               | Yes                | Yes                |
+| **Latency**             | 30-60s             | 30-60s                            | Sub-second         | Seconds            |
+| **Dedup complexity**    | Low (remove label) | High (track comment IDs)          | Low (event-driven) | Low (event-driven) |
+| **Infrastructure**      | None new           | None new                          | HTTPS endpoint     | HTTPS endpoint     |
+| **New code**            | Extend fetcher     | Extend fetcher + comment tracking | Event router       | Event router       |
 
 ---
 
@@ -273,28 +282,37 @@ environment config for Redis connection and Jira credentials.
 
 ---
 
-## Preliminary Recommendation
+## Summary of Trade-offs
 
 _To be agreed on with the team._
 
-**Triggering**: Automation seems simpler than webhooks (project admins can configure, no global
-admin needed) and likely sufficient. Both require a new **event router service** — an HTTP
-server that receives POST requests from Jira, parses the input, validates the author, and
-pushes to the appropriate Redis queue. This would run alongside existing agents and reuse the
-queue infrastructure.
+**Comment-based polling**:
 
-Webhooks not yet explored in depth — revisit if Automation proves insufficient.
+- Simpler to start with, no new service
+- Extend existing fetcher — no new infra or HTTPS endpoint
+- Example JQL: `comment ~ "YMIR_ACCOUNT_ID" AND updated >= -1d AND project = RHEL`
+- Deduplication is the main challenge, see in the related sections
+- Result set grows — even with time filtering, issues re-appear if they get any update. Each poll must re-check comments on returned issues.
+- Latency: 30-60s
+- Rate limits: each poll fetches issues, then comments per issue — API cost scales with
+  number of active issues mentioning @Ymir or /ymir (based on the format we decide)
 
-**Polling as fallback**: Even with automation as primary trigger, polling can remain for missed
-events or retries via a `ymir-retry` label.
+**Automation Rules** (new event router service):
 
-**User input**: Either `/ymir` CLI commands (C1) or manual trigger forms (C2) — both use
-Automation Rules and the same event router. CLI is more flexible (triage pastes pre-filled
-commands, easy to script), manual trigger forms have lower barrier (no syntax, built-in auth).
-Both can coexist.
+- Event-driven — no dedup needed (each trigger fires once)
+- Lower latency (seconds)
+- Requires HTTPS endpoint (trivial on OpenShift with Routes, blocker otherwise)
+- Project admins can configure rules
+- C1 (comment-triggered) + C2 (manual trigger form) both work through same event router
+- Not version-controlled (rules live in Jira UI)
+
+**User input**: `/ymir` CLI (C1) is more flexible — triage can paste pre-filled commands,
+easy to script. Manual trigger forms (C2) have lower barrier — no syntax, built-in auth.
+Both can coexist and use the same event router.
 
 ### To decide
 
+- [ ] Keep polling or start with the event router service?
 - [ ] User input: `/ymir` CLI (C1), manual trigger form (C2), or both?
 - [ ] Keep labels for status tracking (in-progress/completed/failed)?
 - [ ] Should triage still set Fix Version/Severity, or leave to user?
