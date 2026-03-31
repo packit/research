@@ -271,8 +271,14 @@ A lightweight HTTP service that receives POST requests from Jira and routes to R
 - Acknowledgment — post a Jira comment confirming the command was received
 - Deduplication — track processed commands to avoid re-processing on retries
 
-**Deployment**: New container in OpenShift/compose, Service + Route (same pattern as Phoenix),
-environment config for Redis connection and Jira credentials.
+**Deployment**:
+
+- New container in OpenShift, Service + Route
+- Route must be publicly reachable for Jira Cloud — requires external namespace and route config
+- Auth: shared secret token in a custom HTTP header, configured in the Jira Automation rule and validated by the event router. Combined with Jira-side "Groups that can run
+  trigger" restriction.
+- WAF could be placed in front of the route as well
+- More details: https://source.redhat.com/departments/strategy_and_operations/it/datacenter_infrastructure/itcloudservices/itocp/itocp_wiki/tenant_onboarding_and_administration~23#application-ingress
 
 ### Other changes
 

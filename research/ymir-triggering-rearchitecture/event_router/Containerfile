@@ -1,0 +1,22 @@
+FROM fedora:43
+
+RUN dnf -y install \
+      python3 \
+      python3-fastapi \
+      python3-uvicorn \
+      python3-redis \
+      python3-pydantic \
+    && dnf clean all
+
+RUN useradd -m ymir
+WORKDIR /home/ymir
+
+COPY app.py /home/ymir/
+
+RUN chgrp -R root /home/ymir && chmod -R g+rwX /home/ymir
+
+USER ymir
+
+EXPOSE 8080
+
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]

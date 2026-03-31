@@ -1,0 +1,19 @@
+services:
+  event-router:
+    build:
+      context: .
+      dockerfile: Containerfile
+    environment:
+      - REDIS_URL=redis://valkey:6379/0
+      - WEBHOOK_SECRET=${WEBHOOK_SECRET:-}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - valkey
+    restart: unless-stopped
+
+  valkey:
+    image: docker.io/valkey/valkey:8
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
