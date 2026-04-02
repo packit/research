@@ -316,10 +316,15 @@ _To be agreed on with the team._
 easy to script. Manual trigger forms (C2) have lower barrier — no syntax, built-in auth.
 Both can coexist and use the same event router.
 
-### To decide
+### Agreements
 
-- [ ] Keep polling or start with the event router service?
-- [ ] User input: `/ymir` CLI (C1), manual trigger form (C2), or both?
-- [ ] Keep labels for status tracking (in-progress/completed/failed)?
-- [ ] Should triage still set Fix Version/Severity, or leave to user?
-- [ ] Keep triage auto-chain in code (disabled by default, not breaking SE)?
+- **Triggering**: Event-driven (Automation Rules + event router service), with polling retained as fallback
+- **User input**: Manual trigger forms with optional fields + natural language fallback
+  (form fields left empty → agent extracts parameters from free-text using LLM)
+- **Event router**: New lightweight service, shared secret auth, external route
+- **Jira Automation rules**: One rule per workflow (triage, backport, rebase) with
+  manual trigger from work item
+- **Agent changes**: Decouple triage from downstream routing, backport/rebase accept
+  direct input from event router. Auto-chain kept in code but disabled by default.
+- **Labels**: Keep for status tracking (in-progress/completed/failed)
+- **Fix Version/Severity**: Keep but make optional, or wait for feedback from early adopters
