@@ -5,7 +5,6 @@ from urllib.parse import urlparse
 
 import click
 
-
 IGNORED_PROTOCOLS = {
     "",  # None → local files from lookaside cache
     "file",  # same as previous
