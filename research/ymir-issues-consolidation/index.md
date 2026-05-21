@@ -483,6 +483,13 @@ When a single upstream patch addresses multiple CVEs (common in security fixes),
 - Downstream has separate issues: RHEL-1000, RHEL-2000, RHEL-3000
 - Agent should detect relationship and create single MR resolving all three
 
+### Critical Requirements for Downstream Automation
+
+ALL consolidated issues must:
+
+1. **Transition to "In Progress"** - Each issue must be transitioned when work begins (required by downstream automation)
+2. **Link to MR** - Each issue must have a comment indicating it's part of the consolidated backport with MR link
+
 ## Recommended Solution: Triage-Time Auto-Detection
 
 ### Why This Approach
@@ -573,8 +580,11 @@ Add to `BackportData` (symmetry with `RebuildData`):
 - Read `consolidated_issues` from BackportData
 - Build commit message with all issues: `Resolves: RHEL-1000, RHEL-2000, RHEL-3000`
 - Update MR description with consolidation summary
-- Comment on all sibling Jira issues with MR link and explanation
-- Label siblings with `ymir_triaged_backport`
+- **Transition ALL issues to "In Progress"**: Loop through all consolidated issues and transition each to "In Progress" (required by downstream automation)
+- **Comment on ALL issues**: Comment on each consolidated issue with MR link and consolidation explanation (not just primary issue)
+- Label all issues (primary + consolidated) with `ymir_triaged_backport`
+
+**Note**: Current backport agent only transitions/comments on primary issue.
 
 ### 5. Testing & Documentation
 
