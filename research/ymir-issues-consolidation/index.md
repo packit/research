@@ -1,5 +1,39 @@
 # MR Consolidation Strategy
 
+## Overview: Two Consolidation Scenarios
+
+This research addresses two distinct MR consolidation scenarios for Ymir agents:
+
+### Scenario 1: Incremental Multi-Issue Consolidation (Manual)
+
+**Problem**: Multiple separate CVE/bug issues for the same package+fixVersion arrive at different times, each creating separate MRs that could be consolidated.
+
+**Example**:
+
+- RHEL-1000: CVE-2024-1234 in openssl-9.8.0
+- RHEL-2000: CVE-2024-5678 in openssl-9.8.0
+- RHEL-3000: CVE-2024-9012 in openssl-9.8.0
+
+Each has a different upstream patch, but maintainer wants single consolidated MR.
+
+**Solution**: Manual incremental consolidation using `ymir_consolidate_base` and `ymir_consolidate_next` labels to stack MRs sequentially.
+
+### Scenario 2: Multi-CVE Single-Patch Consolidation (Automatic)
+
+**Problem**: A single upstream patch addresses multiple CVEs at once, but each CVE has a separate downstream Jira issue. Without consolidation, the agent would create duplicate backport MRs for the same patch.
+
+**Example**:
+
+- Upstream commit fixes CVE-2024-1234, CVE-2024-5678, CVE-2024-9012 in one patch
+- Downstream has RHEL-1000, RHEL-2000, RHEL-3000 (one per CVE)
+- Agent triggered on RHEL-1000 should detect RHEL-2000 and RHEL-3000 are siblings
+
+**Solution**: Automatic triage-time detection that parses upstream commit message, finds related downstream issues, and consolidates into single MR with `Resolves: RHEL-1000, RHEL-2000, RHEL-3000`.
+
+---
+
+## Scenario 1: Incremental Multi-Issue Consolidation
+
 ### Key Requirements
 
 1. **Unblocking**: If a MR is not doable by our agents (for any reason), we need a way to skip it without being blocked
@@ -431,6 +465,143 @@ Triage agent creates a PACKIT parent ticket linking all related CVE issues for c
 
 ## Next Steps
 
-1. ✅ Confirm label names: `consolidate_base`, `consolidate_next`, `consolidate_batch` (Phase 2)
+1. ✅ Confirm label names: `ymir_consolidate_base`, `ymir_consolidate_next`, `ymir_consolidate_batch` (Phase 2)
 2. Start Phase 1 implementation (Low effort)
 3. Decide on Phase 2 orchestrator based on data
+
+---
+
+# Scenario 2: Multi-CVE Single-Patch Consolidation
+
+## Problem Statement
+
+When a single upstream patch addresses multiple CVEs (common in security fixes), each CVE has a separate downstream Jira issue.
+
+**Example** (per antbob's comment):
+
+- Upstream commit fixes CVE-2024-1234, CVE-2024-5678, CVE-2024-9012 in one patch
+- Downstream has separate issues: RHEL-1000, RHEL-2000, RHEL-3000
+- Agent should detect relationship and create single MR resolving all three
+
+## Recommended Solution: Triage-Time Auto-Detection
+
+### Why This Approach
+
+**1. Symmetric to Existing Rebuild Consolidation**
+
+Existing `find_rebuild_siblings()` in `ymir/agents/rebuild_consolidation.py` already implements triage-time consolidation for dependency rebuilds. This solution **mirrors that exact pattern**:
+
+| Aspect          | Rebuild Consolidation                     | Multi-CVE Backport (Symmetric)                |
+| --------------- | ----------------------------------------- | --------------------------------------------- |
+| **When**        | During triage, after `resolution=REBUILD` | During triage, after `resolution=BACKPORT`    |
+| **Detection**   | JQL search for dependency rebuilds        | Parse upstream commit, search for CVE matches |
+| **Validation**  | LLM verifies dependency rebuild           | Check CVE eligibility                         |
+| **Storage**     | `RebuildData.consolidated_issues`         | `BackportData.consolidated_issues`            |
+| **MR Creation** | Single MR with all `Resolves:`            | Single MR with all `Resolves:`                |
+
+**2. Early Detection = Optimal Resources**
+
+Triage-time consolidation:
+
+- Detects siblings **before** backport runs
+- Creates **one MR** with all issues
+- Runs **one CI pipeline**
+- No duplicate MRs to close
+
+**3. High Accuracy with Low Complexity**
+
+Upstream commit messages reliably list CVEs (security documentation requirements). Simple regex parsing (`CVE-\d{4}-\d{4,}`) provides high accuracy.
+
+**4. Fully Automatic**
+
+Unlike incremental consolidation (requires manual labels), multi-CVE consolidation is automatic:
+
+1. Maintainer triages primary issue
+2. Agent detects multi-CVE patch and finds siblings
+3. Agent creates consolidated MR
+4. All issues updated automatically
+
+**5. Composable with Incremental Consolidation**
+
+The two approaches complement each other:
+
+- **Scenario 1**: Different patches at different times (manual stacking)
+- **Scenario 2**: Same patch with multiple CVEs (auto-detection)
+
+Can be combined: Multi-CVE creates RHEL-1000+2000+3000 MR, then RHEL-4000 added later via `ymir_consolidate_next`
+
+---
+
+## Implementation Plan (Low Effort)
+
+### 1. Extend Data Models
+
+**File**: `ymir/common/models.py`
+
+Add to `BackportData` (symmetry with `RebuildData`):
+
+- `consolidated_issues: list[ConsolidatedIssue]`
+- `consolidation_summary: str | None`
+
+### 2. Create Multi-CVE Detection Module
+
+**New file**: `ymir/agents/backport_consolidation.py` (mirrors `rebuild_consolidation.py`)
+
+**Key functions**:
+
+- `extract_upstream_references(commit_message)` - Parse CVE IDs and Jira keys from commit
+- `build_multi_cve_sibling_jql(...)` - Build JQL to find downstream issues matching upstream CVEs
+- `find_multi_cve_siblings(...)` - Main function, returns `(consolidated_issues, summary)`, validates eligibility
+
+### 3. Integrate into Triage Agent
+
+**File**: `ymir/agents/triage_agent.py`
+
+**Changes**:
+
+- Add workflow step `consolidate_backport_siblings` (parallel to `consolidate_rebuild_siblings`)
+- Route to consolidation after `resolution=BACKPORT`
+- Fetch upstream commit message from patch URL
+- Store results in `backport_data.consolidated_issues`
+
+### 4. Update Backport Agent
+
+**File**: `ymir/agents/backport_agent.py`
+
+**Changes**:
+
+- Read `consolidated_issues` from BackportData
+- Build commit message with all issues: `Resolves: RHEL-1000, RHEL-2000, RHEL-3000`
+- Update MR description with consolidation summary
+- Comment on all sibling Jira issues with MR link and explanation
+- Label siblings with `ymir_triaged_backport`
+
+### 5. Testing & Documentation
+
+**Testing**:
+
+- Unit tests: Commit message parsing, JQL construction, mock detection workflow
+- E2E tests: Full triage → detection → backport flow
+- Integration tests: Real multi-CVE commits from OpenSSL, glibc
+
+**Documentation**:
+
+- Update CLAUDE.md with auto-detection behavior
+- Document relationship with incremental consolidation
+- Maintainer guide for when consolidation happens
+
+---
+
+## Comparison: Two Consolidation Scenarios
+
+| Aspect         | Scenario 1: Incremental            | Scenario 2: Multi-CVE             |
+| -------------- | ---------------------------------- | --------------------------------- |
+| **Use Case**   | Different patches, different times | Same patch, multiple CVEs         |
+| **Trigger**    | Manual labels                      | Automatic triage-time             |
+| **Detection**  | User marks base/next               | Parse upstream commit             |
+| **MR Count**   | Multiple sequential                | Single upfront                    |
+| **Pattern**    | Sequential stacking                | Mirrors `find_rebuild_siblings()` |
+| **Effort**     | Low                                | Low                               |
+| **Composable** | Yes                                | Yes                               |
+
+**Both scenarios are needed** - they solve different problems and work together.
