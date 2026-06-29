@@ -74,12 +74,13 @@ Issues can change postponement reasons:
 **Base frequency (Phase 1):** Every 6 hours, checks all postponed dependency issues
 
 **Backoff policy (Phase 2):**
+
 | Sweep attempts | Interval |
-|----------------|----------|
-| 1-3 attempts | 2 hours |
-| 4-8 attempts | 6 hours |
-| 9-15 attempts | 12 hours |
-| 16+ attempts | 24 hours |
+| -------------- | -------- |
+| 1-3 attempts   | 2 hours  |
+| 4-8 attempts   | 6 hours  |
+| 9-15 attempts  | 12 hours |
+| 16+ attempts   | 24 hours |
 
 **Rationale:** Cheap operation, but dependencies may take days/weeks to fix. Aggressive backoff (Phase 2) prevents wasteful checks on long-blocked issues.
 
@@ -96,11 +97,12 @@ Issues can change postponement reasons:
 **Base frequency (Phase 1):** Every 12 hours
 
 **Backoff policy (Phase 2):**
+
 | Sweep attempts | Interval |
-|----------------|----------|
-| 1-4 attempts | 6 hours |
-| 5-10 attempts | 12 hours |
-| 11+ attempts | 24 hours |
+| -------------- | -------- |
+| 1-4 attempts   | 6 hours  |
+| 5-10 attempts  | 12 hours |
+| 11+ attempts   | 24 hours |
 
 **Rationale:** Z-stream errata ship on a predictable but slow cadence. Backoff (Phase 2) moderates checks for long-pending errata.
 
@@ -117,12 +119,13 @@ Issues can change postponement reasons:
 **Base frequency (Phase 1):** Every 8 hours
 
 **Backoff policy (Phase 2):**
+
 | Sweep attempts | Interval |
-|----------------|----------|
-| 1-5 attempts | 4 hours |
-| 6-12 attempts | 8 hours |
+| -------------- | -------- |
+| 1-5 attempts   | 4 hours  |
+| 6-12 attempts  | 8 hours  |
 | 13-20 attempts | 24 hours |
-| 21+ attempts | 48 hours |
+| 21+ attempts   | 48 hours |
 
 **Rationale:** PRs merge at human pace. Backoff (Phase 2) reduces checks for stalled PRs.
 
@@ -139,12 +142,13 @@ Issues can change postponement reasons:
 **Base frequency (Phase 1):** Daily (24 hours)
 
 **Backoff policy (Phase 2):**
+
 | Sweep attempts | Interval |
-|----------------|-----------|
-| 1-3 attempts | 24 hours |
-| 4-7 attempts | 3 days |
-| 8-14 attempts | 7 days |
-| 15+ attempts | 14 days |
+| -------------- | -------- |
+| 1-3 attempts   | 24 hours |
+| 4-7 attempts   | 3 days   |
+| 8-14 attempts  | 7 days   |
+| 15+ attempts   | 14 days  |
 
 **Rationale:** Full triage re-run consumes LLM tokens. Aggressive backoff (Phase 2) essential for cost control.
 
