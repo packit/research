@@ -59,9 +59,12 @@ Issues can change postponement reasons:
 
 ### 1. Dependency CVE Sweep
 
-**What it checks:** Whether the blocking dependency issue now has "Fixed in build" set
+**What it checks:** Whether the dependency's fixed build is present in the Y-stream buildroot
 
-**Method:** Jira API field lookup on the blocker issue
+**Method:**
+
+1. Jira API field lookup on the blocker issue to get "Fixed in build" NVR
+2. Use `check_build_in_buildroot()` (from `ymir/common/utils.py`) to verify that NVR is available in the Y-stream buildroot
 
 **Blocker identification:**
 
