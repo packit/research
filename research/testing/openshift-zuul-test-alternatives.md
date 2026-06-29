@@ -101,90 +101,89 @@ This is a **dirty** ansible playbook for doing it
     sandbox_namespace: "packit-dev-sandbox"
     packit_service_project_dir: "/home/maja/PycharmProjects/packit-service"
   tasks:
-  - include_tasks: tasks/project-dir.yml
-  - name: include variables
-    ansible.builtin.include_vars: "{{ project_dir }}/vars/{{ service }}/{{ deployment }}.yml"
-    tags:
-      - always
+    - include_tasks: tasks/project-dir.yml
+    - name: include variables
+      ansible.builtin.include_vars: "{{ project_dir }}/vars/{{ service }}/{{ deployment }}.yml"
+      tags:
+        - always
 
-  - name: Getting deploymentconfigs
-    include_tasks: tasks/set-facts.yml
-    tags:
-      - always
+    - name: Getting deploymentconfigs
+      include_tasks: tasks/set-facts.yml
+      tags:
+        - always
 
-  - name: Include extra secret vars
-    ansible.builtin.include_vars:
-      file: "{{ path_to_secrets }}/extra-vars.yml"
-      name: vault
-    tags:
-      - always
+    - name: Include extra secret vars
+      ansible.builtin.include_vars:
+        file: "{{ path_to_secrets }}/extra-vars.yml"
+        name: vault
+      tags:
+        - always
 
-    # to be able to read the github_app_id from the configuration file in tokman
-  - name: include packit-service configuration
-    ansible.builtin.include_vars:
-      file: "{{ path_to_secrets }}/packit-service.yaml"
-      name: packit_service_config
-    tags:
-      - tokman
+      # to be able to read the github_app_id from the configuration file in tokman
+    - name: include packit-service configuration
+      ansible.builtin.include_vars:
+        file: "{{ path_to_secrets }}/packit-service.yaml"
+        name: packit_service_config
+      tags:
+        - tokman
 
-  - name: include extra secret vars
-    ansible.builtin.include_vars: "{{ path_to_secrets }}/extra-vars.yml"
-    tags:
-      - always
+    - name: include extra secret vars
+      ansible.builtin.include_vars: "{{ path_to_secrets }}/extra-vars.yml"
+      tags:
+        - always
 
-
-  - name: render templates
-    ansible.builtin.template:
-       src: "{{ project_dir }}/openshift/redis.yml.j2"
-       dest: /tmp/redis.yaml
-  - name: render templates
-    ansible.builtin.template:
-       src: "{{ project_dir }}/openshift/postgres.yml.j2"
-       dest: /tmp/postgres.yaml
-  - name: render templates
-    ansible.builtin.template:
-       src: "{{ project_dir }}/openshift/packit-service.yml.j2"
-       dest: /tmp/packit-service.yaml
-  - name: render templates
-    vars:
-      component: packit-worker
-      queues: "short-running,long-running"
-      worker_replicas: "1"
-      worker_requests_memory: "384Mi"
-      worker_requests_cpu: "100m"
-      worker_limits_memory: "1024Mi"
-      worker_limits_cpu: "400m"
-    ansible.builtin.template:
-       src: "{{ project_dir }}/openshift/packit-worker.yml.j2"
-       dest: /tmp/packit-worker.yaml
-  - name: render postgres templates
-    ansible.builtin.template:
-       src: "{{ project_dir }}/openshift/secret-postgres.yml.j2"
-       dest: /tmp/secret-postgres.yaml
-  - name: render packit-secrets templates
-    ansible.builtin.template:
-       src: "{{ project_dir }}/openshift/secret-packit-secrets.yml.j2"
-       dest: /tmp/secret-packit-secrets.yaml
-  - name: render packit-config templates
-    ansible.builtin.template:
-       src: "{{ project_dir }}/openshift/secret-packit-config.yml.j2"
-       dest: /tmp/secret-packit-config.yaml
-  - name: render secret sentry templates
-    ansible.builtin.template:
-       src: "{{ project_dir }}/openshift/secret-sentry.yml.j2"
-       dest: /tmp/secret-sentry.yaml
-  - name: render secret splunk templates
-    ansible.builtin.template:
-       src: "{{ project_dir }}/openshift/secret-splunk.yml.j2"
-       dest: /tmp/secret-splunk.yaml
-  - name: render secret ssh templates
-    ansible.builtin.template:
-       src: "{{ project_dir }}/openshift/secret-packit-ssh.yml.j2"
-       dest: /tmp/secret-packit-ssh.yaml
-  - name: render secret aws templates
-    ansible.builtin.template:
-       src: "{{ project_dir }}/openshift/secret-aws.yml.j2"
-       dest: /tmp/secret-aws.yaml
+    - name: render templates
+      ansible.builtin.template:
+        src: "{{ project_dir }}/openshift/redis.yml.j2"
+        dest: /tmp/redis.yaml
+    - name: render templates
+      ansible.builtin.template:
+        src: "{{ project_dir }}/openshift/postgres.yml.j2"
+        dest: /tmp/postgres.yaml
+    - name: render templates
+      ansible.builtin.template:
+        src: "{{ project_dir }}/openshift/packit-service.yml.j2"
+        dest: /tmp/packit-service.yaml
+    - name: render templates
+      vars:
+        component: packit-worker
+        queues: "short-running,long-running"
+        worker_replicas: "1"
+        worker_requests_memory: "384Mi"
+        worker_requests_cpu: "100m"
+        worker_limits_memory: "1024Mi"
+        worker_limits_cpu: "400m"
+      ansible.builtin.template:
+        src: "{{ project_dir }}/openshift/packit-worker.yml.j2"
+        dest: /tmp/packit-worker.yaml
+    - name: render postgres templates
+      ansible.builtin.template:
+        src: "{{ project_dir }}/openshift/secret-postgres.yml.j2"
+        dest: /tmp/secret-postgres.yaml
+    - name: render packit-secrets templates
+      ansible.builtin.template:
+        src: "{{ project_dir }}/openshift/secret-packit-secrets.yml.j2"
+        dest: /tmp/secret-packit-secrets.yaml
+    - name: render packit-config templates
+      ansible.builtin.template:
+        src: "{{ project_dir }}/openshift/secret-packit-config.yml.j2"
+        dest: /tmp/secret-packit-config.yaml
+    - name: render secret sentry templates
+      ansible.builtin.template:
+        src: "{{ project_dir }}/openshift/secret-sentry.yml.j2"
+        dest: /tmp/secret-sentry.yaml
+    - name: render secret splunk templates
+      ansible.builtin.template:
+        src: "{{ project_dir }}/openshift/secret-splunk.yml.j2"
+        dest: /tmp/secret-splunk.yaml
+    - name: render secret ssh templates
+      ansible.builtin.template:
+        src: "{{ project_dir }}/openshift/secret-packit-ssh.yml.j2"
+        dest: /tmp/secret-packit-ssh.yaml
+    - name: render secret aws templates
+      ansible.builtin.template:
+        src: "{{ project_dir }}/openshift/secret-aws.yml.j2"
+        dest: /tmp/secret-aws.yaml
 ```
 
 #### 2. Tweak the generated yaml files and play our main pods locally
