@@ -17,7 +17,7 @@ Each postponement reason has a corresponding label:
 - `ymir_postponed_dependency` — waiting for a dependency CVE to be fixed
 - `ymir_postponed_y_stream` — waiting for Z-stream errata to ship
 - `ymir_postponed_no_patch` — no upstream patch found yet
-- `ymir_postponed_pr_pending` — patch identified but not yet merged
+- `ymir_postponed_pr_pending` — patch identified but not yet merged (if PR gets closed/abandoned, treat as new blocker and re-triage from scratch)
 
 **Properties:**
 
@@ -83,15 +83,15 @@ Issues can change postponement reasons:
 
 **Rationale:** Cheap operation, but dependencies may take days/weeks to fix. Aggressive backoff (Phase 2) prevents wasteful checks on long-blocked issues.
 
-**Action on unblock:** Remove postponement label, push to triage queue with context about which dependency was fixed.
+**Action on unblock:** Remove postponement label, trigger full re-triage from scratch.
 
 ---
 
 ### 2. Y-stream CVE Sweep
 
-**What it checks:** Whether the Z-stream errata has shipped
+**What it checks:** Whether the Z-stream build is present in the target buildroot/compose
 
-**Method:** Errata Tool API status check
+**Method:** Use `check_build_in_buildroot()` (from `ymir/common/utils.py`) to verify the "Fixed in build" NVR from the Z-stream blocker issue is available in the Y-stream buildroot
 
 **Base frequency (Phase 1):** Every 12 hours
 
@@ -104,7 +104,7 @@ Issues can change postponement reasons:
 
 **Rationale:** Z-stream errata ship on a predictable but slow cadence. Backoff (Phase 2) moderates checks for long-pending errata.
 
-**Action on unblock:** Remove postponement label, push to triage queue.
+**Action on unblock:** Remove postponement label, trigger full re-triage from scratch.
 
 ---
 
@@ -126,7 +126,7 @@ Issues can change postponement reasons:
 
 **Rationale:** PRs merge at human pace. Backoff (Phase 2) reduces checks for stalled PRs.
 
-**Action on unblock:** Remove postponement label, push to triage queue with PR URL as context.
+**Action on unblock:** Remove postponement label, trigger full re-triage from scratch (same as `no_patch` unblock — context changed, need fresh evaluation).
 
 ---
 
@@ -150,14 +150,18 @@ Issues can change postponement reasons:
 
 **Action on finding patch:**
 
-- If patch is merged: remove postponement label, push to triage queue
+- If patch is merged: remove postponement label, trigger full re-triage from scratch
 - If patch exists but not merged: transition to `ymir_postponed_pr_pending`, add PR URL comment
+
+**Note:** Both `pr_pending` and `no_patch` trigger full re-triage when unblocked, ensuring fresh evaluation with updated context. The difference is only in the sweep mechanism (lightweight API check vs expensive agent re-run).
 
 ---
 
 ## Backoff Optimization with Redis (Optional - Phase 2)
 
-**Why backoff is needed:** Without backoff, all postponed issues are checked on every sweep, even if recently verified as still blocked. This wastes API calls and agent tokens, especially for issues blocked for weeks.
+**Note:** Backoff is optional — given the unpredictability of when issues unblock, simpler fixed intervals (especially for expensive operations like triage re-runs) may be sufficient. The backoff strategy below is presented as an optimization to explore after Phase 1 baseline is established and metrics show whether it's needed.
+
+**Why backoff might help:** Without backoff, all postponed issues are checked on every sweep, even if recently verified as still blocked. This wastes API calls and agent tokens, especially for issues blocked for weeks. Backoff reduces check frequency for long-blocked issues.
 
 **Redis tracking schema:**
 
