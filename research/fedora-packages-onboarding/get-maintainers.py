@@ -14,7 +14,6 @@ from ogr import PagureService
 from ogr.services.pagure import PagureProject
 from specfile import Specfile
 
-
 bodhi_client = BodhiClient()
 RPM_SPECS = Path("./rpm-specs")
 checks = []
