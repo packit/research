@@ -123,6 +123,13 @@ option only for ambiguous build output, bounded, tested offline first.
 Existing `is_infra_error`/`retryable_error` fields are compatibility
 inputs only.
 
+While a dependency is paused, run one small recovery check per hour. It can use
+an available health signal, recent failure observations, or a short prompt.
+Limit it to one check per dependency, cap checks per outage episode, and use
+the result only to decide whether to resume the gate. It must not start a
+workflow or create unlimited retries. The cost and exact check remain open
+implementation decisions.
+
 ### Pause and replay limits
 
 The worker checks a shared `OutageGate` before `mcp_tools()`, agent creation, or
@@ -137,20 +144,25 @@ await run_workflow(task)
 
 Initial values for discussion:
 
-| Limit                                   | Meaning                                                                                     |                          Starting value |
-| --------------------------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------: |
-| LLM calls while dependency is paused    | How many new agent/model runs to allow for tasks needing a paused service                   |                                       0 |
-| Replays per outage episode              | After the service recovers, how many times to re-run a task that failed during this episode |                                       1 |
-| Outage episodes per task                | How many separate outage windows a single task can survive before giving up                 |                                       3 |
-| Maximum total postponement              | Wall-clock time from first outage-caused delay to final give-up                             |                                 2 hours |
-| Reproducer delay                        | How long to wait before retrying a reproducer task (Testing Farm is slow/expensive)         |                              30 minutes |
-| Provider retries during provider outage | LLM provider-specific retries after a provider 429/failure is detected                      |                                       0 |
-| After all limits exhausted              | What happens when a task hits the ceiling                                                   | One `ERROR_LIST` entry; stop automation |
+| Limit                                   | Meaning                                                                                     |                     Starting value |
+| --------------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------: |
+| LLM calls while dependency is paused    | How many new agent/model runs to allow for tasks needing a paused service                   |                                  0 |
+| Replays per outage episode              | After the service recovers, how many times to re-run a task that failed during this episode |                                  1 |
+| Outage episodes per task                | How many separate outage windows a single task can survive before giving up                 |                                  3 |
+| Maximum total postponement              | Wall-clock time from first outage-caused delay to final give-up                             |                            2 hours |
+| Reproducer delay                        | How long to wait before retrying a reproducer task (Testing Farm is slow/expensive)         |                         30 minutes |
+| Recovery check while paused             | At most one bounded recovery assessment for a dependency while it remains paused            |                             1 hour |
+| Provider retries during provider outage | LLM provider-specific retries after a provider 429/failure is detected                      |                                  0 |
+| After all limits exhausted              | Quarantine the task in `ERROR_LIST` with outage context; stop automation                    | One entry per task; no silent drop |
 
 An **outage episode** starts when the gate pauses a dependency. It ends when
 a recovery probe or real task succeeds. If the same dependency fails again
 after recovery, that counts as a new episode. Independent dependencies have
 independent episodes.
+
+Delayed and quarantined tasks should retain enough outage context in Redis to
+identify the dependency, reason, and whether the limit was reached. The exact
+fields and metrics can be defined during implementation.
 
 Unknown failures fail closed. Operators use
 `openshift/scripts/requeue_error.py` to move a specific error back to its
@@ -276,8 +288,9 @@ Check that:
 
 ## Decided
 
-- No LLM-based classification in the first iteration. If needed later, it
-  must run offline/shadow first and not trigger unlimited retries.
+- No LLM-based failure classification in the first iteration. A separately
+  budgeted hourly recovery prompt remains an optional later addition; if used,
+  it must not trigger unlimited retries.
 - No manual "mark service as down" mechanism initially — the gate pauses
   dependencies automatically based on failure count, and a kill switch
   (env var or Redis key) disables the gate entirely if it misbehaves.
